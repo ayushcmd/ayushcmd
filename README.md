@@ -13,9 +13,7 @@
   <a href="https://github.com/ayushcmd">
     <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=7AA2F7&style=flat-square" alt="Profile Views"/>
   </a>
-  <a href="https://github.com/ayushcmd?tab=followers">
-    <img src="https://img.shields.io/github/followers/ayushcmd?label=Followers&style=social" alt="Followers"/>
-  </a>
+ 
   <a href="https://ayushcmd.github.io/portfolio-website/">
     <img src="https://img.shields.io/badge/Portfolio-Live-7AA2F7?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio"/>
   </a>
@@ -222,7 +220,7 @@
 ### 🐍 Contribution Snake
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg?v=3" alt="Snake animation"/>
 </p>
 
 <!-- Footer Capsule Banner -->

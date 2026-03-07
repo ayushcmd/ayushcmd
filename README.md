@@ -1,81 +1,111 @@
-<h1 align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=30&duration=3000&pause=1000&color=7AA2F7&center=true&vCenter=true&width=750&lines=Hey+There!+I'm+Ayush+👋;Student+%7C+Developer+%7C+ML+Researcher+🚀;Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;Curious+About+the+World+🌍" alt="Typing SVG" />
-</h1>
+<!-- Header Capsule Banner -->
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:7AA2F7,100:BB9AF7&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer%20%7C%20ML%20Researcher&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
+</p>
 
+<!-- Typing SVG -->
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=7AA2F7&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
+</p>
+
+<!-- Badges Row -->
 <p align="center">
   <a href="https://github.com/ayushcmd">
     <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=7AA2F7&style=flat-square" alt="Profile Views"/>
   </a>
-
+  <a href="https://github.com/ayushcmd?tab=followers">
+    <img src="https://img.shields.io/github/followers/ayushcmd?label=Followers&style=social" alt="Followers"/>
   </a>
   <a href="https://ayushcmd.github.io/portfolio-website/">
     <img src="https://img.shields.io/badge/Portfolio-Live-7AA2F7?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio"/>
   </a>
 </p>
 
+<!-- Wave Divider -->
+<img src="https://capsule-render.vercel.app/api?type=rect&color=7AA2F7&height=2&section=header" width="100%"/>
 
+<br/>
+
+<!-- About Me -->
+<img align="right" alt="Coding" width="340" src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif"/>
 
 ### 👨‍💻 About Me
 
 - 🎓 &nbsp; **Student** at **IIT Patna**
-- 🔭 &nbsp; Building projects in **Web Dev, Data Analytics & ML Research**
-- 🌱 &nbsp; Currently learning **React, Node.js & Full Stack Development**
+- 🔭 &nbsp; Building in **Web Dev, Data Analytics & ML Research**
+- 🌱 &nbsp; Learning **React, Node.js & Full Stack Development**
 - 🧠 &nbsp; Love **turning real-world data into meaningful insights**
-- 🌍 &nbsp; Fascinated by **world geography, cultures & people's lived experiences**
+- 🌍 &nbsp; Fascinated by **world geography, cultures & people's stories**
 - 🧘 &nbsp; Believer in **experiences over material things**
 - 💼 &nbsp; Actively seeking **Internship Opportunities**
 - 💬 &nbsp; Ask me about **Python, ML Pipelines, Power BI, Web Dev**
-- 📫 &nbsp; **[ayush_24a12res897@iitp.ac.in](mailto:ayush_24a12res897@iitp.ac.in)**
+- 📫 &nbsp; **ayush_24a12res897@iitp.ac.in**
 
 <br clear="right"/>
+
+<!-- Wave Divider -->
+<br/>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:1a1b27,100:2d3561&height=3" width="100%"/>
+</p>
 
 ---
 
 ### 🛠️ Tech Stack
 
 #### 💻 Languages
-<p>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
-  <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white"/>
-  <img src="https://img.shields.io/badge/R-276DC3?style=for-the-badge&logo=r&logoColor=white"/>
-  <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=python,js,cpp,r,html,css&theme=dark&perline=6" alt="Languages"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
 </p>
 
 #### 🚀 Frameworks & Libraries
-<p>
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
-  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"/>
-  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white"/>
-  <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white"/>
-  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white"/>
-  <img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=for-the-badge&logo=python&logoColor=white"/>
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,tensorflow,pytorch&theme=dark&perline=5" alt="Frameworks"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Seaborn-3776AB?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=flat-square&logo=python&logoColor=white"/>
 </p>
 
 #### 🗄️ Databases
-<p>
-  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/>
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/>
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=mongodb,mysql&theme=dark&perline=2" alt="Databases"/>
+  </a>
 </p>
 
 #### 🔧 Tools & Platforms
-<p>
-  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
-  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HuggingFace-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,vercel&theme=dark&perline=5" alt="Tools"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HuggingFace-FFD21F?style=flat-square&logo=huggingface&logoColor=black"/>
+</p>
+
+<!-- Wave Divider -->
+<br/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
 </p>
 
 ---
@@ -93,7 +123,7 @@
       <p align="center">
         <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
         <img src="https://img.shields.io/badge/DAX-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
-        <img src="https://img.shields.io/badge/Data_Analytics-blue?style=flat-square"/>
+        <img src="https://img.shields.io/badge/Data_Analytics-7AA2F7?style=flat-square"/>
       </p>
       <p align="center">
         <a href="https://app.powerbi.com/links/aZY0sC6VfJ?ctid=a57f7d92-038e-4d4c-8265-7cd2beb33b34&pbi_source=linkShare">
@@ -105,7 +135,7 @@
       <h3 align="center">💵 Dollar Hegemony Dashboard</h3>
       <br/>
       <p align="center">
-        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Built a novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer blended via Ridge meta-ensemble. Live 7-tab dashboard with FastAPI backend.
+        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
       </p>
       <p align="center">
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
@@ -135,25 +165,23 @@
   <i>🔨 More projects coming soon — I'm actively building!</i>
 </p>
 
+<!-- Wave Divider -->
+<br/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
+</p>
+
 ---
 
 ### 📊 GitHub Stats
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=ayushcmd&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" width="49%" alt="GitHub Stats"/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=ayushcmd&theme=tokyonight&hide_border=true" width="49%" alt="GitHub Streak"/>
+  <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=tokyonight&hide_border=true&date_format=j%20M%5B%20Y%5D" width="49%" alt="GitHub Streak"/>
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="42%" alt="Top Languages"/>
-</p>
-
----
-
-### 🏆 GitHub Trophies
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=tokyonight&no-frame=true&no-bg=true&column=7&margin-w=8" alt="GitHub Trophies"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="44%" alt="Top Languages"/>
 </p>
 
 ---
@@ -161,7 +189,13 @@
 ### 📈 Contribution Graph
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=tokyo-night&hide_border=true&area=true" alt="Contribution Graph"/>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=tokyo-night&hide_border=true&area=true&area_color=7AA2F7" alt="Contribution Graph"/>
+</p>
+
+<!-- Wave Divider -->
+<br/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
 </p>
 
 ---
@@ -191,10 +225,9 @@
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
 </p>
 
----
-
+<!-- Footer Capsule Banner -->
 <p align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Random Dev Quote"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:BB9AF7,50:7AA2F7,100:1a1b27&height=120&section=footer&text=Thanks%20for%20visiting!&fontSize=24&fontColor=ffffff&fontAlignY=65" alt="Footer"/>
 </p>
 
 <p align="center">

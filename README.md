@@ -216,11 +216,13 @@
 </p>
 
 ---
-
-### 🐍 Contribution Snake
-
+###  👾  Pac-Man eats my contributions
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg?v=3" alt="Snake animation"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-graph-dark.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-graph.svg"/>
+    <img alt="pacman contribution graph" src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-graph-dark.svg"/>
+  </picture>
 </p>
 
 <!-- Footer Capsule Banner -->

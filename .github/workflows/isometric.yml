@@ -1,4 +1,4 @@
-name: Generate Pac-Man
+name: Generate Isometric
 on:
   schedule: [{cron: "0 */12 * * *"}]
   workflow_dispatch:
@@ -9,9 +9,9 @@ jobs:
       - uses: Platane/snk@v3
         with:
           github_user_name: ayushcmd
-          outputs: |
-            dist/pacman-contribution-graph.svg?palette=github
-            dist/pacman-contribution-graph-dark.svg?palette=github-dark&snake=false&color_snake=#7AA2F7
+          outputs: 
+             dist/isometric.svg?action=tetris-3d&theme=tokyonight
+            
       - uses: crazy-max/ghaction-github-pages@v3
         with:
           target_branch: output

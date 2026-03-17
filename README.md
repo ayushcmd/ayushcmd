@@ -205,7 +205,7 @@
 <table width="100%" align="center" cellpadding="6">
   <tr>
     <td rowspan="2" width="52%" align="center" valign="top">
-      <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=tokyonight&show=graph" width="100%" alt="LeetCode Stats"/>
+      <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
     </td>
     <td width="48%" align="center">
       <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&date_format=j%20M%5B%20Y%5D&cache_seconds=1800" width="100%" alt="GitHub Streak"/>
@@ -218,11 +218,6 @@
   </tr>
 </table>
 
-<p align="center">
-  <a href="https://info.flagcounter.com/sgoR">
-    <img src="https://s01.flagcounter.com/count2/sgoR/bg_1C1917/txt_E8A87C/border_1C1917/columns_8/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"/>
-  </a>
-</p>
 
 ---
 

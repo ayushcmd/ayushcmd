@@ -1,26 +1,25 @@
 <!-- Header Capsule Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:7AA2F7,100:BB9AF7&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
 </p>
 
 <!-- Typing SVG -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=7AA2F7&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
 </p>
 
 <!-- Badges Row -->
 <p align="center">
   <a href="https://github.com/ayushcmd">
-    <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=7AA2F7&style=flat-square" alt="Profile Views"/>
+    <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=E8A87C&style=flat-square" alt="Profile Views"/>
   </a>
- 
   <a href="https://ayushcmd.github.io/portfolio-website/">
-    <img src="https://img.shields.io/badge/Portfolio-Live-7AA2F7?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio"/>
+    <img src="https://img.shields.io/badge/Portfolio-Live-E8A87C?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio"/>
   </a>
 </p>
 
 <!-- Wave Divider -->
-<img src="https://capsule-render.vercel.app/api?type=rect&color=7AA2F7&height=2&section=header" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 <br/>
 
@@ -44,7 +43,7 @@
 <!-- Wave Divider -->
 <br/>
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:1a1b27,100:2d3561&height=3" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:1C1917,100:2C1F14&height=3" width="100%"/>
 </p>
 
 ---
@@ -59,7 +58,7 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
+  <img src="https://img.shields.io/badge/SQL-C4956A?style=flat-square&logo=mysql&logoColor=white"/>
 </p>
 
 #### 🚀 Frameworks & Libraries
@@ -94,10 +93,10 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
   <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
   <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
-  <img src="https://img.shields.io/badge/HuggingFace-FFD21F?style=flat-square&logo=huggingface&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
 </p>
 
 <!-- Wave Divider -->
@@ -119,13 +118,13 @@
         Interactive <strong>Power BI dashboard</strong> analyzing AQI, PM2.5, PM10 and pollution trends across major Indian cities using <strong>2024 data</strong>. Custom DAX measures and dynamic regional comparison filters.
       </p>
       <p align="center">
-        <img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
-        <img src="https://img.shields.io/badge/DAX-F2C811?style=flat-square&logo=powerbi&logoColor=black"/>
-        <img src="https://img.shields.io/badge/Data_Analytics-7AA2F7?style=flat-square"/>
+        <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
+        <img src="https://img.shields.io/badge/DAX-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
+        <img src="https://img.shields.io/badge/Data_Analytics-E8A87C?style=flat-square"/>
       </p>
       <p align="center">
         <a href="https://app.powerbi.com/links/aZY0sC6VfJ?ctid=a57f7d92-038e-4d4c-8265-7cd2beb33b34&pbi_source=linkShare">
-          <img src="https://img.shields.io/badge/View_Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black"/>
+          <img src="https://img.shields.io/badge/View_Dashboard-D4A843?style=for-the-badge&logo=powerbi&logoColor=black"/>
         </a>
       </p>
     </td>
@@ -139,22 +138,58 @@
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
         <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/>
         <img src="https://img.shields.io/badge/Transformer-EE4C2C?style=flat-square&logo=pytorch&logoColor=white"/>
-        <img src="https://img.shields.io/badge/SHAP-FF6F00?style=flat-square"/>
+        <img src="https://img.shields.io/badge/SHAP-E8A87C?style=flat-square"/>
       </p>
       <p align="center">
         <a href="https://huggingface.co/spaces/Ayush0826/dollar-hegemony">
-          <img src="https://img.shields.io/badge/Live_Demo-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black"/>
+          <img src="https://img.shields.io/badge/Live_Demo-D4A843?style=for-the-badge&logo=huggingface&logoColor=black"/>
         </a>
       </p>
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center">
-      <h3>🌐 Portfolio Website</h3>
-      <p>My personal portfolio showcasing projects, skills and journey as a developer & researcher.</p>
-      <a href="https://ayushcmd.github.io/portfolio-website/">
-        <img src="https://img.shields.io/badge/Visit_Portfolio-7AA2F7?style=for-the-badge&logo=google-chrome&logoColor=white"/>
-      </a>
+    <td width="50%" valign="top">
+      <h3 align="center">🗺️ India Crime Analytics</h3>
+      <br/>
+      <p align="center">
+        Crime intelligence platform built on <strong>NCRB data</strong> — 755,580+ crimes tracked across 28 states & UTs from 2018–2025. Features an interactive SVG India map, 11 analytics modules, AI chatbot (GROQ), literacy-crime correlation, and emergency helpline popup.
+      </p>
+      <p align="center">
+        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
+        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white"/>
+        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/>
+        <img src="https://img.shields.io/badge/GROQ_AI-E8A87C?style=flat-square"/>
+      </p>
+      <p align="center">
+        <a href="https://india-crime-analytics.vercel.app/">
+          <img src="https://img.shields.io/badge/Live_Demo-E8A87C?style=for-the-badge&logo=vercel&logoColor=white"/>
+        </a>
+        <a href="https://github.com/ayushcmd/india-crime-analytics">
+          <img src="https://img.shields.io/badge/View_Repo-1C1917?style=for-the-badge&logo=github&logoColor=white"/>
+        </a>
+      </p>
+    </td>
+    <td width="50%" valign="top">
+      <h3 align="center"><img src="https://raw.githubusercontent.com/ayushcmd/fitoglobe/main/frontend/public/logo.png" width="28" style="vertical-align:middle; border-radius:6px;"/> FitoGlobe</h3>
+      <br/>
+      <p align="center">
+        Multilingual <strong>AI fitness companion</strong> — workout logging, nutrition tracking, AI macro calculator, food photo scanner (GROQ Vision), and personalized coaching. Supports 4 languages, auto-detects kg/lbs by country, Google OAuth, and streak/badge system.
+      </p>
+      <p align="center">
+        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
+        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white"/>
+        <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white"/>
+        <img src="https://img.shields.io/badge/GROQ_AI-E8A87C?style=flat-square"/>
+        <img src="https://img.shields.io/badge/i18next-C4956A?style=flat-square"/>
+      </p>
+      <p align="center">
+        <a href="https://fitoglobe.vercel.app">
+          <img src="https://img.shields.io/badge/Live_Demo-E8A87C?style=for-the-badge&logo=vercel&logoColor=white"/>
+        </a>
+        <a href="https://github.com/ayushcmd/fitoglobe">
+          <img src="https://img.shields.io/badge/View_Repo-1C1917?style=for-the-badge&logo=github&logoColor=white"/>
+        </a>
+      </p>
     </td>
   </tr>
 </table>
@@ -163,31 +198,44 @@
   <i>🔨 More projects coming soon — I'm actively building!</i>
 </p>
 
-<!-- Wave Divider -->
-<br/>
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
-</p>
-
 ---
 
 ### 📊 GitHub Stats
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=ayushcmd&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&include_all_commits=true" width="49%" alt="GitHub Stats"/>
-  <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=tokyonight&hide_border=true&date_format=j%20M%5B%20Y%5D" width="49%" alt="GitHub Streak"/>
-</p>
+<table width="100%" align="center" cellpadding="6">
+  <tr>
+    <td rowspan="2" width="52%" align="center" valign="top">
+      <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=tokyonight&show=graph" width="100%" alt="LeetCode Stats"/>
+    </td>
+    <td width="48%" align="center">
+      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&date_format=j%20M%5B%20Y%5D&cache_seconds=1800" width="100%" alt="GitHub Streak"/>
+    </td>
+  </tr>
+  <tr>
+    <td width="48%" align="center">
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=1800" width="100%" alt="Top Languages"/>
+    </td>
+  </tr>
+</table>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" width="44%" alt="Top Languages"/>
+  <a href="https://info.flagcounter.com/sgoR">
+    <img src="https://s01.flagcounter.com/count2/sgoR/bg_1C1917/txt_E8A87C/border_1C1917/columns_8/maxflags_20/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"/>
+  </a>
 </p>
 
 ---
 
+### 🏆 GitHub Trophies
+
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&row=1&column=7" width="100%" alt="Trophies"/>
+</p>
+---
 ### 📈 Contribution Graph
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=tokyo-night&hide_border=true&area=true&area_color=7AA2F7" alt="Contribution Graph"/>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
 </p>
 
 <!-- Wave Divider -->
@@ -197,13 +245,22 @@
 </p>
 
 ---
+
 ### 🏙️ Isometric Contribution City
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
 </p>
 
+---
 
+### 🐍 Contribution Snake
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
+</p>
+
+---
 
 ### 🤝 Connect With Me
 
@@ -215,10 +272,10 @@
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
   <a href="https://ayushcmd.github.io/portfolio-website/" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-7AA2F7?style=for-the-badge&logo=google-chrome&logoColor=white"/>
+    <img src="https://img.shields.io/badge/Portfolio-E8A87C?style=for-the-badge&logo=google-chrome&logoColor=white"/>
   </a>
   <a href="https://huggingface.co/spaces/Ayush0826/dollar-hegemony" target="_blank">
-    <img src="https://img.shields.io/badge/HuggingFace-FFD21F?style=for-the-badge&logo=huggingface&logoColor=black"/>
+    <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=for-the-badge&logo=huggingface&logoColor=black"/>
   </a>
 </p>
 
@@ -226,7 +283,7 @@
 
 <!-- Footer Capsule Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:BB9AF7,50:7AA2F7,100:1a1b27&height=120&section=footer&text=Thanks%20for%20visiting!&fontSize=24&fontColor=ffffff&fontAlignY=65" alt="Footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:D4A843,50:C4956A,100:1C1917&height=120&section=footer&text=Thanks%20for%20visiting!&fontSize=24&fontColor=ffffff&fontAlignY=65" alt="Footer"/>
 </p>
 
 <p align="center">

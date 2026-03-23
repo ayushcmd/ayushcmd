@@ -5,7 +5,7 @@
 
 <!-- Typing SVG -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+%F0%9F%8C%8D;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
 </p>
 
 <!-- Badges Row -->
@@ -18,19 +18,19 @@
   </a>
 </p>
 
-<!-- Wave Divider -->
+<!-- Golden Divider -->
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 <br/>
 
 <!-- About Me -->
-<img align="right" alt="Coding" width="340" src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif"/>
+<img align="right" alt="Coding" width="340" src="https://github.com/user-attachments/assets/0bf134e2-c0ba-488b-bbd4-9300f2f77871"/>
 
 ### 👨‍💻 About Me
 
 - 🎓 &nbsp; **Student** at **IIT Patna**
 - 🔭 &nbsp; Building in **Web Dev, Data Analytics & ML Research**
-- 🌱 &nbsp; Learning **React, Node.js & Full Stack Development**
+- 🌱 &nbsp; Exploring **System Design, ML Deployment & Scalable Architectures**
 - 🧠 &nbsp; Love **turning real-world data into meaningful insights**
 - 🌍 &nbsp; Fascinated by **world geography, cultures & people's stories**
 - 🧘 &nbsp; Believer in **experiences over material things**
@@ -40,13 +40,11 @@
 
 <br clear="right"/>
 
-<!-- Wave Divider -->
+<!-- Golden Divider -->
 <br/>
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=0:1C1917,100:2C1F14&height=3" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 </p>
-
----
 
 ### 🛠️ Tech Stack
 
@@ -99,13 +97,11 @@
   <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
 </p>
 
-<!-- Wave Divider -->
+<!-- Golden Divider -->
 <br/>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 </p>
-
----
 
 ### 🚀 Featured Projects
 
@@ -198,7 +194,11 @@
   <i>🔨 More projects coming soon — I'm actively building!</i>
 </p>
 
----
+<!-- Golden Divider -->
+<br/>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+</p>
 
 ### 📊 GitHub Stats
 
@@ -208,18 +208,21 @@
       <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
     </td>
     <td width="48%" align="center">
-      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&date_format=j%20M%5B%20Y%5D&cache_seconds=1800&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
+      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&date_format=j%20M%5B%20Y%5D&cache_seconds=300&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
     </td>
   </tr>
   <tr>
     <td width="48%" align="center">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=1800" width="100%" alt="Top Languages"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=300" width="100%" alt="Top Languages"/>
     </td>
   </tr>
 </table>
 
-
----
+<!-- Golden Divider -->
+<br/>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+</p>
 
 ### 📈 Contribution Graph
 
@@ -227,13 +230,11 @@
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
 </p>
 
-<!-- Wave Divider -->
+<!-- Golden Divider -->
 <br/>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/74038190/212284100-561aa473-3905-4a80-b561-0d28506553ee.gif" width="700"/>
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 </p>
-
----
 
 ### 🏙️ Isometric Contribution City
 
@@ -241,7 +242,11 @@
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
 </p>
 
----
+<!-- Golden Divider -->
+<br/>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+</p>
 
 ### 🐍 Contribution Snake
 
@@ -249,12 +254,16 @@
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
 </p>
 
----
+<!-- Golden Divider -->
+<br/>
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+</p>
 
 ### 🤝 Connect With Me
 
 <p align="center">
-  <a href="https://linkedin.com/in/aryiitp" target="_blank">
+  <a href="https://linkedin.com/in/ayush08iitp" target="_blank">
     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/>
   </a>
   <a href="mailto:ayush_24a12res897@iitp.ac.in">
@@ -267,8 +276,6 @@
     <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=for-the-badge&logo=huggingface&logoColor=black"/>
   </a>
 </p>
-
----
 
 <!-- Footer Capsule Banner -->
 <p align="center">

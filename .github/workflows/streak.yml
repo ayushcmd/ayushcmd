@@ -1,0 +1,30 @@
+name: Generate Streak Stats
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Generate Streak Stats
+        uses: DenverCoder1/github-readme-streak-stats@v1
+        with:
+          user: ayushcmd
+          theme: gruvbox
+          hide_border: true
+          date_format: "j M[Y]"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          output_path: streak.svg
+
+      - name: Commit streak.svg
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update streak stats"
+          file_pattern: streak.svg

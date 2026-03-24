@@ -208,7 +208,7 @@
       <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
     </td>
     <td width="48%" align="center">
-      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&date_format=j%20M%5B%20Y%5D&cache_seconds=300&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
+      <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/main/streak.svg" width="100%" alt="GitHub Streak"/>
     </td>
   </tr>
   <tr>

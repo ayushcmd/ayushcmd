@@ -222,11 +222,14 @@
 ### Trophies
 
 <p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=6&row=1&column=7" alt="Trophies"/>
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/main/trophy.svg" alt="Trophies" width="100%"/>
 </p>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+---
+
 ### Contribution Graph
 
 <p align="center">

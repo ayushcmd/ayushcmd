@@ -13,7 +13,7 @@ jobs:
 
       - name: Fetch Trophy SVG
         run: |
-          curl -o trophy.svg "https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=6&column=7"
+          curl -L -H "Accept: image/svg+xml" -o trophy.svg "https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=6&column=7"
 
       - name: Commit Trophy SVG
         run: |

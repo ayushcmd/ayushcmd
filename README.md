@@ -1,3 +1,4 @@
+
 <!-- Header Capsule Banner -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
@@ -5,7 +6,7 @@
 
 <!-- Typing SVG -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+%F0%9F%8C%8D;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
 </p>
 
 <!-- Badges Row -->
@@ -18,92 +19,33 @@
   </a>
 </p>
 
-<!-- Golden Divider -->
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 <br/>
 
-<!-- About Me -->
+---
+
+### About
+
 <img align="right" alt="Coding" width="340" src="https://github.com/user-attachments/assets/0bf134e2-c0ba-488b-bbd4-9300f2f77871"/>
 
-### 👨‍💻 About Me
-
-- 🎓 &nbsp; **Student** at **IIT Patna**
-- 🔭 &nbsp; Building in **Web Dev, Data Analytics & ML Research**
-- 🌱 &nbsp; Exploring **System Design, ML Deployment & Scalable Architectures**
-- 🧠 &nbsp; Love **turning real-world data into meaningful insights**
-- 🌍 &nbsp; Fascinated by **world geography, cultures & people's stories**
-- 🧘 &nbsp; Believer in **experiences over material things**
-- 💼 &nbsp; Actively seeking **Internship Opportunities**
-- 💬 &nbsp; Ask me about **Python, ML Pipelines, Power BI, Web Dev**
-- 📫 &nbsp; **ayush_24a12res897@iitp.ac.in**
+- Student at **IIT Patna** — BSc CSDA, CPI 8.7
+- Building in **Full-Stack Web Dev, Data Analytics & ML Research**
+- Exploring **System Design, ML Deployment & Scalable Architectures**
+- Love turning real-world data into meaningful insights
+- Fascinated by world geography, cultures and people's stories
+- 💼 Actively seeking **Internship Opportunities**
+- Ask me about **Python, ML Pipelines, Power BI, Web Dev**
+- ayush_24a12res897@iitp.ac.in
 
 <br clear="right"/>
 
-<!-- Golden Divider -->
 <br/>
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### 🛠️ Tech Stack
+---
 
-#### 💻 Languages
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=python,js,cpp,r,html,css&theme=dark&perline=6" alt="Languages"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/SQL-C4956A?style=flat-square&logo=mysql&logoColor=white"/>
-</p>
-
-#### 🚀 Frameworks & Libraries
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,tensorflow,pytorch&theme=dark&perline=5" alt="Frameworks"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
-  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Seaborn-3776AB?style=flat-square&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=flat-square&logo=python&logoColor=white"/>
-</p>
-
-#### 🗄️ Databases
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=mongodb,mysql&theme=dark&perline=2" alt="Databases"/>
-  </a>
-</p>
-
-#### 🔧 Tools & Platforms
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,vercel&theme=dark&perline=5" alt="Tools"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
-  <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
-</p>
-
-<!-- Golden Divider -->
-<br/>
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
-
-### 🚀 Featured Projects
+### Projects
 
 <table width="100%">
   <tr>
@@ -191,16 +133,71 @@
 </table>
 
 <p align="center">
-  <i>🔨 More projects coming soon — I'm actively building!</i>
+  <i>More projects coming soon — actively building.</i>
 </p>
 
-<!-- Golden Divider -->
 <br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+---
+
+### Skills
+
+#### Languages
+
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=python,js,cpp,r,html,css&theme=dark&perline=6" alt="Languages"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/SQL-C4956A?style=flat-square&logo=mysql&logoColor=white"/>
 </p>
 
-### 📊 GitHub Stats
+#### Frameworks & Libraries
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,tensorflow,pytorch&theme=dark&perline=5" alt="Frameworks"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Seaborn-3776AB?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=flat-square&logo=python&logoColor=white"/>
+</p>
+
+#### Databases
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgresql&theme=dark&perline=3" alt="Databases"/>
+  </a>
+</p>
+
+#### Tools & Platforms
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,vercel&theme=dark&perline=5" alt="Tools"/>
+  </a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
+  <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
+</p>
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+---
+
+### Stats
 
 <table width="100%" align="center" cellpadding="6">
   <tr>
@@ -213,54 +210,35 @@
   </tr>
   <tr>
     <td width="48%" align="center">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=300" width="100%" alt="Top Languages"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=1" width="100%" alt="Top Languages"/>
     </td>
   </tr>
 </table>
 
-<!-- Golden Divider -->
 <br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+---
+### Trophies
+
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+  <img src="https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=6&row=1&column=7" alt="Trophies"/>
 </p>
 
-### 📈 Contribution Graph
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+### Contribution Graph
 
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
 </p>
 
-<!-- Golden Divider -->
 <br/>
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### 🏙️ Isometric Contribution City
+---
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
-</p>
-
-<!-- Golden Divider -->
-<br/>
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
-
-### 🐍 Contribution Snake
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
-</p>
-
-<!-- Golden Divider -->
-<br/>
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
-
-### 🤝 Connect With Me
+### Contact
 
 <p align="center">
   <a href="https://linkedin.com/in/ayush08iitp" target="_blank">
@@ -272,9 +250,32 @@
   <a href="https://ayushcmd.github.io/portfolio-website/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-E8A87C?style=for-the-badge&logo=google-chrome&logoColor=white"/>
   </a>
-  <a href="https://huggingface.co/spaces/Ayush0826/dollar-hegemony" target="_blank">
-    <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=for-the-badge&logo=huggingface&logoColor=black"/>
+  <a href="https://leetcode.com/u/ayush08iitp/" target="_blank">
+    <img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black"/>
   </a>
+  <a href="https://www.kaggle.com/ayush08iitp" target="_blank">
+    <img src="https://img.shields.io/badge/Kaggle-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white"/>
+  </a>
+  <a href="https://www.hackerrank.com/profile/ayush08iitp" target="_blank">
+    <img src="https://img.shields.io/badge/HackerRank-2EC866?style=for-the-badge&logo=hackerrank&logoColor=white"/>
+  </a>
+</p>
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+---
+
+### Isometric Contribution City
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
+</p>
+
+### Contribution Snake
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
 </p>
 
 <!-- Footer Capsule Banner -->
@@ -283,5 +284,5 @@
 </p>
 
 <p align="center">
-  <i>🌍 "Experiences over things. Knowledge over noise. Contribution over consumption."</i>
+  <i>"Experiences over things. Knowledge over noise. Contribution over consumption."</i>
 </p>

@@ -23,7 +23,7 @@
 
 <br/>
 
----
+
 
 ### About
 
@@ -43,7 +43,7 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
+
 
 ### Projects
 
@@ -139,7 +139,7 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
+
 
 ### Skills
 
@@ -195,8 +195,6 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
-
 ### Stats
 
 <table width="100%" align="center" cellpadding="6">
@@ -205,12 +203,12 @@
       <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
     </td>
     <td width="48%" align="center">
-      <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/main/streak.svg" width="100%" alt="GitHub Streak"/>
+      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C" width="100%" alt="GitHub Streak"/>
     </td>
   </tr>
   <tr>
     <td width="48%" align="center">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&cache_seconds=1" width="100%" alt="Top Languages"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=10&include_all_commits=true" width="100%" alt="Top Languages"/>
     </td>
   </tr>
 </table>
@@ -218,17 +216,20 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
+
 ### Trophies
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/main/trophy.svg" alt="Trophies" width="100%"/>
+  <img src="https://github-profile-trophy-git-master-ryo-ma.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=12" />
 </p>
 
 <br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+</p>
+
+<br/>
 
 ### Contribution Graph
 
@@ -236,10 +237,8 @@
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
 </p>
 
-<br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
 
 ### Contact
 
@@ -267,7 +266,7 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
----
+
 
 ### Isometric Contribution City
 

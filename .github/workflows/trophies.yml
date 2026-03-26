@@ -3,7 +3,7 @@ name: Generate Trophies
 on:
   schedule:
     - cron: "0 0 * * *"
-  workflow_dispatch:       
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,16 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Generate Trophy
-        uses: ryo-ma/github-profile-trophy@v3.2.1
-        with:
-          username: ayushcmd
-          theme: gruvbox
-          no-frame: true
-          no-bg: true
-          margin-w: 6
-          column: 7
-          output-path: trophy.svg
+      - name: Fetch Trophy SVG
+        run: |
+          curl -o trophy.svg "https://github-profile-trophy.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=6&column=7"
 
       - name: Commit Trophy SVG
         run: |

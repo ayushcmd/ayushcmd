@@ -203,7 +203,7 @@
       <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
     </td>
     <td width="48%" align="center">
-      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C" width="100%" alt="GitHub Streak"/>
+       <img src="https://github-readme-streak-stats.herokuapp.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
     </td>
   </tr>
   <tr>

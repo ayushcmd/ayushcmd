@@ -1,4 +1,3 @@
-
 <!-- Header Capsule Banner -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
@@ -23,8 +22,6 @@
 
 <br/>
 
-
-
 ### About
 
 <img align="right" alt="Coding" width="340" src="https://github.com/user-attachments/assets/0bf134e2-c0ba-488b-bbd4-9300f2f77871"/>
@@ -32,8 +29,6 @@
 - Student at **IIT Patna** — BSc CSDA, CPI 8.7
 - Building in **Full-Stack Web Dev, Data Analytics & ML Research**
 - Exploring **System Design, ML Deployment & Scalable Architectures**
-- Love turning real-world data into meaningful insights
-- Fascinated by world geography, cultures and people's stories
 - 💼 Actively seeking **Internship Opportunities**
 - Ask me about **Python, ML Pipelines, Power BI, Web Dev**
 - ayush_24a12res897@iitp.ac.in
@@ -43,9 +38,21 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-
-
 ### Projects
+
+<!-- ⭐ Featured Open Source -->
+<h4 align="center">⭐ Featured Open Source</h4>
+
+<p align="center">
+  <a href="https://github.com/ayushcmd/api-repos-hub">
+    <a href="https://github.com/ayushcmd/api-repos-hub">   <img src="https://img.shields.io/badge/📦_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/> </a>
+  </a>
+</p>
+<p align="center">
+  <i>🔗 A curated directory of the best API repos, guides & resources for developers — <strong>star it if it helps!</strong> ⭐</i>
+</p>
+
+<br/>
 
 <table width="100%">
   <tr>
@@ -139,76 +146,42 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-
-
 ### Skills
 
-#### Languages
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=python,js,cpp,r,html,css&theme=dark&perline=6" alt="Languages"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/SQL-C4956A?style=flat-square&logo=mysql&logoColor=white"/>
-</p>
-
-#### Frameworks & Libraries
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,tensorflow,pytorch&theme=dark&perline=5" alt="Frameworks"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
-  <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat-square&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Seaborn-3776AB?style=flat-square&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=flat-square&logo=python&logoColor=white"/>
-</p>
-
-#### Databases
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgresql&theme=dark&perline=3" alt="Databases"/>
-  </a>
-</p>
-
-#### Tools & Platforms
-
-<p align="center">
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,vercel&theme=dark&perline=5" alt="Tools"/>
-  </a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
-  <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
-</p>
-
-<br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
-### Stats
-
-<table width="100%" align="center" cellpadding="6">
+<table width="100%" align="center">
   <tr>
-    <td rowspan="2" width="52%" align="center" valign="top">
-      <img src="https://github-readme-leetcode-card.romitsagu.com/ayush08iitp?theme=gruvbox&show=graph" width="100%" alt="LeetCode Stats"/>
-    </td>
-    <td width="48%" align="center">
-       <img src="https://github-readme-streak-stats.herokuapp.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
+    <td align="center" width="25%"><b>Languages</b></td>
+    <td align="center">
+      <img src="https://skillicons.dev/icons?i=python,js,cpp,r,html,css&theme=dark&perline=6" alt="Languages"/>
+      &nbsp;<img src="https://img.shields.io/badge/SQL-C4956A?style=flat-square&logo=mysql&logoColor=white"/>
     </td>
   </tr>
   <tr>
-    <td width="48%" align="center">
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=10&include_all_commits=true" width="100%" alt="Top Languages"/>
+    <td align="center"><b>Frameworks</b></td>
+    <td align="center">
+      <img src="https://skillicons.dev/icons?i=react,nodejs,fastapi,tensorflow,pytorch&theme=dark&perline=5" alt="Frameworks"/>
+      <br/>
+      <img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white"/>
+      <img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Scikit--Learn-F7931E?style=flat-square&logo=scikit-learn&logoColor=white"/>
+      <img src="https://img.shields.io/badge/XGBoost-EC6B2D?style=flat-square&logo=python&logoColor=white"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Databases</b></td>
+    <td align="center">
+      <img src="https://skillicons.dev/icons?i=mongodb,mysql,postgresql&theme=dark&perline=3" alt="Databases"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><b>Tools</b></td>
+    <td align="center">
+      <img src="https://skillicons.dev/icons?i=git,github,vscode,docker,vercel&theme=dark&perline=5" alt="Tools"/>
+      <br/>
+      <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
+      <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Google_Colab-F9AB00?style=flat-square&logo=googlecolab&logoColor=black"/>
+      <img src="https://img.shields.io/badge/HuggingFace-D4A843?style=flat-square&logo=huggingface&logoColor=black"/>
     </td>
   </tr>
 </table>
@@ -217,19 +190,21 @@
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 
-### Trophies
+### Stats
 
-<p align="center">
-  <img src="https://github-profile-trophy-git-master-ryo-ma.vercel.app/?username=ayushcmd&theme=gruvbox&no-frame=true&no-bg=true&margin-w=12" />
-</p>
+<table width="100%" align="center">
+  <tr>
+    <td width="50%" align="center">
+      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&include_all_commits=true" width="100%" alt="Top Languages"/>
+    </td>
+  </tr>
+</table>
 
 <br/>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-</p>
-
-<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Contribution Graph
 
@@ -238,7 +213,6 @@
 </p>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
 
 ### Contact
 
@@ -265,8 +239,6 @@
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
-
 
 ### Isometric Contribution City
 

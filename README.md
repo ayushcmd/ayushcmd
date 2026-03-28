@@ -26,11 +26,9 @@
 
 <img align="right" alt="Coding" width="340" src="https://github.com/user-attachments/assets/0bf134e2-c0ba-488b-bbd4-9300f2f77871"/>
 
-- Student at **IIT Patna** — BSc CSDA, CPI 8.7
+- Student at **IIT Patna** 
 - Building in **Full-Stack Web Dev, Data Analytics & ML Research**
 - Exploring **System Design, ML Deployment & Scalable Architectures**
-- 💼 Actively seeking **Internship Opportunities**
-- Ask me about **Python, ML Pipelines, Power BI, Web Dev**
 - ayush_24a12res897@iitp.ac.in
 
 <br clear="right"/>

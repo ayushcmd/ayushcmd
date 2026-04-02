@@ -75,7 +75,7 @@
       <h3 align="center">💵 Dollar Hegemony Dashboard</h3>
       <br/>
       <p align="center">
-        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
+        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel   <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
       </p>
       <p align="center">
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
@@ -199,10 +199,17 @@
       <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&include_all_commits=true" width="100%" alt="Top Languages"/>
     </td>
   </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="https://github-readme-stats-salesp07.vercel.app/api?username=ayushcmd&show=prs_merged,prs_merged_percentage,reviews,discussions_started&theme=gruvbox&hide_border=true&title_color=D4A843&icon_color=D4A843&show_icons=true&include_all_commits=true&count_private=true" width="60%" alt="GitHub Stats"/>
+    </td>
+  </tr>
 </table>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+
 
 ### Contribution Graph
 

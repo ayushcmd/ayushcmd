@@ -13,7 +13,7 @@
   <a href="https://github.com/ayushcmd">
     <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=E8A87C&style=flat-square" alt="Profile Views"/>
   </a>
-  <a href="https://ayushcmd.github.io/portfolio-website/">
+  <a href="https://ayushcmd.me">
     <img src="https://img.shields.io/badge/Portfolio-Live-E8A87C?style=flat-square&logo=google-chrome&logoColor=white" alt="Portfolio"/>
   </a>
 </p>

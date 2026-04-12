@@ -1,3 +1,5 @@
+# GitHub Profile README
+
 <!-- Header Capsule Banner -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
@@ -43,7 +45,7 @@
 
 <p align="center">
   <a href="https://github.com/ayushcmd/api-repos-hub">
-    <a href="https://github.com/ayushcmd/api-repos-hub">   <img src="https://img.shields.io/badge/📦_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/> </a>
+    <img src="https://img.shields.io/badge/📦_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/>
   </a>
 </p>
 <p align="center">
@@ -55,19 +57,24 @@
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <h3 align="center">🌫️ India AQI Analytics Dashboard</h3>
+      <h3 align="center">📈 CommodityChain</h3>
       <br/>
       <p align="center">
-        Interactive <strong>Power BI dashboard</strong> analyzing AQI, PM2.5, PM10 and pollution trends across major Indian cities using <strong>2024 data</strong>. Custom DAX measures and dynamic regional comparison filters.
+        Real-time <strong>commodity intelligence platform</strong> — live prices, AI analysis, India macro layer, news feed, alerts, and interactive tools. Features a <em>Dollar Stress Index</em>, city-wise petrol/diesel prices, Groq Llama 3.3 70B analyst with 3 persona modes, and India macro shock simulator. 13 modules, FastAPI backend with WebSockets.
       </p>
       <p align="center">
-        <img src="https://img.shields.io/badge/Power_BI-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
-        <img src="https://img.shields.io/badge/DAX-D4A843?style=flat-square&logo=powerbi&logoColor=black"/>
-        <img src="https://img.shields.io/badge/Data_Analytics-E8A87C?style=flat-square"/>
+        <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white"/>
+        <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"/>
+        <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white"/>
+        <img src="https://img.shields.io/badge/Groq_AI-E8A87C?style=flat-square"/>
+        <img src="https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white"/>
       </p>
       <p align="center">
-        <a href="https://app.powerbi.com/links/aZY0sC6VfJ?ctid=a57f7d92-038e-4d4c-8265-7cd2beb33b34&pbi_source=linkShare">
-          <img src="https://img.shields.io/badge/View_Dashboard-D4A843?style=for-the-badge&logo=powerbi&logoColor=black"/>
+        <a href="https://commoditychain.vercel.app">
+          <img src="https://img.shields.io/badge/Live_Demo-E8A87C?style=for-the-badge&logo=vercel&logoColor=white"/>
+        </a>
+        <a href="https://commoditychain-api-ayaveegddsfagxc8.centralindia-01.azurewebsites.net/docs">
+          <img src="https://img.shields.io/badge/API_Docs-009688?style=for-the-badge&logo=fastapi&logoColor=white"/>
         </a>
       </p>
     </td>
@@ -75,7 +82,7 @@
       <h3 align="center">💵 Dollar Hegemony Dashboard</h3>
       <br/>
       <p align="center">
-        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel   <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
+        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
       </p>
       <p align="center">
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
@@ -187,35 +194,45 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-
 ### Stats
 
-<table width="100%" align="center">
-  <tr>
-    <td width="50%" align="center">
-      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
-    </td>
-    <td width="50%" align="center">
-      <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&include_all_commits=true" width="100%" alt="Top Languages"/>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="https://github-readme-stats-salesp07.vercel.app/api?username=ayushcmd&show=prs_merged,prs_merged_percentage,reviews,discussions_started&theme=gruvbox&hide_border=true&title_color=D4A843&icon_color=D4A843&show_icons=true&include_all_commits=true&count_private=true" width="60%" alt="GitHub Stats"/>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" alt="GitHub Streak"/>
+</p>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
+### 3D Contribution Universe
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Universe"/>
+</p>
+
+> **Setup:** Add [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib) GitHub Action to your repo. It generates the 3D SVG and pushes it to the `output` branch automatically.
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Contribution Graph
 
 <p align="center">
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
 </p>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+### Pac-Man Contribution Graph
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid-dark.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid.svg"/>
+    <img alt="Pac-Man Contributions" src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid-dark.svg"/>
+  </picture>
+</p>
+
+> **Setup:** In your snake GitHub Action, use `Platane/snk/svg-only@v3` with `pac=true` param in the output filename to generate Pac-Man mode alongside your existing snake SVGs.
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
@@ -228,7 +245,7 @@
   <a href="mailto:ayush_24a12res897@iitp.ac.in">
     <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white"/>
   </a>
-  <a href="https://ayushcmd.github.io/portfolio-website/" target="_blank">
+  <a href="https://ayushcmd.me/" target="_blank">
     <img src="https://img.shields.io/badge/Portfolio-E8A87C?style=for-the-badge&logo=google-chrome&logoColor=white"/>
   </a>
   <a href="https://leetcode.com/u/ayush08iitp/" target="_blank">
@@ -244,18 +261,6 @@
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
-### Isometric Contribution City
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
-</p>
-
-### Contribution Snake
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/github-contribution-grid-snake-dark.svg" alt="Snake animation"/>
-</p>
 
 <!-- Footer Capsule Banner -->
 <p align="center">

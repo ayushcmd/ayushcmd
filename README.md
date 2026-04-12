@@ -196,21 +196,30 @@
 
 ### Stats
 
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" alt="GitHub Streak"/>
-</p>
+<table width="100%" align="center">
+  <tr>
+    <td width="50%" align="center">
+      <img src="https://streak-stats.demolab.com?user=ayushcmd&theme=gruvbox&hide_border=true&border_radius=12&ring=F2C94C&fire=F2994A&currStreakLabel=F2C94C&timezone=Asia%2FKolkata" width="100%" alt="GitHub Streak"/>
+    </td>
+    <td width="50%" align="center">
+      <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&include_all_commits=true" width="100%" alt="Top Languages"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <img src="https://github-readme-stats-salesp07.vercel.app/api?username=ayushcmd&show=prs_merged,prs_merged_percentage,reviews,discussions_started&theme=gruvbox&hide_border=true&title_color=D4A843&icon_color=D4A843&show_icons=true&include_all_commits=true&count_private=true" width="60%" alt="GitHub Stats"/>
+    </td>
+  </tr>
+</table>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-###  3D Contribution Universe
+### Isometric Contribution City
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/profile-3d-contrib/profile-night-rainbow.svg" width="90%" alt="3D Contribution Universe"/>
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
 </p>
-
-<br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 
 ### Contribution Graph

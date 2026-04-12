@@ -1,4 +1,4 @@
-# GitHub Profile README
+
 
 <!-- Header Capsule Banner -->
 <p align="center">
@@ -203,11 +203,15 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### 🌌 3D Contribution Universe
+###  3D Contribution Universe
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/profile-3d-contrib/profile-night-rainbow.svg" width="90%" alt="3D Contribution Universe"/>
 </p>
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
 
 ### Contribution Graph
 
@@ -222,6 +226,10 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-graph-dark.svg" alt="Pac-Man Contributions"/>
 </p>
+
+<br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
 
 ### Contact
 

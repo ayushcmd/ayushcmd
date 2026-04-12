@@ -203,16 +203,11 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### 3D Contribution Universe
+### 🌌 3D Contribution Universe
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Universe"/>
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/profile-3d-contrib/profile-night-rainbow.svg" width="90%" alt="3D Contribution Universe"/>
 </p>
-
-> **Setup:** Add [yoshi389111/github-profile-3d-contrib](https://github.com/yoshi389111/github-profile-3d-contrib) GitHub Action to your repo. It generates the 3D SVG and pushes it to the `output` branch automatically.
-
-<br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Contribution Graph
 
@@ -225,16 +220,8 @@
 ### Pac-Man Contribution Graph
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid-dark.svg"/>
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid.svg"/>
-    <img alt="Pac-Man Contributions" src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-grid-dark.svg"/>
-  </picture>
+  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/pacman-contribution-graph-dark.svg" alt="Pac-Man Contributions"/>
 </p>
-
-> **Setup:** In your snake GitHub Action, use `Platane/snk/svg-only@v3` with `pac=true` param in the output filename to generate Pac-Man mode alongside your existing snake SVGs.
-
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Contact
 

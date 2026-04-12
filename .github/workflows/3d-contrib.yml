@@ -21,6 +21,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ayushcmd
+          SETTING_JSON: |
+            {
+              "githubUserName": "ayushcmd",
+              "type": "nightrainbow",
+              "maxRepoCount": 100
+            }
 
       - run: |
           git config user.name "GitHub Actions"

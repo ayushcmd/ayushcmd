@@ -222,12 +222,6 @@
 </p>
 
 
-### Contribution Graph
-
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=ayushcmd&theme=github-compact&hide_border=true&area=true&area_color=E8A87C&color=E8A87C&line=D4A843&point=C4956A" alt="Contribution Graph"/>
-</p>
-
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Pac-Man Contribution Graph

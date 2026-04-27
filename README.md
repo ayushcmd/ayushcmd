@@ -215,14 +215,6 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### Isometric Contribution City
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayushcmd/ayushcmd/output/isometric.svg" alt="Isometric Contributions"/>
-</p>
-
-
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Pac-Man Contribution Graph
 

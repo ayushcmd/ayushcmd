@@ -7,7 +7,7 @@
 
 <!-- Typing SVG -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+💻;Turning+Data+Into+Decisions+📊;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+🧠;Curious+About+the+World+🌍;Open+to+Internship+Opportunities+💼" alt="Typing SVG"/>
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+;Turning+Data+Into+Decisions+;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+;Curious+About+the+World+;Open+to+Internship+Opportunities+" alt="Typing SVG"/>
 </p>
 
 <!-- Badges Row -->

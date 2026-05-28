@@ -45,7 +45,7 @@
 
 <p align="center">
   <a href="https://github.com/ayushcmd/api-repos-hub">
-    <img src="https://img.shields.io/badge/📦_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/>
+    <img src="https://img.shields.io/badge/_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/>
   </a>
 </p>
 <p align="center">

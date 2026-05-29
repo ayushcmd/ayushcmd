@@ -57,7 +57,7 @@
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <h3 align="center">📈 CommodityChain</h3>
+      <h3 align="center"> CommodityChain</h3>
       <br/>
       <p align="center">
         Real-time <strong>commodity intelligence platform</strong> — live prices, AI analysis, India macro layer, news feed, alerts, and interactive tools. Features a <em>Dollar Stress Index</em>, city-wise petrol/diesel prices, Groq Llama 3.3 70B analyst with 3 persona modes, and India macro shock simulator. 13 modules, FastAPI backend with WebSockets.
@@ -79,7 +79,7 @@
       </p>
     </td>
     <td width="50%" valign="top">
-      <h3 align="center">💵 Dollar Hegemony Dashboard</h3>
+      <h3 align="center"> Dollar Hegemony Dashboard</h3>
       <br/>
       <p align="center">
         End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
@@ -99,7 +99,7 @@
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <h3 align="center">🗺️ India Crime Analytics</h3>
+      <h3 align="center"> India Crime Analytics</h3>
       <br/>
       <p align="center">
         Crime intelligence platform built on <strong>NCRB data</strong> — 755,580+ crimes tracked across 28 states & UTs from 2018–2025. Features an interactive SVG India map, 11 analytics modules, AI chatbot (GROQ), literacy-crime correlation, and emergency helpline popup.

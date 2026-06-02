@@ -41,7 +41,7 @@
 ### Projects
 
 <!-- ⭐ Featured Open Source -->
-<h4 align="center">⭐ Featured Open Source</h4>
+<h4 align="center"> Featured Open Source</h4>
 
 <p align="center">
   <a href="https://github.com/ayushcmd/api-repos-hub">

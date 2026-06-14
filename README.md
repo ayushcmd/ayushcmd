@@ -1,6 +1,4 @@
-
-
-<!-- Header Capsule Banner -->
+<!-- Header -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
 </p>
@@ -10,7 +8,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=E8A87C&center=true&vCenter=true&width=750&lines=Building+Projects+That+Matter+;Turning+Data+Into+Decisions+;XGBoost+%7C+LSTM+%7C+Transformer+Pipelines+;Curious+About+the+World+;Open+to+Internship+Opportunities+" alt="Typing SVG"/>
 </p>
 
-<!-- Badges Row -->
+<!-- Badges -->
 <p align="center">
   <a href="https://github.com/ayushcmd">
     <img src="https://komarev.com/ghpvc/?username=ayushcmd&label=Profile%20Views&color=E8A87C&style=flat-square" alt="Profile Views"/>
@@ -28,7 +26,7 @@
 
 <img align="right" alt="Coding" width="340" src="https://github.com/user-attachments/assets/0bf134e2-c0ba-488b-bbd4-9300f2f77871"/>
 
-- Student at **IIT Patna** 
+- Student at **IIT Patna**
 - Building in **Full-Stack Web Dev, Data Analytics & ML Research**
 - Exploring **System Design, ML Deployment & Scalable Architectures**
 - ayush_24a12res897@iitp.ac.in
@@ -38,29 +36,39 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### Projects
-
-<!-- ⭐ Featured Open Source -->
-<h4 align="center"> Featured Open Source</h4>
+### Portfolio Source — Going Open Source
 
 <p align="center">
-  <a href="https://github.com/ayushcmd/api-repos-hub">
-    <img src="https://img.shields.io/badge/_api--repos--hub-Curated_API_Directory-D4A843?style=for-the-badge&logo=github&logoColor=black"/>
-  </a>
+  <b>🗓️ 26 August 2026 — Full source drops free on GitHub.</b>
 </p>
+
 <p align="center">
-  <i>🔗 A curated directory of the best API repos, guides & resources for developers — <strong>star it if it helps!</strong> ⭐</i>
+  A lot of people have been asking for the portfolio source code.<br/>
+  On <strong>26 August 2026</strong>, the complete codebase — Next.js 15, KIRO AI, 3D globe, Redis, animations — goes fully public. Free for everyone, forever.<br/>
+  <br/>
+  Until then, early access is available at <a href="https://ayushcmd.me/buy"><strong>ayushcmd.me/buy</strong></a> — architecture guide, full source, or both.
+</p>
+
+<p align="center">
+  <a href="https://ayushcmd.me/buy">
+    <img src="https://img.shields.io/badge/Early_Access-ayushcmd.me/buy-D4A843?style=for-the-badge&logo=google-chrome&logoColor=black"/>
+  </a>
+  <a href="https://github.com/ayushcmd/portfolio-website-description">
+    <img src="https://img.shields.io/badge/Repo-Watch_for_Aug_26-C4956A?style=for-the-badge&logo=github&logoColor=white"/>
+  </a>
 </p>
 
 <br/>
+<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
+
+### Projects
 
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <h3 align="center"> CommodityChain</h3>
-      <br/>
+      <h3 align="center">CommodityChain</h3>
       <p align="center">
-        Real-time <strong>commodity intelligence platform</strong> — live prices, AI analysis, India macro layer, news feed, alerts, and interactive tools. Features a <em>Dollar Stress Index</em>, city-wise petrol/diesel prices, Groq Llama 3.3 70B analyst with 3 persona modes, and India macro shock simulator. 13 modules, FastAPI backend with WebSockets.
+        Real-time <strong>commodity intelligence platform</strong> — live prices, AI analysis, India macro layer, Dollar Stress Index, and shock simulator. 13 modules, FastAPI backend with WebSockets.
       </p>
       <p align="center">
         <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white"/>
@@ -79,10 +87,9 @@
       </p>
     </td>
     <td width="50%" valign="top">
-      <h3 align="center"> Dollar Hegemony Dashboard</h3>
-      <br/>
+      <h3 align="center">Dollar Hegemony Dashboard</h3>
       <p align="center">
-        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel <em>Dollar Stress Index (DSI)</em> — XGBoost+SHAP, LSTM forecasting & multi-country Transformer via Ridge meta-ensemble. Live 7-tab dashboard + FastAPI backend.
+        End-to-end <strong>ML research system</strong> quantifying US Dollar dominance on BRICS economies. Novel Dollar Stress Index — XGBoost+SHAP, LSTM & Transformer via Ridge meta-ensemble. Live dashboard + FastAPI backend.
       </p>
       <p align="center">
         <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
@@ -97,56 +104,7 @@
       </p>
     </td>
   </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3 align="center"> India Crime Analytics</h3>
-      <br/>
-      <p align="center">
-        Crime intelligence platform built on <strong>NCRB data</strong> — 755,580+ crimes tracked across 28 states & UTs from 2018–2025. Features an interactive SVG India map, 11 analytics modules, AI chatbot (GROQ), literacy-crime correlation, and emergency helpline popup.
-      </p>
-      <p align="center">
-        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
-        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white"/>
-        <img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white"/>
-        <img src="https://img.shields.io/badge/GROQ_AI-E8A87C?style=flat-square"/>
-      </p>
-      <p align="center">
-        <a href="https://india-crime-analytics.vercel.app/">
-          <img src="https://img.shields.io/badge/Live_Demo-E8A87C?style=for-the-badge&logo=vercel&logoColor=white"/>
-        </a>
-        <a href="https://github.com/ayushcmd/india-crime-analytics">
-          <img src="https://img.shields.io/badge/View_Repo-1C1917?style=for-the-badge&logo=github&logoColor=white"/>
-        </a>
-      </p>
-    </td>
-    <td width="50%" valign="top">
-      <h3 align="center"><img src="https://raw.githubusercontent.com/ayushcmd/fitoglobe/main/frontend/public/logo.png" width="28" style="vertical-align:middle; border-radius:6px;"/> FitoGlobe</h3>
-      <br/>
-      <p align="center">
-        Multilingual <strong>AI fitness companion</strong> — workout logging, nutrition tracking, AI macro calculator, food photo scanner (GROQ Vision), and personalized coaching. Supports 4 languages, auto-detects kg/lbs by country, Google OAuth, and streak/badge system.
-      </p>
-      <p align="center">
-        <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
-        <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white"/>
-        <img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white"/>
-        <img src="https://img.shields.io/badge/GROQ_AI-E8A87C?style=flat-square"/>
-        <img src="https://img.shields.io/badge/i18next-C4956A?style=flat-square"/>
-      </p>
-      <p align="center">
-        <a href="https://fitoglobe.vercel.app">
-          <img src="https://img.shields.io/badge/Live_Demo-E8A87C?style=for-the-badge&logo=vercel&logoColor=white"/>
-        </a>
-        <a href="https://github.com/ayushcmd/fitoglobe">
-          <img src="https://img.shields.io/badge/View_Repo-1C1917?style=for-the-badge&logo=github&logoColor=white"/>
-        </a>
-      </p>
-    </td>
-  </tr>
 </table>
-
-<p align="center">
-  <i>More projects coming soon — actively building.</i>
-</p>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
@@ -205,16 +163,10 @@
       <img src="https://github-readme-stats-salesp07.vercel.app/api/top-langs/?username=ayushcmd&layout=compact&theme=gruvbox&hide_border=true&langs_count=8&include_all_commits=true" width="100%" alt="Top Languages"/>
     </td>
   </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <img src="https://github-readme-stats-salesp07.vercel.app/api?username=ayushcmd&show=prs_merged,prs_merged_percentage,reviews,discussions_started&theme=gruvbox&hide_border=true&title_color=D4A843&icon_color=D4A843&show_icons=true&include_all_commits=true&count_private=true" width="60%" alt="GitHub Stats"/>
-    </td>
-  </tr>
 </table>
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
 
 ### Pac-Man Contribution Graph
 
@@ -224,7 +176,6 @@
 
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
-
 
 ### Contact
 
@@ -250,9 +201,8 @@
 </p>
 
 <br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-<!-- Footer Capsule Banner -->
+<!-- Footer -->
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:D4A843,50:C4956A,100:1C1917&height=120&section=footer&text=Thanks%20for%20visiting!&fontSize=24&fontColor=ffffff&fontAlignY=65" alt="Footer"/>
 </p>

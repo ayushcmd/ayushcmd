@@ -1,6 +1,6 @@
 <!-- Header -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20👋&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1C1917,50:C4956A,100:D4A843&height=200&section=header&text=Hey%20There!%20I'm%20Ayush%20&fontSize=45&fontColor=ffffff&fontAlignY=38&desc=Student%20%7C%20Developer&descAlignY=58&descSize=20&animation=fadeIn" alt="Header"/>
 </p>
 
 <!-- Typing SVG -->

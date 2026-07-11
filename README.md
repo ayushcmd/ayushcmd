@@ -36,30 +36,7 @@
 <br/>
 <img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
-### Portfolio Source — Going Open Source
 
-<p align="center">
-  <b>🗓️ 26 August 2026 — Full source drops free on GitHub.</b>
-</p>
-
-<p align="center">
-  A lot of people have been asking for the portfolio source code.<br/>
-  On <strong>26 August 2026</strong>, the complete codebase — Next.js 15, KIRO AI, 3D globe, Redis, animations — goes fully public. Free for everyone, forever.<br/>
-  <br/>
-  Until then, early access is available at <a href="https://ayushcmd.me/buy"><strong>ayushcmd.me/buy</strong></a> — architecture guide, full source, or both.
-</p>
-
-<p align="center">
-  <a href="https://ayushcmd.me/buy">
-    <img src="https://img.shields.io/badge/Early_Access-ayushcmd.me/buy-D4A843?style=for-the-badge&logo=google-chrome&logoColor=black"/>
-  </a>
-  <a href="https://github.com/ayushcmd/portfolio-website-description">
-    <img src="https://img.shields.io/badge/Repo-Watch_for_Aug_26-C4956A?style=for-the-badge&logo=github&logoColor=white"/>
-  </a>
-</p>
-
-<br/>
-<img src="https://capsule-render.vercel.app/api?type=rect&color=C4956A&height=2&section=header" width="100%"/>
 
 ### Projects
 

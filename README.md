@@ -22,25 +22,8 @@
 
 <br/><br/>
 
-<h3><code>ayushcmd@github ~ $ ./links.sh</code></h3>
-
 <p align="center">
-  <strong>Ayush Raj</strong><br/>
-  <sub>Computer Science &amp; Data Analytics &nbsp;|&nbsp; Software Development • Cloud • DevOps</sub>
-</p>
 
-<p align="center">
-  <a href="https://ayushcmd.me" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-ayushcmd.me-22d3ee?style=flat-square&logo=google-chrome&logoColor=white&labelColor=161b22" alt="Portfolio" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/ayushcmd" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-ayushcmd-39d353?style=flat-square&logo=github&logoColor=white&labelColor=161b22" alt="GitHub" />
-  </a>
-  &nbsp;
-  <a href="https://www.linkedin.com/in/ayush08iitp" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-Ayush%20Raj-0a66c2?style=flat-square&logo=linkedin&logoColor=white&labelColor=161b22" alt="LinkedIn" />
-  </a>
 </p>
 
 </div>
@@ -59,6 +42,7 @@
 | **Connect** | [Portfolio](https://ayushcmd.me) &nbsp;•&nbsp; [GitHub](https://github.com/ayushcmd) &nbsp;•&nbsp; [LinkedIn](https://www.linkedin.com/in/ayush08iitp) |
 
 <br/>
+
 
 <p><strong>Languages &amp; Web:</strong></p>
 <p>
@@ -126,5 +110,60 @@
   <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel"/>
   <img src="https://img.shields.io/badge/Hugging_Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face"/>
 </p>
+
+<br/>
+
+---
+
+### Featured Projects
+
+<details>
+<summary><b>CommodityChain</b> &nbsp;•&nbsp; Real-time commodity intelligence platform</summary>
+
+<br/>
+
+Live prices, AI analysis, India markets, correlation and simulator tools.
+
+**Stack:** Next.js • FastAPI • TypeScript • WebSocket
+
+**Repository:** [ayushcmd/commoditychain](https://github.com/ayushcmd/commoditychain)
+
+</details>
+
+<details>
+<summary><b>CargoVision AI</b> &nbsp;•&nbsp; Railway wagon inspection with computer vision</summary>
+
+<br/>
+
+Local-first inspection using YOLOv8, OCR, defect detection and automated PDF reports.
+
+**Stack:** PyTorch • YOLOv8 • FastAPI • React
+
+**Repository:** [ayushcmd/CargoVision-AI](https://github.com/ayushcmd/CargoVision-AI)
+
+</details>
+
+<details>
+<summary><b>Dollar Hegemony</b> &nbsp;•&nbsp; USD dominance research across BRICS vs G7</summary>
+
+<br/>
+
+ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transformer ensemble.
+
+**Stack:** XGBoost • LSTM • FastAPI • Plotly Dash
+
+**Repository:** [ayushcmd/dollar-hegemony](https://github.com/ayushcmd/dollar-hegemony)
+
+</details>
+
+<br/>
+
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./languages --donut</code></h3>
+
+<img src="./assets/languages-donut.svg" width="860" alt="Most used languages across all repositories" />
+
+</div>
 
 <br/>

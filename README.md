@@ -32,7 +32,10 @@
 
 ---
 
-### About Me & Technical Skills
+<details>
+<summary><img src="./assets/toggle-about.svg" width="860" alt="About Me &amp; Technical Skills - click to expand" /></summary>
+
+<br/>
 
 | Field | Details |
 | :--- | :--- |
@@ -167,3 +170,5 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 </div>
 
 <br/>
+
+</details>

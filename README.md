@@ -33,7 +33,7 @@
 ---
 
 <details>
-<summary><img src="./assets/toggle-about.svg" width="860" alt="About Me &amp; Technical Skills - click to expand" /></summary>
+<summary><code>ayushcmd@github ~ $ cat about-me.md</code> &nbsp;•&nbsp; <b>About Me &amp; Technical Skills</b> &nbsp;<kbd>click to expand</kbd></summary>
 
 <br/>
 

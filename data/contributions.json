@@ -1,17 +1,17 @@
 {
   "username": "ayushcmd",
-  "generated_at": "2026-10-31T12:33:50Z",
+  "generated_at": "2026-11-01T13:26:58Z",
   "range": {
-    "start": "2025-10-26",
-    "end": "2026-10-31"
+    "start": "2025-11-02",
+    "end": "2026-11-01"
   },
-  "total_contributions": 789,
-  "active_days": 164,
-  "avg_per_active_day": 4.8,
+  "total_contributions": 805,
+  "active_days": 165,
+  "avg_per_active_day": 4.9,
   "current_streak": {
-    "length": 12,
+    "length": 13,
     "start": "2026-10-20",
-    "end": "2026-10-31"
+    "end": "2026-11-01"
   },
   "longest_streak": {
     "length": 133,
@@ -23,12 +23,6 @@
     "count": 47
   },
   "monthly": [
-    {
-      "key": "2025-10",
-      "label": "Oct",
-      "year": "2025",
-      "total": 0
-    },
     {
       "key": "2025-11",
       "label": "Nov",
@@ -99,49 +93,27 @@
       "key": "2026-10",
       "label": "Oct",
       "year": "2026",
-      "total": 113
+      "total": 122
+    },
+    {
+      "key": "2026-11",
+      "label": "Nov",
+      "year": "2026",
+      "total": 7
     }
   ],
   "github_stats": {
     "public_repos": 26,
-    "total_stars": 60,
-    "total_prs": 22,
-    "merged_prs": 22,
-    "commits_365d": 345,
+    "total_stars": 71,
+    "total_prs": 25,
+    "merged_prs": 25,
+    "commits_365d": 358,
     "code_reviews": 1,
     "total_issues": 38,
     "scope": "public activity",
     "counting_method": "GitHub Search API (trailing 365 days for commits; public repos and PRs)"
   },
   "days": [
-    {
-      "date": "2025-10-26",
-      "count": 0
-    },
-    {
-      "date": "2025-10-27",
-      "count": 0
-    },
-    {
-      "date": "2025-10-28",
-      "count": 0
-    },
-    {
-      "date": "2025-10-29",
-      "count": 0
-    },
-    {
-      "date": "2025-10-30",
-      "count": 0
-    },
-    {
-      "date": "2025-10-31",
-      "count": 0
-    },
-    {
-      "date": "2025-11-01",
-      "count": 0
-    },
     {
       "date": "2025-11-02",
       "count": 0
@@ -1596,7 +1568,11 @@
     },
     {
       "date": "2026-10-31",
-      "count": 5
+      "count": 14
+    },
+    {
+      "date": "2026-11-01",
+      "count": 7
     }
   ]
 }

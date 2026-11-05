@@ -1,12 +1,12 @@
 {
   "generated": "2026-11-05",
   "totals": {
-    "authored_lines": 205860,
-    "live_lines": 204712,
-    "authored_last_30_days": 150000,
-    "repositories": 28,
+    "authored_lines": 251639,
+    "live_lines": 237578,
+    "authored_last_30_days": 151494,
+    "repositories": 34,
     "public": 28,
-    "private": 0
+    "private": 6
   },
   "top_repositories": [
     {
@@ -28,32 +28,32 @@
       "authored_lines": 14956
     },
     {
+      "name": "private-project-1",
+      "private": true,
+      "live_lines": 14792,
+      "authored_lines": 21249
+    },
+    {
+      "name": "private-project-2",
+      "private": true,
+      "live_lines": 14777,
+      "authored_lines": 21233
+    },
+    {
       "name": "CargoVision-AI",
       "private": false,
       "live_lines": 11508,
       "authored_lines": 11060
-    },
-    {
-      "name": "rizz-dice",
-      "private": false,
-      "live_lines": 11113,
-      "authored_lines": 12009
-    },
-    {
-      "name": "campus-around",
-      "private": false,
-      "live_lines": 8519,
-      "authored_lines": 0
     }
   ],
   "languages": [
     {
-      "name": "JavaScript",
-      "lines": 58786
+      "name": "TypeScript",
+      "lines": 75867
     },
     {
-      "name": "TypeScript",
-      "lines": 46888
+      "name": "JavaScript",
+      "lines": 59768
     },
     {
       "name": "Python",
@@ -65,7 +65,7 @@
     },
     {
       "name": "CSS",
-      "lines": 10147
+      "lines": 12635
     },
     {
       "name": "Go",
@@ -103,11 +103,11 @@
     },
     {
       "month": "2026-07",
-      "lines": 9043
+      "lines": 49535
     },
     {
       "month": "2026-08",
-      "lines": 15293
+      "lines": 19086
     },
     {
       "month": "2026-09",
@@ -115,7 +115,7 @@
     },
     {
       "month": "2026-10",
-      "lines": 85739
+      "lines": 87233
     },
     {
       "month": "2026-11",

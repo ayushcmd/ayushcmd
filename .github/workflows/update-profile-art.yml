@@ -1,6 +1,7 @@
 name: Update Contribution Graph & Stats
 
-# Refreshes contribution heatmap and statistics dashboard daily from real GitHub data.
+# Refreshes contribution heatmap, statistics dashboard, languages donut and codebase
+# analytics daily from real GitHub data.
 # Runs daily on schedule, on push to main, and on demand via workflow_dispatch.
 
 on:
@@ -50,8 +51,32 @@ jobs:
         run: |
           python scripts/make_info_card.py
 
+      # The two steps below are additive. continue-on-error keeps the heatmap and
+      # stats refresh working even if one of them fails.
+      - name: Render languages donut SVG
+        continue-on-error: true
+        env:
+          GH_USERNAME: ayushcmd
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/make_languages_donut.py
+
+      - name: Render codebase analytics SVG
+        continue-on-error: true
+        env:
+          GH_USERNAME: ayushcmd
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # PAT with read access to private repos (repo scope, or fine-grained
+          # "Contents: read" + "Metadata: read"). Without it, only public repos are counted.
+          LOC_STATS_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN }}
+          INCLUDE_PRIVATE: "true"
+          INCLUDE_FORKS: "false"
+          SHOW_PRIVATE_NAMES: "false"
+        run: |
+          python scripts/make_loc_stats.py
+
       - name: Commit updated art
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: refresh contribution graph and stats [skip ci]"
-          file_pattern: "data/contributions.json assets/contrib-heatmap.svg contrib-heatmap.svg assets/info-card.svg"
+          file_pattern: "data/contributions.json assets/contrib-heatmap.svg contrib-heatmap.svg assets/info-card.svg assets/languages-donut.svg assets/codebase-analytics.svg data/loc-stats.json"

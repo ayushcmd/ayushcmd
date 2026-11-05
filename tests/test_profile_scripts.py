@@ -10,6 +10,7 @@ Unit and integration tests for profile README scripts:
 import os
 import sys
 import unittest
+from datetime import date
 import xml.etree.ElementTree as ET
 import yaml
 
@@ -21,6 +22,7 @@ sys.path.insert(0, SCRIPTS_DIR)
 from fetch_contributions import compute_current_streak, compute_longest_streak, build_data
 from render_heatmap_svg import render as render_heatmap
 from make_info_card import render_info_card
+import make_loc_stats
 
 
 class TestContributionCalculations(unittest.TestCase):
@@ -108,6 +110,7 @@ class TestSVGValidity(unittest.TestCase):
             os.path.join(HERE, "..", "assets", "contrib-heatmap.svg"),
             os.path.join(HERE, "..", "assets", "ayush-ascii.svg"),
             os.path.join(HERE, "..", "assets", "info-card.svg"),
+            os.path.join(HERE, "..", "assets", "codebase-analytics.svg"),
         ]
         for path in assets:
             if os.path.exists(path):
@@ -117,6 +120,125 @@ class TestSVGValidity(unittest.TestCase):
                     self.assertTrue(root.tag.endswith("svg"), f"Root tag of {path} is not svg")
                 except ET.ParseError as err:
                     self.fail(f"XML parse error in {path}: {err}")
+
+
+def _sample_records():
+    months = make_loc_stats.month_keys(date(2026, 11, 5))
+    def record(name, private, live, authored):
+        return {
+            "name": name,
+            "private": private,
+            "live_lines": live,
+            "live_by_language": {"Python": live // 2, "TypeScript": live - live // 2},
+            "authored": {
+                "total": authored,
+                "last_30_days": authored // 10,
+                "by_month": {months[-1]: authored // 10},
+                "by_language": {},
+            },
+        }
+    return [
+        record("public-small", False, 1000, 2000),
+        record("secret-big", True, 9000, 12000),
+        record("public-big", False, 5000, 6000),
+    ]
+
+
+class TestCodebaseAnalytics(unittest.TestCase):
+    def test_classification_excludes_vendor_lock_and_minified(self):
+        self.assertEqual(make_loc_stats.classify("src/app.py"), "Python")
+        self.assertEqual(make_loc_stats.classify("Dockerfile"), "Dockerfile")
+        self.assertIsNone(make_loc_stats.classify("node_modules/lib/index.js"))
+        self.assertIsNone(make_loc_stats.classify("package-lock.json"))
+        self.assertIsNone(make_loc_stats.classify("static/app.min.js"))
+        self.assertIsNone(make_loc_stats.classify("README.md"))
+
+    def test_numstat_rename_paths(self):
+        norm = make_loc_stats.normalize_numstat_path
+        self.assertEqual(norm("src/{old => new}/file.py"), "src/new/file.py")
+        self.assertEqual(norm("old.py => new.py"), "new.py")
+        self.assertEqual(norm("plain.py"), "plain.py")
+
+    def test_parse_numstat_filters_and_buckets(self):
+        log = "\n".join([
+            "@@2026-11-01T10:00:00+05:30",
+            "10\t2\tapp.py",
+            "500\t0\tpackage-lock.json",
+            "-\t-\timage.png",
+            "99999\t0\tgenerated.js",
+            "7\t0\tnotebook.ipynb",
+            "",
+            "@@2026-09-01T10:00:00+05:30",
+            "4\t1\tmain.ts",
+        ])
+        stats = make_loc_stats.parse_numstat(log, since="2026-10-06")
+        self.assertEqual(stats["total"], 14)
+        self.assertEqual(stats["last_30_days"], 10)
+        self.assertEqual(stats["by_month"], {"2026-11": 10, "2026-09": 4})
+        self.assertEqual(stats["by_language"], {"Python": 10, "TypeScript": 4})
+
+    def test_count_live_skips_excluded_and_counts_notebook_code_cells(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "a.py").write_text("x = 1\n\ny = 2\n")
+            (root / "node_modules").mkdir()
+            (root / "node_modules" / "dep.js").write_text("a\n" * 50)
+            (root / "yarn.lock").write_text("x\n" * 50)
+            (root / "nb.ipynb").write_text(json.dumps({"cells": [
+                {"cell_type": "code", "source": ["a = 1\n", "\n", "b = 2\n"]},
+                {"cell_type": "markdown", "source": ["# title"]},
+            ]}))
+            counts = make_loc_stats.count_live(root)
+        self.assertEqual(counts, {"Python": 3, "Jupyter Notebook": 2})
+
+    def test_authored_stats_uses_real_git_history(self):
+        import shutil
+        import subprocess
+        import tempfile
+        from pathlib import Path
+        if shutil.which("git") is None:
+            self.skipTest("git is not installed")
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = Path(tmp)
+            def git(*args):
+                subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True)
+            subprocess.run(["git", "init", "-q", str(repo)], check=True)
+            git("config", "user.name", "Ayush Raj")
+            git("config", "user.email", "me@example.com")
+            (repo / "mine.py").write_text("a = 1\n" * 5)
+            git("add", "-A")
+            git("commit", "-qm", "mine")
+            (repo / "theirs.py").write_text("b = 1\n" * 40)
+            git("add", "-A")
+            git("-c", "user.name=Someone Else", "-c", "user.email=else@example.com",
+                "commit", "-qm", "theirs")
+            stats = make_loc_stats.authored_stats(repo, ["Ayush Raj"])
+        self.assertEqual(stats["total"], 5)
+
+    def test_report_masks_private_names_and_ranks_by_live_lines(self):
+        report = make_loc_stats.build_report(
+            _sample_records(), today=date(2026, 11, 5), show_private_names=False
+        )
+        names = [repo["name"] for repo in report["top_repositories"]]
+        self.assertEqual(names, ["private-project-1", "public-big", "public-small"])
+        self.assertNotIn("secret-big", str(report))
+        self.assertEqual(report["totals"]["authored_lines"], 20000)
+        self.assertEqual(report["totals"]["live_lines"], 15000)
+        self.assertEqual(report["totals"]["private"], 1)
+        self.assertEqual(len(report["monthly_authored"]), 12)
+        self.assertEqual(report["monthly_authored"][-1]["month"], "2026-11")
+
+    def test_rendered_svg_is_valid_and_leaks_no_private_name(self):
+        report = make_loc_stats.build_report(
+            _sample_records(), today=date(2026, 11, 5), show_private_names=False
+        )
+        for svg in (make_loc_stats.render_svg(report), make_loc_stats.render_placeholder()):
+            root = ET.fromstring(svg)
+            self.assertTrue(root.tag.endswith("svg"))
+            self.assertNotIn("secret-big", svg)
 
 
 class TestWorkflowYAML(unittest.TestCase):

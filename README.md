@@ -171,4 +171,14 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 
 <br/>
 
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./codebase --analytics</code></h3>
+
+<img src="./assets/codebase-analytics.svg" width="860" alt="Codebase analytics: lines authored, live codebase, top repositories by lines and lines by language" />
+
+</div>
+
+<br/>
+
 </details>

@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-05",
   "totals": {
-    "authored_lines": 251639,
-    "live_lines": 237578,
-    "authored_last_30_days": 151494,
+    "authored_lines": 254540,
+    "live_lines": 240350,
+    "authored_last_30_days": 154395,
     "repositories": 34,
     "public": 28,
     "private": 6
@@ -12,8 +12,8 @@
     {
       "name": "go-green",
       "private": false,
-      "live_lines": 47343,
-      "authored_lines": 47756
+      "live_lines": 50115,
+      "authored_lines": 50657
     },
     {
       "name": "open-audex",
@@ -22,7 +22,7 @@
       "authored_lines": 26532
     },
     {
-      "name": "ArcadeWorld",
+      "name": "arcade-world",
       "private": false,
       "live_lines": 15177,
       "authored_lines": 14956
@@ -40,7 +40,7 @@
       "authored_lines": 21233
     },
     {
-      "name": "CargoVision-AI",
+      "name": "cargo-vision-ai",
       "private": false,
       "live_lines": 11508,
       "authored_lines": 11060
@@ -49,7 +49,7 @@
   "languages": [
     {
       "name": "TypeScript",
-      "lines": 75867
+      "lines": 76646
     },
     {
       "name": "JavaScript",
@@ -61,7 +61,7 @@
     },
     {
       "name": "Java",
-      "lines": 26625
+      "lines": 26626
     },
     {
       "name": "CSS",
@@ -69,7 +69,7 @@
     },
     {
       "name": "Go",
-      "lines": 8563
+      "lines": 8654
     }
   ],
   "monthly_authored": [
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 64261
+      "lines": 67162
     }
   ]
 }

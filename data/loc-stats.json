@@ -1,4 +1,125 @@
 {
-  "generated": null,
-  "status": "pending first workflow run"
+  "generated": "2026-11-05",
+  "totals": {
+    "authored_lines": 205860,
+    "live_lines": 204712,
+    "authored_last_30_days": 150000,
+    "repositories": 28,
+    "public": 28,
+    "private": 0
+  },
+  "top_repositories": [
+    {
+      "name": "go-green",
+      "private": false,
+      "live_lines": 47343,
+      "authored_lines": 47756
+    },
+    {
+      "name": "open-audex",
+      "private": false,
+      "live_lines": 26532,
+      "authored_lines": 26532
+    },
+    {
+      "name": "ArcadeWorld",
+      "private": false,
+      "live_lines": 15177,
+      "authored_lines": 14956
+    },
+    {
+      "name": "CargoVision-AI",
+      "private": false,
+      "live_lines": 11508,
+      "authored_lines": 11060
+    },
+    {
+      "name": "rizz-dice",
+      "private": false,
+      "live_lines": 11113,
+      "authored_lines": 12009
+    },
+    {
+      "name": "campus-around",
+      "private": false,
+      "live_lines": 8519,
+      "authored_lines": 0
+    }
+  ],
+  "languages": [
+    {
+      "name": "JavaScript",
+      "lines": 58786
+    },
+    {
+      "name": "TypeScript",
+      "lines": 46888
+    },
+    {
+      "name": "Python",
+      "lines": 27518
+    },
+    {
+      "name": "Java",
+      "lines": 26625
+    },
+    {
+      "name": "CSS",
+      "lines": 10147
+    },
+    {
+      "name": "Go",
+      "lines": 8563
+    }
+  ],
+  "monthly_authored": [
+    {
+      "month": "2025-12",
+      "lines": 0
+    },
+    {
+      "month": "2026-01",
+      "lines": 0
+    },
+    {
+      "month": "2026-02",
+      "lines": 900
+    },
+    {
+      "month": "2026-03",
+      "lines": 12831
+    },
+    {
+      "month": "2026-04",
+      "lines": 12726
+    },
+    {
+      "month": "2026-05",
+      "lines": 0
+    },
+    {
+      "month": "2026-06",
+      "lines": 5067
+    },
+    {
+      "month": "2026-07",
+      "lines": 9043
+    },
+    {
+      "month": "2026-08",
+      "lines": 15293
+    },
+    {
+      "month": "2026-09",
+      "lines": 0
+    },
+    {
+      "month": "2026-10",
+      "lines": 85739
+    },
+    {
+      "month": "2026-11",
+      "lines": 64261
+    }
+  ]
 }

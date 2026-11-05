@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" role="img" aria-label="Codebase analytics, first refresh pending">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" role="img" aria-label="Codebase analytics: lines authored, live codebase, top repositories and languages">
   <style>
     text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
     .title { fill: #8b949e; font-size: 12px; }
@@ -21,6 +21,41 @@
   <circle cx="38" cy="17" r="5" fill="#ffbd2e"/>
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">ayushcmd@github: ~/codebase --analytics</text>
-  <text x="430" y="246" class="name" text-anchor="middle">Codebase analytics</text>
-  <text x="430" y="268" class="sub" text-anchor="middle">First refresh is pending. The daily workflow fills this card automatically.</text>
+  <rect x="20.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="34.0" y="70" class="label">LINES AUTHORED</text><text x="34.0" y="98" class="value" fill="#3fb950">205,860</text><text x="34.0" y="113" class="sub">all-time · lines added by me</text>
+  <rect x="228.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="242.0" y="70" class="label">LIVE CODEBASE</text><text x="242.0" y="98" class="value" fill="#39d0d8">204,712</text><text x="242.0" y="113" class="sub">current lines across repos</text>
+  <rect x="436.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="450.0" y="70" class="label">LAST 30 DAYS</text><text x="450.0" y="98" class="value" fill="#ffa657">+150,000</text><text x="450.0" y="113" class="sub">lines authored</text>
+  <rect x="644.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="658.0" y="70" class="label">REPOSITORIES</text><text x="658.0" y="98" class="value" fill="#d2a8ff">28</text><text x="658.0" y="113" class="sub">28 public · 0 private</text>
+  <text x="20" y="150" class="section">TOP REPOSITORIES BY LINES</text>
+  <text x="452" y="150" class="section">LINES BY LANGUAGE</text>
+  <line x1="20" y1="158" x2="412" y2="158" stroke="#21262d"/>
+  <line x1="452" y1="158" x2="840" y2="158" stroke="#21262d"/>
+  <text x="20" y="182" class="rank">01</text><text x="48" y="182" class="name">go-green</text><rect x="236" y="174" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="174" width="120.0" height="6" rx="3" fill="#3fb950"/><text x="412" y="182" class="num" text-anchor="end">47,343</text>
+  <text x="20" y="208" class="rank">02</text><text x="48" y="208" class="name">open-audex</text><rect x="236" y="200" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="200" width="67.3" height="6" rx="3" fill="#2ea04366"/><text x="412" y="208" class="num" text-anchor="end">26,532</text>
+  <text x="20" y="234" class="rank">03</text><text x="48" y="234" class="name">ArcadeWorld</text><rect x="236" y="226" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="226" width="38.5" height="6" rx="3" fill="#2ea04366"/><text x="412" y="234" class="num" text-anchor="end">15,177</text>
+  <text x="20" y="260" class="rank">04</text><text x="48" y="260" class="name">CargoVision-AI</text><rect x="236" y="252" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="252" width="29.2" height="6" rx="3" fill="#2ea04366"/><text x="412" y="260" class="num" text-anchor="end">11,508</text>
+  <text x="20" y="286" class="rank">05</text><text x="48" y="286" class="name">rizz-dice</text><rect x="236" y="278" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="278" width="28.2" height="6" rx="3" fill="#2ea04366"/><text x="412" y="286" class="num" text-anchor="end">11,113</text>
+  <text x="20" y="312" class="rank">06</text><text x="48" y="312" class="name">campus-around</text><rect x="236" y="304" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="304" width="21.6" height="6" rx="3" fill="#2ea04366"/><text x="412" y="312" class="num" text-anchor="end">8,519</text>
+  <rect x="452" y="173" width="10" height="10" rx="2" fill="#F1E05A"/><text x="472" y="182" class="name">JavaScript</text><rect x="622" y="174" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="174" width="120.0" height="6" rx="3" fill="#F1E05A"/><text x="840" y="182" class="num" text-anchor="end">58,786</text>
+  <rect x="452" y="199" width="10" height="10" rx="2" fill="#3178C6"/><text x="472" y="208" class="name">TypeScript</text><rect x="622" y="200" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="200" width="95.7" height="6" rx="3" fill="#3178C6"/><text x="840" y="208" class="num" text-anchor="end">46,888</text>
+  <rect x="452" y="225" width="10" height="10" rx="2" fill="#3572A5"/><text x="472" y="234" class="name">Python</text><rect x="622" y="226" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="226" width="56.2" height="6" rx="3" fill="#3572A5"/><text x="840" y="234" class="num" text-anchor="end">27,518</text>
+  <rect x="452" y="251" width="10" height="10" rx="2" fill="#B07219"/><text x="472" y="260" class="name">Java</text><rect x="622" y="252" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="252" width="54.3" height="6" rx="3" fill="#B07219"/><text x="840" y="260" class="num" text-anchor="end">26,625</text>
+  <rect x="452" y="277" width="10" height="10" rx="2" fill="#8250DF"/><text x="472" y="286" class="name">CSS</text><rect x="622" y="278" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="278" width="20.7" height="6" rx="3" fill="#8250DF"/><text x="840" y="286" class="num" text-anchor="end">10,147</text>
+  <rect x="452" y="303" width="10" height="10" rx="2" fill="#00ADD8"/><text x="472" y="312" class="name">Go</text><rect x="622" y="304" width="120" height="6" rx="3" fill="#161b22"/><rect x="622" y="304" width="17.5" height="6" rx="3" fill="#00ADD8"/><text x="840" y="312" class="num" text-anchor="end">8,563</text>
+  <text x="20" y="344" class="section">LINES AUTHORED PER MONTH · LAST 12 MONTHS</text>
+  <line x1="20" y1="352" x2="840" y2="352" stroke="#21262d"/>
+  <rect x="37.2" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="37.2" y="428.0" width="34" height="0.0" rx="3" fill="#3fb950"/><text x="54.2" y="367" class="mval" text-anchor="middle">·</text><text x="54.2" y="444" class="month" text-anchor="middle">Dec</text>
+  <rect x="105.5" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="105.5" y="428.0" width="34" height="0.0" rx="3" fill="#3fb950"/><text x="122.5" y="367" class="mval" text-anchor="middle">·</text><text x="122.5" y="444" class="month" text-anchor="middle">Jan</text>
+  <rect x="173.8" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="173.8" y="426.0" width="34" height="2.0" rx="3" fill="#3fb950"/><text x="190.8" y="367" class="mval" text-anchor="middle">900</text><text x="190.8" y="444" class="month" text-anchor="middle">Feb</text>
+  <rect x="242.2" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="242.2" y="419.6" width="34" height="8.4" rx="3" fill="#3fb950"/><text x="259.2" y="367" class="mval" text-anchor="middle">12.8K</text><text x="259.2" y="444" class="month" text-anchor="middle">Mar</text>
+  <rect x="310.5" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="310.5" y="419.7" width="34" height="8.3" rx="3" fill="#3fb950"/><text x="327.5" y="367" class="mval" text-anchor="middle">12.7K</text><text x="327.5" y="444" class="month" text-anchor="middle">Apr</text>
+  <rect x="378.8" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="378.8" y="428.0" width="34" height="0.0" rx="3" fill="#3fb950"/><text x="395.8" y="367" class="mval" text-anchor="middle">·</text><text x="395.8" y="444" class="month" text-anchor="middle">May</text>
+  <rect x="447.2" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="447.2" y="424.7" width="34" height="3.3" rx="3" fill="#3fb950"/><text x="464.2" y="367" class="mval" text-anchor="middle">5.1K</text><text x="464.2" y="444" class="month" text-anchor="middle">Jun</text>
+  <rect x="515.5" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="515.5" y="422.1" width="34" height="5.9" rx="3" fill="#3fb950"/><text x="532.5" y="367" class="mval" text-anchor="middle">9.0K</text><text x="532.5" y="444" class="month" text-anchor="middle">Jul</text>
+  <rect x="583.8" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="583.8" y="418.0" width="34" height="10.0" rx="3" fill="#3fb950"/><text x="600.8" y="367" class="mval" text-anchor="middle">15.3K</text><text x="600.8" y="444" class="month" text-anchor="middle">Aug</text>
+  <rect x="652.2" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="652.2" y="428.0" width="34" height="0.0" rx="3" fill="#3fb950"/><text x="669.2" y="367" class="mval" text-anchor="middle">·</text><text x="669.2" y="444" class="month" text-anchor="middle">Sep</text>
+  <rect x="720.5" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="720.5" y="372.0" width="34" height="56.0" rx="3" fill="#3fb950"/><text x="737.5" y="367" class="mval" text-anchor="middle">85.7K</text><text x="737.5" y="444" class="month" text-anchor="middle">Oct</text>
+  <rect x="788.8" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="788.8" y="386.0" width="34" height="42.0" rx="3" fill="#3fb950"/><text x="805.8" y="367" class="mval" text-anchor="middle">64.3K</text><text x="805.8" y="444" class="month" text-anchor="middle">Nov</text>
+  <line x1="20" y1="460" x2="840" y2="460" stroke="#21262d"/>
+  <text x="20" y="484" class="foot"><tspan class="accent">28</tspan> repositories analyzed · forks, vendored and generated files excluded</text>
+  <text x="840" y="484" class="foot" text-anchor="end">updated 2026-11-05</text>
 </svg>

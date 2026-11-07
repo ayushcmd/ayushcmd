@@ -18,14 +18,14 @@
   <text x="430" y="21" class="title" text-anchor="middle">ayushcmd@github: ~/languages --donut</text>
   <g>
     <circle cx="200" cy="172" r="80" fill="none" stroke="#161b22" stroke-width="28"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#F1E05A" stroke-width="28" stroke-dasharray="268.39 234.26" stroke-dashoffset="-0.00" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#3178C6" stroke-width="28" stroke-dasharray="79.20 423.45" stroke-dashoffset="-271.39" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#3572A5" stroke-width="28" stroke-dasharray="57.69 444.97" stroke-dashoffset="-353.60" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#79C0FF" stroke-width="28" stroke-dasharray="11.08 491.57" stroke-dashoffset="-414.28" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#FF7B72" stroke-width="28" stroke-dasharray="10.86 491.80" stroke-dashoffset="-428.36" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#8250DF" stroke-width="28" stroke-dasharray="10.01 492.65" stroke-dashoffset="-442.22" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#F34B7D" stroke-width="28" stroke-dasharray="4.97 497.69" stroke-dashoffset="-455.23" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#6E7681" stroke-width="28" stroke-dasharray="36.46 466.20" stroke-dashoffset="-463.20" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#F1E05A" stroke-width="28" stroke-dasharray="268.41 234.24" stroke-dashoffset="-0.00" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#3178C6" stroke-width="28" stroke-dasharray="79.19 423.47" stroke-dashoffset="-271.41" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#3572A5" stroke-width="28" stroke-dasharray="57.67 444.98" stroke-dashoffset="-353.60" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#79C0FF" stroke-width="28" stroke-dasharray="11.08 491.58" stroke-dashoffset="-414.27" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#FF7B72" stroke-width="28" stroke-dasharray="10.86 491.80" stroke-dashoffset="-428.35" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#8250DF" stroke-width="28" stroke-dasharray="10.03 492.63" stroke-dashoffset="-442.21" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#F34B7D" stroke-width="28" stroke-dasharray="4.97 497.69" stroke-dashoffset="-455.24" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#6E7681" stroke-width="28" stroke-dasharray="36.45 466.20" stroke-dashoffset="-463.20" transform="rotate(-90 200 172)"/>
     <text x="200" y="174" class="big" text-anchor="middle">54%</text>
     <text x="200" y="194" class="small" text-anchor="middle">JavaScript</text>
   </g>
@@ -40,6 +40,6 @@
     <rect x="380" y="270" width="10" height="10" rx="2" fill="#6E7681"/><text x="400" y="279" class="lang">Other (19)</text><rect x="570" y="271" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="271" width="21.8" height="6" rx="3" fill="#6E7681"/><text x="800" y="279" class="pct" text-anchor="end">7.8%</text>
   </g>
   <line x1="20" y1="310" x2="840" y2="310" stroke="#21262d"/>
-  <text x="20" y="334" class="foot"><tspan class="accent">29</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">10,961 KB</tspan> of code</text>
-  <text x="840" y="334" class="foot" text-anchor="end">updated 2026-11-06</text>
+  <text x="20" y="334" class="foot"><tspan class="accent">29</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">10,963 KB</tspan> of code</text>
+  <text x="840" y="334" class="foot" text-anchor="end">updated 2026-11-07</text>
 </svg>

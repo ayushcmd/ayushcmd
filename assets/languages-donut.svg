@@ -18,28 +18,28 @@
   <text x="430" y="21" class="title" text-anchor="middle">ayushcmd@github: ~/languages --donut</text>
   <g>
     <circle cx="200" cy="172" r="80" fill="none" stroke="#161b22" stroke-width="28"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#F1E05A" stroke-width="28" stroke-dasharray="271.20 231.46" stroke-dashoffset="-0.00" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#3178C6" stroke-width="28" stroke-dasharray="76.40 426.26" stroke-dashoffset="-274.20" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#3572A5" stroke-width="28" stroke-dasharray="55.61 447.04" stroke-dashoffset="-353.59" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#8250DF" stroke-width="28" stroke-dasharray="13.01 489.64" stroke-dashoffset="-412.21" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#FF7B72" stroke-width="28" stroke-dasharray="10.60 492.05" stroke-dashoffset="-428.22" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#7EE787" stroke-width="28" stroke-dasharray="10.39 492.27" stroke-dashoffset="-441.82" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#F34B7D" stroke-width="28" stroke-dasharray="4.70 497.96" stroke-dashoffset="-455.21" transform="rotate(-90 200 172)"/>
-    <circle cx="200" cy="172" r="80" fill="none" stroke="#6E7681" stroke-width="28" stroke-dasharray="36.75 465.90" stroke-dashoffset="-462.90" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#F1E05A" stroke-width="28" stroke-dasharray="272.20 230.45" stroke-dashoffset="-0.00" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#3178C6" stroke-width="28" stroke-dasharray="75.61 427.04" stroke-dashoffset="-275.20" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#3572A5" stroke-width="28" stroke-dasharray="55.04 447.62" stroke-dashoffset="-353.82" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#8250DF" stroke-width="28" stroke-dasharray="13.23 489.42" stroke-dashoffset="-411.85" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#FF7B72" stroke-width="28" stroke-dasharray="10.47 492.19" stroke-dashoffset="-428.09" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#7EE787" stroke-width="28" stroke-dasharray="10.25 492.40" stroke-dashoffset="-441.55" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#E34C26" stroke-width="28" stroke-dasharray="4.80 497.85" stroke-dashoffset="-454.81" transform="rotate(-90 200 172)"/>
+    <circle cx="200" cy="172" r="80" fill="none" stroke="#6E7681" stroke-width="28" stroke-dasharray="37.05 465.61" stroke-dashoffset="-462.61" transform="rotate(-90 200 172)"/>
     <text x="200" y="174" class="big" text-anchor="middle">55%</text>
     <text x="200" y="194" class="small" text-anchor="middle">JavaScript</text>
   </g>
   <g>
-    <rect x="380" y="81" width="10" height="10" rx="2" fill="#F1E05A"/><text x="400" y="90" class="lang">JavaScript</text><rect x="570" y="82" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="82" width="150.0" height="6" rx="3" fill="#F1E05A"/><text x="800" y="90" class="pct" text-anchor="end">54.5%</text>
-    <rect x="380" y="108" width="10" height="10" rx="2" fill="#3178C6"/><text x="400" y="117" class="lang">TypeScript</text><rect x="570" y="109" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="109" width="43.4" height="6" rx="3" fill="#3178C6"/><text x="800" y="117" class="pct" text-anchor="end">15.8%</text>
-    <rect x="380" y="135" width="10" height="10" rx="2" fill="#3572A5"/><text x="400" y="144" class="lang">Python</text><rect x="570" y="136" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="136" width="32.1" height="6" rx="3" fill="#3572A5"/><text x="800" y="144" class="pct" text-anchor="end">11.7%</text>
+    <rect x="380" y="81" width="10" height="10" rx="2" fill="#F1E05A"/><text x="400" y="90" class="lang">JavaScript</text><rect x="570" y="82" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="82" width="150.0" height="6" rx="3" fill="#F1E05A"/><text x="800" y="90" class="pct" text-anchor="end">54.8%</text>
+    <rect x="380" y="108" width="10" height="10" rx="2" fill="#3178C6"/><text x="400" y="117" class="lang">TypeScript</text><rect x="570" y="109" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="109" width="42.8" height="6" rx="3" fill="#3178C6"/><text x="800" y="117" class="pct" text-anchor="end">15.6%</text>
+    <rect x="380" y="135" width="10" height="10" rx="2" fill="#3572A5"/><text x="400" y="144" class="lang">Python</text><rect x="570" y="136" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="136" width="31.6" height="6" rx="3" fill="#3572A5"/><text x="800" y="144" class="pct" text-anchor="end">11.5%</text>
     <rect x="380" y="162" width="10" height="10" rx="2" fill="#8250DF"/><text x="400" y="171" class="lang">CSS</text><rect x="570" y="163" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="163" width="8.8" height="6" rx="3" fill="#8250DF"/><text x="800" y="171" class="pct" text-anchor="end">3.2%</text>
-    <rect x="380" y="189" width="10" height="10" rx="2" fill="#FF7B72"/><text x="400" y="198" class="lang">Blade</text><rect x="570" y="190" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="190" width="7.4" height="6" rx="3" fill="#FF7B72"/><text x="800" y="198" class="pct" text-anchor="end">2.7%</text>
-    <rect x="380" y="216" width="10" height="10" rx="2" fill="#7EE787"/><text x="400" y="225" class="lang">Swift</text><rect x="570" y="217" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="217" width="7.3" height="6" rx="3" fill="#7EE787"/><text x="800" y="225" class="pct" text-anchor="end">2.7%</text>
-    <rect x="380" y="243" width="10" height="10" rx="2" fill="#F34B7D"/><text x="400" y="252" class="lang">C++</text><rect x="570" y="244" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="244" width="4.2" height="6" rx="3" fill="#F34B7D"/><text x="800" y="252" class="pct" text-anchor="end">1.5%</text>
-    <rect x="380" y="270" width="10" height="10" rx="2" fill="#6E7681"/><text x="400" y="279" class="lang">Other (19)</text><rect x="570" y="271" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="271" width="21.7" height="6" rx="3" fill="#6E7681"/><text x="800" y="279" class="pct" text-anchor="end">7.9%</text>
+    <rect x="380" y="189" width="10" height="10" rx="2" fill="#FF7B72"/><text x="400" y="198" class="lang">Blade</text><rect x="570" y="190" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="190" width="7.3" height="6" rx="3" fill="#FF7B72"/><text x="800" y="198" class="pct" text-anchor="end">2.7%</text>
+    <rect x="380" y="216" width="10" height="10" rx="2" fill="#7EE787"/><text x="400" y="225" class="lang">Swift</text><rect x="570" y="217" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="217" width="7.2" height="6" rx="3" fill="#7EE787"/><text x="800" y="225" class="pct" text-anchor="end">2.6%</text>
+    <rect x="380" y="243" width="10" height="10" rx="2" fill="#E34C26"/><text x="400" y="252" class="lang">HTML</text><rect x="570" y="244" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="244" width="4.3" height="6" rx="3" fill="#E34C26"/><text x="800" y="252" class="pct" text-anchor="end">1.6%</text>
+    <rect x="380" y="270" width="10" height="10" rx="2" fill="#6E7681"/><text x="400" y="279" class="lang">Other (19)</text><rect x="570" y="271" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="271" width="21.8" height="6" rx="3" fill="#6E7681"/><text x="800" y="279" class="pct" text-anchor="end">8.0%</text>
   </g>
   <line x1="20" y1="310" x2="840" y2="310" stroke="#21262d"/>
-  <text x="20" y="334" class="foot"><tspan class="accent">31</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">11,348 KB</tspan> of code</text>
-  <text x="840" y="334" class="foot" text-anchor="end">updated 2026-11-09</text>
+  <text x="20" y="334" class="foot"><tspan class="accent">32</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">11,461 KB</tspan> of code</text>
+  <text x="840" y="334" class="foot" text-anchor="end">updated 2026-11-10</text>
 </svg>

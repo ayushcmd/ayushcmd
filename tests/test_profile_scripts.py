@@ -113,6 +113,9 @@ class TestSVGValidity(unittest.TestCase):
             os.path.join(HERE, "..", "assets", "info-card.svg"),
             os.path.join(HERE, "..", "assets", "codebase-analytics.svg"),
             os.path.join(HERE, "..", "assets", "star-stats.svg"),
+            os.path.join(HERE, "..", "assets", "star-stats-portfoliostore99.svg"),
+            os.path.join(HERE, "..", "assets", "star-stats-readmify.svg"),
+            os.path.join(HERE, "..", "assets", "star-stats-automate-workflow.svg"),
         ]
         for path in assets:
             if os.path.exists(path):
@@ -348,6 +351,78 @@ class TestStarStats(unittest.TestCase):
             make_star_stats.fetch_json = original
         self.assertEqual(len(repos), 101)
         self.assertEqual(calls, [1, 2])
+
+
+class TestStarStatsOrganizations(unittest.TestCase):
+    def test_profiles_cover_personal_account_and_three_organizations(self):
+        profiles = make_star_stats.all_profiles()
+        self.assertEqual(
+            [(profile["owner"], profile["theme"]) for profile in profiles],
+            [
+                (make_star_stats.USERNAME, "gold"),
+                ("PortfolioStore99", "orange"),
+                ("Readmify", "sky"),
+                ("Automate-Workflow", "red"),
+            ],
+        )
+        self.assertEqual(len({profile["slug"] for profile in profiles}), 4)
+
+    def test_each_card_uses_its_own_theme_colour(self):
+        report = make_star_stats.build_report(
+            [{"name": "tool", "stars": 5}], previous={}, today="2026-11-11", owner="X"
+        )
+        svgs = {}
+        for profile in make_star_stats.all_profiles():
+            svg = make_star_stats.render_svg(report, profile)
+            ET.fromstring(svg)
+            self.assertIn(make_star_stats.THEMES[profile["theme"]]["accent"], svg)
+            self.assertIn(profile["title"], svg)
+            svgs[profile["owner"]] = svg
+        gold = make_star_stats.THEMES["gold"]["accent"]
+        for owner in ("PortfolioStore99", "Readmify", "Automate-Workflow"):
+            self.assertNotIn(gold, svgs[owner])
+
+    def test_placeholders_are_valid_for_every_profile(self):
+        for profile in make_star_stats.all_profiles():
+            root = ET.fromstring(make_star_stats.render_placeholder(profile))
+            self.assertTrue(root.tag.endswith("svg"))
+
+    def test_empty_organization_still_renders(self):
+        report = make_star_stats.build_report([], previous={}, today="2026-11-11", owner="Readmify")
+        profile = make_star_stats.organization_profile("Readmify", "sky")
+        root = ET.fromstring(make_star_stats.render_svg(report, profile))
+        self.assertTrue(root.tag.endswith("svg"))
+
+    def test_one_failing_account_does_not_block_the_others(self):
+        import contextlib
+        import io
+        import tempfile
+        import urllib.error
+        from pathlib import Path
+
+        def fake_fetch(owner=None):
+            if owner == "Readmify":
+                raise urllib.error.URLError("unreachable")
+            return [{"name": f"{owner}-repo", "stargazers_count": 2, "fork": False, "private": False}]
+
+        original_fetch = make_star_stats.fetch_repos
+        original_root = make_star_stats.ROOT
+        with tempfile.TemporaryDirectory() as tmp:
+            make_star_stats.fetch_repos = fake_fetch
+            make_star_stats.ROOT = Path(tmp)
+            try:
+                with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                    with self.assertRaises(SystemExit) as raised:
+                        make_star_stats.main()
+            finally:
+                make_star_stats.fetch_repos = original_fetch
+                make_star_stats.ROOT = original_root
+            written = sorted(path.name for path in (Path(tmp) / "assets").glob("*.svg"))
+        self.assertEqual(raised.exception.code, 1)
+        self.assertEqual(
+            written,
+            ["star-stats-automate-workflow.svg", "star-stats-portfoliostore99.svg", "star-stats.svg"],
+        )
 
 
 class TestWorkflowYAML(unittest.TestCase):

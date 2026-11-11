@@ -1,27 +1,34 @@
 #!/usr/bin/env python3
 """
-Generate the Star Statistics card (assets/star-stats.svg) and its
-machine-readable twin (data/star-stats.json).
+Generate the Star Statistics cards and their machine-readable twins.
 
-What it shows
-- Total stars across every public repository you own.
+Cards (one per GitHub account, each with its own colour theme)
+- ayushcmd           gold    assets/star-stats.svg                       data/star-stats.json
+- PortfolioStore99   orange  assets/star-stats-portfoliostore99.svg      data/star-stats-portfoliostore99.json
+- Readmify           sky     assets/star-stats-readmify.svg              data/star-stats-readmify.json
+- Automate-Workflow  red     assets/star-stats-automate-workflow.svg     data/star-stats-automate-workflow.json
+
+What each card shows
+- Total stars across every public repository of the account.
 - Change in total stars since the previous daily refresh.
 - Number of repositories that have at least one star, and the top repository.
 - Every public repository with its own live star count, ranked by stars.
 
 How it stays current
 - The GitHub Actions workflow runs this script once every 24 hours and commits
-  the refreshed card, so the numbers always come straight from the GitHub API.
-- data/star-stats.json keeps a rolling daily history (last 30 days) which is
-  used to compute the change since the previous refresh.
+  the refreshed cards, so the numbers always come straight from the GitHub API.
+- Each data/*.json keeps a rolling daily history (last 30 days) which is used to
+  compute the change since the previous refresh.
+- If one account cannot be fetched, the others are still refreshed and the
+  script exits with a non-zero status so the failure stays visible.
 
 Scope rules
-- Public repositories owned by the user (private repositories are never listed).
-- Forks are included by default so the total matches the "Stars Earned" tile in
-  the statistics dashboard. Set INCLUDE_FORKS=false to hide them.
+- Public repositories owned by the account (private repositories are never listed).
+- Forks are included by default so the personal total matches the "Stars Earned"
+  tile in the statistics dashboard. Set INCLUDE_FORKS=false to hide them.
 
 Environment
-  GH_USERNAME    GitHub username                          (default: ayushcmd)
+  GH_USERNAME    Personal GitHub username                 (default: ayushcmd)
   GITHUB_TOKEN   Actions token, used only to raise the API rate limit
   INCLUDE_FORKS  true|false                               (default: true)
   EXCLUDE_REPOS  comma-separated repo names to skip       (default: none)
@@ -38,8 +45,6 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SVG_PATH = ROOT / "assets" / "star-stats.svg"
-JSON_PATH = ROOT / "data" / "star-stats.json"
 
 USERNAME = os.environ.get("GH_USERNAME", "ayushcmd")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
@@ -65,8 +70,51 @@ RETRY_DELAY = 2
 WIDTH = 860
 ROW_START = 182
 ROW_STEP = 24
-GOLD = "#e3b341"
-GOLD_SOFT = "#e3b34199"
+
+THEMES = {
+    "gold": {"accent": "#e3b341", "second": "#39d0d8", "third": "#d2a8ff", "border": "#30363d"},
+    "orange": {"accent": "#ff8c1a", "second": "#ffb86b", "third": "#ffd9a8", "border": "#5c3a17"},
+    "sky": {"accent": "#38bdf8", "second": "#7dd3fc", "third": "#bae6fd", "border": "#1c4a60"},
+    "red": {"accent": "#f04848", "second": "#ff8a8a", "third": "#ffc2c2", "border": "#5c2328"},
+}
+
+ORGANIZATIONS = [
+    ("PortfolioStore99", "orange"),
+    ("Readmify", "sky"),
+    ("Automate-Workflow", "red"),
+]
+
+
+def personal_profile():
+    return {
+        "owner": USERNAME,
+        "slug": "star-stats",
+        "theme": "gold",
+        "title": f"{USERNAME}@github: ~/stars --stats",
+        "heading": "ALL PUBLIC REPOSITORIES BY STARS",
+    }
+
+
+def organization_profile(name, theme):
+    return {
+        "owner": name,
+        "slug": f"star-stats-{name.lower()}",
+        "theme": theme,
+        "title": f"{USERNAME}@github: ~/orgs/{name} --stars",
+        "heading": f"{name.upper()} REPOSITORIES BY STARS",
+    }
+
+
+def all_profiles():
+    return [personal_profile()] + [organization_profile(name, theme) for name, theme in ORGANIZATIONS]
+
+
+def asset_path(profile):
+    return ROOT / "assets" / f"{profile['slug']}.svg"
+
+
+def data_path(profile):
+    return ROOT / "data" / f"{profile['slug']}.json"
 
 
 def fetch_json(url):
@@ -92,13 +140,13 @@ def fetch_json(url):
     raise last_error
 
 
-def fetch_repos():
+def fetch_repos(owner=None):
+    owner = owner or USERNAME
     repos = []
     page = 1
     while True:
         batch = fetch_json(
-            f"https://api.github.com/users/{USERNAME}/repos"
-            f"?per_page={PAGE_SIZE}&type=owner&page={page}"
+            f"https://api.github.com/users/{owner}/repos?per_page={PAGE_SIZE}&page={page}"
         )
         if not batch:
             break
@@ -124,9 +172,9 @@ def parse_repos(raw, include_forks=True, excluded=frozenset()):
     return repos
 
 
-def load_previous(path=None):
+def load_previous(path):
     try:
-        data = json.loads(Path(path or JSON_PATH).read_text(encoding="utf-8"))
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
     return data if isinstance(data, dict) else {}
@@ -148,13 +196,14 @@ def build_history(previous, today, total):
     return history[-HISTORY_DAYS:], (earlier[-1] if earlier else None)
 
 
-def build_report(repos, previous=None, today=None):
+def build_report(repos, previous=None, today=None, owner=None):
     today = today or date.today().isoformat()
     total = sum(repo["stars"] for repo in repos)
     starred = sum(1 for repo in repos if repo["stars"] > 0)
     top = repos[0] if repos and repos[0]["stars"] > 0 else None
     history, baseline = build_history(previous or {}, today, total)
     return {
+        "owner": owner or USERNAME,
         "generated": today,
         "totals": {
             "stars": total,
@@ -192,7 +241,8 @@ def star_points(cx, cy, outer, inner):
     return " ".join(points)
 
 
-def svg_open(title, aria, height):
+def svg_open(profile, aria, height):
+    theme = THEMES[profile["theme"]]
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{height}" viewBox="0 0 {WIDTH} {height}" role="img" aria-label="{esc(aria)}">
   <style>
     text {{ font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }}
@@ -203,18 +253,18 @@ def svg_open(title, aria, height):
     .sub {{ fill: #6e7681; font-size: 10px; }}
     .name {{ fill: #e6edf3; font-size: 13px; }}
     .rank {{ fill: #6e7681; font-size: 12px; }}
-    .num {{ fill: #e3b341; font-size: 12px; }}
+    .num {{ fill: {theme["accent"]}; font-size: 12px; }}
     .zero {{ fill: #6e7681; font-size: 12px; }}
     .foot {{ fill: #8b949e; font-size: 11px; }}
-    .accent {{ fill: #39d0d8; }}
+    .accent {{ fill: {theme["second"]}; }}
   </style>
-  <rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{height - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{height - 1}" rx="10" fill="#0d1117" stroke="{theme["border"]}"/>
   <path d="M0.5 10.5 a10 10 0 0 1 10 -10 H{WIDTH - 10.5} a10 10 0 0 1 10 10 V34 H0.5 Z" fill="#161b22"/>
-  <line x1="0.5" y1="34" x2="{WIDTH - 0.5}" y2="34" stroke="#30363d"/>
+  <line x1="0.5" y1="34" x2="{WIDTH - 0.5}" y2="34" stroke="{theme["border"]}"/>
   <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
   <circle cx="38" cy="17" r="5" fill="#ffbd2e"/>
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
-  <text x="{WIDTH // 2}" y="21" class="title" text-anchor="middle">{esc(title)}</text>
+  <text x="{WIDTH // 2}" y="21" class="title" text-anchor="middle">{esc(profile["title"])}</text>
 """
 
 
@@ -229,23 +279,23 @@ def change_tile(change):
     return "0", "#8b949e", f"since {change['since']}"
 
 
-def render_tiles(report):
+def render_tiles(report, theme):
     totals = report["totals"]
     top = report["top_repository"]
     change_value, change_color, change_sub = change_tile(report["change"])
     tiles = [
-        ("TOTAL STARS", fmt(totals["stars"]), GOLD, "across public repositories"),
+        ("TOTAL STARS", fmt(totals["stars"]), theme["accent"], "across public repositories"),
         ("SINCE LAST REFRESH", change_value, change_color, change_sub),
         (
             "STARRED REPOSITORIES",
             fmt(totals["starred_repositories"]),
-            "#39d0d8",
+            theme["second"],
             f"of {fmt(totals['repositories'])} have at least 1 star",
         ),
         (
             "TOP REPOSITORY",
             fmt(top["stars"]) if top else "0",
-            "#d2a8ff",
+            theme["third"],
             esc(truncate(top["name"], 24)) if top else "no stars yet",
         ),
     ]
@@ -261,12 +311,12 @@ def render_tiles(report):
             f'<text x="{x + 14:.1f}" y="113" class="sub">{sub}</text>'
         )
     out.append(
-        f'<polygon points="{star_points(20 + tile_w - 26, 72, 8, 3.4)}" fill="{GOLD}"/>'
+        f'<polygon points="{star_points(20 + tile_w - 26, 72, 8, 3.4)}" fill="{theme["accent"]}"/>'
     )
     return "\n  ".join(out)
 
 
-def render_rows(repos):
+def render_rows(repos, theme):
     if not repos:
         return ""
     per_column = math.ceil(len(repos) / 2)
@@ -280,7 +330,7 @@ def render_rows(repos):
         bar = ""
         if stars > 0:
             width = max(stars / peak * 120, 3)
-            fill = GOLD if index == 0 else GOLD_SOFT
+            fill = theme["accent"] if index == 0 else theme["accent"] + "99"
             bar = f'<rect x="{bar_x}" y="{y - 8}" width="{width:.1f}" height="6" rx="3" fill="{fill}"/>'
         rows.append(
             f'<text x="{rank_x}" y="{y}" class="rank">{index + 1:02d}</text>'
@@ -297,18 +347,19 @@ def card_height(repo_count):
     return ROW_START + (lines - 1) * ROW_STEP + 68
 
 
-def render_svg(report):
+def render_svg(report, profile=None):
+    profile = profile or personal_profile()
+    theme = THEMES[profile["theme"]]
     totals = report["totals"]
     height = card_height(totals["repositories"])
     return (
-        svg_open(f"{USERNAME}@github: ~/stars --stats",
-                 "Star statistics: total stars and stars per public repository", height)
-        + f"""  {render_tiles(report)}
-  <text x="20" y="150" class="section">ALL PUBLIC REPOSITORIES BY STARS</text>
+        svg_open(profile, f"Star statistics for {profile['owner']}: total stars and stars per public repository", height)
+        + f"""  {render_tiles(report, theme)}
+  <text x="20" y="150" class="section">{esc(profile["heading"])}</text>
   <text x="840" y="150" class="section" text-anchor="end">{fmt(totals["repositories"])} REPOSITORIES</text>
   <line x1="20" y1="158" x2="412" y2="158" stroke="#21262d"/>
   <line x1="448" y1="158" x2="840" y2="158" stroke="#21262d"/>
-  {render_rows(report["repositories"])}
+  {render_rows(report["repositories"], theme)}
   <line x1="20" y1="{height - 40}" x2="{WIDTH - 20}" y2="{height - 40}" stroke="#21262d"/>
   <text x="20" y="{height - 16}" class="foot"><tspan class="accent">{fmt(totals["repositories"])}</tspan> public repositories · <tspan class="accent">{fmt(totals["starred_repositories"])}</tspan> starred · refreshed every 24 hours</text>
   <text x="{WIDTH - 20}" y="{height - 16}" class="foot" text-anchor="end">updated {esc(report["generated"])}</text>
@@ -317,45 +368,56 @@ def render_svg(report):
     )
 
 
-def render_placeholder():
+def render_placeholder(profile=None):
+    profile = profile or personal_profile()
     height = 300
     return (
-        svg_open(f"{USERNAME}@github: ~/stars --stats", "Star statistics, first refresh pending", height)
-        + f"""  <text x="{WIDTH // 2}" y="{height // 2 + 4}" class="name" text-anchor="middle">Star statistics</text>
+        svg_open(profile, f"Star statistics for {profile['owner']}, first refresh pending", height)
+        + f"""  <text x="{WIDTH // 2}" y="{height // 2 + 4}" class="name" text-anchor="middle">Star statistics · {esc(profile["owner"])}</text>
   <text x="{WIDTH // 2}" y="{height // 2 + 26}" class="sub" text-anchor="middle">First refresh is pending. The daily workflow fills this card automatically.</text>
 </svg>
 """
     )
 
 
-def write_outputs(report):
-    SVG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
-    SVG_PATH.write_text(render_svg(report), encoding="utf-8")
-    JSON_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+def write_outputs(profile, report):
+    svg_file = asset_path(profile)
+    json_file = data_path(profile)
+    svg_file.parent.mkdir(parents=True, exist_ok=True)
+    json_file.parent.mkdir(parents=True, exist_ok=True)
+    svg_file.write_text(render_svg(report, profile), encoding="utf-8")
+    json_file.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 
-def main():
-    try:
-        raw = fetch_repos()
-    except (urllib.error.URLError, json.JSONDecodeError) as error:
-        print(f"could not fetch repositories: {error}", file=sys.stderr)
-        sys.exit(1)
+def refresh(profile):
+    repos = parse_repos(fetch_repos(profile["owner"]), INCLUDE_FORKS, EXCLUDE_REPOS)
+    report = build_report(repos, load_previous(data_path(profile)), owner=profile["owner"])
+    write_outputs(profile, report)
+    return report
 
-    repos = parse_repos(raw, INCLUDE_FORKS, EXCLUDE_REPOS)
-    if not repos:
-        print("no public repositories found", file=sys.stderr)
-        sys.exit(1)
 
-    report = build_report(repos, load_previous())
-    write_outputs(report)
+def describe(profile, report):
     totals = report["totals"]
     delta = report["change"]["stars"]
     change = "first snapshot" if delta is None else f"{delta:+d} since {report['change']['since']}"
-    print(
-        f"wrote {SVG_PATH.name}: {totals['stars']} stars across "
+    return (
+        f"wrote {asset_path(profile).name}: {profile['owner']} has {totals['stars']} stars across "
         f"{totals['repositories']} public repos ({totals['starred_repositories']} starred, {change})"
     )
+
+
+def main():
+    failures = 0
+    for profile in all_profiles():
+        try:
+            report = refresh(profile)
+        except (urllib.error.URLError, json.JSONDecodeError) as error:
+            failures += 1
+            print(f"{profile['owner']}: could not refresh star statistics: {error}", file=sys.stderr)
+            continue
+        print(describe(profile, report))
+    if failures:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

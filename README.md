@@ -193,4 +193,34 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 
 <br/>
 
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./stars --org PortfolioStore99</code></h3>
+
+<img src="./assets/star-stats-portfoliostore99.svg" width="860" alt="Star statistics for the PortfolioStore99 organization: total stars and stars per public repository" />
+
+</div>
+
+<br/>
+
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./stars --org Readmify</code></h3>
+
+<img src="./assets/star-stats-readmify.svg" width="860" alt="Star statistics for the Readmify organization: total stars and stars per public repository" />
+
+</div>
+
+<br/>
+
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./stars --org Automate-Workflow</code></h3>
+
+<img src="./assets/star-stats-automate-workflow.svg" width="860" alt="Star statistics for the Automate-Workflow organization: total stars and stars per public repository" />
+
+</div>
+
+<br/>
+
 </details>

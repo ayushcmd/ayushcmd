@@ -23,7 +23,9 @@
 <br/><br/>
 
 <p align="center">
-
+  <a href="https://buymeacoffee.com/ayushcmd">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=ayushcmd&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" width="260" alt="Buy Me a Coffee"/>
+  </a>
 </p>
 
 </div>
@@ -176,6 +178,16 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 <h3><code>ayushcmd@github ~ $ ./codebase --analytics</code></h3>
 
 <img src="./assets/codebase-analytics.svg" width="860" alt="Codebase analytics: lines authored, live codebase, top repositories by lines and lines by language" />
+
+</div>
+
+<br/>
+
+<div align="center">
+
+<h3><code>ayushcmd@github ~ $ ./stars --stats</code></h3>
+
+<img src="./assets/star-stats.svg" width="860" alt="Star statistics: total stars and stars per public repository" />
 
 </div>
 

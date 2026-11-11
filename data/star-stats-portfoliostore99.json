@@ -1,4 +1,33 @@
 {
-  "generated": null,
-  "status": "pending first workflow run"
+  "owner": "PortfolioStore99",
+  "generated": "2026-11-11",
+  "totals": {
+    "stars": 100,
+    "repositories": 2,
+    "starred_repositories": 1
+  },
+  "top_repository": {
+    "name": "PortfolioStore99-Promotional",
+    "stars": 100
+  },
+  "change": {
+    "since": null,
+    "stars": null
+  },
+  "repositories": [
+    {
+      "name": "PortfolioStore99-Promotional",
+      "stars": 100
+    },
+    {
+      "name": ".github",
+      "stars": 0
+    }
+  ],
+  "history": [
+    {
+      "date": "2026-11-11",
+      "stars": 100
+    }
+  ]
 }

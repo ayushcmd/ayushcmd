@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="658" viewBox="0 0 860 658" role="img" aria-label="Star statistics: total stars and stars per public repository">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="658" viewBox="0 0 860 658" role="img" aria-label="Star statistics for ayushcmd: total stars and stars per public repository">
   <style>
     text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
     .title { fill: #8b949e; font-size: 12px; }

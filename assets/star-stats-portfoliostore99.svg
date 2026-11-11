@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="860" height="300" viewBox="0 0 860 300" role="img" aria-label="Star statistics for PortfolioStore99, first refresh pending">
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="250" viewBox="0 0 860 250" role="img" aria-label="Star statistics for PortfolioStore99: total stars and stars per public repository">
   <style>
     text { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }
     .title { fill: #8b949e; font-size: 12px; }
@@ -13,13 +13,25 @@
     .foot { fill: #8b949e; font-size: 11px; }
     .accent { fill: #ffb86b; }
   </style>
-  <rect x="0.5" y="0.5" width="859" height="299" rx="10" fill="#0d1117" stroke="#5c3a17"/>
+  <rect x="0.5" y="0.5" width="859" height="249" rx="10" fill="#0d1117" stroke="#5c3a17"/>
   <path d="M0.5 10.5 a10 10 0 0 1 10 -10 H849.5 a10 10 0 0 1 10 10 V34 H0.5 Z" fill="#161b22"/>
   <line x1="0.5" y1="34" x2="859.5" y2="34" stroke="#5c3a17"/>
   <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
   <circle cx="38" cy="17" r="5" fill="#ffbd2e"/>
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">ayushcmd@github: ~/orgs/PortfolioStore99 --stars</text>
-  <text x="430" y="154" class="name" text-anchor="middle">Star statistics · PortfolioStore99</text>
-  <text x="430" y="176" class="sub" text-anchor="middle">First refresh is pending. The daily workflow fills this card automatically.</text>
+  <rect x="20.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="34.0" y="70" class="label">TOTAL STARS</text><text x="34.0" y="98" class="value" fill="#ff8c1a">100</text><text x="34.0" y="113" class="sub">across public repositories</text>
+  <rect x="228.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="242.0" y="70" class="label">SINCE LAST REFRESH</text><text x="242.0" y="98" class="value" fill="#8b949e">0</text><text x="242.0" y="113" class="sub">first snapshot</text>
+  <rect x="436.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="450.0" y="70" class="label">STARRED REPOSITORIES</text><text x="450.0" y="98" class="value" fill="#ffb86b">1</text><text x="450.0" y="113" class="sub">of 2 have at least 1 star</text>
+  <rect x="644.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="658.0" y="70" class="label">TOP REPOSITORY</text><text x="658.0" y="98" class="value" fill="#ffd9a8">100</text><text x="658.0" y="113" class="sub">PortfolioStore99-Promot…</text>
+  <polygon points="190.0,64.0 192.0,69.2 197.6,69.5 193.2,73.1 194.7,78.5 190.0,75.4 185.3,78.5 186.8,73.1 182.4,69.5 188.0,69.2" fill="#ff8c1a"/>
+  <text x="20" y="150" class="section">PORTFOLIOSTORE99 REPOSITORIES BY STARS</text>
+  <text x="840" y="150" class="section" text-anchor="end">2 REPOSITORIES</text>
+  <line x1="20" y1="158" x2="412" y2="158" stroke="#21262d"/>
+  <line x1="448" y1="158" x2="840" y2="158" stroke="#21262d"/>
+  <text x="20" y="182" class="rank">01</text><text x="48" y="182" class="name">PortfolioStore99-Prom…</text><rect x="236" y="174" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="174" width="120.0" height="6" rx="3" fill="#ff8c1a"/><text x="412" y="182" class="num" text-anchor="end">100</text>
+  <text x="448" y="182" class="rank">02</text><text x="476" y="182" class="name">.github</text><rect x="664" y="174" width="120" height="6" rx="3" fill="#161b22"/><text x="840" y="182" class="zero" text-anchor="end">0</text>
+  <line x1="20" y1="210" x2="840" y2="210" stroke="#21262d"/>
+  <text x="20" y="234" class="foot"><tspan class="accent">2</tspan> public repositories · <tspan class="accent">1</tspan> starred · refreshed every 24 hours</text>
+  <text x="840" y="234" class="foot" text-anchor="end">updated 2026-11-11</text>
 </svg>

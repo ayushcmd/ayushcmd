@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-10",
+  "generated": "2026-11-11",
   "totals": {
-    "authored_lines": 278863,
-    "live_lines": 263795,
-    "authored_last_30_days": 178718,
+    "authored_lines": 279337,
+    "live_lines": 264269,
+    "authored_last_30_days": 179192,
     "repositories": 38,
     "public": 32,
     "private": 6
@@ -57,7 +57,7 @@
     },
     {
       "name": "Python",
-      "lines": 27518
+      "lines": 27992
     },
     {
       "name": "Java",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 91485
+      "lines": 91959
     }
   ]
 }

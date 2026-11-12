@@ -421,7 +421,7 @@ class TestStarStatsOrganizations(unittest.TestCase):
         self.assertEqual(raised.exception.code, 1)
         self.assertEqual(
             written,
-            ["star-stats-automate-workflow.svg", "star-stats-portfoliostore99.svg", "star-stats.svg"],
+            ["star-stats-automate-workflow.svg", "star-stats-portfoliostore99.svg", "star-stats.svg", "stars-overview.svg"],
         )
 
 
@@ -436,6 +436,93 @@ class TestWorkflowYAML(unittest.TestCase):
         steps = content["jobs"]["refresh-profile-art"]["steps"]
         self.assertIn("python scripts/make_star_stats.py", [step.get("run", "").strip() for step in steps])
         self.assertIn("schedule", content.get("on", content.get(True, {})))
+
+
+class TestCompactDashboard(unittest.TestCase):
+    def test_overview_totals_rankings_zero_and_missing(self):
+        reports = {}
+        for profile in make_star_stats.all_profiles():
+            repos = [{"name": "small", "stars": 2}, {"name": "large", "stars": 8}] if profile["owner"] == make_star_stats.USERNAME else []
+            reports[profile["owner"]] = make_star_stats.build_report(repos, previous={}, today="2026-11-11", owner=profile["owner"])
+        self.assertEqual(make_star_stats.overview_totals(reports), {"personal": 10, "organizations": 0, "tracked": 3})
+        svg = make_star_stats.render_overview(reports)
+        ET.fromstring(svg)
+        self.assertLess(svg.index("large"), svg.index("small"))
+        self.assertIn("No starred repositories yet", svg)
+        for owner in reports:
+            if owner != make_star_stats.USERNAME:
+                self.assertIn(owner, svg)
+        del reports["Readmify"]
+        self.assertIsNone(make_star_stats.overview_totals(reports)["organizations"])
+        self.assertIn("Data unavailable", make_star_stats.render_overview(reports))
+
+    def test_assets_exist_and_compact_dimensions(self):
+        from pathlib import Path
+        import re
+        root = Path(HERE).parent
+        readme = (root / "README.md").read_text(encoding="utf-8")
+        for asset in re.findall(r'src="\./([^" ]+)"', readme):
+            self.assertTrue((root / asset).is_file(), asset)
+            ET.parse(root / asset)
+        for name, height in [("contrib-heatmap", 245), ("info-card", 300), ("ayush-ascii", 300), ("codebase-overview", 156), ("stars-overview", 330)]:
+            svg = ET.parse(root / "assets" / (name + ".svg")).getroot()
+            self.assertLessEqual(float(svg.attrib["viewBox"].split()[3]), height)
+        depth = 0
+        for tag in re.findall(r'</?details>', readme):
+            depth += -1 if tag.startswith('</') else 1
+            self.assertGreaterEqual(depth, 0)
+        self.assertEqual(depth, 0)
+        self.assertLess(readme.index("I'm **Ayush Raj**"), readme.index('<details>'))
+        self.assertEqual(readme.count('<summary><b>'), 3)
+        headings = re.findall(r'^### `ayushcmd@github ~ \$ (.*?)`', readme, re.M)
+        self.assertEqual(headings, ['./contributions.sh', 'whoami', 'cat about-me.md', 'ls featured-projects/', './analytics --overview', './stars --all', './support.sh'])
+
+    def test_missing_account_metrics_are_not_zero(self):
+        import tempfile
+        from pathlib import Path
+        with tempfile.TemporaryDirectory() as tmp:
+            output = Path(tmp) / 'info.svg'
+            render_info_card({}, output)
+            svg = output.read_text(encoding='utf-8')
+        ET.fromstring(svg)
+        self.assertEqual(svg.count('Unavailable'), 6)
+        self.assertNotIn('STREAK', svg)
+        self.assertIn('PRs reviewed', svg)
+
+    def test_overview_preserves_private_masking(self):
+        report = make_loc_stats.build_report(_sample_records(), show_private_names=False)
+        svg = make_loc_stats.render_overview(report)
+        ET.fromstring(svg)
+        self.assertNotIn('secret-big', svg)
+        self.assertIn('20,000', svg)
+        self.assertIn('15,000', svg)
+
+    def test_language_shares_and_full_year_calendar(self):
+        import make_languages_donut
+        from datetime import timedelta
+        totals = {"Python": 750, "TypeScript": 250}
+        rows = make_languages_donut.group_languages(totals)
+        self.assertAlmostEqual(sum(row[1] for row in rows), 100)
+        self.assertEqual(rows[0][1], 75)
+        root = ET.fromstring(make_languages_donut.build_svg(totals, 2))
+        self.assertEqual(root.attrib['height'], '290')
+        days = [{"date": (date(2025, 11, 12) + timedelta(days=i)).isoformat(), "count": i % 5} for i in range(365)]
+        svg = render_heatmap(build_data(days, username='test'))
+        root = ET.fromstring(svg)
+        cells = [r for r in root.iter('{http://www.w3.org/2000/svg}rect') if 'cell' in r.attrib.get('class', '')]
+        self.assertEqual(len(cells), 365)
+
+    def test_workflow_branch_and_new_outputs(self):
+        from pathlib import Path
+        workflow = yaml.safe_load((Path(HERE).parent / '.github/workflows/update-profile-art.yml').read_text())
+        triggers = workflow.get('on', workflow.get(True))
+        self.assertEqual(triggers['push']['branches'], ['master'])
+        self.assertIn('workflow_dispatch', triggers)
+        steps = workflow['jobs']['refresh-profile-art']['steps']
+        pattern = steps[-1]['with']['file_pattern']
+        self.assertIn('assets/stars-overview.svg', pattern)
+        self.assertIn('assets/codebase-overview.svg', pattern)
+        self.assertNotIn('assets/**', triggers['push']['paths'])
 
 
 if __name__ == "__main__":

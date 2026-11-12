@@ -1,12 +1,8 @@
-### `ayushcmd@github ~ $ ./contributions.sh`
-
-<img src="./assets/contrib-heatmap.svg" width="860" alt="Full-year contribution calendar and streaks" />
-
 ### `ayushcmd@github ~ $ whoami`
 
 <table><tr>
 <td valign="top"><img src="./assets/ayush-ascii.svg" width="280" alt="Ayush Raj ASCII portrait" /></td>
-<td valign="top"><img src="./assets/info-card.svg" width="440" alt="GitHub account statistics" /></td>
+<td valign="top"><img src="./assets/info-card.svg" width="520" alt="Monthly contributions and six GitHub activity metrics" /></td>
 </tr></table>
 
 ### `ayushcmd@github ~ $ cat about-me.md`
@@ -17,12 +13,14 @@ I'm **Ayush Raj**, studying **B.S. Computer Science & Data Analytics (2024–202
 
 <p>
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
-<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&amp;logo=typescript&amp;logoColor=white" alt="TypeScript"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript"/>
 <img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React"/>
 <img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI"/>
 <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white" alt="AWS"/>
 <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
-<img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL"/>
+<img src="https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++"/>
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB"/>
+<img src="https://img.shields.io/badge/Git_%26_GitHub-181717?style=flat-square&amp;logo=github&amp;logoColor=white" alt="Git &amp; GitHub"/>
 <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/>
 </p>
 

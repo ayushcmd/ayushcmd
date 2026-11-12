@@ -1,31 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="440" height="300" viewBox="0 0 440 300" font-family="Consolas, monospace">
-<rect x="0.5" y="0.5" width="439" height="299" rx="10" fill="#0D1117" stroke="#30363d"/>
-<text x="220" y="19" fill="#8b949e" font-size="11" text-anchor="middle">Account activity</text>
-<circle cx="16" cy="13" r="4" fill="#ff5f56"/>
-<circle cx="30" cy="13" r="4" fill="#ffbd2e"/>
-<circle cx="44" cy="13" r="4" fill="#27c93f"/>
-<rect x="12" y="38" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="22" y="55" fill="#8b949e" font-size="11">COMMITS</text>
-<text x="22" y="78" fill="#22d3ee" font-size="22">469</text>
-<text x="22" y="96" fill="#8b949e" font-size="10">Trailing 365-day search</text>
-<rect x="226" y="38" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="236" y="55" fill="#8b949e" font-size="11">REPOSITORIES</text>
-<text x="236" y="78" fill="#22d3ee" font-size="22">37</text>
-<text x="236" y="96" fill="#8b949e" font-size="10">Public repositories</text>
-<rect x="12" y="116" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="22" y="133" fill="#8b949e" font-size="11">STARS EARNED</text>
-<text x="22" y="156" fill="#f2cc60" font-size="22">212</text>
-<text x="22" y="174" fill="#8b949e" font-size="10">Across public repos</text>
-<rect x="226" y="116" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="236" y="133" fill="#8b949e" font-size="11">PULL REQUESTS</text>
-<text x="236" y="156" fill="#22d3ee" font-size="22">46</text>
-<text x="236" y="174" fill="#8b949e" font-size="10">Authored · 45 merged</text>
-<rect x="12" y="194" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="22" y="211" fill="#8b949e" font-size="11">CODE REVIEWS</text>
-<text x="22" y="234" fill="#22d3ee" font-size="22">14</text>
-<text x="22" y="252" fill="#8b949e" font-size="10">PRs reviewed · all time</text>
-<rect x="226" y="194" width="202" height="68" rx="5" fill="#161B22"/>
-<text x="236" y="211" fill="#8b949e" font-size="11">ISSUES</text>
-<text x="236" y="234" fill="#22d3ee" font-size="22">42</text>
-<text x="236" y="252" fill="#8b949e" font-size="10">Created issues · all time</text>
-<text x="12" y="288" fill="#8b949e" font-size="10">Public activity · unavailable values are not zero</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="323" viewBox="0 0 560 323" font-family="Consolas, monospace" role="img" aria-label="Monthly contributions and account activity">
+<defs><linearGradient id="green" x2="0" y2="1"><stop stop-color="#39d353"/><stop offset="1" stop-color="#00a63e"/></linearGradient></defs>
+<rect x="0.5" y="0.5" width="559" height="322" rx="9" fill="#0D1117" stroke="#30363d"/><path d="M1 28H559" stroke="#30363d"/>
+<text x="280" y="19" fill="#c9d1d9" font-size="11" text-anchor="middle">ayushcmd@github: ~/account --stats</text>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f56"/>
+<circle cx="30" cy="14" r="4.5" fill="#ffbd2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#27c93f"/>
+<rect x="12" y="40" width="536" height="112" rx="7" fill="#10161e" stroke="#30363d"/>
+<text x="24" y="59" fill="#c9d1d9" font-size="12">MONTHLY CONTRIBUTION ACTIVITY <tspan fill="#8b949e" font-size="10">(Last 12 Months)</tspan></text>
+<g class="month"><title>2025-12: 0 contributions</title><rect x="27" y="123.0" width="32" height="2.0" rx="2" fill="#21262d"/><text x="43" y="117.0" fill="#e6edf3" font-size="11" text-anchor="middle">0</text><text x="43" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Dec</text></g>
+<g class="month"><title>2026-01: 1 contributions</title><rect x="70" y="123.0" width="32" height="2.0" rx="2" fill="url(#green)"/><text x="86" y="117.0" fill="#e6edf3" font-size="11" text-anchor="middle">1</text><text x="86" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Jan</text></g>
+<g class="month"><title>2026-02: 11 contributions</title><rect x="113" y="122.4" width="32" height="2.6" rx="2" fill="url(#green)"/><text x="129" y="116.4" fill="#e6edf3" font-size="11" text-anchor="middle">11</text><text x="129" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Feb</text></g>
+<g class="month"><title>2026-03: 164 contributions</title><rect x="156" y="86.0" width="32" height="39.0" rx="2" fill="url(#green)"/><text x="172" y="80.0" fill="#e6edf3" font-size="11" text-anchor="middle">164</text><text x="172" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Mar</text></g>
+<g class="month"><title>2026-04: 181 contributions</title><rect x="199" y="82.0" width="32" height="43.0" rx="2" fill="url(#green)"/><text x="215" y="76.0" fill="#e6edf3" font-size="11" text-anchor="middle">181</text><text x="215" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Apr</text></g>
+<g class="month"><title>2026-05: 85 contributions</title><rect x="242" y="104.8" width="32" height="20.2" rx="2" fill="url(#green)"/><text x="258" y="98.8" fill="#e6edf3" font-size="11" text-anchor="middle">85</text><text x="258" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">May</text></g>
+<g class="month"><title>2026-06: 135 contributions</title><rect x="285" y="92.9" width="32" height="32.1" rx="2" fill="url(#green)"/><text x="301" y="86.9" fill="#e6edf3" font-size="11" text-anchor="middle">135</text><text x="301" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Jun</text></g>
+<g class="month"><title>2026-07: 93 contributions</title><rect x="328" y="102.9" width="32" height="22.1" rx="2" fill="url(#green)"/><text x="344" y="96.9" fill="#e6edf3" font-size="11" text-anchor="middle">93</text><text x="344" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Jul</text></g>
+<g class="month"><title>2026-08: 5 contributions</title><rect x="371" y="123.0" width="32" height="2.0" rx="2" fill="url(#green)"/><text x="387" y="117.0" fill="#e6edf3" font-size="11" text-anchor="middle">5</text><text x="387" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Aug</text></g>
+<g class="month"><title>2026-09: 1 contributions</title><rect x="414" y="123.0" width="32" height="2.0" rx="2" fill="url(#green)"/><text x="430" y="117.0" fill="#e6edf3" font-size="11" text-anchor="middle">1</text><text x="430" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Sep</text></g>
+<g class="month"><title>2026-10: 122 contributions</title><rect x="457" y="96.0" width="32" height="29.0" rx="2" fill="url(#green)"/><text x="473" y="90.0" fill="#e6edf3" font-size="11" text-anchor="middle">122</text><text x="473" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Oct</text></g>
+<g class="month"><title>2026-11: 176 contributions</title><rect x="500" y="83.2" width="32" height="41.8" rx="2" fill="url(#green)"/><text x="516" y="77.2" fill="#e6edf3" font-size="11" text-anchor="middle">176</text><text x="516" y="141" fill="#c9d1d9" font-size="11" text-anchor="middle">Nov</text></g>
+<g class="metric"><title>Trailing 365-day commit search</title><rect x="12" y="164" width="172" height="60" rx="6" fill="#10161e" stroke="#bc8cff" stroke-opacity="0.4"/><rect x="20" y="178" width="30" height="32" rx="6" fill="#bc8cff" fill-opacity="0.1"/><g transform="translate(24 182) scale(.72)" fill="none" stroke="#bc8cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="5" r="3"/><circle cx="7" cy="23" r="3"/><circle cx="23" cy="5" r="3"/><path d="M7 8v12m0-6c12 0 16-2 16-6"/></g>
+<text x="58" y="182" fill="#c9d1d9" font-size="10.5">TOTAL COMMITS</text>
+<text x="58" y="213" fill="#bc8cff" font-size="24" font-weight="700">469</text></g>
+<g class="metric"><title>Public repositories</title><rect x="194" y="164" width="172" height="60" rx="6" fill="#10161e" stroke="#22d3ee" stroke-opacity="0.4"/><rect x="202" y="178" width="30" height="32" rx="6" fill="#22d3ee" fill-opacity="0.1"/><g transform="translate(206 182) scale(.72)" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 13-7 13 7-13 7ZM2 15l13 7 13-7M2 21l13 7 13-7"/></g>
+<text x="240" y="182" fill="#c9d1d9" font-size="10.5">PUBLIC REPOS</text>
+<text x="240" y="213" fill="#22d3ee" font-size="24" font-weight="700">37</text></g>
+<g class="metric"><title>PRs reviewed, not individual reviews</title><rect x="376" y="164" width="172" height="60" rx="6" fill="#10161e" stroke="#f0883e" stroke-opacity="0.4"/><rect x="384" y="178" width="30" height="32" rx="6" fill="#f0883e" fill-opacity="0.1"/><g transform="translate(388 182) scale(.72)" fill="none" stroke="#f0883e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 6-8 9 8 9m10-18 8 9-8 9m-3-22-4 26"/></g>
+<text x="422" y="182" fill="#c9d1d9" font-size="10.5">CODE REVIEWS</text>
+<text x="422" y="213" fill="#f0883e" font-size="24" font-weight="700">14</text></g>
+<g class="metric"><title>Authored pull requests, all time</title><rect x="12" y="232" width="172" height="60" rx="6" fill="#10161e" stroke="#39d353" stroke-opacity="0.4"/><rect x="20" y="246" width="30" height="32" rx="6" fill="#39d353" fill-opacity="0.1"/><g transform="translate(24 250) scale(.72)" fill="none" stroke="#39d353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6" r="3"/><circle cx="7" cy="24" r="3"/><circle cx="23" cy="24" r="3"/><path d="M7 9v12m16 0V10q0-4-7-4m0 0 4-4m-4 4 4 4"/></g>
+<text x="58" y="250" fill="#c9d1d9" font-size="10.5">PULL REQUESTS</text>
+<text x="58" y="281" fill="#39d353" font-size="24" font-weight="700">46</text></g>
+<g class="metric"><title>Authored issues, all time</title><rect x="194" y="232" width="172" height="60" rx="6" fill="#10161e" stroke="#ff6b6b" stroke-opacity="0.4"/><rect x="202" y="246" width="30" height="32" rx="6" fill="#ff6b6b" fill-opacity="0.1"/><g transform="translate(206 250) scale(.72)" fill="none" stroke="#ff6b6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="15" r="12"/><path d="M15 7v10m0 4v2"/></g>
+<text x="240" y="250" fill="#c9d1d9" font-size="10.5">ISSUES</text>
+<text x="240" y="281" fill="#ff6b6b" font-size="24" font-weight="700">42</text></g>
+<g class="metric"><title>Accepted discussion answers in API-visible repositories</title><rect x="376" y="232" width="172" height="60" rx="6" fill="#10161e" stroke="#f2cc60" stroke-opacity="0.4"/><rect x="384" y="246" width="30" height="32" rx="6" fill="#f2cc60" fill-opacity="0.1"/><g transform="translate(388 250) scale(.72)" fill="none" stroke="#f2cc60" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h20q3 0 3 3v15q0 3-3 3h-9l-7 5v-5H5q-3 0-3-3V6q0-3 3-3Z"/><path d="m8 13 5 5 9-10"/></g>
+<text x="422" y="250" fill="#c9d1d9" font-size="10.5">ACCEPTED</text>
+<text x="422" y="262" fill="#c9d1d9" font-size="10.5">DISCUSSION ANSWERS</text>
+<text x="422" y="281" fill="#f2cc60" font-size="24" font-weight="700">N/A</text></g>
+<text x="12" y="311" fill="#8b949e" font-size="9.5">Commits: 365d · Reviews: PRs reviewed · Current month in progress</text></svg>

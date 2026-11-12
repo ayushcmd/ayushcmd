@@ -464,7 +464,7 @@ class TestCompactDashboard(unittest.TestCase):
         for asset in re.findall(r'src="\./([^" ]+)"', readme):
             self.assertTrue((root / asset).is_file(), asset)
             ET.parse(root / asset)
-        for name, height in [("contrib-heatmap", 245), ("info-card", 300), ("ayush-ascii", 300), ("codebase-overview", 156), ("stars-overview", 330)]:
+        for name, height in [("contrib-heatmap", 245), ("info-card", 323), ("ayush-ascii", 300), ("codebase-overview", 156), ("stars-overview", 330)]:
             svg = ET.parse(root / "assets" / (name + ".svg")).getroot()
             self.assertLessEqual(float(svg.attrib["viewBox"].split()[3]), height)
         depth = 0
@@ -475,7 +475,7 @@ class TestCompactDashboard(unittest.TestCase):
         self.assertLess(readme.index("I'm **Ayush Raj**"), readme.index('<details>'))
         self.assertEqual(readme.count('<summary><b>'), 3)
         headings = re.findall(r'^### `ayushcmd@github ~ \$ (.*?)`', readme, re.M)
-        self.assertEqual(headings, ['./contributions.sh', 'whoami', 'cat about-me.md', 'ls featured-projects/', './analytics --overview', './stars --all', './support.sh'])
+        self.assertEqual(headings, ['whoami', 'cat about-me.md', 'ls featured-projects/', './analytics --overview', './stars --all', './support.sh'])
 
     def test_missing_account_metrics_are_not_zero(self):
         import tempfile
@@ -485,7 +485,7 @@ class TestCompactDashboard(unittest.TestCase):
             render_info_card({}, output)
             svg = output.read_text(encoding='utf-8')
         ET.fromstring(svg)
-        self.assertEqual(svg.count('Unavailable'), 6)
+        self.assertEqual(svg.count('>N/A</text>'), 6)
         self.assertNotIn('STREAK', svg)
         self.assertIn('PRs reviewed', svg)
 
@@ -523,6 +523,50 @@ class TestCompactDashboard(unittest.TestCase):
         self.assertIn('assets/stars-overview.svg', pattern)
         self.assertIn('assets/codebase-overview.svg', pattern)
         self.assertNotIn('assets/**', triggers['push']['paths'])
+
+
+class TestWhoamiRefinement(unittest.TestCase):
+    def test_accepted_answers_query_and_failures(self):
+        from unittest.mock import patch, Mock
+        from fetch_contributions import fetch_accepted_answers
+        response = Mock()
+        with patch('fetch_contributions.requests.post', return_value=response) as post:
+            response.json.return_value = {'data': {'user': {'repositoryDiscussionComments': {'totalCount': 7}}}}
+            self.assertEqual(fetch_accepted_answers('test', 'token'), 7)
+            self.assertIn('onlyAnswers: true', post.call_args.kwargs['json']['query'])
+            self.assertNotIn('nodes', post.call_args.kwargs['json']['query'])
+            response.json.return_value['data']['user']['repositoryDiscussionComments']['totalCount'] = 0
+            self.assertEqual(fetch_accepted_answers('test', 'token'), 0)
+            response.json.return_value = {'errors': [{'message': 'denied'}]}
+            self.assertIsNone(fetch_accepted_answers('test', 'token'))
+            self.assertEqual(fetch_accepted_answers('test', 'token', previous=5), 5)
+            post.reset_mock()
+            self.assertIsNone(fetch_accepted_answers('test', None))
+            post.assert_not_called()
+
+    def test_months_cards_and_preserved_readme(self):
+        from pathlib import Path
+        import json, re, subprocess, html
+        from make_info_card import recent_months, METRICS
+        root = Path(HERE).parent
+        data = json.loads((root / 'data/contributions.json').read_text())
+        months = recent_months(data)
+        self.assertEqual(len(months), 12)
+        self.assertEqual(months[-1]['key'], data['range']['end'][:7])
+        self.assertEqual(months[-1]['total'], data['monthly'][-1]['total'])
+        self.assertIsNone(recent_months({'range': {'end':'2026-01-01'}})[-1]['total'])
+        svg = ET.parse(root / 'assets/info-card.svg').getroot()
+        groups = list(svg.iter('{http://www.w3.org/2000/svg}g'))
+        self.assertEqual(sum(g.get('class') == 'month' for g in groups), 12)
+        self.assertEqual(sum(g.get('class') == 'metric' for g in groups), 6)
+        self.assertEqual([m[1] for m in METRICS], ['commits_365d','public_repos','code_reviews','total_prs','total_issues','accepted_discussion_answers'])
+        readme = (root / 'README.md').read_text(encoding='utf-8')
+        self.assertNotIn('contrib-heatmap', readme)
+        self.assertTrue(readme.startswith('### `ayushcmd@github ~ $ whoami`'))
+        badges = re.findall(r'alt="([^"]+)"', readme[readme.index('<p>'):readme.index('</p>')])
+        self.assertEqual([html.unescape(b) for b in badges], ['Python','JavaScript','React','FastAPI','AWS','Docker','C++','MongoDB','Git & GitHub','PyTorch'])
+        self.assertIn('<table><tr>', readme)
+        self.assertIn('assets/ayush-ascii.svg', readme)
 
 
 if __name__ == "__main__":

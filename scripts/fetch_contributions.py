@@ -123,6 +123,37 @@ def compute_longest_streak(days):
     return longest, longest_start, longest_end
 
 
+def fetch_accepted_answers(username, token, previous=None, timeout=12):
+    """Count accepted answers, never all authored discussion comments.
+
+    GitHub User.repositoryDiscussionComments(onlyAnswers: true) is documented at
+    https://docs.github.com/en/graphql/reference/objects#user.
+    Only the aggregate is requested; repository names/content are never stored.
+    """
+    if not token:
+        return previous
+    query = '''query($login: String!) {
+      user(login: $login) {
+        repositoryDiscussionComments(onlyAnswers: true) { totalCount }
+      }
+    }'''
+    try:
+        response = requests.post(
+            'https://api.github.com/graphql',
+            headers={'Authorization': f'Bearer {token}', 'User-Agent': 'profile-readme-bot/1.0'},
+            json={'query': query, 'variables': {'login': username}}, timeout=timeout,
+        )
+        response.raise_for_status()
+        payload = response.json()
+        if payload.get('errors'):
+            return previous
+        count = payload['data']['user']['repositoryDiscussionComments']['totalCount']
+        return count if type(count) is int and count >= 0 else previous
+    except (requests.RequestException, ValueError, KeyError, TypeError):
+        print('Notice: accepted discussion answers unavailable; retaining cached value', file=sys.stderr)
+        return previous
+
+
 def fetch_account_stats(username=USERNAME, existing_stats=None, timeout=12):
     """
     Fetch public account metrics via GitHub public API:
@@ -228,6 +259,9 @@ def fetch_account_stats(username=USERNAME, existing_stats=None, timeout=12):
     except Exception as exc:
         print(f"Warning: Failed to fetch issue count: {exc}", file=sys.stderr)
 
+    stats['accepted_discussion_answers'] = fetch_accepted_answers(
+        username, gh_token, stats.get('accepted_discussion_answers'), timeout,
+    )
     stats["scope"] = "public activity"
     stats["counting_method"] = "GitHub Search API (trailing 365 days for commits; public repos and PRs)"
     return stats

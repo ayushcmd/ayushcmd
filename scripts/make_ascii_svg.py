@@ -23,11 +23,11 @@ USERNAME = os.environ.get("GH_PROFILE_USER", "ayushcmd")
 RAMP = " .':;!+*eE#%@"
 
 # Card Dimensions
-CARD_WIDTH = 400
-CARD_HEIGHT = 420
-TITLEBAR_H = 32
-PADDING_X = 20
-PADDING_Y = 16
+CARD_WIDTH = 280
+CARD_HEIGHT = 300
+TITLEBAR_H = 26
+PADDING_X = 12
+PADDING_Y = 10
 
 # Terminal Theme Colors
 BG_COLOR = "#0d1117"
@@ -84,8 +84,8 @@ def generate_ascii_svg(lines, out_path=OUT_PATH, username=USERNAME):
 
     rows = len(lines)
     # Character sizing inside the SVG
-    font_size = 8.5
-    line_height = 9.2
+    font_size = 6.5
+    line_height = 6.8
     char_width = 5.2
 
     # Animation timings
@@ -101,7 +101,7 @@ def generate_ascii_svg(lines, out_path=OUT_PATH, username=USERNAME):
         "  .window-border { fill: none; stroke: #30363d; stroke-width: 1; }",
         "  .title-line { stroke: #21262d; stroke-width: 1; }",
         "  .title-text { fill: #8b949e; font-size: 11px; font-weight: 500; }",
-        "  .ascii-line { fill: #c9d1d9; font-size: 8.5px; opacity: 1; transform-origin: left center; }",
+        "  .ascii-line { fill: #c9d1d9; font-size: 6.5px; opacity: 1; transform-origin: left center; }",
         "  .anim-line { animation: typeIn 0.35s ease-out backwards; }",
         "  @keyframes typeIn {",
         "    0% { opacity: 0; transform: translateY(2px); }",
@@ -129,7 +129,7 @@ def generate_ascii_svg(lines, out_path=OUT_PATH, username=USERNAME):
     # Title text
     svg_parts.append(
         f'<text x="{CARD_WIDTH // 2}" y="{TITLEBAR_H // 2 + 4}" class="title-text" text-anchor="middle">'
-        f'{username}@github: ~/whoami --portrait'
+        f'ASCII portrait'
         f'</text>'
     )
 

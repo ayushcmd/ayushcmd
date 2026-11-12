@@ -136,15 +136,15 @@ def build_legend(rows, x, y, row_height):
 def build_svg(totals, repo_count):
     rows = group_languages(totals)
     width = 860
-    height = 350
-    cx, cy = 200, 172
-    radius, stroke_width = 80, 28
+    height = 290
+    cx, cy = 200, 142
+    radius, stroke_width = 72, 24
     top_language, top_percent, _ = rows[0]
     language_count = len(totals)
     total_kb = sum(totals.values()) / 1024
 
     arcs = build_arcs(rows, cx, cy, radius, stroke_width)
-    legend = build_legend(rows, 380, 90, 27)
+    legend = build_legend(rows, 380, 65, 24)
 
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="Most used languages across all repositories">
   <style>
@@ -163,7 +163,7 @@ def build_svg(totals, repo_count):
   <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
   <circle cx="38" cy="17" r="5" fill="#ffbd2e"/>
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
-  <text x="{width // 2}" y="21" class="title" text-anchor="middle">{USERNAME}@github: ~/languages --donut</text>
+  <text x="{width // 2}" y="21" class="title" text-anchor="middle">Languages · public repository bytes</text>
   <g>
     <circle cx="{cx}" cy="{cy}" r="{radius}" fill="none" stroke="#161b22" stroke-width="{stroke_width}"/>
     {arcs}

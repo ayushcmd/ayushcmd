@@ -1,11 +1,11 @@
 {
   "username": "ayushcmd",
-  "generated_at": "2026-11-12T13:00:19Z",
+  "generated_at": "2026-11-12T13:54:26Z",
   "range": {
     "start": "2025-11-09",
     "end": "2026-11-12"
   },
-  "total_contributions": 974,
+  "total_contributions": 975,
   "active_days": 176,
   "avg_per_active_day": 5.5,
   "current_streak": {
@@ -99,19 +99,20 @@
       "key": "2026-11",
       "label": "Nov",
       "year": "2026",
-      "total": 176
+      "total": 177
     }
   ],
   "github_stats": {
     "public_repos": 37,
     "total_stars": 212,
-    "total_prs": 46,
+    "total_prs": 47,
     "merged_prs": 45,
     "commits_365d": 469,
     "code_reviews": 14,
     "total_issues": 42,
     "scope": "public activity",
-    "counting_method": "GitHub Search API (trailing 365 days for commits; public repos and PRs)"
+    "counting_method": "GitHub Search API (trailing 365 days for commits; public repos and PRs)",
+    "accepted_discussion_answers": 1
   },
   "days": [
     {
@@ -1588,7 +1589,7 @@
     },
     {
       "date": "2026-11-12",
-      "count": 24
+      "count": 25
     }
   ]
 }

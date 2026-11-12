@@ -22,7 +22,7 @@
   <text x="430" y="21" class="title" text-anchor="middle">Stars · personal + organizations</text>
 
 <rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">212</text>
-<rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">162</text>
+<rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">161</text>
 <rect x="580" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="592" y="66" class="label">TRACKED ORGANIZATIONS</text><text x="592" y="94" class="value" fill="#f2cc60">3</text>
 <text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>
 <text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">72</text>
@@ -34,7 +34,7 @@
 <text x="446" y="134" fill="#ff8c1a" font-size="13">PortfolioStore99</text>
 <text x="446" y="152" class="sub">103 stars · 2 repos · 2026-11-12</text><text x="446" y="169" class="sub">Top: PortfolioStore99-Promotional (103)</text>
 <text x="446" y="194" fill="#38bdf8" font-size="13">Readmify</text>
-<text x="446" y="212" class="sub">49 stars · 6 repos · 2026-11-12</text><text x="446" y="229" class="sub">Top: profile-readme-generator (14)</text>
+<text x="446" y="212" class="sub">48 stars · 6 repos · 2026-11-12</text><text x="446" y="229" class="sub">Top: profile-readme-generator (14)</text>
 <text x="446" y="254" fill="#f04848" font-size="13">Automate-Workflow</text>
 <text x="446" y="272" class="sub">10 stars · 5 repos · 2026-11-12</text><text x="446" y="289" class="sub">Top: .github (2)</text>
 </svg>

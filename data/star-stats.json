@@ -1,23 +1,23 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-11",
+  "generated": "2026-11-12",
   "totals": {
-    "stars": 207,
-    "repositories": 36,
-    "starred_repositories": 35
+    "stars": 212,
+    "repositories": 37,
+    "starred_repositories": 36
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 69
+    "stars": 72
   },
   "change": {
-    "since": null,
-    "stars": null
+    "since": "2026-11-11",
+    "stars": 5
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 69
+      "stars": 72
     },
     {
       "name": "commoditychain",
@@ -70,6 +70,10 @@
     {
       "name": "waytodoomsday",
       "stars": 3
+    },
+    {
+      "name": "ai-helper-prompt",
+      "stars": 2
     },
     {
       "name": "air-atlas",
@@ -156,7 +160,7 @@
       "stars": 1
     },
     {
-      "name": "ai-helper-prompt",
+      "name": "license-advisor",
       "stars": 0
     }
   ],
@@ -164,6 +168,10 @@
     {
       "date": "2026-11-11",
       "stars": 207
+    },
+    {
+      "date": "2026-11-12",
+      "stars": 212
     }
   ]
 }

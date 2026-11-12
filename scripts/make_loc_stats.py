@@ -455,8 +455,8 @@ def color_for(language, index):
     return LANGUAGE_COLORS.get(language) or FALLBACK_COLORS[index % len(FALLBACK_COLORS)]
 
 
-def svg_open(title, aria):
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-label="{esc(aria)}">
+def svg_open(title, aria, height=HEIGHT):
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{height}" viewBox="0 0 {WIDTH} {height}" role="img" aria-label="{esc(aria)}">
   <style>
     text {{ font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; }}
     .title {{ fill: #8b949e; font-size: 12px; }}
@@ -472,7 +472,7 @@ def svg_open(title, aria):
     .foot {{ fill: #8b949e; font-size: 11px; }}
     .accent {{ fill: #39d0d8; }}
   </style>
-  <rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{HEIGHT - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{height - 1}" rx="10" fill="#0d1117" stroke="#30363d"/>
   <path d="M0.5 10.5 a10 10 0 0 1 10 -10 H{WIDTH - 10.5} a10 10 0 0 1 10 10 V34 H0.5 Z" fill="#161b22"/>
   <line x1="0.5" y1="34" x2="{WIDTH - 0.5}" y2="34" stroke="#30363d"/>
   <circle cx="20" cy="17" r="5" fill="#ff5f56"/>
@@ -603,10 +603,18 @@ def render_placeholder():
 # Entry point
 # --------------------------------------------------------------------------- #
 
+def render_overview(report):
+    """Reuse the verified tiles without changing their methodologies."""
+    header = svg_open("Codebase · filtered lines", "Codebase headline metrics", height=156)
+    return (header + render_tiles(report["totals"]) +
+            f'<text x="20" y="143" class="foot">Snapshot {esc(report["generated"])} · detailed rankings and monthly activity below</text></svg>')
+
+
 def write_outputs(report):
     SVG_PATH.parent.mkdir(parents=True, exist_ok=True)
     JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
     SVG_PATH.write_text(render_svg(report), encoding="utf-8")
+    (SVG_PATH.parent / "codebase-overview.svg").write_text(render_overview(report), encoding="utf-8")
     JSON_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 

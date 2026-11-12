@@ -406,6 +406,62 @@ def describe(profile, report):
     )
 
 
+def overview_totals(reports):
+    orgs = [reports.get(p["owner"]) for p in all_profiles()[1:]]
+    personal = reports.get(USERNAME)
+    return {
+        "personal": personal["totals"]["stars"] if personal else None,
+        "organizations": sum(r["totals"]["stars"] for r in orgs) if all(orgs) else None,
+        "tracked": len(orgs),
+    }
+
+
+def render_overview(reports):
+    totals = overview_totals(reports)
+    profile = dict(personal_profile(), title="Stars · personal + organizations")
+    parts = [svg_open(profile, "Consolidated stars overview", 330).replace("fill: #6e7681; font-size: 10px", "fill: #8b949e; font-size: 11px")]
+    for i, (label, key) in enumerate([("PERSONAL STARS", "personal"), ("ORGANIZATION STARS", "organizations"), ("TRACKED ORGANIZATIONS", "tracked")]):
+        x = 20 + i * 280
+        value = totals[key]
+        value = fmt(value) if value is not None else "Unavailable"
+        parts.append(f'<rect x="{x}" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="{x+12}" y="66" class="label">{label}</text><text x="{x+12}" y="94" class="value" fill="#f2cc60">{value}</text>')
+    personal = reports.get(USERNAME)
+    parts.append('<text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>')
+    if personal:
+        repos = sorted(personal["repositories"], key=lambda r: (-r["stars"], r["name"].lower()))[:5]
+        for i, repo in enumerate(repos):
+            y = 157 + i*26
+            parts.append(f'<text x="20" y="{y}" class="name">{i+1:02d} {esc(truncate(repo["name"], 32))}</text><text x="402" y="{y}" class="num" text-anchor="end">{fmt(repo["stars"])}</text>')
+        if not repos:
+            parts.append('<text x="20" y="157" class="sub">No public repositories</text>')
+        parts.append(f'<text x="20" y="310" class="sub">Snapshot {esc(personal["generated"])}</text>')
+    else:
+        parts.append('<text x="20" y="157" class="sub">Personal data unavailable</text>')
+    for i, profile in enumerate(all_profiles()[1:]):
+        y = 134 + i*60
+        report = reports.get(profile["owner"])
+        accent = THEMES[profile["theme"]]["accent"]
+        parts.append(f'<text x="446" y="{y}" fill="{accent}" font-size="13">{esc(profile["owner"])}</text>')
+        if report:
+            count = report["totals"]
+            top = report.get("top_repository")
+            summary = f'{count["stars"]} stars · {count["repositories"]} repos · {report["generated"]}'
+            detail = (f'Top: {truncate(top["name"], 29)} ({top["stars"]})' if top and count["stars"] else "No starred repositories yet")
+        else:
+            summary, detail = "Data unavailable", "Awaiting successful refresh"
+        parts.append(f'<text x="446" y="{y+18}" class="sub">{esc(summary)}</text><text x="446" y="{y+35}" class="sub">{esc(detail)}</text>')
+    parts.append('</svg>')
+    return "\n".join(parts)
+
+
+def write_overview():
+    # Retain each last successful dated snapshot when an account fails refresh.
+    reports = {p["owner"]: load_previous(data_path(p)) for p in all_profiles()}
+    output = ROOT / "assets/stars-overview.svg"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(render_overview(reports), encoding="utf-8")
+
+
 def main():
     failures = 0
     for profile in all_profiles():
@@ -416,6 +472,7 @@ def main():
             print(f"{profile['owner']}: could not refresh star statistics: {error}", file=sys.stderr)
             continue
         print(describe(profile, report))
+    write_overview()
     if failures:
         sys.exit(1)
 

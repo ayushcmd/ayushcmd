@@ -1,53 +1,31 @@
-<div align="center">
+### `ayushcmd@github ~ $ whoami`
 
-<h3><code>ayushcmd@github ~ $ ./contributions.sh</code></h3>
+<table><tr>
+<td valign="top"><img src="./assets/ayush-ascii.svg" width="280" alt="Ayush Raj ASCII portrait" /></td>
+<td valign="top"><img src="./assets/info-card.svg" width="520" alt="Monthly contributions and six GitHub activity metrics" /></td>
+</tr></table>
 
-<img src="./assets/contrib-heatmap.svg" width="860" alt="Ayush's GitHub Contribution Heatmap" />
+### `ayushcmd@github ~ $ cat about-me.md`
 
-<br/><br/>
+I'm **Ayush Raj**, studying **B.S. Computer Science & Data Analytics (2024–2028)** at **IIT Patna**. I build across full-stack development, Cloud & AWS, and AI/ML with Python.
 
-<h3><code>ayushcmd@github ~ $ whoami</code></h3>
+[Portfolio](https://ayushcmd.me) · [GitHub](https://github.com/ayushcmd) · [LinkedIn](https://www.linkedin.com/in/ayush08iitp)
 
-<table align="center" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td valign="top" align="center">
-      <img src="./assets/ayush-ascii.svg" width="400" alt="Ayush Raj ASCII Portrait" />
-    </td>
-    <td width="20"></td>
-    <td valign="top" align="center">
-      <img src="./assets/info-card.svg" width="440" alt="Ayush Raj GitHub Statistics Dashboard" />
-    </td>
-  </tr>
-</table>
-
-<br/><br/>
-
-<p align="center">
-  <a href="https://buymeacoffee.com/ayushcmd">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=ayushcmd&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" width="260" alt="Buy Me a Coffee"/>
-  </a>
+<p>
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python"/>
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript"/>
+<img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React"/>
+<img src="https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI"/>
+<img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white" alt="AWS"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker"/>
+<img src="https://img.shields.io/badge/C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white" alt="C++"/>
+<img src="https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white" alt="MongoDB"/>
+<img src="https://img.shields.io/badge/Git_%26_GitHub-181717?style=flat-square&amp;logo=github&amp;logoColor=white" alt="Git &amp; GitHub"/>
+<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch"/>
 </p>
 
-</div>
-
-<br/>
-
----
-
 <details>
-<summary><code>ayushcmd@github ~ $ cat about-me.md</code> &nbsp;•&nbsp; <b>About Me &amp; Technical Skills</b> &nbsp;<kbd>click to expand</kbd></summary>
-
-<br/>
-
-| Field | Details |
-| :--- | :--- |
-| **Name** | Ayush Raj |
-| **College &amp; Degree** | Indian Institute of Technology (IIT) Patna — B.S. Computer Science &amp; Data Analytics (2024–2028) |
-| **Core Interests** | Full-Stack Development • Cloud &amp; AWS • AI/ML/Python |
-| **Connect** | [Portfolio](https://ayushcmd.me) &nbsp;•&nbsp; [GitHub](https://github.com/ayushcmd) &nbsp;•&nbsp; [LinkedIn](https://www.linkedin.com/in/ayush08iitp) |
-
-<br/>
-
+<summary>View complete technical stack</summary>
 
 <p><strong>Languages &amp; Web:</strong></p>
 <p>
@@ -116,16 +94,14 @@
   <img src="https://img.shields.io/badge/Hugging_Face-FFD21E?style=flat-square&logo=huggingface&logoColor=black" alt="Hugging Face"/>
 </p>
 
-<br/>
+</details>
 
----
-
-### Featured Projects
+### `ayushcmd@github ~ $ ls featured-projects/`
 
 <details>
 <summary><b>CommodityChain</b> &nbsp;•&nbsp; Real-time commodity intelligence platform</summary>
 
-<br/>
+
 
 Live prices, AI analysis, India markets, correlation and simulator tools.
 
@@ -138,7 +114,7 @@ Live prices, AI analysis, India markets, correlation and simulator tools.
 <details>
 <summary><b>CargoVision AI</b> &nbsp;•&nbsp; Railway wagon inspection with computer vision</summary>
 
-<br/>
+
 
 Local-first inspection using YOLOv8, OCR, defect detection and automated PDF reports.
 
@@ -151,7 +127,7 @@ Local-first inspection using YOLOv8, OCR, defect detection and automated PDF rep
 <details>
 <summary><b>Dollar Hegemony</b> &nbsp;•&nbsp; USD dominance research across BRICS vs G7</summary>
 
-<br/>
+
 
 ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transformer ensemble.
 
@@ -161,66 +137,38 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 
 </details>
 
-<br/>
+### `ayushcmd@github ~ $ ./analytics --overview`
 
-<div align="center">
+<img src="./assets/languages-donut.svg" width="860" alt="Language distribution by GitHub language bytes" />
 
-<h3><code>ayushcmd@github ~ $ ./languages --donut</code></h3>
+<img src="./assets/codebase-overview.svg" width="860" alt="Authored lines, live codebase and recent activity" />
 
-<img src="./assets/languages-donut.svg" width="860" alt="Most used languages across all repositories" />
+Language shares use GitHub language **bytes** in public non-fork repositories. Codebase metrics count filtered **lines**; authored lines are additions attributed to me, while live lines describe the current codebase, including accessible private repositories with masked names.
 
-</div>
+<details>
+<summary>View repository rankings, lines by language and monthly activity</summary>
 
-<br/>
-
-<div align="center">
-
-<h3><code>ayushcmd@github ~ $ ./codebase --analytics</code></h3>
-
-<img src="./assets/codebase-analytics.svg" width="860" alt="Codebase analytics: lines authored, live codebase, top repositories by lines and lines by language" />
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<h3><code>ayushcmd@github ~ $ ./stars --stats</code></h3>
-
-<img src="./assets/star-stats.svg" width="860" alt="Star statistics: total stars and stars per public repository" />
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<h3><code>ayushcmd@github ~ $ ./stars --org PortfolioStore99</code></h3>
-
-<img src="./assets/star-stats-portfoliostore99.svg" width="860" alt="Star statistics for the PortfolioStore99 organization: total stars and stars per public repository" />
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<h3><code>ayushcmd@github ~ $ ./stars --org Readmify</code></h3>
-
-<img src="./assets/star-stats-readmify.svg" width="860" alt="Star statistics for the Readmify organization: total stars and stars per public repository" />
-
-</div>
-
-<br/>
-
-<div align="center">
-
-<h3><code>ayushcmd@github ~ $ ./stars --org Automate-Workflow</code></h3>
-
-<img src="./assets/star-stats-automate-workflow.svg" width="860" alt="Star statistics for the Automate-Workflow organization: total stars and stars per public repository" />
-
-</div>
-
-<br/>
+<img src="./assets/codebase-analytics.svg" width="860" alt="Detailed codebase analytics" />
 
 </details>
+
+### `ayushcmd@github ~ $ ./stars --all`
+
+<img src="./assets/stars-overview.svg" width="860" alt="Personal and organization star overview" />
+
+<details>
+<summary>View all personal and organization repository stars</summary>
+
+<img src="./assets/star-stats.svg" width="860" alt="star-stats" />
+
+<img src="./assets/star-stats-portfoliostore99.svg" width="860" alt="star-stats-portfoliostore99" />
+
+<img src="./assets/star-stats-readmify.svg" width="860" alt="star-stats-readmify" />
+
+<img src="./assets/star-stats-automate-workflow.svg" width="860" alt="star-stats-automate-workflow" />
+
+</details>
+
+### `ayushcmd@github ~ $ ./support.sh`
+
+<a href="https://buymeacoffee.com/ayushcmd"><img src="https://img.shields.io/badge/Buy_me_a_coffee-FFDD00?style=flat-square&amp;logo=buymeacoffee&amp;logoColor=000000" alt="Buy Me a Coffee" /></a>

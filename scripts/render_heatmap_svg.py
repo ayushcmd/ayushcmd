@@ -32,11 +32,11 @@ PALETTE = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353", "#56f085"]
 CELL = 12
 GAP = 3
 STEP = CELL + GAP
-PAD = 20
+PAD = 12
 LEFT_LABEL_W = 32
 TOP_LABEL_H = 22
-TITLEBAR_H = 32
-STATS_FOOTER_H = 84
+TITLEBAR_H = 26
+STATS_FOOTER_H = 80
 
 # Colors
 BG_COLOR = "#0d1117"
@@ -169,7 +169,7 @@ def render(data):
     # Window title
     parts.append(
         f'<text x="{canvas_w/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="11" font-weight="500" '
-        f'text-anchor="middle">{username}@github: ~/contributions --graph</text>'
+        f'text-anchor="middle">Contribution calendar</text>'
     )
 
     grid_top = TITLEBAR_H + TOP_LABEL_H

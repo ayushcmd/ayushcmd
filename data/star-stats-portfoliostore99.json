@@ -2,22 +2,22 @@
   "owner": "PortfolioStore99",
   "generated": "2026-11-12",
   "totals": {
-    "stars": 103,
+    "stars": 102,
     "repositories": 2,
     "starred_repositories": 1
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 103
+    "stars": 102
   },
   "change": {
     "since": "2026-11-11",
-    "stars": 3
+    "stars": 2
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 103
+      "stars": 102
     },
     {
       "name": ".github",
@@ -31,7 +31,7 @@
     },
     {
       "date": "2026-11-12",
-      "stars": 103
+      "stars": 102
     }
   ]
 }

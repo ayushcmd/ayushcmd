@@ -2,7 +2,7 @@
   "owner": "Readmify",
   "generated": "2026-11-12",
   "totals": {
-    "stars": 48,
+    "stars": 49,
     "repositories": 6,
     "starred_repositories": 6
   },
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-11",
-    "stars": 48
+    "stars": 49
   },
   "repositories": [
     {
@@ -32,11 +32,11 @@
       "stars": 5
     },
     {
-      "name": ".github",
-      "stars": 2
+      "name": "readme-badges",
+      "stars": 3
     },
     {
-      "name": "readme-badges",
+      "name": ".github",
       "stars": 2
     }
   ],
@@ -47,7 +47,7 @@
     },
     {
       "date": "2026-11-12",
-      "stars": 48
+      "stars": 49
     }
   ]
 }

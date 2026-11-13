@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-12",
+  "generated": "2026-11-13",
   "totals": {
-    "authored_lines": 287568,
-    "live_lines": 271969,
-    "authored_last_30_days": 187423,
-    "repositories": 39,
-    "public": 33,
-    "private": 6
+    "authored_lines": 303939,
+    "live_lines": 286788,
+    "authored_last_30_days": 203794,
+    "repositories": 40,
+    "public": 35,
+    "private": 5
   },
   "top_repositories": [
     {
@@ -40,20 +40,20 @@
       "authored_lines": 21233
     },
     {
-      "name": "cargo-vision-ai",
+      "name": "fame-fighters",
       "private": false,
-      "live_lines": 11508,
-      "authored_lines": 11060
+      "live_lines": 14441,
+      "authored_lines": 15658
     }
   ],
   "languages": [
     {
-      "name": "JavaScript",
-      "lines": 80742
+      "name": "TypeScript",
+      "lines": 86107
     },
     {
-      "name": "TypeScript",
-      "lines": 77050
+      "name": "JavaScript",
+      "lines": 81159
     },
     {
       "name": "Python",
@@ -65,7 +65,7 @@
     },
     {
       "name": "CSS",
-      "lines": 19818
+      "lines": 24833
     },
     {
       "name": "Go",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 100190
+      "lines": 116561
     }
   ]
 }

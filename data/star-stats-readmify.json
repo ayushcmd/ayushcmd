@@ -1,26 +1,30 @@
 {
   "owner": "Readmify",
-  "generated": "2026-11-12",
+  "generated": "2026-11-13",
   "totals": {
-    "stars": 49,
+    "stars": 62,
     "repositories": 6,
     "starred_repositories": 6
   },
   "top_repository": {
-    "name": "profile-readme-generator",
+    "name": "ascii-generator",
     "stars": 14
   },
   "change": {
-    "since": "2026-11-11",
-    "stars": 49
+    "since": "2026-11-12",
+    "stars": 13
   },
   "repositories": [
+    {
+      "name": "ascii-generator",
+      "stars": 14
+    },
     {
       "name": "profile-readme-generator",
       "stars": 14
     },
     {
-      "name": "ascii-generator",
+      "name": "readme-badges",
       "stars": 13
     },
     {
@@ -29,15 +33,11 @@
     },
     {
       "name": "visual-line",
-      "stars": 5
-    },
-    {
-      "name": "readme-badges",
-      "stars": 3
+      "stars": 6
     },
     {
       "name": ".github",
-      "stars": 2
+      "stars": 3
     }
   ],
   "history": [
@@ -48,6 +48,10 @@
     {
       "date": "2026-11-12",
       "stars": 49
+    },
+    {
+      "date": "2026-11-13",
+      "stars": 62
     }
   ]
 }

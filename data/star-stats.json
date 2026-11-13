@@ -1,34 +1,38 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-12",
+  "generated": "2026-11-13",
   "totals": {
-    "stars": 212,
-    "repositories": 37,
-    "starred_repositories": 36
+    "stars": 275,
+    "repositories": 39,
+    "starred_repositories": 39
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 72
+    "stars": 77
   },
   "change": {
-    "since": "2026-11-11",
-    "stars": 5
+    "since": "2026-11-12",
+    "stars": 63
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 72
+      "stars": 77
+    },
+    {
+      "name": "license-advisor",
+      "stars": 34
     },
     {
       "name": "commoditychain",
       "stars": 25
     },
     {
-      "name": "cloud_monitor",
-      "stars": 17
+      "name": "my-site-description",
+      "stars": 18
     },
     {
-      "name": "my-site-description",
+      "name": "cloud_monitor",
       "stars": 17
     },
     {
@@ -41,7 +45,7 @@
     },
     {
       "name": "ayushcmd",
-      "stars": 4
+      "stars": 5
     },
     {
       "name": "developer-portfolios",
@@ -52,7 +56,35 @@
       "stars": 4
     },
     {
+      "name": "waytodoomsday",
+      "stars": 4
+    },
+    {
+      "name": "ai-helper-prompt",
+      "stars": 3
+    },
+    {
+      "name": "air-atlas",
+      "stars": 3
+    },
+    {
+      "name": "ajourneytotommorow",
+      "stars": 3
+    },
+    {
       "name": "aqi-powerbi-dashboard",
+      "stars": 3
+    },
+    {
+      "name": "arcade-world",
+      "stars": 3
+    },
+    {
+      "name": "atmos-grid",
+      "stars": 3
+    },
+    {
+      "name": "badge-quest",
       "stars": 3
     },
     {
@@ -60,7 +92,51 @@
       "stars": 3
     },
     {
+      "name": "bug-trace-agent",
+      "stars": 3
+    },
+    {
+      "name": "campus-around",
+      "stars": 3
+    },
+    {
+      "name": "cargo-vision-ai",
+      "stars": 3
+    },
+    {
+      "name": "chess-khelo",
+      "stars": 3
+    },
+    {
+      "name": "deluxe-ghazal",
+      "stars": 3
+    },
+    {
+      "name": "dino-loader",
+      "stars": 3
+    },
+    {
+      "name": "gh-insights",
+      "stars": 3
+    },
+    {
+      "name": "go-green",
+      "stars": 3
+    },
+    {
+      "name": "mac-vault-app",
+      "stars": 3
+    },
+    {
       "name": "nettracker",
+      "stars": 3
+    },
+    {
+      "name": "octoverse-2026",
+      "stars": 3
+    },
+    {
+      "name": "open-audex",
       "stars": 3
     },
     {
@@ -68,84 +144,12 @@
       "stars": 3
     },
     {
-      "name": "waytodoomsday",
+      "name": "rizz-dice",
       "stars": 3
     },
     {
-      "name": "ai-helper-prompt",
-      "stars": 2
-    },
-    {
-      "name": "air-atlas",
-      "stars": 2
-    },
-    {
-      "name": "ajourneytotommorow",
-      "stars": 2
-    },
-    {
-      "name": "arcade-world",
-      "stars": 2
-    },
-    {
-      "name": "atmos-grid",
-      "stars": 2
-    },
-    {
-      "name": "badge-quest",
-      "stars": 2
-    },
-    {
-      "name": "bug-trace-agent",
-      "stars": 2
-    },
-    {
-      "name": "campus-around",
-      "stars": 2
-    },
-    {
-      "name": "cargo-vision-ai",
-      "stars": 2
-    },
-    {
-      "name": "chess-khelo",
-      "stars": 2
-    },
-    {
-      "name": "deluxe-ghazal",
-      "stars": 2
-    },
-    {
-      "name": "dino-loader",
-      "stars": 2
-    },
-    {
-      "name": "gh-insights",
-      "stars": 2
-    },
-    {
-      "name": "go-green",
-      "stars": 2
-    },
-    {
-      "name": "mac-vault-app",
-      "stars": 2
-    },
-    {
-      "name": "octoverse-2026",
-      "stars": 2
-    },
-    {
-      "name": "open-audex",
-      "stars": 2
-    },
-    {
-      "name": "rizz-dice",
-      "stars": 2
-    },
-    {
       "name": "rob-links",
-      "stars": 2
+      "stars": 3
     },
     {
       "name": "Cloud-DevOps",
@@ -156,12 +160,16 @@
       "stars": 1
     },
     {
-      "name": "system-design-notes",
+      "name": "fame-fighters",
       "stars": 1
     },
     {
-      "name": "license-advisor",
-      "stars": 0
+      "name": "leet-practice",
+      "stars": 1
+    },
+    {
+      "name": "system-design-notes",
+      "stars": 1
     }
   ],
   "history": [
@@ -172,6 +180,10 @@
     {
       "date": "2026-11-12",
       "stars": 212
+    },
+    {
+      "date": "2026-11-13",
+      "stars": 275
     }
   ]
 }

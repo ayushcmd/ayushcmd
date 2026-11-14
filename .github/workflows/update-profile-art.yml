@@ -1,13 +1,13 @@
 name: Update Contribution Graph & Stats
 
 # Refreshes contribution heatmap, statistics dashboard, languages donut, codebase
-# analytics and star statistics (personal account and organizations) daily from
+# analytics and star statistics (personal account and organizations) twice daily from
 # real GitHub data.
-# Runs daily on schedule, on push to main, and on demand via workflow_dispatch.
+# Runs twice daily on schedule, on push to main, and on demand via workflow_dispatch.
 
 on:
   schedule:
-    - cron: "17 6 * * *"  # 06:17 UTC daily
+    - cron: "30 4,9 * * *"  # 10:00 AM and 3:00 PM IST daily (UTC+05:30)
   workflow_dispatch:
   push:
     branches:
@@ -89,4 +89,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: refresh contribution graph and stats [skip ci]"
-          file_pattern: "data/contributions.json assets/contrib-heatmap.svg contrib-heatmap.svg assets/info-card.svg assets/languages-donut.svg assets/codebase-analytics.svg data/loc-stats.json assets/star-stats*.svg data/star-stats*.json"
+          file_pattern: "data/contributions.json assets/contrib-heatmap.svg contrib-heatmap.svg assets/info-card.svg assets/languages-donut.svg assets/codebase-analytics.svg assets/codebase-overview.svg data/loc-stats.json assets/star-stats*.svg assets/stars-overview.svg data/star-stats*.json"

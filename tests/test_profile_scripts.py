@@ -520,7 +520,15 @@ class TestCompactDashboard(unittest.TestCase):
         self.assertIn('workflow_dispatch', triggers)
         steps = workflow['jobs']['refresh-profile-art']['steps']
         pattern = steps[-1]['with']['file_pattern']
-        # Keep the main workflow unchanged; new overview assets are committed manually.
+        self.assertEqual(triggers['schedule'], [{'cron': '30 4,9 * * *'}])
+        # Every generated README panel must be published by the refresh commit.
+        import fnmatch
+        import re
+        readme = (Path(HERE).parent / 'README.md').read_text(encoding='utf-8')
+        for asset in re.findall(r'src="\./(assets/[^" ]+\.svg)"', readme):
+            if asset == 'assets/ayush-ascii.svg':
+                continue  # Static portrait, not a daily data output.
+            self.assertTrue(any(fnmatch.fnmatchcase(asset, glob) for glob in pattern.split()), asset)
         self.assertIn('assets/star-stats*.svg', pattern)
         self.assertIn('assets/codebase-analytics.svg', pattern)
         self.assertNotIn('assets/**', triggers['push']['paths'])

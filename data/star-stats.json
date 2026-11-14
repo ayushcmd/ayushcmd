@@ -2,30 +2,34 @@
   "owner": "ayushcmd",
   "generated": "2026-11-14",
   "totals": {
-    "stars": 297,
+    "stars": 319,
     "repositories": 40,
     "starred_repositories": 39
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 79
+    "stars": 81
   },
   "change": {
     "since": "2026-11-13",
-    "stars": 22
+    "stars": 44
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 79
+      "stars": 81
     },
     {
       "name": "open-workers",
-      "stars": 49
+      "stars": 48
     },
     {
       "name": "commoditychain",
-      "stars": 25
+      "stars": 24
+    },
+    {
+      "name": "gh-insights",
+      "stars": 19
     },
     {
       "name": "my-site-description",
@@ -36,11 +40,11 @@
       "stars": 17
     },
     {
-      "name": "fitoglobe",
-      "stars": 8
+      "name": "badge-quest",
+      "stars": 14
     },
     {
-      "name": "gh-insights",
+      "name": "fitoglobe",
       "stars": 8
     },
     {
@@ -85,10 +89,6 @@
     },
     {
       "name": "atmos-grid",
-      "stars": 3
-    },
-    {
-      "name": "badge-quest",
       "stars": 3
     },
     {
@@ -191,7 +191,7 @@
     },
     {
       "date": "2026-11-14",
-      "stars": 297
+      "stars": 319
     }
   ]
 }

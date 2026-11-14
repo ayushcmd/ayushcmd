@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-14",
   "totals": {
-    "authored_lines": 317206,
-    "live_lines": 299632,
-    "authored_last_30_days": 216369,
+    "authored_lines": 327322,
+    "live_lines": 307970,
+    "authored_last_30_days": 226485,
     "repositories": 40,
     "public": 36,
     "private": 4
@@ -16,16 +16,16 @@
       "authored_lines": 50657
     },
     {
+      "name": "open-workers",
+      "private": false,
+      "live_lines": 29166,
+      "authored_lines": 31781
+    },
+    {
       "name": "open-audex",
       "private": false,
       "live_lines": 26532,
       "authored_lines": 26532
-    },
-    {
-      "name": "open-workers",
-      "private": false,
-      "live_lines": 20828,
-      "authored_lines": 21665
     },
     {
       "name": "arcade-world",
@@ -49,7 +49,7 @@
   "languages": [
     {
       "name": "JavaScript",
-      "lines": 92300
+      "lines": 99868
     },
     {
       "name": "TypeScript",
@@ -65,7 +65,7 @@
     },
     {
       "name": "CSS",
-      "lines": 24864
+      "lines": 24907
     },
     {
       "name": "Go",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 129828
+      "lines": 139944
     }
   ]
 }

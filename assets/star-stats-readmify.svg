@@ -21,7 +21,7 @@
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">ayushcmd@github: ~/orgs/Readmify --stars</text>
   <rect x="20.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="34.0" y="70" class="label">TOTAL STARS</text><text x="34.0" y="98" class="value" fill="#38bdf8">62</text><text x="34.0" y="113" class="sub">across public repositories</text>
-  <rect x="228.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="242.0" y="70" class="label">SINCE LAST REFRESH</text><text x="242.0" y="98" class="value" fill="#3fb950">+13</text><text x="242.0" y="113" class="sub">since 2026-11-12</text>
+  <rect x="228.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="242.0" y="70" class="label">SINCE LAST REFRESH</text><text x="242.0" y="98" class="value" fill="#8b949e">0</text><text x="242.0" y="113" class="sub">since 2026-11-13</text>
   <rect x="436.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="450.0" y="70" class="label">STARRED REPOSITORIES</text><text x="450.0" y="98" class="value" fill="#7dd3fc">6</text><text x="450.0" y="113" class="sub">of 6 have at least 1 star</text>
   <rect x="644.0" y="50" width="196.0" height="70" rx="6" fill="#161b22" stroke="#21262d"/><text x="658.0" y="70" class="label">TOP REPOSITORY</text><text x="658.0" y="98" class="value" fill="#bae6fd">14</text><text x="658.0" y="113" class="sub">ascii-generator</text>
   <polygon points="190.0,64.0 192.0,69.2 197.6,69.5 193.2,73.1 194.7,78.5 190.0,75.4 185.3,78.5 186.8,73.1 182.4,69.5 188.0,69.2" fill="#38bdf8"/>
@@ -37,5 +37,5 @@
   <text x="448" y="230" class="rank">06</text><text x="476" y="230" class="name">.github</text><rect x="664" y="222" width="120" height="6" rx="3" fill="#161b22"/><rect x="664" y="222" width="25.7" height="6" rx="3" fill="#38bdf899"/><text x="840" y="230" class="num" text-anchor="end">3</text>
   <line x1="20" y1="258" x2="840" y2="258" stroke="#21262d"/>
   <text x="20" y="282" class="foot"><tspan class="accent">6</tspan> public repositories · <tspan class="accent">6</tspan> starred · refreshed every 24 hours</text>
-  <text x="840" y="282" class="foot" text-anchor="end">updated 2026-11-13</text>
+  <text x="840" y="282" class="foot" text-anchor="end">updated 2026-11-14</text>
 </svg>

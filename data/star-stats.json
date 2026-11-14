@@ -1,27 +1,27 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-13",
+  "generated": "2026-11-14",
   "totals": {
-    "stars": 275,
-    "repositories": 39,
+    "stars": 297,
+    "repositories": 40,
     "starred_repositories": 39
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 77
+    "stars": 79
   },
   "change": {
-    "since": "2026-11-12",
-    "stars": 63
+    "since": "2026-11-13",
+    "stars": 22
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 77
+      "stars": 79
     },
     {
-      "name": "license-advisor",
-      "stars": 34
+      "name": "open-workers",
+      "stars": 49
     },
     {
       "name": "commoditychain",
@@ -37,6 +37,10 @@
     },
     {
       "name": "fitoglobe",
+      "stars": 8
+    },
+    {
+      "name": "gh-insights",
       "stars": 8
     },
     {
@@ -116,10 +120,6 @@
       "stars": 3
     },
     {
-      "name": "gh-insights",
-      "stars": 3
-    },
-    {
       "name": "go-green",
       "stars": 3
     },
@@ -170,6 +170,10 @@
     {
       "name": "system-design-notes",
       "stars": 1
+    },
+    {
+      "name": "mac-vault-web",
+      "stars": 0
     }
   ],
   "history": [
@@ -184,6 +188,10 @@
     {
       "date": "2026-11-13",
       "stars": 275
+    },
+    {
+      "date": "2026-11-14",
+      "stars": 297
     }
   ]
 }

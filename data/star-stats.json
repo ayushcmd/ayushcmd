@@ -1,27 +1,31 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-14",
+  "generated": "2026-11-15",
   "totals": {
-    "stars": 319,
+    "stars": 357,
     "repositories": 40,
     "starred_repositories": 39
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 81
+    "stars": 83
   },
   "change": {
-    "since": "2026-11-13",
-    "stars": 44
+    "since": "2026-11-14",
+    "stars": 38
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 81
+      "stars": 83
     },
     {
       "name": "open-workers",
       "stars": 48
+    },
+    {
+      "name": "go-green",
+      "stars": 28
     },
     {
       "name": "commoditychain",
@@ -29,7 +33,7 @@
     },
     {
       "name": "gh-insights",
-      "stars": 19
+      "stars": 18
     },
     {
       "name": "my-site-description",
@@ -41,11 +45,19 @@
     },
     {
       "name": "badge-quest",
-      "stars": 14
+      "stars": 16
+    },
+    {
+      "name": "octoverse-2026",
+      "stars": 11
     },
     {
       "name": "fitoglobe",
       "stars": 8
+    },
+    {
+      "name": "air-atlas",
+      "stars": 5
     },
     {
       "name": "api-repos-hub",
@@ -69,10 +81,6 @@
     },
     {
       "name": "ai-helper-prompt",
-      "stars": 3
-    },
-    {
-      "name": "air-atlas",
       "stars": 3
     },
     {
@@ -120,19 +128,11 @@
       "stars": 3
     },
     {
-      "name": "go-green",
-      "stars": 3
-    },
-    {
       "name": "mac-vault-app",
       "stars": 3
     },
     {
       "name": "nettracker",
-      "stars": 3
-    },
-    {
-      "name": "octoverse-2026",
       "stars": 3
     },
     {
@@ -192,6 +192,10 @@
     {
       "date": "2026-11-14",
       "stars": 319
+    },
+    {
+      "date": "2026-11-15",
+      "stars": 357
     }
   ]
 }

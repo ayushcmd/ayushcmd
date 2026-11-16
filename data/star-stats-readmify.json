@@ -1,8 +1,8 @@
 {
   "owner": "Readmify",
-  "generated": "2026-11-15",
+  "generated": "2026-11-16",
   "totals": {
-    "stars": 62,
+    "stars": 61,
     "repositories": 6,
     "starred_repositories": 6
   },
@@ -11,8 +11,8 @@
     "stars": 14
   },
   "change": {
-    "since": "2026-11-14",
-    "stars": 0
+    "since": "2026-11-15",
+    "stars": -1
   },
   "repositories": [
     {
@@ -21,7 +21,7 @@
     },
     {
       "name": "profile-readme-generator",
-      "stars": 14
+      "stars": 13
     },
     {
       "name": "readme-badges",
@@ -60,6 +60,10 @@
     {
       "date": "2026-11-15",
       "stars": 62
+    },
+    {
+      "date": "2026-11-16",
+      "stars": 61
     }
   ]
 }

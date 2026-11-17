@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-16",
+  "generated": "2026-11-17",
   "totals": {
-    "authored_lines": 343596,
-    "live_lines": 315995,
-    "authored_last_30_days": 230686,
-    "repositories": 41,
-    "public": 37,
+    "authored_lines": 361430,
+    "live_lines": 333192,
+    "authored_last_30_days": 248520,
+    "repositories": 42,
+    "public": 38,
     "private": 4
   },
   "top_repositories": [
@@ -18,8 +18,8 @@
     {
       "name": "open-workers",
       "private": false,
-      "live_lines": 29357,
-      "authored_lines": 31975
+      "live_lines": 34333,
+      "authored_lines": 37146
     },
     {
       "name": "open-audex",
@@ -28,16 +28,16 @@
       "authored_lines": 26532
     },
     {
+      "name": "private-project-1",
+      "private": true,
+      "live_lines": 15600,
+      "authored_lines": 22123
+    },
+    {
       "name": "arcade-world",
       "private": false,
       "live_lines": 15177,
       "authored_lines": 14956
-    },
-    {
-      "name": "private-project-1",
-      "private": true,
-      "live_lines": 15168,
-      "authored_lines": 21672
     },
     {
       "name": "fame-fighters",
@@ -49,27 +49,27 @@
   "languages": [
     {
       "name": "JavaScript",
-      "lines": 105442
+      "lines": 110542
     },
     {
       "name": "TypeScript",
-      "lines": 86960
+      "lines": 87369
     },
     {
       "name": "Python",
-      "lines": 29339
+      "lines": 30015
+    },
+    {
+      "name": "CSS",
+      "lines": 28177
     },
     {
       "name": "Java",
       "lines": 26626
     },
     {
-      "name": "CSS",
-      "lines": 25579
-    },
-    {
-      "name": "Go",
-      "lines": 8654
+      "name": "HTML",
+      "lines": 15523
     }
   ],
   "monthly_authored": [
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 152099
+      "lines": 169933
     }
   ]
 }

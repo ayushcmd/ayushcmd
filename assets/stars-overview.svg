@@ -21,7 +21,7 @@
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">Stars · personal + organizations</text>
 
-<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">538</text>
+<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">539</text>
 <rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">84</text>
 <rect x="580" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="592" y="66" class="label">TRACKED ORGANIZATIONS</text><text x="592" y="94" class="value" fill="#f2cc60">3</text>
 <text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>

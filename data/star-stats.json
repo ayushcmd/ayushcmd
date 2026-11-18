@@ -2,7 +2,7 @@
   "owner": "ayushcmd",
   "generated": "2026-11-18",
   "totals": {
-    "stars": 535,
+    "stars": 541,
     "repositories": 42,
     "starred_repositories": 40
   },
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-17",
-    "stars": 17
+    "stars": 23
   },
   "repositories": [
     {
@@ -52,6 +52,10 @@
       "stars": 17
     },
     {
+      "name": "rob-links",
+      "stars": 17
+    },
+    {
       "name": "badge-quest",
       "stars": 16
     },
@@ -61,10 +65,6 @@
     },
     {
       "name": "octoverse-2026",
-      "stars": 11
-    },
-    {
-      "name": "rob-links",
       "stars": 11
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "date": "2026-11-18",
-      "stars": 535
+      "stars": 541
     }
   ]
 }

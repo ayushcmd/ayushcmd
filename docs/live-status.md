@@ -19,7 +19,7 @@ scripts/status_engine.py  +  scripts/resolve_status.py
 data/status_resolved.json (unambiguous machine-readable output)
         │
         ▼
-scripts/render_status_svg.py -> img/status/available.svg (displayed in README.md)
+scripts/render_status_svg.py -> img/status/current.svg (displayed in README.md)
 ```
 
 | File | Owner | Purpose |
@@ -28,7 +28,7 @@ scripts/render_status_svg.py -> img/status/available.svg (displayed in README.md
 | `data/status_meta.json` | Automated workflow | Stamps the daily PR's IST `effective_date` (`YYYY-MM-DD`) so statuses never roll forward across days. |
 | `data/status_presets.json` | Maintainer | Central catalog of the 3 effective statuses (`available`, `offline`, `sleeping`). |
 | `data/status_resolved.json` | Automated workflow | Resolved, SVG-ready output recording both effective status and underlying `manual_input`. |
-| `img/status/available.svg` | Automated workflow | Animated SVG card rendered from `data/status_resolved.json` and embedded at the top of `README.md`. |
+| `img/status/current.svg` | Automated workflow | Animated SVG card rendered from `data/status_resolved.json` and embedded at the top of `README.md`. |
 | `scripts/status_engine.py` | Core library | Pure Python stdlib validation, IST timezone math, night override, 7 AM boundary, and safe `offline` fallback. |
 | `scripts/resolve_status.py` | CLI | Strict PR validator (`--strict --check-only`) and idempotent resolver writing `data/status_resolved.json`. |
 | `scripts/render_status_svg.py` | CLI | Animated SVG renderer reading `data/status_resolved.json` and refusing invalid or placeholder states. |

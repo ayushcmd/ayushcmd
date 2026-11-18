@@ -1113,7 +1113,7 @@ class TestStatusWorkflows(unittest.TestCase):
         self.assertIn("scripts/render_status_svg.py", run_cmds)
         self.assertEqual(
             steps[-1]["with"]["file_pattern"],
-            "data/status_resolved.json img/status/available.svg",
+            "data/status_resolved.json img/status/current.svg",
         )
 
 
@@ -1253,7 +1253,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
 
         # Idempotent writing for Sleeping Dragon SVG
         with tempfile.TemporaryDirectory() as tmp:
-            out_path = Path(tmp) / "available.svg"
+            out_path = Path(tmp) / "current.svg"
             self.assertTrue(render_status_svg.render_status_svg_file(night_resolved, out_path))
             self.assertFalse(render_status_svg.render_status_svg_file(night_resolved, out_path))
 
@@ -1336,7 +1336,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
 
         # Idempotent writing for Available Jurassic SVG
         with tempfile.TemporaryDirectory() as tmp:
-            out_path = Path(tmp) / "available.svg"
+            out_path = Path(tmp) / "current.svg"
             self.assertTrue(render_status_svg.render_status_svg_file(avail_resolved, out_path))
             self.assertFalse(render_status_svg.render_status_svg_file(avail_resolved, out_path))
 
@@ -1484,7 +1484,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_dir = Path(tmp)
             in_path = tmp_dir / "resolved.json"
-            out_path = tmp_dir / "available.svg"
+            out_path = tmp_dir / "current.svg"
 
             self.assertTrue(render_status_svg.render_status_svg_file(resolved, out_path))
             # Idempotent second write returns False
@@ -1499,14 +1499,18 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
     def test_local_svg_and_readme_live_status_section(self):
         import xml.etree.ElementTree as ET
 
-        svg_path = REPO_ROOT / "img" / "status" / "available.svg"
+        svg_path = REPO_ROOT / "img" / "status" / "current.svg"
         self.assertTrue(svg_path.exists(), f"Missing generated SVG: {svg_path}")
+        self.assertFalse(
+            (REPO_ROOT / "img" / "status" / "available.svg").exists(),
+            "Obsolete img/status/available.svg should be removed.",
+        )
         root = ET.fromstring(svg_path.read_text(encoding="utf-8"))
         self.assertTrue(root.tag.endswith("svg"))
 
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         heading = "### `ayushcmd@github ~ $ ./status --live`"
-        img_tag = '<img src="./img/status/available.svg" width="860" alt="Ayush Live Status" />'
+        img_tag = '<img src="./img/status/current.svg" width="860" alt="Ayush Live Status" />'
         whoami_heading = "### `ayushcmd@github ~ $ whoami`"
         whoami_table = "<table><tr>"
         about_heading = "### `ayushcmd@github ~ $ cat about-me.md`"

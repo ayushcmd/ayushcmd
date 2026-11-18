@@ -1,7 +1,7 @@
 name: Resolve Live Status
 
 # Resolves data/status.json + data/status_meta.json + data/status_presets.json
-# into data/status_resolved.json and renders img/status/available.svg for
+# into data/status_resolved.json and renders img/status/current.svg for
 # README.md. Runs immediately after a daily status PR merges to main, and every
 # 30 minutes so automatic night sleeping (22:00-05:59:59 IST), 06:00 restoration,
 # and expiry to offline update without manual intervention. No commit is made
@@ -25,7 +25,7 @@ on:
   workflow_dispatch:
     inputs:
       force:
-        description: "Force rewrite of data/status_resolved.json and img/status/available.svg even if unchanged."
+        description: "Force rewrite of data/status_resolved.json and img/status/current.svg even if unchanged."
         required: false
         default: false
         type: boolean
@@ -76,4 +76,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: update resolved live status and SVG [skip ci]"
-          file_pattern: "data/status_resolved.json img/status/available.svg"
+          file_pattern: "data/status_resolved.json img/status/current.svg"

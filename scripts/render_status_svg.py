@@ -3,7 +3,7 @@
 
 Reads the machine-readable resolved status output (`data/status_resolved.json`),
 validates that it represents one of the three supported statuses without any
-placeholders or schema errors, and writes `img/status/available.svg` only when
+placeholders or schema errors, and writes `img/status/current.svg` only when
 the rendered SVG content changes.
 
 Uses a modular layout:
@@ -38,7 +38,7 @@ from status_engine import (  # noqa: E402
 )
 
 DEFAULT_IN_PATH = REPO_ROOT / "data" / "status_resolved.json"
-DEFAULT_OUT_PATH = REPO_ROOT / "img" / "status" / "available.svg"
+DEFAULT_OUT_PATH = REPO_ROOT / "img" / "status" / "current.svg"
 
 AVAILABILITY_COLORS = {
     "online": "#3fb950",
@@ -1591,7 +1591,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--out-file",
         type=Path,
         default=DEFAULT_OUT_PATH,
-        help="Path to output SVG file (default: img/status/available.svg).",
+        help="Path to output SVG file (default: img/status/current.svg).",
     )
     parser.add_argument(
         "--force",

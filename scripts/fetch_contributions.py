@@ -19,6 +19,7 @@ import json
 import os
 import re
 import sys
+import time
 import requests
 from bs4 import BeautifulSoup
 
@@ -26,29 +27,17 @@ HERE = os.path.dirname(__file__)
 USERNAME = os.environ.get("GH_PROFILE_USER", "ayushcmd")
 URL = f"https://github.com/users/{USERNAME}/contributions"
 OUT_PATH = os.path.join(HERE, "..", "data", "contributions.json")
+RETRY_DELAYS = (5, 15)
 
 
-def fetch_days(username=USERNAME, timeout=25):
-    """Fetch and parse calendar days from GitHub public contributions HTML."""
-    target_url = f"https://github.com/users/{username}/contributions"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    }
-
-    try:
-        resp = requests.get(target_url, headers=headers, timeout=timeout)
-        resp.raise_for_status()
-    except requests.RequestException as exc:
-        print(f"Error fetching contributions for {username}: {exc}", file=sys.stderr)
-        raise
-
-    soup = BeautifulSoup(resp.text, "html.parser")
+def parse_days(html, username=USERNAME):
+    """Parse calendar days from GitHub public contributions HTML."""
+    soup = BeautifulSoup(html, "html.parser")
     cells = soup.select("td.ContributionCalendar-day")
     if not cells:
-        msg = f"No calendar cells found for user '{username}' - GitHub markup may have changed or user not found."
-        print(msg, file=sys.stderr)
-        raise ValueError(msg)
+        raise ValueError(
+            f"No calendar cells found for user '{username}' - GitHub markup may have changed or user not found."
+        )
 
     days = []
     for td in cells:
@@ -73,6 +62,28 @@ def fetch_days(username=USERNAME, timeout=25):
     # Sort deterministically by date
     days.sort(key=lambda d: d["date"])
     return days
+
+
+def fetch_days(username=USERNAME, timeout=25, retry_delays=RETRY_DELAYS):
+    """Fetch calendar days, retrying transient failures such as rate limits and timeouts."""
+    target_url = f"https://github.com/users/{username}/contributions"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    }
+
+    last_error = None
+    for attempt, delay in enumerate((0, *retry_delays), start=1):
+        if delay:
+            time.sleep(delay)
+        try:
+            resp = requests.get(target_url, headers=headers, timeout=timeout)
+            resp.raise_for_status()
+            return parse_days(resp.text, username)
+        except (requests.RequestException, ValueError) as exc:
+            last_error = exc
+            print(f"Attempt {attempt} fetching contributions for {username} failed: {exc}", file=sys.stderr)
+    raise last_error
 
 
 def compute_current_streak(days):
@@ -328,21 +339,31 @@ def build_data(days, username=USERNAME, account_stats=None):
     }
 
 
+def comparable(data):
+    """Return the payload without the volatile generation timestamp."""
+    return {key: value for key, value in data.items() if key != "generated_at"}
+
+
 def main():
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
-    existing_stats = {}
+    previous = {}
     if os.path.exists(OUT_PATH):
         try:
             with open(OUT_PATH, "r", encoding="utf-8") as f:
-                prev_data = json.load(f)
-                existing_stats = prev_data.get("github_stats", {})
-        except Exception:
-            existing_stats = {}
+                loaded = json.load(f)
+            if isinstance(loaded, dict):
+                previous = loaded
+        except (OSError, ValueError):
+            previous = {}
+    existing_stats = previous.get("github_stats", {})
 
     try:
         days = fetch_days(USERNAME)
         account_stats = fetch_account_stats(USERNAME, existing_stats)
         data = build_data(days, USERNAME, account_stats)
+        if previous and comparable(previous) == comparable(data):
+            print("No contribution or stats changes; data/contributions.json left untouched.")
+            return
         with open(OUT_PATH, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
         print(f"Successfully wrote {OUT_PATH}: {data['total_contributions']} contributions, "

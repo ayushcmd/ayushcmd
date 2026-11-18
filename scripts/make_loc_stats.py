@@ -20,6 +20,13 @@ Scope rules
   lockfiles, *.min.*, files over 1 MB, binary files, and single-file additions
   above 10,000 lines).
 
+Safety
+- A run is published only when it is complete. If a repository cannot be cloned
+  (after retries), or the private repository listing fails while the previous
+  snapshot contained private repositories, the script exits with an error and
+  leaves the previous card and JSON untouched instead of publishing lower totals.
+  A repository that fails permanently can be added to EXCLUDE_REPOS.
+
 Environment
   GH_USERNAME        GitHub username                       (default: ayushcmd)
   LOC_STATS_TOKEN    PAT with read access to private repos (falls back to GITHUB_TOKEN)
@@ -38,6 +45,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.request
 from collections import defaultdict
@@ -75,6 +83,8 @@ MONTHS = 12
 MAX_FILE_BYTES = 1_000_000
 MAX_FILE_ADDITIONS = 10_000
 GIT_TIMEOUT = 600
+CLONE_ATTEMPTS = 3
+CLONE_RETRY_DELAY = 5
 
 LANGUAGE_BY_EXTENSION = {
     ".py": "Python", ".pyw": "Python",
@@ -306,12 +316,15 @@ def keep_repo(repo):
 
 
 def list_repos():
+    """Return (repositories, private_listing_failed)."""
     repos = None
+    private_listing_failed = False
     if TOKEN and INCLUDE_PRIVATE:
         try:
             owned = paged("https://api.github.com/user/repos?affiliation=owner&visibility=all")
             repos = [r for r in owned if r["owner"]["login"].lower() == USERNAME.lower()]
         except urllib.error.HTTPError as error:
+            private_listing_failed = True
             print(
                 f"private repo listing unavailable (HTTP {error.code}); "
                 "falling back to public repositories",
@@ -319,7 +332,7 @@ def list_repos():
             )
     if repos is None:
         repos = paged(f"https://api.github.com/users/{USERNAME}/repos?type=owner")
-    return [repo for repo in repos if keep_repo(repo)]
+    return [repo for repo in repos if keep_repo(repo)], private_listing_failed
 
 
 def clone_repo(repo, destination):
@@ -334,10 +347,23 @@ def clone_repo(repo, destination):
     )
 
 
+def clone_with_retry(repo, destination):
+    """Clone a repository, retrying quick failures. Timeouts are not retried."""
+    for attempt in range(1, CLONE_ATTEMPTS + 1):
+        try:
+            clone_repo(repo, destination)
+            return
+        except subprocess.CalledProcessError:
+            shutil.rmtree(destination, ignore_errors=True)
+            if attempt == CLONE_ATTEMPTS:
+                raise
+            time.sleep(CLONE_RETRY_DELAY * attempt)
+
+
 def analyze_repo(repo, workdir):
     destination = Path(workdir) / str(repo["id"])
     try:
-        clone_repo(repo, destination)
+        clone_with_retry(repo, destination)
         live = count_live(destination)
         authored = authored_stats(destination, AUTHOR_PATTERNS)
     finally:
@@ -618,8 +644,29 @@ def write_outputs(report):
     JSON_PATH.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
 
 
+def load_previous():
+    """Return the previously published report, or None when absent or unreadable."""
+    try:
+        loaded = json.loads(JSON_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return loaded if isinstance(loaded, dict) else None
+
+
+def incomplete_reason(previous, skipped, private_listing_failed):
+    """Explain why a run is too incomplete to publish, or return None when it is safe."""
+    if skipped:
+        noun = "repository" if skipped == 1 else "repositories"
+        return f"{skipped} {noun} could not be analyzed (add persistent failures to EXCLUDE_REPOS)"
+    previous_private = ((previous or {}).get("totals") or {}).get("private", 0)
+    if private_listing_failed and previous_private:
+        return "private repository listing failed, so private repositories would vanish from the totals"
+    return None
+
+
 def main():
-    repos = list_repos()
+    previous = load_previous()
+    repos, private_listing_failed = list_repos()
     if not repos:
         print("no repositories found", file=sys.stderr)
         sys.exit(1)
@@ -639,12 +686,17 @@ def main():
         print("no repository could be analyzed", file=sys.stderr)
         sys.exit(1)
 
+    reason = incomplete_reason(previous, skipped, private_listing_failed)
+    if reason:
+        print(f"keeping previous codebase analytics: {reason}", file=sys.stderr)
+        sys.exit(1)
+
     report = build_report(records)
     write_outputs(report)
     totals = report["totals"]
     print(
         f"wrote {SVG_PATH.name}: {totals['repositories']} repos "
-        f"({totals['private']} private, {skipped} skipped), "
+        f"({totals['private']} private), "
         f"{totals['authored_lines']:,} lines authored, {totals['live_lines']:,} live"
     )
 

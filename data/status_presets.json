@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "default_fallback": "offline",
+  "night_override_status": "sleeping",
+  "presets": {
+    "available": {
+      "emoji": "🟢",
+      "title": "Available",
+      "category": "other",
+      "availability": "available",
+      "message": "Around and open to messages, reviews, and collabs",
+      "tags": ["Online", "Open"],
+      "color": "#3fb950"
+    },
+    "offline": {
+      "emoji": "🌙",
+      "title": "Offline",
+      "category": "other",
+      "availability": "offline",
+      "message": "Away from the keyboard — catch you next cycle",
+      "tags": ["Offline"],
+      "color": "#8b949e"
+    },
+    "exam": {
+      "emoji": "📝",
+      "title": "Exam Crunch",
+      "category": "college",
+      "availability": "busy",
+      "message": "Focused on exams — GitHub replies paused",
+      "tags": ["Exams", "DND"],
+      "color": "#da3633"
+    },
+    "travelling": {
+      "emoji": "🚆",
+      "title": "On the Move",
+      "category": "travel",
+      "availability": "limited",
+      "message": "Exploring beyond the screen",
+      "tags": ["Travel", "Away"],
+      "color": "#f0883e"
+    },
+    "working": {
+      "emoji": "💻",
+      "title": "Building & Shipping",
+      "category": "work",
+      "availability": "focused",
+      "message": "Heads down writing code and shipping features",
+      "project": "Building developer tools, AI workflows, and open-source projects",
+      "tags": ["Working", "Building"],
+      "color": "#58a6ff"
+    },
+    "sleeping": {
+      "emoji": "😴",
+      "title": "Recharging",
+      "category": "life",
+      "availability": "offline",
+      "message": "Offline for the night — back in the morning",
+      "tags": ["Sleep", "AFK"],
+      "color": "#6e7681"
+    }
+  }
+}

@@ -2,16 +2,15 @@
 """Render the Ayush Live Status SVG card from `data/status_resolved.json`.
 
 Reads the machine-readable resolved status output (`data/status_resolved.json`),
-validates that it represents one of the six supported statuses without any
+validates that it represents one of the three supported statuses without any
 placeholders or schema errors, and writes `img/status/available.svg` only when
 the rendered SVG content changes.
 
 Uses a modular layout:
-- Shared terminal frame and footer rendering
-- Shared status info & availability badge rendering
+- Shared terminal frame, status info block, and availability pill rendering
+- Dedicated animated Prehistoric Jurassic World scene for `available`
 - Dedicated animated monochrome pixel-art Dino Runner scene for `offline`
-- Standard icon card layout for `available`, `exam`, `travelling`, `working`,
-  and `sleeping`
+- Dedicated animated Medieval Dragon Night scene for `sleeping`
 
 Uses only the Python standard library; emits pure SVG with no JavaScript or
 external assets for full GitHub README compatibility.
@@ -32,6 +31,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 from status_engine import (  # noqa: E402
+    SUPPORTED_STATUS_IDS,
     is_placeholder_value,
     load_json_file,
     validate_resolved_status,
@@ -40,28 +40,13 @@ from status_engine import (  # noqa: E402
 DEFAULT_IN_PATH = REPO_ROOT / "data" / "status_resolved.json"
 DEFAULT_OUT_PATH = REPO_ROOT / "img" / "status" / "available.svg"
 
-SUPPORTED_STATUS_IDS = frozenset({
-    "available",
-    "offline",
-    "exam",
-    "travelling",
-    "working",
-    "sleeping",
-})
-
 AVAILABILITY_COLORS = {
-    "available": "#3fb950",
-    "focused": "#58a6ff",
-    "busy": "#f85149",
-    "limited": "#f0883e",
+    "online": "#3fb950",
     "offline": "#8b949e",
 }
 
 AVAILABILITY_LABELS = {
-    "available": "ONLINE",
-    "focused": "FOCUSED",
-    "busy": "BUSY",
-    "limited": "LIMITED",
+    "online": "ONLINE",
     "offline": "OFFLINE",
 }
 
@@ -325,24 +310,11 @@ def _render_terminal_frame_open(
     return lines
 
 
-def _render_generic_icon_badge(emoji: str, accent: str, avail_color: str) -> list[str]:
-    """Render the standard left emoji badge used by non-offline statuses."""
-    return [
-        f'  <rect x="32" y="58" width="64" height="64" rx="12" fill="{escape(accent, quote=True)}" '
-        f'fill-opacity="0.14" stroke="{escape(accent, quote=True)}" stroke-opacity="0.55"/>',
-        f'  <text x="64" y="100" font-size="30" text-anchor="middle">{escape(emoji)}</text>',
-        '  <circle cx="88" cy="114" r="6" fill="#10161e"/>',
-        f'  <circle cx="88" cy="114" r="4" fill="{escape(avail_color, quote=True)}"/>',
-    ]
-
-
 def _render_status_info_block(
     *,
     title: str,
     message: str,
-    project: str | None,
     tags: list[str],
-    accent: str,
     avail_color: str,
     avail_label: str,
     text_x: int,
@@ -354,13 +326,12 @@ def _render_status_info_block(
     msg_size: float = 13,
     tag_y: int = 109,
     max_msg_len: int = 82,
-    max_proj_len: int = 76,
     pulse_dot: bool = False,
     tag_fill: str = "#161b22",
     tag_stroke: str = "#30363d",
     tag_text_color: str = "#c9d1d9",
 ) -> list[str]:
-    """Render shared status title, right-aligned availability pill, message, and tags/project."""
+    """Render shared status title, right-aligned availability pill, message, and tags."""
     pill_width = max(96, int(len(avail_label) * 7.4) + 42)
     pill_x = 828 - pill_width
     pill_dot_x = pill_x + 16
@@ -397,54 +368,28 @@ def _render_status_info_block(
         f'  <text x="{text_x}" y="{msg_y}" fill="#c9d1d9" font-size="{msg_size}">{escape(_truncate(message, max_msg_len))}</text>',
     ])
 
-    if project:
-        proj_str = _truncate(project, max_proj_len)
+    tag_x = text_x
+    for tag in tags:
+        t_label = _truncate(tag, 18)
+        t_width = max(62, len(t_label) * 7 + 22)
         lines.append(
-            f'  <text x="{text_x}" y="{tag_y + 13}" fill="#8b949e" font-size="11.5">'
-            f'<tspan fill="{escape(accent, quote=True)}" font-weight="600">PROJECT</tspan>'
-            f'  {escape(proj_str)}</text>'
+            f'  <rect x="{tag_x}" y="{tag_y}" width="{t_width}" height="20" rx="10" '
+            f'fill="{escape(tag_fill, quote=True)}" stroke="{escape(tag_stroke, quote=True)}"/>'
+            f'<text x="{tag_x + t_width / 2:.1f}" y="{tag_y + 13.5:.1f}" '
+            f'fill="{escape(tag_text_color, quote=True)}" '
+            f'font-size="10.5" text-anchor="middle">{escape(t_label)}</text>'
         )
-    else:
-        tag_x = text_x
-        for tag in tags:
-            t_label = _truncate(tag, 18)
-            t_width = max(62, len(t_label) * 7 + 22)
-            lines.append(
-                f'  <rect x="{tag_x}" y="{tag_y}" width="{t_width}" height="20" rx="10" '
-                f'fill="{escape(tag_fill, quote=True)}" stroke="{escape(tag_stroke, quote=True)}"/>'
-                f'<text x="{tag_x + t_width / 2:.1f}" y="{tag_y + 13.5:.1f}" '
-                f'fill="{escape(tag_text_color, quote=True)}" '
-                f'font-size="10.5" text-anchor="middle">{escape(t_label)}</text>'
-            )
-            tag_x += t_width + 8
+        tag_x += t_width + 8
 
     return lines
 
 
-def _render_footer(
-    expiry_text: str,
-    mode_badge: str,
-    *,
-    badge_accent: str | None = None,
-) -> list[str]:
-    """Render shared card divider and bottom expiry/status metadata footer."""
-    if badge_accent and " · " in mode_badge:
-        prefix, suffix = mode_badge.split(" · ", 1)
-        badge_markup = (
-            f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">'
-            f'{escape(prefix)} · <tspan fill="{escape(badge_accent, quote=True)}" font-weight="700">'
-            f'{escape(suffix)}</tspan></text>'
-        )
-    else:
-        badge_markup = (
-            f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">'
-            f'{escape(mode_badge)}</text>'
-        )
-
+def _render_footer(expiry_text: str, mode_badge: str) -> list[str]:
+    """Render card divider and bottom expiry/status metadata footer for offline."""
     return [
         '  <path d="M32 134H828" stroke="#21262d"/>',
         f'  <text x="32" y="149" fill="#8b949e" font-size="11">{escape(expiry_text)}</text>',
-        badge_markup,
+        f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">{escape(mode_badge)}</text>',
     ]
 
 
@@ -1503,11 +1448,9 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
         raise ValueError("Cannot render invalid status data:\n" + "\n".join(f"- {e}" for e in errors))
 
     status_id: str = data["status"]
-    emoji: str = data["emoji"]
     title: str = _truncate(data["title"], 38)
     availability: str = data["availability"]
     message: str = data["message"]
-    project: str | None = data.get("project")
     tags: list[str] = [str(t) for t in data.get("tags", [])[:2]]
     accent: str = data.get("color") or AVAILABILITY_COLORS.get(availability, "#8b949e")
     avail_color: str = AVAILABILITY_COLORS.get(availability, accent)
@@ -1531,9 +1474,7 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
             *_render_status_info_block(
                 title=title,
                 message=message,
-                project=project,
                 tags=tags,
-                accent=accent,
                 avail_color=avail_color,
                 avail_label=avail_label,
                 text_x=318,
@@ -1542,7 +1483,6 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
                 msg_y=100,
                 tag_y=109,
                 max_msg_len=62,
-                max_proj_len=56,
             ),
             *_render_footer(expiry_text, mode_badge),
             '</svg>',
@@ -1559,9 +1499,7 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
             *_render_status_info_block(
                 title=title,
                 message=message,
-                project=project,
                 tags=tags,
-                accent=accent,
                 avail_color=avail_color,
                 avail_label=avail_label,
                 text_x=448,
@@ -1573,7 +1511,6 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
                 msg_size=12.5,
                 tag_y=98,
                 max_msg_len=48,
-                max_proj_len=42,
                 pulse_dot=True,
                 tag_fill="#0e2c1c",
                 tag_stroke="#3fb950",
@@ -1594,9 +1531,7 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
             *_render_status_info_block(
                 title=title,
                 message=message,
-                project=project,
                 tags=tags,
-                accent=accent,
                 avail_color="#B9A5CA",
                 avail_label=avail_label,
                 text_x=428,
@@ -1608,7 +1543,6 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
                 msg_size=12.5,
                 tag_y=106,
                 max_msg_len=50,
-                max_proj_len=44,
                 tag_fill="#1D2033",
                 tag_stroke="#626779",
                 tag_text_color="#E5DDDC",
@@ -1617,22 +1551,7 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
             '</svg>',
         ]
     else:
-        lines = [
-            *_render_terminal_frame_open(aria_label, accent),
-            *_render_generic_icon_badge(emoji, accent, avail_color),
-            *_render_status_info_block(
-                title=title,
-                message=message,
-                project=project,
-                tags=tags,
-                accent=accent,
-                avail_color=avail_color,
-                avail_label=avail_label,
-                text_x=114,
-            ),
-            *_render_footer(expiry_text, mode_badge),
-            '</svg>',
-        ]
+        raise ValueError(f"Unsupported status ID {status_id!r}.")
 
     return "\n".join(lines) + "\n"
 

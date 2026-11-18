@@ -44,10 +44,12 @@ import status_engine as se  # noqa: E402
 EXPECTED_PRESETS = {
     "available",
     "offline",
-    "exam",
-    "travelling",
-    "working",
     "sleeping",
+}
+
+EXPECTED_MANUAL_PRESETS = {
+    "available",
+    "offline",
 }
 
 
@@ -58,14 +60,23 @@ class TestPresetCatalog(unittest.TestCase):
         cls.catalog = se.load_json_file(cls.presets_path)
         cls.presets, cls.fallback_id = se.load_presets(cls.presets_path)
 
-    def test_catalog_has_exact_six_presets_and_passes_validation(self):
+    def test_catalog_has_exact_three_presets_and_passes_validation(self):
         self.assertEqual(se.validate_presets_catalog(self.catalog), [])
         self.assertEqual(self.fallback_id, "offline")
         self.assertEqual(set(self.presets.keys()), EXPECTED_PRESETS)
-        self.assertEqual(len(self.presets), 6)
+        self.assertEqual(len(self.presets), 3)
+        self.assertEqual(se.SUPPORTED_STATUS_IDS, EXPECTED_PRESETS)
+        self.assertEqual(se.MANUAL_STATUS_IDS, EXPECTED_MANUAL_PRESETS)
+        self.assertEqual(self.presets["available"]["availability"], "online")
+        self.assertEqual(self.presets["available"]["message"], "Open to chat, collaborate & build.")
+        self.assertEqual(self.presets["available"]["tags"], ["Available"])
+        self.assertEqual(self.presets["offline"]["availability"], "offline")
+        self.assertEqual(self.presets["offline"]["tags"], ["Offline"])
         self.assertEqual(self.presets["sleeping"]["availability"], "offline")
-        self.assertIsInstance(self.presets["working"].get("project"), str)
-        self.assertTrue(self.presets["working"]["project"].strip())
+        self.assertEqual(self.presets["sleeping"]["message"], "Recharging — see you in the morning.")
+        self.assertEqual(self.presets["sleeping"]["tags"], ["Night Mode"])
+        for entry in self.presets.values():
+            self.assertNotIn("project", entry)
 
     def test_every_preset_has_required_fields_and_resolves_cleanly(self):
         seen_titles = set()
@@ -89,7 +100,19 @@ class TestPresetCatalog(unittest.TestCase):
                 self.assertLessEqual(len(preset["tags"]), 2)
                 self.assertRegex(preset["color"], r"^#[0-9a-fA-F]{6}$")
 
-                # Active resolution (daytime, before 21:00)
+                if preset_id not in EXPECTED_MANUAL_PRESETS:
+                    # `sleeping` is automatic-only and must be rejected as manual input
+                    with self.assertRaises(se.StatusValidationError):
+                        se.resolve_status(
+                            {"status": preset_id, "until": "21:00"},
+                            self.presets,
+                            effective,
+                            now=active_now,
+                            strict=True,
+                        )
+                    continue
+
+                # Active manual resolution (daytime, before 21:00)
                 resolved = se.resolve_status(
                     {"status": preset_id, "until": "21:00"},
                     self.presets,
@@ -98,6 +121,7 @@ class TestPresetCatalog(unittest.TestCase):
                     strict=True,
                 )
                 self.assertEqual(se.validate_resolved_status(resolved), [])
+                self.assertNotIn("project", resolved)
                 self.assertEqual(resolved["status"], preset_id)
                 self.assertEqual(resolved["emoji"], preset["emoji"])
                 self.assertEqual(resolved["title"], preset["title"])
@@ -105,7 +129,6 @@ class TestPresetCatalog(unittest.TestCase):
                 self.assertEqual(resolved["availability"], preset["availability"])
                 self.assertEqual(resolved["tags"], preset["tags"])
                 self.assertEqual(resolved["message"], preset["message"])
-                self.assertEqual(resolved["project"], preset.get("project"))
                 self.assertEqual(resolved["color"], preset["color"])
                 self.assertEqual(resolved["until"], "21:00")
                 self.assertFalse(resolved["expired"])
@@ -123,6 +146,7 @@ class TestPresetCatalog(unittest.TestCase):
                     strict=True,
                 )
                 self.assertEqual(se.validate_resolved_status(expired), [])
+                self.assertNotIn("project", expired)
                 self.assertTrue(expired["expired"])
                 self.assertTrue(expired["is_fallback"])
                 self.assertFalse(expired["is_override"])
@@ -133,35 +157,23 @@ class TestPresetCatalog(unittest.TestCase):
                 self.assertEqual(expired["computed"]["configured_status"], preset_id)
                 self.assertEqual(expired["computed"]["active_status"], "offline")
 
-    def test_working_preset_includes_predefined_project_without_extra_manual_fields(self):
-        resolved = se.resolve_status(
-            {"status": "working", "until": "21:00"},
-            self.presets,
-            date(2026, 11, 18),
-            now=datetime(2026, 11, 18, 15, 0, tzinfo=se.IST),
-            strict=True,
-        )
-        self.assertEqual(resolved["status"], "working")
-        self.assertEqual(resolved["project"], self.presets["working"]["project"])
-        self.assertEqual(set(resolved["manual_input"].keys()), {"status", "until"})
-
-    def test_catalog_validator_rejects_broken_presets(self):
+    def test_catalog_validator_rejects_broken_and_obsolete_presets(self):
         bad_catalog = {
             "default_fallback": "missing",
             "presets": {
                 "Bad-ID": {
                     "emoji": "",
                     "title": "A",
-                    "category": "coding",
+                    "category": "status",
                     "availability": "super_online",
                     "message": "hi",
                     "tags": ["One", "Two", "Three"],
                     "color": "blue",
                 },
-                "dup_one": {
+                "working": {
                     "emoji": "💻",
                     "title": "Same Title",
-                    "category": "coding",
+                    "category": "work",
                     "availability": "focused",
                     "message": "m1",
                     "tags": ["Tag1"],
@@ -170,8 +182,8 @@ class TestPresetCatalog(unittest.TestCase):
                 "dup_two": {
                     "emoji": "🐛",
                     "title": "same title",
-                    "category": "coding",
-                    "availability": "focused",
+                    "category": "status",
+                    "availability": "online",
                     "message": "m2",
                     "tags": ["Tag1", "Tag2", "Tag3"],
                     "color": "#zzzzzz",
@@ -182,7 +194,10 @@ class TestPresetCatalog(unittest.TestCase):
         joined = "\n".join(errors)
         self.assertIn("default_fallback", joined)
         self.assertIn("offline", joined)
+        self.assertIn("available", joined)
+        self.assertIn("sleeping", joined)
         self.assertIn("snake_case", joined)
+        self.assertIn("Unsupported preset ID 'working'", joined)
         self.assertIn("reuses title", joined)
         self.assertIn("1 to 2 items", joined)
         self.assertIn("6-digit hex", joined)
@@ -194,31 +209,66 @@ class TestUserValidationAndSchema(unittest.TestCase):
         cls.presets, _ = se.load_presets(REPO_ROOT / "data" / "status_presets.json")
 
     def test_valid_two_field_selection(self):
-        errors = se.validate_user_status(
-            {"status": "travelling", "until": "22:00"},
-            self.presets,
-        )
-        self.assertEqual(errors, [])
+        for status_id in sorted(EXPECTED_MANUAL_PRESETS):
+            with self.subTest(status=status_id):
+                errors = se.validate_user_status(
+                    {"status": status_id, "until": "21:00"},
+                    self.presets,
+                )
+                self.assertEqual(errors, [])
 
-    def test_invalid_status_selection_and_suggestion(self):
+    def test_sleeping_rejected_as_manual_daily_input(self):
         errors = se.validate_user_status(
-            {"status": "traveling", "until": "22:00"},
+            {"status": "sleeping", "until": "07:00"},
             self.presets,
         )
         self.assertEqual(len(errors), 1)
-        self.assertIn("Unknown status preset 'traveling'", errors[0])
-        self.assertIn("travelling", errors[0])
+        self.assertIn("sleeping", errors[0])
+        self.assertIn("automatic", errors[0].lower())
+        self.assertIn("available, offline", errors[0])
 
-        for bad_status in (123, None, True, "CODING", " coding ", "nonexistent_mode"):
+        with self.assertRaises(se.StatusValidationError):
+            se.resolve_status(
+                {"status": "sleeping", "until": "07:00"},
+                self.presets,
+                date(2026, 11, 18),
+                now=datetime(2026, 11, 18, 14, 0, tzinfo=se.IST),
+                strict=True,
+            )
+
+    def test_invalid_and_obsolete_status_selection_rejected(self):
+        errors = se.validate_user_status(
+            {"status": "availble", "until": "21:00"},
+            self.presets,
+        )
+        self.assertEqual(len(errors), 1)
+        self.assertIn("Unknown or unsupported manual status 'availble'", errors[0])
+        self.assertIn("available", errors[0])
+
+        removed_or_bad = (
+            "working",
+            "exam",
+            "travelling",
+            "coding",
+            "deep_focus",
+            "studying",
+            123,
+            None,
+            True,
+            "AVAILABLE",
+            " available ",
+            "nonexistent_mode",
+        )
+        for bad_status in removed_or_bad:
             with self.subTest(bad_status=bad_status):
                 errs = se.validate_user_status(
-                    {"status": bad_status, "until": "22:00"},
+                    {"status": bad_status, "until": "21:00"},
                     self.presets,
                 )
                 self.assertTrue(errs)
 
     def test_strict_two_field_schema_rejects_extra_or_missing_keys(self):
-        missing_until = se.validate_user_status({"status": "working"}, self.presets)
+        missing_until = se.validate_user_status({"status": "available"}, self.presets)
         self.assertTrue(any("Missing required field" in e and "until" in e for e in missing_until))
 
         missing_status = se.validate_user_status({"until": "21:00"}, self.presets)
@@ -226,10 +276,10 @@ class TestUserValidationAndSchema(unittest.TestCase):
 
         extra_fields = se.validate_user_status(
             {
-                "status": "working",
+                "status": "available",
                 "until": "21:00",
-                "emoji": "💻",
-                "availability": "available",
+                "emoji": "🟢",
+                "availability": "online",
                 "project": "Custom",
                 "active_window": "09:00-21:00",
                 "tags": ["Extra"],
@@ -238,7 +288,7 @@ class TestUserValidationAndSchema(unittest.TestCase):
         )
         self.assertTrue(any("Unexpected extra field" in e for e in extra_fields))
 
-        non_dict = se.validate_user_status(["working", "21:00"], self.presets)
+        non_dict = se.validate_user_status(["available", "21:00"], self.presets)
         self.assertTrue(non_dict)
 
     def test_valid_hhmm_values(self):
@@ -327,7 +377,7 @@ class TestTimezoneAndExpiration(unittest.TestCase):
         # 2026-11-18 15:29 UTC == 2026-11-18 20:59 IST (1 min before 21:00 IST)
         utc_before = datetime(2026, 11, 18, 15, 29, tzinfo=timezone.utc)
         res_before = se.resolve_status(
-            {"status": "travelling", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             date(2026, 11, 18),
             now=utc_before,
@@ -343,7 +393,7 @@ class TestTimezoneAndExpiration(unittest.TestCase):
         # 2026-11-18 15:30 UTC == 2026-11-18 21:00 IST (exact daytime expiry)
         utc_exact = datetime(2026, 11, 18, 15, 30, tzinfo=timezone.utc)
         res_exact = se.resolve_status(
-            {"status": "travelling", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             date(2026, 11, 18),
             now=utc_exact,
@@ -361,7 +411,7 @@ class TestTimezoneAndExpiration(unittest.TestCase):
             se.parse_iso_datetime("2026-11-18T12:00:00")
 
     def test_before_at_after_expiration_and_no_next_day_rollover(self):
-        cfg = {"status": "working", "until": "21:00"}
+        cfg = {"status": "available", "until": "21:00"}
         eff = date(2026, 11, 18)
 
         # 1 second before expiry -> active
@@ -369,7 +419,7 @@ class TestTimezoneAndExpiration(unittest.TestCase):
             cfg, self.presets, eff, now=datetime(2026, 11, 18, 20, 59, 59, tzinfo=se.IST)
         )
         self.assertFalse(r_before["expired"])
-        self.assertEqual(r_before["status"], "working")
+        self.assertEqual(r_before["status"], "available")
 
         # Exact expiry -> expired -> offline
         r_at = se.resolve_status(
@@ -406,13 +456,14 @@ class TestTimezoneAndExpiration(unittest.TestCase):
         )
 
         # Status spanning past 06:00 (until 06:30 next morning)
-        cfg_span = {"status": "travelling", "until": "06:30"}
+        cfg_span = {"status": "available", "until": "06:30"}
         # At 06:00 IST after night override ends, manual status is restored because 06:00 < 06:30
         r_restored = se.resolve_status(
             cfg_span, self.presets, eff, now=datetime(2026, 11, 19, 6, 0, tzinfo=se.IST)
         )
         self.assertFalse(r_restored["expired"])
-        self.assertEqual(r_restored["status"], "travelling")
+        self.assertEqual(r_restored["status"], "available")
+        self.assertEqual(r_restored["availability"], "online")
         self.assertEqual(r_restored["resolution_source"], "manual")
 
         # At 06:30 IST it expires to offline
@@ -438,12 +489,13 @@ class TestTimezoneAndExpiration(unittest.TestCase):
         )
 
         # Active until 06:59:59 next morning, expired at 07:00:00
-        cfg = {"status": "sleeping", "until": "07:00"}
+        cfg = {"status": "available", "until": "07:00"}
         r_before = se.resolve_status(
             cfg, self.presets, eff, now=datetime(2026, 11, 19, 6, 59, 59, tzinfo=se.IST)
         )
         self.assertFalse(r_before["expired"])
-        self.assertEqual(r_before["status"], "sleeping")
+        self.assertEqual(r_before["status"], "available")
+        self.assertEqual(r_before["availability"], "online")
 
         r_reset = se.resolve_status(
             cfg, self.presets, eff, now=datetime(2026, 11, 19, 7, 0, 0, tzinfo=se.IST)
@@ -477,16 +529,19 @@ class TestTimezoneAndExpiration(unittest.TestCase):
         self.assertEqual(r_placeholder["status"], "offline")
         self.assertEqual(r_placeholder["computed"]["fallback_reason"], "placeholder_config")
 
-        # Unknown preset
-        r_unknown = se.resolve_status(
-            {"status": "mystery", "until": "22:00"},
-            self.presets,
-            date(2026, 11, 18),
-            now=now,
-            strict=False,
-        )
-        self.assertEqual(r_unknown["status"], "offline")
-        self.assertEqual(r_unknown["computed"]["fallback_reason"], "invalid_config")
+        # Obsolete preset or manual sleeping safely falls back to offline in non-strict mode
+        for invalid_status in ("working", "exam", "travelling", "sleeping", "mystery"):
+            with self.subTest(status=invalid_status):
+                r_invalid = se.resolve_status(
+                    {"status": invalid_status, "until": "21:00"},
+                    self.presets,
+                    date(2026, 11, 18),
+                    now=now,
+                    strict=False,
+                )
+                self.assertEqual(r_invalid["status"], "offline")
+                self.assertTrue(r_invalid["is_fallback"])
+                self.assertEqual(r_invalid["computed"]["fallback_reason"], "invalid_config")
 
         # Missing effective_date (never rolls forward!)
         r_no_date = se.resolve_status(
@@ -509,20 +564,20 @@ class TestNightOverrideAndPriority(unittest.TestCase):
     def test_night_window_exact_boundaries(self):
         # Test exact requested timestamps: 21:59, 22:00, 23:59, 00:00, 05:59, 06:00, 07:00 IST
         # Using a manual status valid through 07:00 so restoration at 06:00 and expiry at 07:00 are both proven.
-        cfg = {"status": "travelling", "until": "07:00"}
+        cfg = {"status": "available", "until": "07:00"}
         eff = date(2026, 11, 18)
 
         cases = [
             # (timestamp IST, expected_status, expected_avail, expected_source, expected_manual_expired)
-            (datetime(2026, 11, 18, 21, 59, 0, tzinfo=se.IST), "travelling", "limited", "manual", False),
-            (datetime(2026, 11, 18, 21, 59, 59, tzinfo=se.IST), "travelling", "limited", "manual", False),
+            (datetime(2026, 11, 18, 21, 59, 0, tzinfo=se.IST), "available", "online", "manual", False),
+            (datetime(2026, 11, 18, 21, 59, 59, tzinfo=se.IST), "available", "online", "manual", False),
             (datetime(2026, 11, 18, 22, 0, 0, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
             (datetime(2026, 11, 18, 23, 59, 0, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
             (datetime(2026, 11, 18, 23, 59, 59, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
             (datetime(2026, 11, 19, 0, 0, 0, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
             (datetime(2026, 11, 19, 5, 59, 0, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
             (datetime(2026, 11, 19, 5, 59, 59, tzinfo=se.IST), "sleeping", "offline", "night_override", False),
-            (datetime(2026, 11, 19, 6, 0, 0, tzinfo=se.IST), "travelling", "limited", "manual", False),
+            (datetime(2026, 11, 19, 6, 0, 0, tzinfo=se.IST), "available", "online", "manual", False),
             (datetime(2026, 11, 19, 7, 0, 0, tzinfo=se.IST), "offline", "offline", "offline_fallback", True),
         ]
 
@@ -536,28 +591,28 @@ class TestNightOverrideAndPriority(unittest.TestCase):
                 self.assertEqual(resolved["computed"]["priority_source"], exp_source)
                 self.assertEqual(resolved["computed"]["active_status"], exp_status)
                 # Underlying manual status is always preserved
-                self.assertEqual(resolved["manual_input"], {"status": "travelling", "until": "07:00"})
-                self.assertEqual(resolved["computed"]["configured_status"], "travelling")
+                self.assertEqual(resolved["manual_input"], {"status": "available", "until": "07:00"})
+                self.assertEqual(resolved["computed"]["configured_status"], "available")
                 self.assertEqual(resolved["computed"]["manual_expired"], exp_manual_expired)
                 self.assertEqual(resolved["is_override"], exp_source == "night_override")
                 self.assertEqual(resolved["computed"]["night_override_active"], exp_source == "night_override")
 
     def test_night_override_when_manual_status_expires_overnight(self):
         # Manual status expires at 02:00 IST overnight
-        cfg = {"status": "working", "until": "02:00"}
+        cfg = {"status": "available", "until": "02:00"}
         eff = date(2026, 11, 18)
 
-        # 21:59 -> active manual working (with predefined project)
+        # 21:59 -> active manual available
         r_2159 = se.resolve_status(cfg, self.presets, eff, now=datetime(2026, 11, 18, 21, 59, tzinfo=se.IST))
-        self.assertEqual(r_2159["status"], "working")
-        self.assertEqual(r_2159["project"], self.presets["working"]["project"])
+        self.assertEqual(r_2159["status"], "available")
+        self.assertEqual(r_2159["availability"], "online")
 
         # 22:00 -> night override sleeping (underlying manual still unexpired)
         r_2200 = se.resolve_status(cfg, self.presets, eff, now=datetime(2026, 11, 18, 22, 0, tzinfo=se.IST))
         self.assertEqual(r_2200["status"], "sleeping")
         self.assertEqual(r_2200["availability"], "offline")
-        self.assertEqual(r_2200["manual_input"], {"status": "working", "until": "02:00"})
-        self.assertEqual(r_2200["computed"]["configured_status"], "working")
+        self.assertEqual(r_2200["manual_input"], {"status": "available", "until": "02:00"})
+        self.assertEqual(r_2200["computed"]["configured_status"], "available")
         self.assertFalse(r_2200["computed"]["manual_expired"])
 
         # 03:00 -> night override sleeping (underlying manual expired at 02:00)
@@ -574,11 +629,11 @@ class TestNightOverrideAndPriority(unittest.TestCase):
         self.assertTrue(r_0600["expired"])
         self.assertTrue(r_0600["is_fallback"])
         self.assertEqual(r_0600["computed"]["fallback_reason"], "status_expired")
-        self.assertEqual(r_0600["manual_input"], {"status": "working", "until": "02:00"})
+        self.assertEqual(r_0600["manual_input"], {"status": "available", "until": "02:00"})
 
     def test_night_override_works_when_daily_pr_was_never_merged(self):
         # Stale effective_date from 5 days ago
-        stale_cfg = {"status": "working", "until": "21:00"}
+        stale_cfg = {"status": "available", "until": "21:00"}
         stale_date = date(2026, 11, 13)
 
         r_day = se.resolve_status(stale_cfg, self.presets, stale_date, now=datetime(2026, 11, 18, 15, 0, tzinfo=se.IST))
@@ -595,7 +650,7 @@ class TestNightOverrideAndPriority(unittest.TestCase):
             self.assertEqual(r_night["status"], "sleeping")
             self.assertEqual(r_night["availability"], "offline")
             self.assertEqual(r_night["resolution_source"], "night_override")
-            self.assertEqual(r_night["computed"]["configured_status"], "working")
+            self.assertEqual(r_night["computed"]["configured_status"], "available")
 
         # At 06:00 IST -> falls back to offline
         r_morning = se.resolve_status(stale_cfg, self.presets, stale_date, now=datetime(2026, 11, 19, 6, 0, tzinfo=se.IST))
@@ -637,14 +692,20 @@ class TestNightOverrideAndPriority(unittest.TestCase):
 
     def test_strict_validation_still_rejects_invalid_config_during_night_hours(self):
         night_ts = datetime(2026, 11, 18, 23, 30, tzinfo=se.IST)
-        with self.assertRaises(se.StatusValidationError):
-            se.resolve_status(
-                {"status": se.PLACEHOLDER_STATUS, "until": se.PLACEHOLDER_UNTIL},
-                self.presets,
-                date(2026, 11, 18),
-                now=night_ts,
-                strict=True,
-            )
+        for bad_cfg in (
+            {"status": se.PLACEHOLDER_STATUS, "until": se.PLACEHOLDER_UNTIL},
+            {"status": "sleeping", "until": "07:00"},
+            {"status": "working", "until": "21:00"},
+        ):
+            with self.subTest(cfg=bad_cfg):
+                with self.assertRaises(se.StatusValidationError):
+                    se.resolve_status(
+                        bad_cfg,
+                        self.presets,
+                        date(2026, 11, 18),
+                        now=night_ts,
+                        strict=True,
+                    )
 
     def test_night_override_does_not_modify_manual_status_file(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -653,7 +714,7 @@ class TestNightOverrideAndPriority(unittest.TestCase):
             meta_path = tmp_dir / "status_meta.json"
             out_path = tmp_dir / "status_resolved.json"
 
-            original_status_text = json.dumps({"status": "working", "until": "21:00"}, indent=2) + "\n"
+            original_status_text = json.dumps({"status": "available", "until": "21:00"}, indent=2) + "\n"
             status_path.write_text(original_status_text, encoding="utf-8")
             meta_path.write_text(
                 json.dumps({"effective_date": "2026-11-18", "timezone": "Asia/Kolkata"}),
@@ -672,13 +733,13 @@ class TestNightOverrideAndPriority(unittest.TestCase):
             resolved = json.loads(out_path.read_text(encoding="utf-8"))
             self.assertEqual(resolved["status"], "sleeping")
             self.assertEqual(resolved["availability"], "offline")
-            self.assertEqual(resolved["manual_input"], {"status": "working", "until": "21:00"})
+            self.assertEqual(resolved["manual_input"], {"status": "available", "until": "21:00"})
 
 
 class TestCLIAndIdempotentOutput(unittest.TestCase):
     def test_idempotent_write_skips_timestamp_only_changes(self):
         presets, _ = se.load_presets(REPO_ROOT / "data" / "status_presets.json")
-        cfg = {"status": "working", "until": "21:00"}
+        cfg = {"status": "available", "until": "21:00"}
         eff = date(2026, 11, 18)
 
         with tempfile.TemporaryDirectory() as tmp:
@@ -700,7 +761,7 @@ class TestCLIAndIdempotentOutput(unittest.TestCase):
             self.assertTrue(saved["expired"])
             self.assertEqual(saved["status"], "offline")
 
-    def test_cli_strict_passes_and_rejects_placeholders(self):
+    def test_cli_strict_passes_and_rejects_placeholders_and_invalid_inputs(self):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_dir = Path(tmp)
             status_path = tmp_dir / "status.json"
@@ -708,7 +769,7 @@ class TestCLIAndIdempotentOutput(unittest.TestCase):
             out_path = tmp_dir / "status_resolved.json"
 
             status_path.write_text(
-                json.dumps({"status": "travelling", "until": "22:00"}),
+                json.dumps({"status": "available", "until": "21:00"}),
                 encoding="utf-8",
             )
             meta_path.write_text(
@@ -726,7 +787,8 @@ class TestCLIAndIdempotentOutput(unittest.TestCase):
             ])
             self.assertEqual(rc, 0)
             resolved = json.loads(out_path.read_text(encoding="utf-8"))
-            self.assertEqual(resolved["status"], "travelling")
+            self.assertEqual(resolved["status"], "available")
+            self.assertEqual(resolved["availability"], "online")
             self.assertFalse(resolved["expired"])
 
             # Branch date mismatch fails strict validation
@@ -738,6 +800,20 @@ class TestCLIAndIdempotentOutput(unittest.TestCase):
                 "--check-only",
             ])
             self.assertEqual(rc_mismatch, 1)
+
+            # Manual `sleeping` and obsolete preset IDs fail strict validation
+            for bad_status in ("sleeping", "working", "exam", "travelling"):
+                status_path.write_text(
+                    json.dumps({"status": bad_status, "until": "21:00"}),
+                    encoding="utf-8",
+                )
+                rc_bad = resolve_cli.main([
+                    "--status-file", str(status_path),
+                    "--meta-file", str(meta_path),
+                    "--strict",
+                    "--check-only",
+                ])
+                self.assertEqual(rc_bad, 1, f"Expected strict rejection for {bad_status!r}")
 
             # Placeholders fail strict validation, but non-strict safely falls back to offline
             status_path.write_text(
@@ -778,7 +854,7 @@ class TestDailyPRPreparation(unittest.TestCase):
     def setUpClass(cls):
         cls.presets, _ = se.load_presets(REPO_ROOT / "data" / "status_presets.json")
 
-    def test_branch_title_and_body_include_ist_date_and_all_presets(self):
+    def test_branch_title_and_body_include_ist_date_and_only_manual_options(self):
         d = date(2026, 11, 18)
         self.assertEqual(prepare_daily_status_pr.daily_branch_name(d), "status/2026-11-18")
         self.assertEqual(se.parse_daily_branch_date("status/2026-11-18"), d)
@@ -791,8 +867,17 @@ class TestDailyPRPreparation(unittest.TestCase):
         body = prepare_daily_status_pr.build_pr_body(d, self.presets)
         self.assertIn("2026-11-18", body)
         self.assertIn("data/status.json", body)
-        for preset_id in self.presets:
-            self.assertIn(f"`{preset_id}`", body)
+        self.assertIn("### Manual Status Options", body)
+        self.assertIn("22:00 to 05:59:59 IST", body)
+        self.assertIn("`sleeping`", body)
+
+        manual_section = body.split("### Manual Status Options", 1)[1].split("> **Tip", 1)[0]
+        self.assertIn("`available`", manual_section)
+        self.assertIn("`offline`", manual_section)
+        self.assertNotIn("`sleeping`", manual_section)
+
+        for obsolete in ("`working`", "`exam`", "`travelling`", "`coding`", "6 preset"):
+            self.assertNotIn(obsolete, body)
 
     def test_idempotent_planner_prevents_duplicates(self):
         d = date(2026, 11, 18)
@@ -831,7 +916,7 @@ class TestDailyPRPreparation(unittest.TestCase):
             existing_prs_for_branch=[],
             open_daily_prs=[],
             branch_exists=True,
-            existing_branch_status={"status": "working", "until": "21:00"},
+            existing_branch_status={"status": "available", "until": "21:00"},
         )
         self.assertEqual(plan["action"], "open_pr_for_existing_branch")
         self.assertTrue(plan["preserve_branch_contents"])
@@ -851,7 +936,7 @@ class TestDailyPRPreparation(unittest.TestCase):
             "state": "open",
             "draft": True,
             "head": {"ref": "status/2026-11-16"},
-            "_status_config": {"status": "travelling", "until": "22:00"},
+            "_status_config": {"status": "available", "until": "21:00"},
         }
         ready_pr = {
             "number": 12,
@@ -884,7 +969,7 @@ class TestDailyPRPreparation(unittest.TestCase):
             data_dir = root / "data"
             data_dir.mkdir()
             (data_dir / "status.json").write_text(
-                json.dumps({"status": "working", "until": "21:00"}, indent=2) + "\n",
+                json.dumps({"status": "available", "until": "21:00"}, indent=2) + "\n",
                 encoding="utf-8",
             )
             (data_dir / "status_meta.json").write_text(
@@ -933,7 +1018,7 @@ class TestDailyPRPreparation(unittest.TestCase):
         ]
         fake_gh.list_open_prs.return_value = []
         fake_gh.branch_exists.return_value = True
-        fake_gh.fetch_json_file_on_ref.return_value = {"status": "working", "until": "21:00"}
+        fake_gh.fetch_json_file_on_ref.return_value = {"status": "available", "until": "21:00"}
 
         with patch.dict(os.environ, {"GITHUB_TOKEN": "test-token"}), \
                 patch.object(prepare_daily_status_pr, "GitHubClient", return_value=fake_gh), \
@@ -958,11 +1043,11 @@ class TestDailyPRPreparation(unittest.TestCase):
 
         def fake_fetch(_path, ref):
             if ref == "status/2026-11-18":
-                return {"status": "travelling", "until": "22:00"}
+                return {"status": "available", "until": "21:00"}
             if ref == "status/2026-11-17":
                 return prepare_daily_status_pr.build_placeholder_status()
             if ref == "status/2026-11-16":
-                return {"status": "working", "until": "20:00"}
+                return {"status": "offline", "until": "20:00"}
             return None
 
         fake_gh2.fetch_json_file_on_ref.side_effect = fake_fetch
@@ -1037,55 +1122,61 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
     def setUpClass(cls):
         cls.presets, _ = se.load_presets(REPO_ROOT / "data" / "status_presets.json")
 
-    def test_renderer_supports_all_six_statuses_with_valid_xml_and_text(self):
+    def test_renderer_supports_all_three_effective_statuses_with_valid_xml_and_text(self):
         import xml.etree.ElementTree as ET
 
         eff = date(2026, 11, 18)
         day_now = datetime(2026, 11, 18, 14, 0, tzinfo=se.IST)
+        night_now = datetime(2026, 11, 18, 22, 30, tzinfo=se.IST)
 
-        for status_id in sorted(EXPECTED_PRESETS):
+        effective_cases = [
+            (
+                "available",
+                se.resolve_status({"status": "available", "until": "21:00"}, self.presets, eff, now=day_now, strict=True),
+                'id="available-jurassic-scene"',
+                "Available till 21:00 IST",
+            ),
+            (
+                "offline",
+                se.resolve_status({"status": "offline", "until": "21:00"}, self.presets, eff, now=day_now, strict=True),
+                'id="offline-dino-scene"',
+                "Expires at 21:00 IST",
+            ),
+            (
+                "sleeping",
+                se.resolve_status({"status": "available", "until": "21:00"}, self.presets, eff, now=night_now, strict=True),
+                'id="sleeping-dragon-scene"',
+                "Ayush available at 6 AM IST.",
+            ),
+        ]
+
+        all_scene_ids = (
+            'id="available-jurassic-scene"',
+            'id="offline-dino-scene"',
+            'id="sleeping-dragon-scene"',
+        )
+
+        for status_id, resolved, expected_scene_id, expected_schedule_text in effective_cases:
             with self.subTest(status=status_id):
-                resolved = se.resolve_status(
-                    {"status": status_id, "until": "21:00"},
-                    self.presets,
-                    eff,
-                    now=day_now,
-                    strict=True,
-                )
+                self.assertEqual(resolved["status"], status_id)
                 svg_text = render_status_svg.render_status_svg_markup(resolved)
                 root = ET.fromstring(svg_text)
                 self.assertTrue(root.tag.endswith("svg"))
                 self.assertEqual(root.attrib.get("width"), "860")
+                self.assertEqual(root.attrib.get("height"), "172")
+                self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
 
-                # Must clearly display title, availability label, message, and expiry time
-                rendered_text = " ".join(root.itertext())
+                rendered_text = " ".join("".join(root.itertext()).split())
                 expected_avail_label = render_status_svg.AVAILABILITY_LABELS[resolved["availability"]]
                 self.assertIn(resolved["title"], rendered_text)
                 self.assertIn(expected_avail_label, rendered_text)
                 self.assertIn(resolved["message"], rendered_text)
-                self.assertIn("21:00 IST", rendered_text)
-                self.assertEqual(root.attrib.get("height"), "172")
-                self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
-                if status_id == "working":
-                    self.assertIn(resolved["project"], rendered_text)
+                self.assertIn(expected_schedule_text, rendered_text)
 
-                # Scene selection by effective status
-                if status_id == "offline":
-                    self.assertIn('id="offline-dino-scene"', svg_text)
-                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
-                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
-                elif status_id == "available":
-                    self.assertIn('id="available-jurassic-scene"', svg_text)
-                    self.assertNotIn('id="offline-dino-scene"', svg_text)
-                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
-                elif status_id == "sleeping":
-                    self.assertIn('id="sleeping-dragon-scene"', svg_text)
-                    self.assertNotIn('id="offline-dino-scene"', svg_text)
-                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
-                else:
-                    self.assertNotIn('id="offline-dino-scene"', svg_text)
-                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
-                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
+                self.assertIn(expected_scene_id, svg_text)
+                for other_scene in all_scene_ids:
+                    if other_scene != expected_scene_id:
+                        self.assertNotIn(other_scene, svg_text)
 
     def test_sleeping_medieval_dragon_scene_animations_and_footer(self):
         import xml.etree.ElementTree as ET
@@ -1305,7 +1396,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
 
         # Night override (`sleeping`) must NOT use the offline dino scene
         night_resolved = se.resolve_status(
-            {"status": "working", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             eff,
             now=datetime(2026, 11, 18, 22, 30, tzinfo=se.IST),
@@ -1316,7 +1407,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
 
         # Expired fallback resolves to `offline` and displays the Dino scene with fallback expiry text
         expired_resolved = se.resolve_status(
-            {"status": "working", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             eff,
             now=datetime(2026, 11, 18, 21, 5, tzinfo=se.IST),
@@ -1332,7 +1423,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
 
         eff = date(2026, 11, 18)
         night_resolved = se.resolve_status(
-            {"status": "working", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             eff,
             now=datetime(2026, 11, 18, 22, 30, tzinfo=se.IST),
@@ -1349,7 +1440,7 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
         self.assertIn("STATUS · SLEEPING", night_text)
 
         expired_resolved = se.resolve_status(
-            {"status": "working", "until": "21:00"},
+            {"status": "available", "until": "21:00"},
             self.presets,
             eff,
             now=datetime(2026, 11, 18, 21, 5, tzinfo=se.IST),
@@ -1376,11 +1467,12 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
         with self.assertRaises(ValueError):
             render_status_svg.render_status_svg_markup(bad_placeholder)
 
-        # Unknown status ID rejected
-        bad_unknown = dict(resolved)
-        bad_unknown["status"] = "coding"
-        with self.assertRaises(ValueError):
-            render_status_svg.render_status_svg_markup(bad_unknown)
+        # Removed / unknown status IDs rejected
+        for unsupported in ("working", "exam", "travelling", "coding"):
+            bad_unknown = dict(resolved)
+            bad_unknown["status"] = unsupported
+            with self.assertRaises(ValueError):
+                render_status_svg.render_status_svg_markup(bad_unknown)
 
         # Placeholder title rejected
         bad_title = dict(resolved)

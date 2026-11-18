@@ -1057,10 +1057,11 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
                 self.assertTrue(root.tag.endswith("svg"))
                 self.assertEqual(root.attrib.get("width"), "860")
 
-                # Must clearly display title, availability, message, and expiry time
+                # Must clearly display title, availability label, message, and expiry time
                 rendered_text = " ".join(root.itertext())
+                expected_avail_label = render_status_svg.AVAILABILITY_LABELS[resolved["availability"]]
                 self.assertIn(resolved["title"], rendered_text)
-                self.assertIn(resolved["availability"].upper(), rendered_text)
+                self.assertIn(expected_avail_label, rendered_text)
                 self.assertIn(resolved["message"], rendered_text)
                 self.assertIn("21:00 IST", rendered_text)
                 self.assertEqual(root.attrib.get("height"), "172")
@@ -1068,11 +1069,99 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
                 if status_id == "working":
                     self.assertIn(resolved["project"], rendered_text)
 
-                # Offline-only scene selection: only `offline` uses the animated Dino Runner scene
+                # Scene selection by effective status
                 if status_id == "offline":
                     self.assertIn('id="offline-dino-scene"', svg_text)
+                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
+                elif status_id == "available":
+                    self.assertIn('id="available-jurassic-scene"', svg_text)
+                    self.assertNotIn('id="offline-dino-scene"', svg_text)
                 else:
                     self.assertNotIn('id="offline-dino-scene"', svg_text)
+                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
+
+    def test_available_jurassic_scene_dinosaurs_animations_and_dynamic_fields(self):
+        import xml.etree.ElementTree as ET
+
+        eff = date(2026, 11, 18)
+        avail_resolved = se.resolve_status(
+            {"status": "available", "until": "17:45"},
+            self.presets,
+            eff,
+            now=datetime(2026, 11, 18, 14, 0, tzinfo=se.IST),
+            strict=True,
+        )
+        svg_text = render_status_svg.render_status_svg_markup(avail_resolved)
+        root = ET.fromstring(svg_text)
+
+        # Valid 860x172 SVG, pure self-contained vector (no raster/base64/JS)
+        self.assertEqual(root.attrib.get("width"), "860")
+        self.assertEqual(root.attrib.get("height"), "172")
+        self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
+        self.assertNotIn("<image", svg_text.lower())
+        self.assertNotIn("data:image", svg_text.lower())
+        self.assertNotIn("<script", svg_text.lower())
+        self.assertIn('shape-rendering="crispEdges"', svg_text)
+        self.assertIn("prefers-reduced-motion: reduce", svg_text)
+
+        # All Jurassic Valley scene and dinosaur groups present
+        for expected_id in (
+            'id="available-jurassic-scene"',
+            'id="jurassic-clouds"',
+            'id="jurassic-volcano"',
+            'id="jurassic-smoke"',
+            'id="jurassic-lava"',
+            'id="jurassic-landscape"',
+            'id="jurassic-river"',
+            'id="jurassic-waterfall"',
+            'id="jurassic-pterosaur"',
+            'id="jurassic-sauropod"',
+            'id="jurassic-stegosaurus"',
+            'id="jurassic-triceratops"',
+            'id="triceratops-head"',
+            'id="triceratops-body"',
+            'id="triceratops-tail"',
+            'id="jurassic-foreground"',
+        ):
+            self.assertIn(expected_id, svg_text)
+
+        # Native SVG animations across dinosaurs, volcano, river/waterfall, clouds, and ONLINE pulse
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        for group_id in (
+            "jurassic-clouds",
+            "jurassic-smoke",
+            "jurassic-river",
+            "jurassic-pterosaur",
+            "jurassic-sauropod",
+            "jurassic-stegosaurus",
+            "jurassic-triceratops",
+        ):
+            group = root.find(f'.//svg:g[@id="{group_id}"]', ns)
+            self.assertIsNotNone(group, f"Missing group {group_id}")
+            self.assertGreaterEqual(
+                len(group.findall(".//svg:animateTransform", ns)),
+                1,
+                f"Expected animateTransform in {group_id}",
+            )
+        lava_group = root.find('.//svg:g[@id="jurassic-lava"]', ns)
+        self.assertGreaterEqual(len(lava_group.findall(".//svg:animate", ns)), 1)
+        self.assertIn('class="jurassic-pulse"', svg_text)
+
+        # Dynamic status title, ONLINE badge, dynamic "Available till HH:MM IST", and NO "Expires at"
+        rendered_text = " ".join("".join(root.itertext()).split())
+        self.assertIn("Available", rendered_text)
+        self.assertIn("ONLINE", rendered_text)
+        self.assertIn("Open to chat, collaborate & build.", rendered_text)
+        self.assertIn("Available till 17:45 IST", rendered_text)
+        self.assertNotIn("Expires at", rendered_text)
+        self.assertNotIn("21:00", rendered_text)
+        self.assertIn("STATUS · AVAILABLE", rendered_text)
+
+        # Idempotent writing for Available Jurassic SVG
+        with tempfile.TemporaryDirectory() as tmp:
+            out_path = Path(tmp) / "available.svg"
+            self.assertTrue(render_status_svg.render_status_svg_file(avail_resolved, out_path))
+            self.assertFalse(render_status_svg.render_status_svg_file(avail_resolved, out_path))
 
     def test_offline_dino_scene_geometry_animations_and_dynamic_expiry(self):
         import xml.etree.ElementTree as ET

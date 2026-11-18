@@ -58,7 +58,7 @@ AVAILABILITY_COLORS = {
 }
 
 AVAILABILITY_LABELS = {
-    "available": "AVAILABLE",
+    "available": "ONLINE",
     "focused": "FOCUSED",
     "busy": "BUSY",
     "limited": "LIMITED",
@@ -199,6 +199,41 @@ def _pixel_grid_to_path(
     return "".join(cmds)
 
 
+def _palette_grid_to_paths(
+    rows: tuple[str, ...],
+    palette: dict[str, str],
+    x0: int,
+    y0: int,
+    cell: int = 2,
+    *,
+    indent: str = "      ",
+) -> list[str]:
+    """Compile a multi-color ASCII pixel sprite into one compact `<path>` per color."""
+    by_color: dict[str, list[str]] = {}
+    for row_idx, row in enumerate(rows):
+        col = 0
+        width = len(row)
+        y = y0 + row_idx * cell
+        while col < width:
+            ch = row[col]
+            if ch not in palette:
+                col += 1
+                continue
+            start = col
+            while col < width and row[col] == ch:
+                col += 1
+            run_w = (col - start) * cell
+            x = x0 + start * cell
+            by_color.setdefault(ch, []).append(f"M{x} {y}h{run_w}v{cell}h-{run_w}z")
+
+    out: list[str] = []
+    for ch in palette:
+        cmds = by_color.get(ch)
+        if cmds:
+            out.append(f'{indent}<path d="{"".join(cmds)}" fill="{palette[ch]}"/>')
+    return out
+
+
 def validate_renderable_status(data: Any) -> list[str]:
     """Validate that resolved status JSON is safe to render into a public SVG."""
     errors = validate_resolved_status(data)
@@ -232,6 +267,7 @@ def _truncate(text: str, max_len: int) -> str:
 
 def format_expiry_text(data: dict[str, Any]) -> str:
     """Build clear, human-readable expiry or schedule text from resolved status."""
+    status_id = data.get("status")
     source = data.get("resolution_source")
     until = data.get("until")
     computed = data.get("computed") or {}
@@ -242,6 +278,8 @@ def format_expiry_text(data: dict[str, Any]) -> str:
         return f"Auto night mode (22:00–06:00 IST) · Ends at {end_label}"
 
     if source == "manual" and not data.get("expired") and until_display:
+        if status_id == "available":
+            return f"Available till {until_display}"
         return f"Expires at {until_display}"
 
     return "Expired · Offline until next update"
@@ -260,6 +298,7 @@ def _render_terminal_frame_open(
     accent: str,
     *,
     defs_and_styles: list[str] | None = None,
+    show_left_bar: bool = True,
 ) -> list[str]:
     """Render shared outer terminal window, header bar, and inner card container."""
     lines = [
@@ -279,8 +318,11 @@ def _render_terminal_frame_open(
         '  <text x="430" y="19" fill="#c9d1d9" font-size="11.5" text-anchor="middle">ayushcmd@github: ~/status --live</text>',
         '  <text x="844" y="19" fill="#8b949e" font-size="10.5" text-anchor="end">IST · Asia/Kolkata</text>',
         '  <rect x="14" y="42" width="832" height="116" rx="8" fill="#10161e" stroke="#30363d"/>',
-        f'  <rect x="14" y="42" width="5" height="116" rx="2.5" fill="{escape(accent, quote=True)}"/>',
     ])
+    if show_left_bar:
+        lines.append(
+            f'  <rect x="14" y="42" width="5" height="116" rx="2.5" fill="{escape(accent, quote=True)}"/>'
+        )
     return lines
 
 
@@ -307,27 +349,54 @@ def _render_status_info_block(
     text_x: int,
     title_size: int = 22,
     title_y: int = 76,
+    title_color: str = "#e6edf3",
+    pill_y: int = 56,
     msg_y: int = 99,
+    msg_size: float = 13,
     tag_y: int = 109,
     max_msg_len: int = 82,
     max_proj_len: int = 76,
+    pulse_dot: bool = False,
+    tag_fill: str = "#161b22",
+    tag_stroke: str = "#30363d",
+    tag_text_color: str = "#c9d1d9",
 ) -> list[str]:
     """Render shared status title, right-aligned availability pill, message, and tags/project."""
     pill_width = max(96, int(len(avail_label) * 7.4) + 42)
     pill_x = 828 - pill_width
     pill_dot_x = pill_x + 16
+    pill_dot_y = pill_y + 12
     pill_text_x = pill_x + 29
+    pill_text_y = pill_y + 16
 
     lines = [
-        f'  <text x="{text_x}" y="{title_y}" fill="#e6edf3" font-size="{title_size}" font-weight="700">{escape(title)}</text>',
-        f'  <rect x="{pill_x}" y="56" width="{pill_width}" height="24" rx="12" '
+        f'  <text x="{text_x}" y="{title_y}" fill="{escape(title_color, quote=True)}" font-size="{title_size}" font-weight="700">{escape(title)}</text>',
+        f'  <rect x="{pill_x}" y="{pill_y}" width="{pill_width}" height="24" rx="12" '
         f'fill="{escape(avail_color, quote=True)}" fill-opacity="0.16" '
         f'stroke="{escape(avail_color, quote=True)}" stroke-opacity="0.6"/>',
-        f'  <circle cx="{pill_dot_x}" cy="68" r="4" fill="{escape(avail_color, quote=True)}"/>',
-        f'  <text x="{pill_text_x}" y="72" fill="{escape(avail_color, quote=True)}" '
-        f'font-size="11" font-weight="700">{escape(avail_label)}</text>',
-        f'  <text x="{text_x}" y="{msg_y}" fill="#c9d1d9" font-size="13">{escape(_truncate(message, max_msg_len))}</text>',
     ]
+
+    if pulse_dot:
+        lines.extend([
+            f'  <circle class="jurassic-pulse" cx="{pill_dot_x}" cy="{pill_dot_y}" r="4" '
+            f'fill="{escape(avail_color, quote=True)}" opacity="0.55">'
+            f'<animate attributeName="r" values="4;7.5;4" dur="2s" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="0.6;0.08;0.6" dur="2s" repeatCount="indefinite"/>'
+            f'</circle>',
+            f'  <circle cx="{pill_dot_x}" cy="{pill_dot_y}" r="4" fill="#4ade80">'
+            f'<animate attributeName="opacity" values="0.85;1;0.85" dur="2s" repeatCount="indefinite"/>'
+            f'</circle>',
+        ])
+    else:
+        lines.append(
+            f'  <circle cx="{pill_dot_x}" cy="{pill_dot_y}" r="4" fill="{escape(avail_color, quote=True)}"/>'
+        )
+
+    lines.extend([
+        f'  <text x="{pill_text_x}" y="{pill_text_y}" fill="{escape(avail_color, quote=True)}" '
+        f'font-size="11" font-weight="700">{escape(avail_label)}</text>',
+        f'  <text x="{text_x}" y="{msg_y}" fill="#c9d1d9" font-size="{msg_size}">{escape(_truncate(message, max_msg_len))}</text>',
+    ])
 
     if project:
         proj_str = _truncate(project, max_proj_len)
@@ -343,8 +412,9 @@ def _render_status_info_block(
             t_width = max(62, len(t_label) * 7 + 22)
             lines.append(
                 f'  <rect x="{tag_x}" y="{tag_y}" width="{t_width}" height="20" rx="10" '
-                f'fill="#161b22" stroke="#30363d"/>'
-                f'<text x="{tag_x + t_width / 2:.1f}" y="{tag_y + 13.5:.1f}" fill="#c9d1d9" '
+                f'fill="{escape(tag_fill, quote=True)}" stroke="{escape(tag_stroke, quote=True)}"/>'
+                f'<text x="{tag_x + t_width / 2:.1f}" y="{tag_y + 13.5:.1f}" '
+                f'fill="{escape(tag_text_color, quote=True)}" '
                 f'font-size="10.5" text-anchor="middle">{escape(t_label)}</text>'
             )
             tag_x += t_width + 8
@@ -352,12 +422,30 @@ def _render_status_info_block(
     return lines
 
 
-def _render_footer(expiry_text: str, mode_badge: str) -> list[str]:
+def _render_footer(
+    expiry_text: str,
+    mode_badge: str,
+    *,
+    badge_accent: str | None = None,
+) -> list[str]:
     """Render shared card divider and bottom expiry/status metadata footer."""
+    if badge_accent and " · " in mode_badge:
+        prefix, suffix = mode_badge.split(" · ", 1)
+        badge_markup = (
+            f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">'
+            f'{escape(prefix)} · <tspan fill="{escape(badge_accent, quote=True)}" font-weight="700">'
+            f'{escape(suffix)}</tspan></text>'
+        )
+    else:
+        badge_markup = (
+            f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">'
+            f'{escape(mode_badge)}</text>'
+        )
+
     return [
         '  <path d="M32 134H828" stroke="#21262d"/>',
         f'  <text x="32" y="149" fill="#8b949e" font-size="11">{escape(expiry_text)}</text>',
-        f'  <text x="828" y="149" fill="#6e7681" font-size="10.5" text-anchor="end">{escape(mode_badge)}</text>',
+        badge_markup,
     ]
 
 
@@ -516,6 +604,494 @@ def _render_offline_dino_scene() -> list[str]:
     return lines
 
 
+# ---------------------------------------------------------------------------
+# Available Jurassic Valley pixel-art sprites & scene renderer (16-bit world)
+# ---------------------------------------------------------------------------
+
+_JURASSIC_CLOUD_PALETTE = {
+    "W": "#ffffff",
+    "M": "#dff2ff",
+    "S": "#a6d8fb",
+}
+_JURASSIC_CLOUD_LARGE_GRID = (
+    ".........WWWWW............",
+    ".......WWWWWWWWW..........",
+    ".....WWWWWWWWWWWWW........",
+    "..WWWWWWWWWWWWWWWWWWW.....",
+    ".WWWWWWWWWWWWWWWWWWWWWW...",
+    "WWWWWWWWWWWWWWWWWWWWWWMW..",
+    "MMMMMMMMMMMMMMMMMMMMMMMMM.",
+    "SSSSSSSSSSSSSSSSSSSSSSSSSS",
+)
+_JURASSIC_CLOUD_SMALL_GRID = (
+    ".....WWWWW......",
+    "...WWWWWWWWW....",
+    ".WWWWWWWWWWWWWW.",
+    "MMMMMMMMMMMMMMMW",
+    "SSSSSSSSSSSSSSSS",
+)
+
+_SAUROPOD_PALETTE = {
+    "K": "#223322",
+    "D": "#5e7556",
+    "M": "#8ea87e",
+    "L": "#bdd4ab",
+}
+_SAUROPOD_BODY_GRID = (
+    ".....................KKKK..",
+    "....................KLLMK..",
+    "....................KMDKK..",
+    "...................KLMDK...",
+    "..................KLMDK....",
+    ".................KLMDK.....",
+    "................KLMDK......",
+    "...............KLMDDK......",
+    "...........KKKKLMDDK.......",
+    ".........KKLLLLMMMDDK......",
+    ".......KKLLMMMMMMMMDK......",
+    "....KKKMMMMMMMMMMMMDK......",
+    ".KKKMMMMMMDDDDDDDDDK.......",
+    "KDDDDDDDDK.................",
+)
+_SAUROPOD_LEGS_A = (
+    ".........KMDK...KMDK.......",
+    ".........KMDK...KMDK.......",
+    ".........KKKK...KKKK.......",
+)
+_SAUROPOD_LEGS_B = (
+    "........KMDK.....KMDK......",
+    "........KMDK.....KMDK......",
+    "........KKKK.....KKKK......",
+)
+
+_STEGOSAURUS_PALETTE = {
+    "K": "#1c2e14",
+    "P": "#b83a22",
+    "R": "#e5633b",
+    "D": "#4d7d2c",
+    "M": "#7db542",
+    "L": "#b4e065",
+    "W": "#fff3d6",
+}
+_STEGOSAURUS_BODY_GRID = (
+    "..........KK.KK..........",
+    "........KKRK.KRKK........",
+    "......KKRPKRPKRPKK.......",
+    "....KKRPKKKKKKKRPKK......",
+    "...KPRKKLLLLLLLKKPK..W...",
+    ".KKKKKLLMMMMMMMMLKKKK.W..",
+    "KMMMLMMMMMMMMMMMMMMMDKK..",
+    "KMDKMMMMMMMMMMMMMMMMDDK..",
+    ".KKKDDDDDDDDDDDDDDDDKK...",
+)
+_STEGOSAURUS_LEGS_A = (
+    ".....KMDK.....KMDK.......",
+    ".....KKKK.....KKKK.......",
+)
+_STEGOSAURUS_LEGS_B = (
+    "......KMDK...KMDK........",
+    "......KKKK...KKKK........",
+)
+
+_TRICERATOPS_PALETTE = {
+    "K": "#281409",
+    "D": "#7a3918",
+    "O": "#b85520",
+    "L": "#e4853b",
+    "B": "#e5b889",
+    "W": "#fff6e5",
+}
+_TRICERATOPS_BODY_GRID = (
+    ".....KKKKKKKKKKKKK....",
+    "...KKLLLLLLLLLLOOOK...",
+    "..KLLOOLLLLOOLLOOOOK..",
+    ".KLLOOOOOOOOOOOOLOOOK.",
+    "KLOOOODDOOOODDOOOOOOK.",
+    "KOOOOODDOOOODDOOOOBBK.",
+    ".KDDDOOOOOOOOOOOOBBBK.",
+    "..KDDDDDBBBBBBBBBBKK..",
+)
+_TRICERATOPS_LEGS_GRID = (
+    "..KODK..........KODK..",
+    "..KODK..KODK....KODK..",
+    "..KODK..KODK....KODK..",
+    "..KKKK..KKKK....KKKK..",
+)
+_TRICERATOPS_HEAD_GRID = (
+    "..KWKK................",
+    ".KWLLWK..........W....",
+    "KWLOLWWK.......WW.....",
+    "KWOOLWWKK....WW.......",
+    "KWOOLWLLKKKKW.........",
+    "KWOOLWLLOOOOOK..W.....",
+    ".KWOOLLLLOKOOOKW......",
+    ".KKOOLLOOOOOOOOOK.....",
+    "...KKODBBBBBBBBK......",
+    ".....KKKKKKKKKK.......",
+)
+_TRICERATOPS_TAIL_GRID = (
+    ".........KKK",
+    ".......KKLLK",
+    "....KKKLOOOK",
+    ".KKKLOOOODDK",
+    "KDDDDDDDDKK.",
+)
+
+_PTEROSAUR_PALETTE = {
+    "K": "#361c0a",
+    "D": "#96531c",
+    "M": "#c97a2d",
+    "L": "#f0ac54",
+}
+_PTEROSAUR_UP_GRID = (
+    "KKK.............",
+    ".KLMK...........",
+    "..KLMK....KK....",
+    "...KLMMKKKLKK...",
+    "....KMMMMMMLLKKK",
+    ".....KKDDKKMKKKK",
+    ".......KK.......",
+)
+_PTEROSAUR_DOWN_GRID = (
+    "..........KK....",
+    "......KKKKLKK...",
+    "...KKKMMMMMLLKKK",
+    "..KLMKKDDKKMKKKK",
+    ".KLMK...KK......",
+    "KKK.............",
+)
+
+
+def _render_available_jurassic_defs() -> list[str]:
+    """Gradients, clipPaths, and reduced-motion CSS for the Available Jurassic Valley."""
+    return [
+        '  <defs>',
+        '    <clipPath id="available-jurassic-clip">',
+        '      <rect x="18" y="44" width="406" height="112" rx="6"/>',
+        '    </clipPath>',
+        '    <clipPath id="jurassic-waterfall-clip">',
+        '      <rect x="310" y="131" width="60" height="22"/>',
+        '    </clipPath>',
+        '    <linearGradient id="jurassic-sky" x1="0" y1="44" x2="0" y2="104" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#1785eb"/>',
+        '      <stop offset="56%" stop-color="#48b8ff"/>',
+        '      <stop offset="100%" stop-color="#b8edff"/>',
+        '    </linearGradient>',
+        '    <linearGradient id="jurassic-valley" x1="18" y1="96" x2="424" y2="156" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#4ab52c"/>',
+        '      <stop offset="45%" stop-color="#8be332"/>',
+        '      <stop offset="100%" stop-color="#359c2b"/>',
+        '    </linearGradient>',
+        '    <linearGradient id="jurassic-water" x1="250" y1="96" x2="350" y2="156" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#67d3f5"/>',
+        '      <stop offset="55%" stop-color="#2ca6e0"/>',
+        '      <stop offset="100%" stop-color="#196fa8"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <style>',
+        '    @media (prefers-reduced-motion: reduce) {',
+        '      .jurassic-motion { transform: none !important; }',
+        '      .jurassic-pulse { display: none !important; }',
+        '      .jurassic-frame-b { display: none !important; }',
+        '      .jurassic-frame-a { opacity: 1 !important; }',
+        '      .jurassic-glow { opacity: 0.85 !important; }',
+        '    }',
+        '  </style>',
+    ]
+
+
+def _render_available_jurassic_scene() -> list[str]:
+    """Render the animated 16-bit Prehistoric Jurassic Valley on the left panel."""
+    cloud_l = _palette_grid_to_paths(_JURASSIC_CLOUD_LARGE_GRID, _JURASSIC_CLOUD_PALETTE, 0, 0, cell=2, indent="        ")
+    cloud_s = _palette_grid_to_paths(_JURASSIC_CLOUD_SMALL_GRID, _JURASSIC_CLOUD_PALETTE, 0, 0, cell=2, indent="        ")
+
+    sauropod_body = _palette_grid_to_paths(_SAUROPOD_BODY_GRID, _SAUROPOD_PALETTE, 88, 76, cell=2, indent="        ")
+    sauropod_legs_a = _palette_grid_to_paths(_SAUROPOD_LEGS_A, _SAUROPOD_PALETTE, 88, 76 + 14 * 2, cell=2, indent="          ")
+    sauropod_legs_b = _palette_grid_to_paths(_SAUROPOD_LEGS_B, _SAUROPOD_PALETTE, 88, 76 + 14 * 2, cell=2, indent="          ")
+
+    stego_body = _palette_grid_to_paths(_STEGOSAURUS_BODY_GRID, _STEGOSAURUS_PALETTE, 294, 102, cell=2, indent="        ")
+    stego_legs_a = _palette_grid_to_paths(_STEGOSAURUS_LEGS_A, _STEGOSAURUS_PALETTE, 294, 102 + 9 * 2, cell=2, indent="          ")
+    stego_legs_b = _palette_grid_to_paths(_STEGOSAURUS_LEGS_B, _STEGOSAURUS_PALETTE, 294, 102 + 9 * 2, cell=2, indent="          ")
+
+    trike_body = _palette_grid_to_paths(_TRICERATOPS_BODY_GRID, _TRICERATOPS_PALETTE, 104, 111, cell=2, indent="        ")
+    trike_legs = _palette_grid_to_paths(_TRICERATOPS_LEGS_GRID, _TRICERATOPS_PALETTE, 104, 111 + 8 * 2, cell=2, indent="      ")
+    trike_head = _palette_grid_to_paths(_TRICERATOPS_HEAD_GRID, _TRICERATOPS_PALETTE, 140, 109, cell=2, indent="        ")
+    trike_tail = _palette_grid_to_paths(_TRICERATOPS_TAIL_GRID, _TRICERATOPS_PALETTE, 84, 120, cell=2, indent="        ")
+
+    ptero_up = _palette_grid_to_paths(_PTEROSAUR_UP_GRID, _PTEROSAUR_PALETTE, 0, 0, cell=2, indent="        ")
+    ptero_down = _palette_grid_to_paths(_PTEROSAUR_DOWN_GRID, _PTEROSAUR_PALETTE, 0, 2, cell=2, indent="        ")
+
+    # Rising gentle volcanic smoke puffs (cohesive billowing plume, calm & non-explosive)
+    smoke_puffs = [
+        ("316 61;328 54;342 47;358 41", "7.8s", "0s", "#e2ebf5", 9, 5),
+        ("318 60;332 53;348 46;366 40", "8.6s", "-1.9s", "#cbd7e6", 11, 6),
+        ("317 61;330 53;346 46;364 39", "9.4s", "-4.1s", "#eef4fa", 10, 5),
+        ("315 62;326 55;340 48;356 42", "10.2s", "-6.4s", "#bccad9", 8, 5),
+    ]
+    smoke_lines: list[str] = []
+    for vals, dur, begin, col, rw, rh in smoke_puffs:
+        sx, sy = vals.split(";")[0].split()
+        smoke_lines.append(
+            f'      <g class="jurassic-motion" transform="translate({sx} {sy})" opacity="0.72">'
+            f'<rect x="-{rw}" y="-{rh}" width="{rw * 2}" height="{rh * 2}" rx="3" fill="{col}"/>'
+            f'<rect x="-{rw - 2}" y="-{rh + 2}" width="{(rw - 2) * 2}" height="{rh}" rx="2" fill="#f8fbff" opacity="0.6"/>'
+            f'<animateTransform attributeName="transform" type="translate" values="{vals}" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="0;0.78;0.65;0" keyTimes="0;0.18;0.7;1" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+            f'</g>'
+        )
+
+    lines = [
+        '  <g id="available-jurassic-scene" clip-path="url(#available-jurassic-clip)">',
+        # 1. Prehistoric sky
+        '    <rect x="18" y="44" width="406" height="112" fill="url(#jurassic-sky)"/>',
+        # 2. Independently drifting pixel clouds
+        '    <g id="jurassic-clouds" shape-rendering="crispEdges">',
+        '      <g class="jurassic-motion" transform="translate(166 56)">',
+        *cloud_l,
+        '        <animateTransform attributeName="transform" type="translate" from="430 56" to="-62 56" dur="28s" begin="-15.0s" repeatCount="indefinite"/>',
+        '      </g>',
+        '      <g class="jurassic-motion" transform="translate(364 58)">',
+        *cloud_s,
+        '        <animateTransform attributeName="transform" type="translate" from="430 58" to="-42 58" dur="24s" begin="-3.4s" repeatCount="indefinite"/>',
+        '      </g>',
+        '      <g class="jurassic-motion" transform="translate(86 70)">',
+        *cloud_s,
+        '        <animateTransform attributeName="transform" type="translate" from="430 70" to="-42 70" dur="32s" begin="-23.2s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        # 3. Volcano smoke, towering cone, and subtle lava glow
+        '    <g id="jurassic-volcano" shape-rendering="crispEdges">',
+        '      <g id="jurassic-smoke">',
+        *smoke_lines,
+        '      </g>',
+        # Distant left-to-center alpine mountain silhouette
+        '      <polygon points="18,98 54,78 88,88 122,74 162,86 206,72 246,84 246,104 18,104" fill="#4682b4"/>',
+        '      <polygon points="54,78 68,85 58,88 46,84" fill="#6aa8d6"/>',
+        '      <polygon points="122,74 138,82 126,86 114,81" fill="#6aa8d6"/>',
+        '      <polygon points="206,72 222,80 210,84 198,79" fill="#6aa8d6"/>',
+        # Main volcano cone (peak at x=316, y=62)
+        '      <polygon points="222,98 274,76 306,62 326,62 358,76 410,98" fill="#486584"/>',
+        '      <polygon points="256,98 292,76 312,62 324,62 346,78 386,98" fill="#5e7f9e"/>',
+        '      <polygon points="316,62 326,62 356,78 396,98 352,98 330,78" fill="#3a526e"/>',
+        # Sunlit ridge strokes on volcano slope
+        '      <path d="M306 66l-18 14-24 14M314 66l-10 16-14 14M322 66l12 14 20 14" stroke="#789ab8" stroke-width="1.5" fill="none" opacity="0.65"/>',
+        # Subtle glowing lava caldera & slow-pulsing veins (calm, non-explosive)
+        '      <g id="jurassic-lava" class="jurassic-glow">',
+        '        <path d="M306 62h20v3h-4v2h-12v-2h-4z" fill="#ff7324"/>',
+        '        <path d="M310 62h12v2h-12z" fill="#ffd859"/>',
+        '        <path d="M312 65h2v6h-2v6h-2v-6h2zM320 65h2v4h2v5h-2v-5h-2zM307 65h2v4h-2z" fill="#ff8c2e"/>',
+        '        <animate attributeName="opacity" values="0.68;1;0.68" dur="4.2s" repeatCount="indefinite"/>',
+        '      </g>',
+        # Misty clouds hugging lower volcanic foothills
+        '      <path d="M232 94h34v4h-34zM284 92h48v4h-48zM344 90h38v4h-38z" fill="#c9ecff" opacity="0.72"/>',
+        '    </g>',
+        # 4. Midground prehistoric green hills, rocky right cliff, and valley forest
+        '    <g id="jurassic-landscape" shape-rendering="crispEdges">',
+        '      <path d="M18 102 Q92 84 176 96 Q256 84 344 94 L424 90 L424 112 L18 112 Z" fill="#217c3e"/>',
+        '      <path d="M18 106 Q116 92 214 100 Q314 90 424 98 L424 120 L18 120 Z" fill="#2f9a43"/>',
+        # Right rocky sandstone cliff / mesa topped with prehistoric foliage
+        '      <polygon points="366,106 374,90 388,88 394,78 424,78 424,108" fill="#6b5e50"/>',
+        '      <polygon points="372,106 378,92 390,90 396,80 416,80 412,106" fill="#91806d"/>',
+        '      <path d="M380 92h4v12h-4zM396 82h4v20h-4zM412 82h4v18h-4z" fill="#4a4036"/>',
+        '      <path d="M388 78h36v4h-36zM370 88h24v4h-24z" fill="#329c3a"/>',
+        '      <path d="M394 76h28v3h-28zM374 86h16v3h-16z" fill="#7be034"/>',
+        # Bright sunlit rolling Jurassic valley floor
+        '      <path d="M18 106 Q142 102 260 108 Q344 104 424 108 L424 156 L18 156 Z" fill="url(#jurassic-valley)"/>',
+        # Distant valley trees & prehistoric bushes (layered rounded pixel canopies)
+        '      <g id="jurassic-mid-trees">',
+        '        <path d="M168 104h2v6h-2zM206 105h2v6h-2zM242 102h2v7h-2zM362 106h3v8h-3zM400 114h3v10h-3z" fill="#593419"/>',
+        '        <path d="M162 104h14v-4h-2v-3h-2v-2h-6v2h-2v3h-2zM200 105h14v-4h-2v-3h-2v-2h-6v2h-2v3h-2zM236 102h14v-4h-2v-3h-2v-2h-6v2h-2v3h-2zM353 106h20v-6h-3v-3h-3v-2h-8v2h-3v3h-3zM389 114h26v-7h-3v-4h-4v-2h-12v2h-4v4h-3z" fill="#186832"/>',
+        '        <path d="M164 101h10v-3h-2v-3h-6v3h-2zM202 102h10v-3h-2v-3h-6v3h-2zM238 99h10v-3h-2v-3h-6v3h-2zM356 102h14v-4h-3v-3h-8v3h-3zM393 109h18v-5h-3v-3h-12v3h-3z" fill="#5fd132"/>',
+        '      </g>',
+        '    </g>',
+        # 5. Winding prehistoric river & animated dual waterfall
+        '    <g id="jurassic-river" shape-rendering="crispEdges">',
+        # River banks (soft sandy/earthy edge)
+        '      <path d="M262 100 Q284 104 272 109 Q244 114 268 119 Q296 123 262 128 Q232 133 292 137 Q324 139 348 134 L366 134 L366 156 L306 156 L306 144 Q246 139 246 132 Q246 125 276 121 Q252 116 252 111 Q252 106 266 103 Z" fill="#2c6e2f"/>',
+        # Main turquoise-blue S-curved river body
+        '      <path d="M264 101 Q282 104 270 109 Q248 114 270 119 Q294 123 264 128 Q242 132 302 136 L362 135 L362 156 L310 156 L310 143 Q254 138 254 132 Q254 126 280 121 Q256 116 256 111 Q256 106 268 103 Z" fill="url(#jurassic-water)"/>',
+        # Animated flowing river ripples
+        '      <g class="jurassic-motion" fill="#d8f6ff" opacity="0.75">',
+        '        <path d="M264 108h8v1.5h-8zM266 118h10v1.5h-10zM268 128h12v1.5h-12zM292 133h14v1.5h-14z">',
+        '          <animateTransform attributeName="transform" type="translate" values="0 0;6 2;0 0" dur="3.4s" repeatCount="indefinite"/>',
+        '          <animate attributeName="opacity" values="0.35;0.9;0.35" dur="3.4s" repeatCount="indefinite"/>',
+        '        </path>',
+        '        <path d="M258 113h8v1.5h-8zM278 123h10v1.5h-10zM278 132h12v1.5h-12z">',
+        '          <animateTransform attributeName="transform" type="translate" values="0 0;-5 2;0 0" dur="4.2s" begin="-1.6s" repeatCount="indefinite"/>',
+        '          <animate attributeName="opacity" values="0.3;0.85;0.3" dur="4.2s" begin="-1.6s" repeatCount="indefinite"/>',
+        '        </path>',
+        '      </g>',
+        # Rocky waterfall ledge splitting two sparkling cascades
+        '      <path d="M312 132h52v18h-52z" fill="#1b5c8c"/>',
+        '      <polygon points="326,149 328,133 334,130 341,132 343,149" fill="#544b42"/>',
+        '      <polygon points="329,144 331,134 336,132 340,135 339,144" fill="#827769"/>',
+        '      <path d="M330 130h10v3h-10z" fill="#4ec232"/>',
+        # Animated falling waterfall water streaks (clipped to drop)
+        '      <g id="jurassic-waterfall" clip-path="url(#jurassic-waterfall-clip)">',
+        '        <rect x="314" y="131" width="14" height="19" fill="#5cc8f5"/>',
+        '        <rect x="342" y="131" width="18" height="19" fill="#5cc8f5"/>',
+        '        <g class="jurassic-motion" fill="#eefbff">',
+        '          <path d="M316 125h3v7h-3zM322 128h2v8h-2zM318 138h3v7h-3zM324 140h2v7h-2zM344 125h3v8h-3zM351 128h3v7h-3zM356 126h2v7h-2zM346 138h3v8h-3zM353 140h3v7h-3z"/>',
+        '          <animateTransform attributeName="transform" type="translate" from="0 -6" to="0 7" dur="1.1s" repeatCount="indefinite"/>',
+        '        </g>',
+        '      </g>',
+        # Pulsing white waterfall splash foam at pool base
+        '      <g class="jurassic-motion" fill="#eefbff">',
+        '        <path d="M310 149h20v3h-20zM340 149h24v3h-24zM314 147h12v2h-12zM344 147h16v2h-16z"/>',
+        '        <animate attributeName="opacity" values="0.65;1;0.65" dur="1.6s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        # 6. Flying Pterosaur crossing the sky (2-frame wing flap + smooth flight loop)
+        '    <g id="jurassic-pterosaur" shape-rendering="crispEdges">',
+        '      <g class="jurassic-motion" transform="translate(124 52)">',
+        '        <animateTransform attributeName="transform" type="translate" values="-36 58;124 50;268 56;436 48" dur="15s" begin="-4.8s" repeatCount="indefinite"/>',
+        '        <g class="jurassic-frame-a" opacity="1">',
+        *ptero_up,
+        '          <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="0.64s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="jurassic-frame-b" opacity="0">',
+        *ptero_down,
+        '          <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="0.64s" repeatCount="indefinite"/>',
+        '        </g>',
+        '      </g>',
+        '    </g>',
+        # 7. Distant Long-Necked Sauropod (slow subtle walk + leg shuffle + gentle neck sway)
+        '    <g id="jurassic-sauropod" shape-rendering="crispEdges">',
+        '      <g class="jurassic-motion">',
+        '        <animateTransform attributeName="transform" type="translate" values="0 0;10 0;0 0" dur="14s" repeatCount="indefinite"/>',
+        '        <ellipse cx="116" cy="110" rx="20" ry="2.5" fill="#185427" opacity="0.45"/>',
+        '        <g class="jurassic-frame-a" opacity="1">',
+        *sauropod_legs_a,
+        '          <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="1.8s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="jurassic-frame-b" opacity="0">',
+        *sauropod_legs_b,
+        '          <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="1.8s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="jurassic-motion">',
+        '          <animateTransform attributeName="transform" type="rotate" values="-1.5 118 96;2 118 96;-1.5 118 96" dur="5.2s" repeatCount="indefinite"/>',
+        *sauropod_body,
+        '        </g>',
+        '      </g>',
+        '    </g>',
+        # 8. Wandering Stegosaurus on the right sunlit meadow
+        '    <g id="jurassic-stegosaurus" shape-rendering="crispEdges">',
+        '      <g class="jurassic-motion">',
+        '        <animateTransform attributeName="transform" type="translate" values="0 0;-12 0;0 0" dur="13s" repeatCount="indefinite"/>',
+        '        <ellipse cx="316" cy="124" rx="18" ry="2.5" fill="#1d6326" opacity="0.5"/>',
+        '        <g class="jurassic-frame-a" opacity="1">',
+        *stego_legs_a,
+        '          <animate attributeName="opacity" values="1;0" keyTimes="0;0.5" calcMode="discrete" dur="1.5s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="jurassic-frame-b" opacity="0">',
+        *stego_legs_b,
+        '          <animate attributeName="opacity" values="0;1" keyTimes="0;0.5" calcMode="discrete" dur="1.5s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="jurassic-motion">',
+        '          <animateTransform attributeName="transform" type="translate" values="0 0;0 0.7;0 0" dur="3.8s" repeatCount="indefinite"/>',
+        *stego_body,
+        '        </g>',
+        '      </g>',
+        '    </g>',
+        # 9. Hero Foreground Triceratops (grazing head nod, breathing body, subtle tail sway)
+        '    <g id="jurassic-triceratops" shape-rendering="crispEdges">',
+        '      <ellipse cx="132" cy="135" rx="34" ry="4" fill="#195222" opacity="0.55"/>',
+        '      <g id="triceratops-tail" class="jurassic-motion">',
+        '        <animateTransform attributeName="transform" type="rotate" values="-2.5 106 124;3 106 124;-2.5 106 124" dur="4.8s" repeatCount="indefinite"/>',
+        *trike_tail,
+        '      </g>',
+        *trike_legs,
+        '      <g id="triceratops-body" class="jurassic-motion">',
+        '        <animateTransform attributeName="transform" type="translate" values="0 0;0 0.8;0 0" dur="4.2s" repeatCount="indefinite"/>',
+        *trike_body,
+        '      </g>',
+        '      <g id="triceratops-head" class="jurassic-motion">',
+        '        <animateTransform attributeName="transform" type="rotate" values="0 144 120;0 144 120;7 144 120;8 144 120;0 144 120" keyTimes="0;0.38;0.55;0.74;1" dur="6.4s" repeatCount="indefinite"/>',
+        *trike_head,
+        '      </g>',
+        '    </g>',
+        # 10. Framing left prehistoric tree, mossy rocks, ferns & purple/white wildflowers
+        '    <g id="jurassic-foreground" shape-rendering="crispEdges">',
+        # Left framing gnarled tree trunk & overarching leafy bough
+        '      <path d="M18 44h16v18h8v-4h16v-4h16v-4h20v-4h-12v4h-18v4h-16v4h-14v10h-6v16h-4v22h-6z" fill="#2b170b"/>',
+        '      <path d="M18 54h10v14h10v-4h16v-4h18v-4h-16v4h-16v4h-10v12h-6v24h-6z" fill="#6b3d1e"/>',
+        '      <path d="M22 66h6v10h-4v20h-4v-20h2zM38 62h16v-3h-16z" fill="#a86430"/>',
+        '      <g class="jurassic-motion">',
+        '        <path d="M18 44h132v4h-10v4h-20v-2h-16v4h-22v-4h-14v6h-20v-4h-12v6h-18z" fill="#124a23"/>',
+        '        <path d="M18 44h124v4h-12v2h-22v-2h-18v4h-20v-4h-16v4h-18v4h-18z" fill="#2ea834"/>',
+        '        <path d="M24 44h30v4h-18v2h-12zM68 44h36v4h-22v2h-14zM114 44h26v4h-16v2h-10z" fill="#9ae833"/>',
+        '        <path d="M18 74h44v8h-8v8h-14v6h-22z" fill="#155728"/>',
+        '        <path d="M18 74h36v6h-8v6h-14v6h-14z" fill="#46bd33"/>',
+        '        <animateTransform attributeName="transform" type="translate" values="0 0;1.2 0.5;0 0;-0.8 0.2;0 0" dur="5.8s" repeatCount="indefinite"/>',
+        '      </g>',
+        # Left mossy foreground boulders
+        '      <polygon points="18,156 18,128 38,124 58,130 70,144 86,140 106,148 112,156" fill="#3a414a"/>',
+        '      <polygon points="22,156 24,132 40,128 54,134 62,148 84,144 98,152 100,156" fill="#646f7d"/>',
+        '      <polygon points="28,132 42,128 52,134 40,136" fill="#8f9aa8"/>',
+        '      <path d="M24 128h16v4h-16zM44 130h12v4h-12zM78 142h18v4h-18z" fill="#4eb832"/>',
+        # Center-bottom rock & right waterfall framing rocks
+        '      <polygon points="220,154 226,140 244,138 258,144 264,154" fill="#48515c"/>',
+        '      <polygon points="226,152 232,142 246,140 254,146 254,152" fill="#77828f"/>',
+        '      <path d="M232 140h12v3h-12z" fill="#6cd430"/>',
+        '      <polygon points="366,156 372,136 392,130 412,124 424,126 424,156" fill="#3e4650"/>',
+        '      <polygon points="374,154 380,138 398,134 414,128 424,130 424,154" fill="#6b7582"/>',
+        '      <path d="M386 130h24v4h-24zM406 124h18v5h-18z" fill="#52c432"/>',
+        # Purple lupine spikes & crisp white meadow flowers in bottom-left
+        '      <path d="M56 154v-14h4v14zM66 154v-12h4v12zM76 154v-10h4v10z" fill="#5b21b6"/>',
+        '      <path d="M56 142h4v3h-4zM58 146h4v3h-4zM66 144h4v3h-4zM68 148h4v3h-4zM76 146h4v3h-4z" fill="#a78bfa"/>',
+        '      <path d="M58 140h2v2h-2zM68 142h2v2h-2zM78 144h2v2h-2z" fill="#ddd6fe"/>',
+        '      <path d="M126 150h4v2h-4zM128 148h2v6h-2zM148 152h4v2h-4zM150 150h2v4h-2zM186 150h4v2h-4zM188 148h2v4h-2zM272 150h4v2h-4zM274 148h2v4h-2z" fill="#ffffff"/>',
+        '      <path d="M128 150h2v2h-2zM150 152h2v2h-2zM188 150h2v2h-2zM274 150h2v2h-2z" fill="#facc15"/>',
+        # Gently swaying foreground ferns & tall grass blades
+        '      <g class="jurassic-motion">',
+        '        <path d="M22 156v-16h3v-4h3v20zM32 156v-14h3v-4h3v18zM44 156v-10h3v10z" fill="#1e6e2b"/>',
+        '        <path d="M24 156v-14h3v-4h2v18zM34 156v-12h3v-4h2v16z" fill="#6ae034"/>',
+        '        <animateTransform attributeName="transform" type="skewX" values="0;2.5;0;-2;0" dur="5.0s" repeatCount="indefinite"/>',
+        '      </g>',
+        '      <g class="jurassic-motion">',
+        '        <path d="M394 156v-14h3v-4h3v18zM406 156v-18h3v-4h3v22zM416 156v-12h3v12z" fill="#1a6328"/>',
+        '        <path d="M396 156v-12h3v-4h2v16zM408 156v-16h3v-4h2v20z" fill="#7be836"/>',
+        '        <animateTransform attributeName="transform" type="skewX" values="0;-2.5;0;2;0" dur="5.6s" begin="-1.8s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        '  </g>',
+        # Subtle inner border around the rounded Jurassic scene + vertical panel divider
+        '  <rect x="18" y="44" width="406" height="112" rx="6" fill="none" stroke="#30363d" stroke-opacity="0.9"/>',
+        '  <path d="M434 44V156" stroke="#21262d"/>',
+    ]
+    return lines
+
+
+def _render_available_jurassic_time_and_footer(
+    expiry_text: str,
+    mode_badge: str,
+) -> list[str]:
+    """Render the right-side clock icon, dynamic `Available till` line, divider, and green footer."""
+    if " · " in mode_badge:
+        prefix, suffix = mode_badge.split(" · ", 1)
+        badge_markup = (
+            f'  <text x="828" y="152" fill="#6e7681" font-size="10.5" text-anchor="end">'
+            f'{escape(prefix)} · <tspan fill="#4ade80" font-weight="700">{escape(suffix)}</tspan></text>'
+        )
+    else:
+        badge_markup = (
+            f'  <text x="828" y="152" fill="#4ade80" font-size="10.5" font-weight="700" text-anchor="end">'
+            f'{escape(mode_badge)}</text>'
+        )
+
+    return [
+        # Minimalist green clock icon + separator + dynamic "Available till HH:MM IST"
+        '  <g id="available-time-row">',
+        '    <circle cx="455" cy="127" r="6" fill="none" stroke="#4ade80" stroke-width="1.4"/>',
+        '    <path d="M455 123.5V127L457.5 128.5" fill="none" stroke="#4ade80" stroke-width="1.4" stroke-linecap="round"/>',
+        '    <path d="M469 121V133" stroke="#30363d"/>',
+        f'    <text x="479" y="131" fill="#e6edf3" font-size="12">{escape(expiry_text)}</text>',
+        '  </g>',
+        '  <path d="M446 139H828" stroke="#21262d"/>',
+        badge_markup,
+    ]
+
+
 def render_status_svg_markup(data: dict[str, Any]) -> str:
     """Render deterministic, valid XML SVG markup for a validated resolved status."""
     errors = validate_renderable_status(data)
@@ -565,6 +1141,41 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
                 max_proj_len=56,
             ),
             *_render_footer(expiry_text, mode_badge),
+            '</svg>',
+        ]
+    elif status_id == "available":
+        lines = [
+            *_render_terminal_frame_open(
+                aria_label,
+                accent,
+                defs_and_styles=_render_available_jurassic_defs(),
+                show_left_bar=False,
+            ),
+            *_render_available_jurassic_scene(),
+            *_render_status_info_block(
+                title=title,
+                message=message,
+                project=project,
+                tags=tags,
+                accent=accent,
+                avail_color=avail_color,
+                avail_label=avail_label,
+                text_x=448,
+                title_size=26,
+                title_y=72,
+                title_color="#7ee787",
+                pill_y=51,
+                msg_y=91,
+                msg_size=12.5,
+                tag_y=98,
+                max_msg_len=48,
+                max_proj_len=42,
+                pulse_dot=True,
+                tag_fill="#0e2c1c",
+                tag_stroke="#3fb950",
+                tag_text_color="#7ee787",
+            ),
+            *_render_available_jurassic_time_and_footer(expiry_text, mode_badge),
             '</svg>',
         ]
     else:

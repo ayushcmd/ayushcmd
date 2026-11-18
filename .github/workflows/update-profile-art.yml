@@ -1,13 +1,15 @@
 name: Update Contribution Graph & Stats
 
 # Refreshes contribution heatmap, statistics dashboard, languages donut, codebase
-# analytics and star statistics (personal account and organizations) twice daily from
-# real GitHub data.
-# Runs twice daily on schedule, on push to main, and on demand via workflow_dispatch.
+# analytics and star statistics (personal account and organizations) eleven times
+# daily from real GitHub data.
+# Runs on schedule, on push to main, and on demand via workflow_dispatch.
 
 on:
   schedule:
-    - cron: "30 4,9 * * *"  # 10:00 AM and 3:00 PM IST daily (UTC+05:30)
+    # GitHub cron runs in UTC. IST (UTC+05:30) run times:
+    # 06:00, 08:00, 10:00, 11:00, 13:00, 15:00, 17:00, 19:00, 21:00, 22:00, 00:00
+    - cron: "30 0,2,4,5,7,9,11,13,15,16,18 * * *"
   workflow_dispatch:
   push:
     branches:
@@ -19,15 +21,25 @@ on:
 permissions:
   contents: write
 
+# Only one refresh runs at a time so two commits never race to push.
+concurrency:
+  group: refresh-profile-art
+  cancel-in-progress: false
+
 jobs:
   refresh-profile-art:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      # Scripts label snapshots with date.today(); use IST so the label matches
+      # the local calendar day, including the midnight run.
+      TZ: Asia/Kolkata
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: "pip"

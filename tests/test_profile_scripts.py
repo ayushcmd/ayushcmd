@@ -520,7 +520,7 @@ class TestCompactDashboard(unittest.TestCase):
         self.assertIn('workflow_dispatch', triggers)
         steps = workflow['jobs']['refresh-profile-art']['steps']
         pattern = steps[-1]['with']['file_pattern']
-        self.assertEqual(triggers['schedule'], [{'cron': '30 4,9 * * *'}])
+        self.assertEqual(triggers['schedule'], [{'cron': '30 0,2,4,5,7,9,11,13,15,16,18 * * *'}])
         # Every generated README panel must be published by the refresh commit.
         import fnmatch
         import re
@@ -576,6 +576,149 @@ class TestWhoamiRefinement(unittest.TestCase):
         self.assertEqual([html.unescape(b) for b in badges], ['Python','JavaScript','React','FastAPI','AWS','Docker','C++','MongoDB','Git & GitHub','PyTorch'])
         self.assertIn('<table><tr>', readme)
         self.assertIn('assets/ayush-ascii.svg', readme)
+
+
+class TestRefreshReliability(unittest.TestCase):
+    CALENDAR_HTML = (
+        '<table><tr>'
+        '<td class="ContributionCalendar-day" data-date="2026-11-02" aria-label="3 contributions"></td>'
+        '<td class="ContributionCalendar-day" data-date="2026-11-01" aria-label="No contributions"></td>'
+        '</tr></table>'
+    )
+
+    def load_workflow(self):
+        from pathlib import Path
+        path = Path(HERE).parent / '.github/workflows/update-profile-art.yml'
+        return yaml.safe_load(path.read_text())
+
+    def test_schedule_matches_requested_ist_times(self):
+        workflow = self.load_workflow()
+        triggers = workflow.get('on', workflow.get(True))
+        minute, hours = triggers['schedule'][0]['cron'].split()[:2]
+        ist = sorted(
+            ((int(hour) * 60 + int(minute) + 330) % 1440) for hour in hours.split(',')
+        )
+        expected = [h * 60 for h in (0, 6, 8, 10, 11, 13, 15, 17, 19, 21, 22)]
+        self.assertEqual(ist, expected)
+
+    def test_workflow_is_hardened(self):
+        workflow = self.load_workflow()
+        job = workflow['jobs']['refresh-profile-art']
+        self.assertEqual(workflow['concurrency']['group'], 'refresh-profile-art')
+        self.assertFalse(workflow['concurrency']['cancel-in-progress'])
+        self.assertLessEqual(job['timeout-minutes'], 60)
+        self.assertEqual(job['env']['TZ'], 'Asia/Kolkata')
+        uses = [step['uses'] for step in job['steps'] if 'uses' in step]
+        self.assertIn('actions/checkout@v6', uses)
+        self.assertIn('actions/setup-python@v6', uses)
+
+    def test_parse_days_reads_counts_and_rejects_empty_markup(self):
+        from fetch_contributions import parse_days
+        self.assertEqual(
+            parse_days(self.CALENDAR_HTML, 'tester'),
+            [{'date': '2026-11-01', 'count': 0}, {'date': '2026-11-02', 'count': 3}],
+        )
+        with self.assertRaises(ValueError):
+            parse_days('<html></html>', 'tester')
+
+    def test_fetch_days_retries_then_succeeds(self):
+        import requests
+        from unittest.mock import patch, Mock
+        from fetch_contributions import fetch_days
+        good = Mock(text=self.CALENDAR_HTML)
+        good.raise_for_status.return_value = None
+        responses = [requests.ConnectionError('boom'), good]
+        with patch('fetch_contributions.requests.get', side_effect=responses) as get, \
+                patch('fetch_contributions.time.sleep') as sleep:
+            days = fetch_days('tester', retry_delays=(5, 15))
+        self.assertEqual(len(days), 2)
+        self.assertEqual(get.call_count, 2)
+        sleep.assert_called_once_with(5)
+
+    def test_fetch_days_raises_after_all_attempts_fail(self):
+        import requests
+        from unittest.mock import patch
+        from fetch_contributions import fetch_days
+        with patch('fetch_contributions.requests.get', side_effect=requests.Timeout('slow')) as get, \
+                patch('fetch_contributions.time.sleep'):
+            with self.assertRaises(requests.Timeout):
+                fetch_days('tester', retry_delays=(1, 2))
+        self.assertEqual(get.call_count, 3)
+
+    def test_unchanged_data_does_not_rewrite_contributions_file(self):
+        import json
+        import tempfile
+        from unittest.mock import patch
+        import fetch_contributions
+        days = [{'date': '2026-11-01', 'count': 2}]
+        stats = {'public_repos': 1}
+        first = build_data(days, 'tester', stats)
+        first['generated_at'] = '2026-11-01T00:00:00Z'
+        with tempfile.TemporaryDirectory() as folder:
+            target = os.path.join(folder, 'contributions.json')
+            with open(target, 'w', encoding='utf-8') as handle:
+                json.dump(first, handle)
+            with patch.object(fetch_contributions, 'OUT_PATH', target), \
+                    patch.object(fetch_contributions, 'USERNAME', 'tester'), \
+                    patch.object(fetch_contributions, 'fetch_days', return_value=days), \
+                    patch.object(fetch_contributions, 'fetch_account_stats', return_value=stats):
+                fetch_contributions.main()
+                with open(target, encoding='utf-8') as handle:
+                    self.assertEqual(json.load(handle)['generated_at'], '2026-11-01T00:00:00Z')
+                changed = [{'date': '2026-11-01', 'count': 5}]
+                with patch.object(fetch_contributions, 'fetch_days', return_value=changed):
+                    fetch_contributions.main()
+                with open(target, encoding='utf-8') as handle:
+                    saved = json.load(handle)
+        self.assertEqual(saved['total_contributions'], 5)
+        self.assertNotEqual(saved['generated_at'], '2026-11-01T00:00:00Z')
+
+    def test_incomplete_runs_keep_previous_codebase_stats(self):
+        previous = {'totals': {'private': 4}}
+        self.assertIsNone(make_loc_stats.incomplete_reason(previous, 0, False))
+        self.assertIn('1 repository', make_loc_stats.incomplete_reason(previous, 1, False))
+        self.assertIn('2 repositories', make_loc_stats.incomplete_reason(None, 2, False))
+        self.assertIn('private repository listing', make_loc_stats.incomplete_reason(previous, 0, True))
+        self.assertIsNone(make_loc_stats.incomplete_reason({'totals': {'private': 0}}, 0, True))
+        self.assertIsNone(make_loc_stats.incomplete_reason(None, 0, True))
+
+    def test_clone_retries_quick_failures_but_not_timeouts(self):
+        import subprocess
+        from unittest.mock import patch
+        failure = subprocess.CalledProcessError(128, 'git')
+        with patch.object(make_loc_stats, 'clone_repo', side_effect=[failure, None]) as clone, \
+                patch.object(make_loc_stats.time, 'sleep'):
+            make_loc_stats.clone_with_retry({'id': 1}, 'unused')
+        self.assertEqual(clone.call_count, 2)
+        with patch.object(make_loc_stats, 'clone_repo', side_effect=failure) as clone, \
+                patch.object(make_loc_stats.time, 'sleep'):
+            with self.assertRaises(subprocess.CalledProcessError):
+                make_loc_stats.clone_with_retry({'id': 1}, 'unused')
+        self.assertEqual(clone.call_count, make_loc_stats.CLONE_ATTEMPTS)
+        timeout = subprocess.TimeoutExpired('git', 600)
+        with patch.object(make_loc_stats, 'clone_repo', side_effect=timeout) as clone:
+            with self.assertRaises(subprocess.TimeoutExpired):
+                make_loc_stats.clone_with_retry({'id': 1}, 'unused')
+        self.assertEqual(clone.call_count, 1)
+
+    def test_private_listing_failure_is_reported(self):
+        import io
+        import urllib.error
+        from unittest.mock import patch
+        denied = urllib.error.HTTPError('https://api.github.com/user/repos', 403, 'denied', {}, io.BytesIO())
+        public = [{'name': 'pub', 'private': False, 'fork': False, 'owner': {'login': 'tester'}}]
+
+        def fake_paged(url):
+            if '/user/repos' in url:
+                raise denied
+            return public
+
+        with patch.object(make_loc_stats, 'TOKEN', 'token'), \
+                patch.object(make_loc_stats, 'INCLUDE_PRIVATE', True), \
+                patch.object(make_loc_stats, 'paged', side_effect=fake_paged):
+            repos, failed = make_loc_stats.list_repos()
+        self.assertTrue(failed)
+        self.assertEqual([r['name'] for r in repos], ['pub'])
 
 
 if __name__ == "__main__":

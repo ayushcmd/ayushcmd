@@ -39,6 +39,8 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from status_engine import (  # noqa: E402
     DAY_BOUNDARY_STR,
+    MANUAL_STATUS_IDS,
+    NIGHT_OVERRIDE_STATUS,
     PLACEHOLDER_STATUS,
     PLACEHOLDER_UNTIL,
     TIMEZONE_NAME,
@@ -53,15 +55,6 @@ from status_engine import (  # noqa: E402
 DEFAULT_PRESETS_FILE = REPO_ROOT / "data" / "status_presets.json"
 DEFAULT_BASE_BRANCH = "main"
 GITHUB_API_BASE = "https://api.github.com"
-
-CATEGORY_ORDER = ("work", "college", "travel", "life", "other")
-CATEGORY_LABELS = {
-    "work": "Work",
-    "college": "College",
-    "travel": "Travel",
-    "life": "Life",
-    "other": "Other",
-}
 
 
 def daily_branch_name(target_date: date) -> str:
@@ -113,26 +106,17 @@ def has_manual_edits(config: Any) -> bool:
 
 
 def build_pr_body(target_date: date, presets: dict[str, dict[str, Any]]) -> str:
-    """Build a concise, Copilot-friendly Draft PR description with all presets."""
-    grouped: dict[str, list[tuple[str, dict[str, Any]]]] = {}
-    for preset_id, entry in presets.items():
-        cat = entry.get("category", "other")
-        grouped.setdefault(cat, []).append((preset_id, entry))
-
-    ordered_categories = [c for c in CATEGORY_ORDER if c in grouped] + [
-        c for c in sorted(grouped) if c not in CATEGORY_ORDER
+    """Build a concise, Copilot-friendly Draft PR description with the two manual options."""
+    manual_order = ("available", "offline")
+    ordered_manual_ids = [pid for pid in manual_order if pid in presets and pid in MANUAL_STATUS_IDS] + [
+        pid for pid in sorted(presets) if pid in MANUAL_STATUS_IDS and pid not in manual_order
     ]
 
-    preset_lines: list[str] = []
-    for cat in ordered_categories:
-        label = CATEGORY_LABELS.get(cat, cat.title())
-        items = ", ".join(
-            f"`{pid}` ({entry['emoji']} {entry['title']})"
-            for pid, entry in grouped[cat]
-        )
-        preset_lines.append(f"- **{label}:** {items}")
-
-    presets_md = "\n".join(preset_lines)
+    option_lines = [
+        f"- `{pid}` ({presets[pid]['emoji']} **{presets[pid]['title']}**) — {presets[pid]['message']}"
+        for pid in ordered_manual_ids
+    ]
+    options_md = "\n".join(option_lines)
     date_str = target_date.isoformat()
 
     return f"""## Ayush Live Status — {date_str} (IST)
@@ -141,25 +125,25 @@ Update **only** the two fields in `data/status.json`:
 
 ```json
 {{
-  "status": "working",
+  "status": "available",
   "until": "21:00"
 }}
 ```
 
 ### Rules
 1. **Only edit `data/status.json`** (`status` and `until`). Do not edit `data/status_meta.json` — it records today's IST effective date (`{date_str}`).
-2. **`status`**: Pick one of the 6 preset IDs below. Emoji, title, category, availability, tags, message, predefined project description (for `working`), and theme color resolve automatically.
+2. **`status`**: Choose one of the **2 manual statuses** below (`available` or `offline`). Emoji, title, availability, tags, message, and theme color resolve automatically.
 3. **`until`**: 24-hour IST time (`HH:MM`) when this status expires:
    - `07:01`–`23:59` → expires on **{date_str}** (IST).
    - `00:00`–`07:00` → expires after midnight on the **next calendar date** (up to the 07:00 AM IST cycle reset).
    - After `until` passes, your status automatically falls back to `offline`.
-4. **Automatic Night Status**: Every day from **22:00 to 05:59:59 IST**, your effective status automatically resolves to `sleeping` (`offline` availability) without modifying `data/status.json`. At **06:00 IST**, your manual status is restored if still valid; otherwise it falls back to `offline`.
+4. **Automatic Night Mode (`{NIGHT_OVERRIDE_STATUS}`)**: Every day from **22:00 to 05:59:59 IST**, your effective status automatically switches to `{NIGHT_OVERRIDE_STATUS}` (`offline` availability) without modifying `data/status.json`. Do **not** set `status` to `{NIGHT_OVERRIDE_STATUS}` manually. At **06:00 IST**, your manual status is restored if still unexpired; otherwise it falls back to `offline`.
 5. **Validation & Merge**: Saving edits to `data/status.json` (or marking this PR **Ready for review**) runs the `Validate Live Status` check. Review and merge manually — this PR will never auto-merge.
 
-### Available Presets
-{presets_md}
+### Manual Status Options
+{options_md}
 
-> **Tip (GitHub Copilot):** Ask Copilot to update `data/status.json` with your chosen preset and `until` time (e.g., *"Set status to working until 21:00"*).
+> **Tip (GitHub Copilot):** Ask Copilot to update `data/status.json` with your chosen status and `until` time (e.g., *"Set status to available until 21:00"*).
 """
 
 

@@ -43,13 +43,15 @@ NIGHT_WINDOW_STR = f"{NIGHT_START_STR}-{NIGHT_END_STR}"
 
 DEFAULT_FALLBACK_STATUS = "offline"
 NIGHT_OVERRIDE_STATUS = "sleeping"
+SUPPORTED_STATUS_IDS = frozenset({"available", "offline", "sleeping"})
+MANUAL_STATUS_IDS = frozenset({"available", "offline"})
 DEFAULT_THEME_COLOR = "#8b949e"
 
 PLACEHOLDER_STATUS = "__SELECT_STATUS__"
 PLACEHOLDER_UNTIL = "__HH:MM__"
 
 ALLOWED_USER_KEYS = frozenset({"status", "until"})
-VALID_AVAILABILITIES = frozenset({"available", "focused", "busy", "limited", "offline"})
+VALID_AVAILABILITIES = frozenset({"online", "offline"})
 VALID_RESOLUTION_SOURCES = frozenset({"night_override", "manual", "offline_fallback"})
 MAX_TAGS = 2
 
@@ -76,7 +78,7 @@ _PLACEHOLDER_LITERALS = frozenset({
 _FALLBACK_PRESET_EMERGENCY: dict[str, Any] = {
     "emoji": "🌙",
     "title": "Offline",
-    "category": "other",
+    "category": "status",
     "availability": "offline",
     "message": "Away from the keyboard — catch you next cycle",
     "tags": ["Offline"],
@@ -84,13 +86,13 @@ _FALLBACK_PRESET_EMERGENCY: dict[str, Any] = {
 }
 
 _NIGHT_PRESET_EMERGENCY: dict[str, Any] = {
-    "emoji": "😴",
-    "title": "Recharging",
-    "category": "life",
+    "emoji": "🌙",
+    "title": "Sleeping",
+    "category": "night",
     "availability": "offline",
-    "message": "Offline for the night — back in the morning",
-    "tags": ["Sleep", "AFK"],
-    "color": "#6e7681",
+    "message": "Recharging — see you in the morning.",
+    "tags": ["Night Mode"],
+    "color": "#b9a5ca",
 }
 
 
@@ -324,6 +326,11 @@ def validate_presets_catalog(catalog: Any) -> list[str]:
         )
     if DEFAULT_FALLBACK_STATUS not in presets:
         errors.append(f"Presets catalog must define the `{DEFAULT_FALLBACK_STATUS}` preset.")
+    elif isinstance(presets.get(DEFAULT_FALLBACK_STATUS), dict):
+        if presets[DEFAULT_FALLBACK_STATUS].get("availability") != "offline":
+            errors.append(
+                f"Preset `{DEFAULT_FALLBACK_STATUS}` must have `availability` set to 'offline'."
+            )
 
     night_id = catalog.get("night_override_status", NIGHT_OVERRIDE_STATUS)
     if not isinstance(night_id, str) or night_id not in presets:
@@ -338,13 +345,23 @@ def validate_presets_catalog(catalog: Any) -> list[str]:
                 f"Preset `{NIGHT_OVERRIDE_STATUS}` must have `availability` set to 'offline'."
             )
 
+    if "available" not in presets:
+        errors.append("Presets catalog must define the `available` preset.")
+    elif isinstance(presets.get("available"), dict):
+        if presets["available"].get("availability") != "online":
+            errors.append("Preset `available` must have `availability` set to 'online'.")
+
     seen_titles: dict[str, str] = {}
     for preset_id, entry in presets.items():
         if not isinstance(preset_id, str) or not _PRESET_ID_RE.match(preset_id):
             errors.append(
-                f"Preset ID {preset_id!r} must be lowercase snake_case (e.g. 'deep_focus')."
+                f"Preset ID {preset_id!r} must be lowercase snake_case (e.g. 'available')."
             )
             continue
+        if preset_id not in SUPPORTED_STATUS_IDS:
+            errors.append(
+                f"Unsupported preset ID {preset_id!r}; expected only {sorted(SUPPORTED_STATUS_IDS)}."
+            )
         if not isinstance(entry, dict):
             errors.append(f"Preset `{preset_id}` must be a JSON object.")
             continue
@@ -378,13 +395,6 @@ def validate_presets_catalog(catalog: Any) -> list[str]:
             if not isinstance(color, str) or not _HEX_COLOR_RE.match(color):
                 errors.append(
                     f"Preset `{preset_id}` color {color!r} must be a 6-digit hex string (e.g. '#58a6ff')."
-                )
-
-        project = entry.get("project")
-        if project is not None:
-            if not isinstance(project, str) or not project.strip():
-                errors.append(
-                    f"Preset `{preset_id}` optional `project` must be a non-empty string when provided."
                 )
 
         title = entry.get("title")
@@ -444,15 +454,22 @@ def validate_user_status(
         elif is_placeholder_value(status_val):
             errors.append(
                 f"`status` still contains a placeholder ({status_val!r}). "
-                "Replace it with a valid preset ID from `data/status_presets.json` "
-                "(for example: 'working', 'travelling', 'available', 'offline')."
+                "Replace it with a valid manual status ID "
+                f"({', '.join(repr(s) for s in sorted(MANUAL_STATUS_IDS))})."
             )
-        elif status_val not in presets:
-            suggestions = difflib.get_close_matches(status_val.lower(), list(presets.keys()), n=3)
+        elif status_val == NIGHT_OVERRIDE_STATUS:
+            errors.append(
+                f"`{NIGHT_OVERRIDE_STATUS}` is an automatic night-only status "
+                f"({NIGHT_START_STR}–05:59:59 IST) and cannot be selected manually in `data/status.json`. "
+                f"Allowed manual statuses: {', '.join(sorted(MANUAL_STATUS_IDS))}."
+            )
+        elif status_val not in MANUAL_STATUS_IDS or status_val not in presets:
+            allowed_manual = sorted(k for k in presets if k in MANUAL_STATUS_IDS)
+            suggestions = difflib.get_close_matches(status_val.lower(), allowed_manual, n=3)
             hint = f" Did you mean: {', '.join(suggestions)}?" if suggestions else ""
             errors.append(
-                f"Unknown status preset {status_val!r}.{hint} "
-                f"Valid presets: {', '.join(sorted(presets.keys()))}."
+                f"Unknown or unsupported manual status {status_val!r}.{hint} "
+                f"Allowed manual statuses: {', '.join(allowed_manual)}."
             )
 
     if "until" in config:
@@ -543,7 +560,6 @@ def build_night_override(
         "availability": "offline",
         "tags": list(preset["tags"]),
         "message": preset["message"],
-        "project": preset.get("project"),
         "color": preset.get("color", DEFAULT_THEME_COLOR),
         "until": NIGHT_END_STR,
         "timezone": TIMEZONE_NAME,
@@ -607,7 +623,6 @@ def build_offline_fallback(
         "availability": preset["availability"],
         "tags": list(preset["tags"]),
         "message": preset["message"],
-        "project": preset.get("project"),
         "color": preset.get("color", DEFAULT_THEME_COLOR),
         "until": None,
         "timezone": TIMEZONE_NAME,
@@ -732,7 +747,6 @@ def resolve_status(
             "availability": preset["availability"],
             "tags": list(preset["tags"]),
             "message": preset["message"],
-            "project": preset.get("project"),
             "color": preset.get("color", DEFAULT_THEME_COLOR),
             "until": until_str,
             "timezone": TIMEZONE_NAME,
@@ -811,7 +825,6 @@ def validate_resolved_status(resolved: Any) -> list[str]:
         "availability",
         "tags",
         "message",
-        "project",
         "color",
         "until",
         "timezone",
@@ -829,6 +842,11 @@ def validate_resolved_status(resolved: Any) -> list[str]:
     if errors:
         return errors
 
+    if resolved["status"] not in SUPPORTED_STATUS_IDS:
+        errors.append(
+            f"Unsupported resolved status {resolved['status']!r}; "
+            f"expected one of {sorted(SUPPORTED_STATUS_IDS)}."
+        )
     if resolved["timezone"] != TIMEZONE_NAME:
         errors.append(f"Resolved timezone must be {TIMEZONE_NAME!r}.")
     if not isinstance(resolved["expired"], bool):
@@ -842,8 +860,6 @@ def validate_resolved_status(resolved: Any) -> list[str]:
             f"Invalid `resolution_source` {resolved['resolution_source']!r}; "
             f"expected one of {sorted(VALID_RESOLUTION_SOURCES)}."
         )
-    if resolved["project"] is not None and not isinstance(resolved["project"], str):
-        errors.append("`project` must be a string or null.")
     if resolved["availability"] not in VALID_AVAILABILITIES:
         errors.append(f"Invalid resolved availability {resolved['availability']!r}.")
     if not isinstance(resolved["tags"], list) or not (1 <= len(resolved["tags"]) <= MAX_TAGS):

@@ -2,7 +2,7 @@
   "owner": "ayushcmd",
   "generated": "2026-11-18",
   "totals": {
-    "stars": 537,
+    "stars": 538,
     "repositories": 42,
     "starred_repositories": 40
   },
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-17",
-    "stars": 19
+    "stars": 20
   },
   "repositories": [
     {
@@ -36,11 +36,11 @@
       "stars": 28
     },
     {
-      "name": "commoditychain",
-      "stars": 23
+      "name": "rob-links",
+      "stars": 24
     },
     {
-      "name": "rob-links",
+      "name": "commoditychain",
       "stars": 23
     },
     {
@@ -215,7 +215,7 @@
     },
     {
       "date": "2026-11-18",
-      "stars": 537
+      "stars": 538
     }
   ]
 }

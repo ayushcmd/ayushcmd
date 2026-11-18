@@ -1,27 +1,27 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-17",
+  "generated": "2026-11-18",
   "totals": {
-    "stars": 518,
+    "stars": 535,
     "repositories": 42,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 109
+    "stars": 113
   },
   "change": {
-    "since": "2026-11-16",
-    "stars": 24
+    "since": "2026-11-17",
+    "stars": 17
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 109
+      "stars": 113
     },
     {
       "name": "dollar-hegemony",
-      "stars": 87
+      "stars": 92
     },
     {
       "name": "open-workers",
@@ -61,6 +61,10 @@
     },
     {
       "name": "octoverse-2026",
+      "stars": 11
+    },
+    {
+      "name": "rob-links",
       "stars": 11
     },
     {
@@ -152,10 +156,6 @@
       "stars": 3
     },
     {
-      "name": "rob-links",
-      "stars": 3
-    },
-    {
       "name": "Cloud-DevOps",
       "stars": 2
     },
@@ -212,6 +212,10 @@
     {
       "date": "2026-11-17",
       "stars": 518
+    },
+    {
+      "date": "2026-11-18",
+      "stars": 535
     }
   ]
 }

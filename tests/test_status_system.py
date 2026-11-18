@@ -1063,8 +1063,94 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
                 self.assertIn(resolved["availability"].upper(), rendered_text)
                 self.assertIn(resolved["message"], rendered_text)
                 self.assertIn("21:00 IST", rendered_text)
+                self.assertEqual(root.attrib.get("height"), "172")
+                self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
                 if status_id == "working":
                     self.assertIn(resolved["project"], rendered_text)
+
+                # Offline-only scene selection: only `offline` uses the animated Dino Runner scene
+                if status_id == "offline":
+                    self.assertIn('id="offline-dino-scene"', svg_text)
+                else:
+                    self.assertNotIn('id="offline-dino-scene"', svg_text)
+
+    def test_offline_dino_scene_geometry_animations_and_dynamic_expiry(self):
+        import xml.etree.ElementTree as ET
+
+        eff = date(2026, 11, 18)
+        manual_offline = se.resolve_status(
+            {"status": "offline", "until": "18:30"},
+            self.presets,
+            eff,
+            now=datetime(2026, 11, 18, 14, 0, tzinfo=se.IST),
+            strict=True,
+        )
+        svg_text = render_status_svg.render_status_svg_markup(manual_offline)
+        root = ET.fromstring(svg_text)
+
+        # Correct dimensions and viewBox
+        self.assertEqual(root.attrib.get("width"), "860")
+        self.assertEqual(root.attrib.get("height"), "172")
+        self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
+
+        # Pure vector SVG: no raster images, base64 data URIs, or JavaScript
+        self.assertNotIn("<image", svg_text.lower())
+        self.assertNotIn("data:image", svg_text.lower())
+        self.assertNotIn("<script", svg_text.lower())
+
+        # Offline Dino Runner scene components & pixel-art crispEdges rendering
+        for expected_id in (
+            'id="offline-dino-scene"',
+            'id="offline-dino-runner"',
+            'id="offline-ground"',
+            'id="offline-cacti"',
+            'id="offline-clouds"',
+            'id="offline-moon"',
+            'id="offline-stars"',
+            'id="offline-hills"',
+        ):
+            self.assertIn(expected_id, svg_text)
+        self.assertIn('shape-rendering="crispEdges"', svg_text)
+        self.assertIn("prefers-reduced-motion: reduce", svg_text)
+
+        # Native SVG animation elements present (<animate> and <animateTransform>)
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        animates = root.findall(".//svg:animate", ns)
+        animate_transforms = root.findall(".//svg:animateTransform", ns)
+        self.assertGreaterEqual(len(animates), 6)
+        self.assertGreaterEqual(len(animate_transforms), 6)
+
+        # Dynamic expiry and status text (not hardcoded to 07:00)
+        rendered_text = " ".join(root.itertext())
+        self.assertIn("Offline", rendered_text)
+        self.assertIn("OFFLINE", rendered_text)
+        self.assertIn("Away from the keyboard — catch you next cycle", rendered_text)
+        self.assertIn("Expires at 18:30 IST", rendered_text)
+        self.assertIn("STATUS · OFFLINE", rendered_text)
+
+        # Night override (`sleeping`) must NOT use the offline dino scene
+        night_resolved = se.resolve_status(
+            {"status": "working", "until": "21:00"},
+            self.presets,
+            eff,
+            now=datetime(2026, 11, 18, 22, 30, tzinfo=se.IST),
+            strict=True,
+        )
+        night_svg = render_status_svg.render_status_svg_markup(night_resolved)
+        self.assertNotIn('id="offline-dino-scene"', night_svg)
+
+        # Expired fallback resolves to `offline` and displays the Dino scene with fallback expiry text
+        expired_resolved = se.resolve_status(
+            {"status": "working", "until": "21:00"},
+            self.presets,
+            eff,
+            now=datetime(2026, 11, 18, 21, 5, tzinfo=se.IST),
+            strict=True,
+        )
+        expired_svg = render_status_svg.render_status_svg_markup(expired_resolved)
+        self.assertIn('id="offline-dino-scene"', expired_svg)
+        self.assertIn("Expired · Offline until next update", expired_svg)
+        self.assertIn("FALLBACK · OFFLINE", expired_svg)
 
     def test_renderer_handles_night_override_and_expired_fallback(self):
         import xml.etree.ElementTree as ET

@@ -2,26 +2,26 @@
   "owner": "ayushcmd",
   "generated": "2026-11-18",
   "totals": {
-    "stars": 543,
+    "stars": 537,
     "repositories": 42,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 112
+    "stars": 111
   },
   "change": {
     "since": "2026-11-17",
-    "stars": 25
+    "stars": 19
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 112
+      "stars": 111
     },
     {
       "name": "dollar-hegemony",
-      "stars": 92
+      "stars": 91
     },
     {
       "name": "open-workers",
@@ -29,7 +29,7 @@
     },
     {
       "name": "cargo-vision-ai",
-      "stars": 41
+      "stars": 40
     },
     {
       "name": "go-green",
@@ -37,7 +37,7 @@
     },
     {
       "name": "commoditychain",
-      "stars": 24
+      "stars": 23
     },
     {
       "name": "rob-links",
@@ -52,16 +52,16 @@
       "stars": 18
     },
     {
-      "name": "cloud_monitor",
-      "stars": 16
-    },
-    {
       "name": "air-atlas",
       "stars": 15
     },
     {
-      "name": "badge-quest",
+      "name": "cloud_monitor",
       "stars": 15
+    },
+    {
+      "name": "badge-quest",
+      "stars": 14
     },
     {
       "name": "octoverse-2026",
@@ -215,7 +215,7 @@
     },
     {
       "date": "2026-11-18",
-      "stars": 543
+      "stars": 537
     }
   ]
 }

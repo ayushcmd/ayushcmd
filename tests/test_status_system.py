@@ -1073,12 +1073,98 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
                 if status_id == "offline":
                     self.assertIn('id="offline-dino-scene"', svg_text)
                     self.assertNotIn('id="available-jurassic-scene"', svg_text)
+                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
                 elif status_id == "available":
                     self.assertIn('id="available-jurassic-scene"', svg_text)
                     self.assertNotIn('id="offline-dino-scene"', svg_text)
+                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
+                elif status_id == "sleeping":
+                    self.assertIn('id="sleeping-dragon-scene"', svg_text)
+                    self.assertNotIn('id="offline-dino-scene"', svg_text)
+                    self.assertNotIn('id="available-jurassic-scene"', svg_text)
                 else:
                     self.assertNotIn('id="offline-dino-scene"', svg_text)
                     self.assertNotIn('id="available-jurassic-scene"', svg_text)
+                    self.assertNotIn('id="sleeping-dragon-scene"', svg_text)
+
+    def test_sleeping_medieval_dragon_scene_animations_and_footer(self):
+        import xml.etree.ElementTree as ET
+
+        eff = date(2026, 11, 18)
+        night_resolved = se.resolve_status(
+            {"status": "available", "until": "21:00"},
+            self.presets,
+            eff,
+            now=datetime(2026, 11, 18, 22, 30, tzinfo=se.IST),
+            strict=True,
+        )
+        self.assertEqual(night_resolved["status"], "sleeping")
+        self.assertEqual(night_resolved["availability"], "offline")
+        self.assertEqual(night_resolved["resolution_source"], "night_override")
+
+        svg_text = render_status_svg.render_status_svg_markup(night_resolved)
+        root = ET.fromstring(svg_text)
+
+        # Valid 860x172 SVG, pure self-contained vector (no raster/base64/JS)
+        self.assertEqual(root.attrib.get("width"), "860")
+        self.assertEqual(root.attrib.get("height"), "172")
+        self.assertEqual(root.attrib.get("viewBox"), "0 0 860 172")
+        self.assertNotIn("<image", svg_text.lower())
+        self.assertNotIn("data:image", svg_text.lower())
+        self.assertNotIn("<script", svg_text.lower())
+        self.assertIn('shape-rendering="crispEdges"', svg_text)
+        self.assertIn("prefers-reduced-motion: reduce", svg_text)
+
+        # Medieval Dragon Night scene layers & landmarks present
+        for expected_id in (
+            'id="sleeping-dragon-scene"',
+            'id="sleeping-stars"',
+            'id="sleeping-shooting-star"',
+            'id="sleeping-moon"',
+            'id="sleeping-clouds"',
+            'id="sleeping-mountains"',
+            'id="sleeping-castle"',
+            'id="sleeping-dragon"',
+            'id="sleeping-town"',
+            'id="sleeping-river"',
+            'id="sleeping-bridge"',
+        ):
+            self.assertIn(expected_id, svg_text)
+
+        # Dragon geometry (3 wing frames) & flight/wing animations
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        dragon_group = root.find('.//svg:g[@id="sleeping-dragon"]', ns)
+        self.assertIsNotNone(dragon_group)
+        self.assertGreaterEqual(len(dragon_group.findall(".//svg:animateTransform", ns)), 1)
+        self.assertGreaterEqual(len(dragon_group.findall(".//svg:animate", ns)), 3)
+        self.assertIn('class="sleep-wing-1"', svg_text)
+        self.assertIn('class="sleep-wing-2"', svg_text)
+        self.assertIn('class="sleep-wing-3"', svg_text)
+
+        # Clouds, stars, shooting star, and river reflection animations present
+        for group_id in ("sleeping-clouds", "sleeping-river"):
+            grp = root.find(f'.//svg:g[@id="{group_id}"]', ns)
+            self.assertIsNotNone(grp)
+            self.assertGreaterEqual(len(grp.findall(".//svg:animateTransform", ns)), 2)
+        stars_grp = root.find('.//svg:g[@id="sleeping-stars"]', ns)
+        self.assertGreaterEqual(len(stars_grp.findall(".//svg:animate", ns)), 6)
+        self.assertGreaterEqual(len(stars_grp.findall(".//svg:animateTransform", ns)), 1)
+
+        # Right panel text & approved footer wording
+        rendered_text = " ".join("".join(root.itertext()).split())
+        self.assertIn("Sleeping", rendered_text)
+        self.assertIn("OFFLINE", rendered_text)
+        self.assertIn("Recharging — see you in the morning.", rendered_text)
+        self.assertIn("Night Mode", rendered_text)
+        self.assertIn("Ayush available at 6 AM IST.", rendered_text)
+        self.assertNotIn("Scheduled until 06:00 IST", rendered_text)
+        self.assertIn("STATUS · SLEEPING", rendered_text)
+
+        # Idempotent writing for Sleeping Dragon SVG
+        with tempfile.TemporaryDirectory() as tmp:
+            out_path = Path(tmp) / "available.svg"
+            self.assertTrue(render_status_svg.render_status_svg_file(night_resolved, out_path))
+            self.assertFalse(render_status_svg.render_status_svg_file(night_resolved, out_path))
 
     def test_available_jurassic_scene_dinosaurs_animations_and_dynamic_fields(self):
         import xml.etree.ElementTree as ET
@@ -1253,10 +1339,14 @@ class TestStatusSVGRendererAndReadme(unittest.TestCase):
             strict=True,
         )
         night_svg = render_status_svg.render_status_svg_markup(night_resolved)
-        self.assertTrue(ET.fromstring(night_svg).tag.endswith("svg"))
-        self.assertIn("Recharging", night_svg)
-        self.assertIn("OFFLINE", night_svg)
-        self.assertIn("06:00 IST", night_svg)
+        night_root = ET.fromstring(night_svg)
+        self.assertTrue(night_root.tag.endswith("svg"))
+        night_text = " ".join("".join(night_root.itertext()).split())
+        self.assertIn('id="sleeping-dragon-scene"', night_svg)
+        self.assertIn("Sleeping", night_text)
+        self.assertIn("OFFLINE", night_text)
+        self.assertIn("Ayush available at 6 AM IST.", night_text)
+        self.assertIn("STATUS · SLEEPING", night_text)
 
         expired_resolved = se.resolve_status(
             {"status": "working", "until": "21:00"},

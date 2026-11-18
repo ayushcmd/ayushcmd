@@ -51,12 +51,12 @@
     },
     "sleeping": {
       "emoji": "😴",
-      "title": "Recharging",
+      "title": "Sleeping",
       "category": "life",
       "availability": "offline",
-      "message": "Offline for the night — back in the morning",
-      "tags": ["Sleep", "AFK"],
-      "color": "#6e7681"
+      "message": "Recharging — see you in the morning.",
+      "tags": ["Night Mode"],
+      "color": "#b9a5ca"
     }
   }
 }

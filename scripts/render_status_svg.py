@@ -273,9 +273,8 @@ def format_expiry_text(data: dict[str, Any]) -> str:
     computed = data.get("computed") or {}
     until_display = computed.get("until_display") or (f"{until} IST" if until else None)
 
-    if source == "night_override":
-        end_label = until_display or "06:00 IST"
-        return f"Auto night mode (22:00–06:00 IST) · Ends at {end_label}"
+    if source == "night_override" or (status_id == "sleeping" and until == "06:00"):
+        return "Ayush available at 6 AM IST."
 
     if source == "manual" and not data.get("expired") and until_display:
         if status_id == "available":
@@ -287,7 +286,7 @@ def format_expiry_text(data: dict[str, Any]) -> str:
 
 def _format_mode_badge(status_id: str, source: str) -> str:
     if source == "night_override":
-        return "SCHEDULED · NIGHT"
+        return f"STATUS · {status_id.upper()}"
     if source == "offline_fallback":
         return "FALLBACK · OFFLINE"
     return f"STATUS · {status_id.upper()}"
@@ -1092,6 +1091,411 @@ def _render_available_jurassic_time_and_footer(
     ]
 
 
+# ---------------------------------------------------------------------------
+# Sleeping Medieval Dragon Night pixel-art sprites & scene renderer
+# Palette: Dusty Lavender & Silver (#25283A, #2D3249, #626779, #77758D,
+# #E5DDDC, #D9AE8E, #171B2A, #B9A5CA)
+# ---------------------------------------------------------------------------
+
+_SLEEPING_CLOUD_PALETTE = {
+    "D": "#34374D",
+    "M": "#4F526B",
+    "L": "#77758D",
+}
+_SLEEPING_CLOUD_WIDE_GRID = (
+    "........LLLLLL............",
+    ".....LLLMMMMMMLLL.........",
+    "..LLLMMMMMMMMMMMMLLL......",
+    ".LMMMMMMMMMMMMMMMMMML.....",
+    "DDDDDDDDDDDDDDDDDDDDDD....",
+)
+_SLEEPING_CLOUD_SMALL_GRID = (
+    "....LLLLL.......",
+    "..LLMMMMMLL.....",
+    ".LMMMMMMMMML....",
+    "DDDDDDDDDDDDD...",
+)
+
+_DRAGON_PALETTE = {
+    "K": "#171B2A",
+    "D": "#2F2E47",
+    "M": "#4E4B6C",
+    "L": "#77758D",
+    "A": "#B9A5CA",
+    "S": "#E5DDDC",
+}
+
+# 3-frame medieval fantasy dragon flying left-to-right (36x16 cells at 2px = 72x32px)
+# Broad bat-like twin wings with silver leading edges, dark-lavender horned head,
+# and a long sinuous undulating tail.
+_DRAGON_FRAME_UP = (
+    ".............KKK....................",
+    "............KSSAK...................",
+    "...........KSAAAMK..KK..............",
+    "..........KSAMMMDK.KSAK......KS.....",
+    "..........KAMMMDDDDKMMK.....KSSK....",
+    "...........KMMMDDDDMMDK....KMLMKK...",
+    "............KMMDDDDMMDK...KMLMMMMK..",
+    "..KK.........KMMDDDDMMKKKKMLMKMMMK..",
+    ".KAAK.........KMMMMMMMLLLLMMMKMMMMK.",
+    "KADMMKK........KKMMMMMMMMMMMMMKKKK..",
+    ".KKDDMMKKKKKKKKKKMMMMMMMMMDDKK......",
+    "...KKKDDDDDMMMMMMMMMMMMDDDDK........",
+    ".......KKKKKDDDDDDDDDDDKKKK.........",
+    ".............KKK....KKK.............",
+)
+
+_DRAGON_FRAME_MID = (
+    "....................................",
+    "....................................",
+    ".............................KS.....",
+    "...........KKKKKKKK.........KSSK....",
+    ".........KKSSAAAMMMKK......KMLMKK...",
+    ".......KKSAAAMMMMMMDDKK...KMLMMMMK..",
+    ".....KKAAAMMMMMMDDDDMMMKKKMLMKMMMK..",
+    "..KK..KKKMMMMMMMDDDDMMMMMMLMMKMMMMK.",
+    ".KAAKK...KKKMMMMMMMMMMMMMMMMMMKKKK..",
+    "KADMMMKKKKKKKMMMMMMMMMMMMMDDKK......",
+    "..KKKDDDDDDMMMMMMMMMMMMDDDDK........",
+    ".......KKKKKDDDDDDDDDDDKKKK.........",
+    ".............KKK....KKK.............",
+    "....................................",
+)
+
+_DRAGON_FRAME_DOWN = (
+    "....................................",
+    "....................................",
+    ".............................KS.....",
+    "............................KSSK....",
+    "...........................KMLMKK...",
+    "..........................KMLMMMMK..",
+    "....KK.......KKKKKKKKKKKKKMLMKMMMK..",
+    "..KKAAK....KKSSAAAAMMMMMMMLMMKMMMMK.",
+    ".KADMMMKKKKSSAAAMMMMMMMMMMMMMMKKKK..",
+    "..KKKDDDDDDMMMMMMDDDDMMMMMDDKK......",
+    ".......KKKKKMMMMDDDDDMMMMDDK........",
+    "...........KMMMDDDDDKK.KKKK.........",
+    "..........KAMMMDDDDK................",
+    "..........KSAMMMDMK.................",
+    "...........KSAAAMK..................",
+    "............KKKKK...................",
+)
+
+
+def _render_sleeping_dragon_defs() -> list[str]:
+    """Gradients, clipPath, and reduced-motion CSS for Sleeping Medieval Dragon Night."""
+    return [
+        '  <defs>',
+        '    <clipPath id="sleeping-dragon-clip">',
+        '      <rect x="18" y="44" width="382" height="112" rx="6"/>',
+        '    </clipPath>',
+        '    <linearGradient id="sleeping-sky" x1="0" y1="44" x2="0" y2="124" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#1A1D2E"/>',
+        '      <stop offset="52%" stop-color="#25283A"/>',
+        '      <stop offset="100%" stop-color="#43455E"/>',
+        '    </linearGradient>',
+        '    <radialGradient id="sleeping-moon-halo" cx="86" cy="67" r="46" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#E5DDDC" stop-opacity="0.24"/>',
+        '      <stop offset="45%" stop-color="#B9A5CA" stop-opacity="0.11"/>',
+        '      <stop offset="100%" stop-color="#25283A" stop-opacity="0"/>',
+        '    </radialGradient>',
+        '    <linearGradient id="sleeping-river-grad" x1="0" y1="130" x2="0" y2="156" gradientUnits="userSpaceOnUse">',
+        '      <stop offset="0%" stop-color="#171B2A"/>',
+        '      <stop offset="55%" stop-color="#22263B"/>',
+        '      <stop offset="100%" stop-color="#2D3249"/>',
+        '    </linearGradient>',
+        '  </defs>',
+        '  <style>',
+        '    @media (prefers-reduced-motion: reduce) {',
+        '      .sleep-motion { transform: none !important; }',
+        '      .sleep-wing-1 { opacity: 1 !important; }',
+        '      .sleep-wing-2, .sleep-wing-3 { display: none !important; }',
+        '      .sleep-shooting { display: none !important; }',
+        '      .sleep-twinkle { opacity: 0.7 !important; }',
+        '    }',
+        '  </style>',
+    ]
+
+
+def _render_sleeping_dragon_scene() -> list[str]:
+    """Render the animated Medieval Dragon Night scene (Dusty Lavender & Silver)."""
+    cloud_wide = _palette_grid_to_paths(_SLEEPING_CLOUD_WIDE_GRID, _SLEEPING_CLOUD_PALETTE, 0, 0, cell=2, indent="        ")
+    cloud_small = _palette_grid_to_paths(_SLEEPING_CLOUD_SMALL_GRID, _SLEEPING_CLOUD_PALETTE, 0, 0, cell=2, indent="        ")
+
+    dragon_up = _palette_grid_to_paths(_DRAGON_FRAME_UP, _DRAGON_PALETTE, 0, 0, cell=2, indent="          ")
+    dragon_mid = _palette_grid_to_paths(_DRAGON_FRAME_MID, _DRAGON_PALETTE, 0, 0, cell=2, indent="          ")
+    dragon_down = _palette_grid_to_paths(_DRAGON_FRAME_DOWN, _DRAGON_PALETTE, 0, 0, cell=2, indent="          ")
+
+    # Subtle twinkling silver & dusty-lavender stars (3–6s staggered phases)
+    stars = [
+        (32, 52, 2, "#E5DDDC", "3.8s", "0s"),
+        (54, 62, 1.5, "#B9A5CA", "4.6s", "-1.4s"),
+        (132, 50, 2, "#E5DDDC", "5.2s", "-2.1s"),
+        (156, 66, 1.5, "#77758D", "3.4s", "-0.9s"),
+        (188, 53, 2, "#B9A5CA", "4.9s", "-3.2s"),
+        (224, 59, 1.5, "#E5DDDC", "4.1s", "-1.8s"),
+        (264, 50, 2, "#E5DDDC", "5.6s", "-0.5s"),
+        (308, 56, 1.5, "#B9A5CA", "3.6s", "-2.7s"),
+        (348, 51, 2, "#E5DDDC", "4.4s", "-1.1s"),
+        (378, 63, 1.5, "#77758D", "5.4s", "-3.8s"),
+    ]
+    star_lines = [
+        f'      <rect class="sleep-twinkle" x="{sx}" y="{sy}" width="{sz}" height="{sz}" fill="{col}" opacity="0.6">'
+        f'<animate attributeName="opacity" values="0.2;0.88;0.2" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+        f'</rect>'
+        for sx, sy, sz, col, dur, begin in stars
+    ]
+
+    # Warm flickering town & castle windows (x, y, w, h, dur, begin)
+    warm_windows = [
+        # Castle tower windows
+        (268, 86, 2, 4, "5.2s", "-0.6s"),
+        (284, 82, 2, 4, "6.1s", "-2.4s"),
+        (294, 88, 2, 3, "4.8s", "-1.2s"),
+        (308, 84, 2, 4, "5.8s", "-3.3s"),
+        # Left bank medieval stone houses
+        (30, 114, 3, 4, "4.6s", "-1.1s"),
+        (38, 114, 3, 4, "5.4s", "-2.8s"),
+        (54, 110, 3, 4, "6.2s", "-0.4s"),
+        (62, 118, 3, 4, "4.9s", "-3.1s"),
+        (82, 112, 3, 4, "5.7s", "-1.9s"),
+        (98, 116, 3, 4, "4.4s", "-0.8s"),
+        (114, 114, 3, 4, "6.0s", "-2.2s"),
+        # Right bank medieval stone houses
+        (302, 116, 3, 4, "5.1s", "-1.5s"),
+        (318, 112, 3, 4, "4.7s", "-3.0s"),
+        (336, 116, 3, 4, "5.9s", "-0.9s"),
+        (354, 110, 3, 4, "4.5s", "-2.5s"),
+        (372, 114, 3, 4, "6.3s", "-1.3s"),
+        (386, 118, 3, 4, "5.0s", "-3.6s"),
+    ]
+    window_lines = [
+        f'      <rect x="{wx}" y="{wy}" width="{ww}" height="{wh}" fill="#D9AE8E" opacity="0.82">'
+        f'<animate attributeName="opacity" values="0.62;0.96;0.74;0.92;0.62" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+        f'</rect>'
+        for wx, wy, ww, wh, dur, begin in warm_windows
+    ]
+
+    # Warm riverside & bridge street lanterns (x, y_top, dur, begin)
+    lanterns = [
+        (74, 124, "4.8s", "0s"),
+        (126, 125, "5.6s", "-1.7s"),
+        (182, 118, "5.0s", "-2.8s"),
+        (246, 118, "6.0s", "-0.9s"),
+        (298, 125, "4.6s", "-3.2s"),
+        (350, 124, "5.4s", "-1.4s"),
+    ]
+    lantern_lines: list[str] = []
+    for lx, ly, dur, begin in lanterns:
+        lantern_lines.extend([
+            f'      <rect x="{lx}" y="{ly}" width="2" height="8" fill="#171B2A"/>',
+            f'      <circle cx="{lx + 1}" cy="{ly}" r="5.5" fill="#D9AE8E" opacity="0.22">'
+            f'<animate attributeName="opacity" values="0.16;0.3;0.16" dur="{dur}" begin="{begin}" repeatCount="indefinite"/>'
+            f'</circle>',
+            f'      <rect x="{lx}" y="{ly - 1}" width="2" height="2" fill="#F2D2B6"/>',
+        ])
+
+    lines = [
+        '  <g id="sleeping-dragon-scene" clip-path="url(#sleeping-dragon-clip)">',
+        # 1. Dusty Lavender & Slate Night Sky + understated silver lunar glow
+        '    <rect x="18" y="44" width="382" height="112" fill="url(#sleeping-sky)"/>',
+        '    <rect x="18" y="44" width="382" height="112" fill="url(#sleeping-moon-halo)"/>',
+        # 2. Scattered twinkling stars + occasional soft shooting star (every 20s)
+        '    <g id="sleeping-stars" shape-rendering="crispEdges">',
+        *star_lines,
+        '      <g id="sleeping-shooting-star" class="sleep-shooting" opacity="0">',
+        '        <line x1="0" y1="0" x2="22" y2="-7" stroke="#E5DDDC" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>',
+        '        <rect x="-1" y="-1" width="2.5" height="2.5" fill="#F4F0EF"/>',
+        '        <animateTransform attributeName="transform" type="translate" values="332 50;332 50;246 76;246 76" keyTimes="0;0.74;0.82;1" dur="20s" begin="-4s" repeatCount="indefinite"/>',
+        '        <animate attributeName="opacity" values="0;0;0.85;0;0" keyTimes="0;0.74;0.77;0.82;1" dur="20s" begin="-4s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        # 3. Large stationary silver moon with subtle lunar craters
+        '    <g id="sleeping-moon">',
+        '      <circle cx="86" cy="67" r="14.5" fill="#E5DDDC"/>',
+        '      <circle cx="84" cy="65" r="13" fill="#F2ECEB" opacity="0.45"/>',
+        '      <g fill="#C6BEC4" opacity="0.55" shape-rendering="crispEdges">',
+        '        <rect x="78" y="61" width="5" height="4"/>',
+        '        <rect x="89" y="69" width="6" height="4"/>',
+        '        <rect x="82" y="72" width="4" height="3"/>',
+        '        <rect x="91" y="60" width="3" height="3"/>',
+        '      </g>',
+        '    </g>',
+        # 4. Soft parallax night clouds (28s & 38s)
+        '    <g id="sleeping-clouds" shape-rendering="crispEdges" opacity="0.72">',
+        '      <g class="sleep-motion" transform="translate(216 54)">',
+        *cloud_wide,
+        '        <animateTransform attributeName="transform" type="translate" from="408 54" to="-64 54" dur="36s" begin="-14.6s" repeatCount="indefinite"/>',
+        '      </g>',
+        '      <g class="sleep-motion" transform="translate(36 74)">',
+        *cloud_small,
+        '        <animateTransform attributeName="transform" type="translate" from="408 74" to="-44 74" dur="28s" begin="-23.0s" repeatCount="indefinite"/>',
+        '      </g>',
+        '      <g class="sleep-motion" transform="translate(324 68)">',
+        *cloud_small,
+        '        <animateTransform attributeName="transform" type="translate" from="408 68" to="-44 68" dur="32s" begin="-6.0s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        # 5. Layered distant lavender-gray mountains
+        '    <g id="sleeping-mountains" shape-rendering="crispEdges">',
+        '      <polygon points="18,112 52,84 86,96 128,78 168,94 214,80 256,92 298,78 344,90 380,80 400,88 400,118 18,118" fill="#464A61"/>',
+        '      <polygon points="52,84 64,91 56,94 46,90" fill="#626779"/>',
+        '      <polygon points="128,78 142,86 132,90 120,85" fill="#626779"/>',
+        '      <polygon points="214,80 228,88 218,91 206,86" fill="#626779"/>',
+        '      <polygon points="18,118 48,96 92,106 144,92 192,108 242,96 290,88 338,98 378,92 400,100 400,126 18,126" fill="#2D3249"/>',
+        '      <polygon points="144,92 158,100 146,104 134,98" fill="#484D66"/>',
+        '      <polygon points="290,88 302,94 292,98 280,94" fill="#484D66"/>',
+        '    </g>',
+        # 6. Distant Medieval Castle with multiple crenellated & pointed towers
+        '    <g id="sleeping-castle" shape-rendering="crispEdges">',
+        # Castle hill crag
+        '      <polygon points="246,118 258,100 326,98 342,118" fill="#23273B"/>',
+        # Castle main keep & curtain walls
+        '      <rect x="260" y="88" width="60" height="18" fill="#2D3249"/>',
+        '      <rect x="260" y="88" width="12" height="18" fill="#444963"/>',
+        # Left tall spire tower
+        '      <rect x="264" y="76" width="10" height="28" fill="#2D3249"/>',
+        '      <rect x="264" y="76" width="4" height="28" fill="#525670"/>',
+        '      <polygon points="262,76 269,66 276,76" fill="#1B1F32"/>',
+        '      <polygon points="262,76 269,66 268,76" fill="#484C66"/>',
+        # Central grand keep tower
+        '      <rect x="280" y="72" width="14" height="32" fill="#2D3249"/>',
+        '      <rect x="280" y="72" width="5" height="32" fill="#5A5E78"/>',
+        '      <polygon points="278,72 287,60 296,72" fill="#171B2A"/>',
+        '      <polygon points="278,72 287,60 286,72" fill="#4E526C"/>',
+        # Right twin turret towers
+        '      <rect x="302" y="78" width="12" height="26" fill="#2D3249"/>',
+        '      <rect x="302" y="78" width="4" height="26" fill="#4C506A"/>',
+        '      <polygon points="300,78 308,68 316,78" fill="#1B1F32"/>',
+        '      <rect x="318" y="84" width="8" height="20" fill="#25293E"/>',
+        '      <path d="M260 88h4v-2h4v2h4v-2h4v2M294 88h4v-2h4v2" fill="#525670"/>',
+        # Soft silver moonlit castle rim
+        '      <path d="M264 76h1v28h-1zM280 72h1v32h-1zM302 78h1v26h-1z" fill="#B9A5CA" opacity="0.5"/>',
+        '    </g>',
+        # 7. Flying Fantasy Dragon (Main animated hero — graceful glide + 3-frame wing cycle)
+        '    <g id="sleeping-dragon" shape-rendering="crispEdges">',
+        '      <g class="sleep-motion" transform="translate(148 56)">',
+        '        <animateTransform attributeName="transform" type="translate" values="-78 60;54 54;156 58;270 51;412 57" dur="22s" begin="-9.6s" repeatCount="indefinite"/>',
+        '        <g class="sleep-wing-1" opacity="1">',
+        *dragon_up,
+        '          <animate attributeName="opacity" values="1;0;0;0" keyTimes="0;0.25;0.5;0.75" calcMode="discrete" dur="1.5s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="sleep-wing-2" opacity="0">',
+        *dragon_mid,
+        '          <animate attributeName="opacity" values="0;1;0;1" keyTimes="0;0.25;0.5;0.75" calcMode="discrete" dur="1.5s" repeatCount="indefinite"/>',
+        '        </g>',
+        '        <g class="sleep-wing-3" opacity="0">',
+        *dragon_down,
+        '          <animate attributeName="opacity" values="0;0;1;0" keyTimes="0;0.25;0.5;0.75" calcMode="discrete" dur="1.5s" repeatCount="indefinite"/>',
+        '        </g>',
+        '      </g>',
+        '    </g>',
+        # 8. Medieval European stone houses (left & right riverbanks, dark pitched roofs)
+        '    <g id="sleeping-town" shape-rendering="crispEdges">',
+        # Left riverside stone quay wall
+        '      <rect x="18" y="126" width="122" height="8" fill="#23273B"/>',
+        '      <rect x="18" y="126" width="122" height="2" fill="#626779"/>',
+        # Left bank houses (pitched medieval gables + chimneys)
+        '      <rect x="22" y="108" width="26" height="18" fill="#2D3249"/>',
+        '      <rect x="22" y="108" width="6" height="18" fill="#3F445E"/>',
+        '      <polygon points="20,108 35,96 50,108" fill="#171B2A"/>',
+        '      <polygon points="20,108 35,96 34,108" fill="#2A2F45"/>',
+        '      <rect x="40" y="96" width="4" height="8" fill="#25283A"/>',
+        '      <rect x="48" y="102" width="24" height="24" fill="#282D42"/>',
+        '      <rect x="48" y="102" width="6" height="24" fill="#444963"/>',
+        '      <polygon points="46,102 60,91 74,102" fill="#171B2A"/>',
+        '      <polygon points="46,102 60,91 59,102" fill="#353A52"/>',
+        '      <rect x="74" y="106" width="32" height="20" fill="#2D3249"/>',
+        '      <rect x="74" y="106" width="8" height="20" fill="#464B66"/>',
+        '      <polygon points="72,106 90,95 108,106" fill="#1B1F32"/>',
+        '      <rect x="106" y="109" width="22" height="17" fill="#25293E"/>',
+        '      <polygon points="104,109 117,99 130,109" fill="#171B2A"/>',
+        # Right riverside stone quay wall
+        '      <rect x="288" y="126" width="112" height="8" fill="#23273B"/>',
+        '      <rect x="288" y="126" width="112" height="2" fill="#626779"/>',
+        # Right bank medieval stone houses
+        '      <rect x="294" y="108" width="24" height="18" fill="#2D3249"/>',
+        '      <rect x="294" y="108" width="6" height="18" fill="#464B66"/>',
+        '      <polygon points="292,108 306,97 320,108" fill="#171B2A"/>',
+        '      <rect x="318" y="103" width="28" height="23" fill="#272C40"/>',
+        '      <rect x="318" y="103" width="6" height="23" fill="#434862"/>',
+        '      <polygon points="316,103 332,92 348,103" fill="#1B1F32"/>',
+        '      <polygon points="316,103 332,92 331,103" fill="#353A52"/>',
+        '      <rect x="346" y="105" width="26" height="21" fill="#2D3249"/>',
+        '      <rect x="346" y="105" width="6" height="21" fill="#484D67"/>',
+        '      <polygon points="344,105 359,94 374,105" fill="#171B2A"/>',
+        '      <rect x="372" y="109" width="28" height="17" fill="#25293E"/>',
+        '      <polygon points="370,109 386,98 402,109" fill="#171B2A"/>',
+        # Gently flickering warm medieval windows
+        *window_lines,
+        '    </g>',
+        # 9. Calm Night River + Gentle Animated Moon & Lantern Reflections
+        '    <g id="sleeping-river" shape-rendering="crispEdges">',
+        '      <rect x="18" y="132" width="382" height="24" fill="url(#sleeping-river-grad)"/>',
+        # Soft moonlight silver reflection column beneath the moon (x≈86)
+        '      <g class="sleep-motion" fill="#E5DDDC" opacity="0.45">',
+        '        <path d="M76 136h20v1.5h-20zM79 140h15v1.5h-15zM75 144h22v1.5h-22zM80 148h13v1.5h-13zM78 152h16v1.5h-16z"/>',
+        '        <animateTransform attributeName="transform" type="translate" values="-2 0;2.5 0;-2 0" dur="5.6s" repeatCount="indefinite"/>',
+        '        <animate attributeName="opacity" values="0.32;0.58;0.32" dur="5.6s" repeatCount="indefinite"/>',
+        '      </g>',
+        # Soft warm amber reflections beneath street & bridge lanterns
+        '      <g class="sleep-motion" fill="#D9AE8E" opacity="0.38">',
+        '        <path d="M71 138h8v1.5h-8zM73 142h5v1.5h-5zM123 139h8v1.5h-8zM125 144h5v1.5h-5zM179 141h8v1.5h-8zM243 141h8v1.5h-8zM295 139h8v1.5h-8zM347 138h8v1.5h-8z"/>',
+        '        <animateTransform attributeName="transform" type="translate" values="1.5 0;-1.5 0;1.5 0" dur="4.8s" begin="-1.2s" repeatCount="indefinite"/>',
+        '        <animate attributeName="opacity" values="0.24;0.5;0.24" dur="4.8s" begin="-1.2s" repeatCount="indefinite"/>',
+        '      </g>',
+        # Calm horizontal dusty-lavender water wave ripples
+        '      <g class="sleep-motion" fill="#77758D" opacity="0.32">',
+        '        <path d="M36 139h24v1h-24zM148 145h28v1h-28zM206 149h32v1h-32zM272 143h22v1h-22zM336 150h30v1h-30z"/>',
+        '        <animateTransform attributeName="transform" type="translate" values="0 0;8 0;0 0" dur="7.4s" repeatCount="indefinite"/>',
+        '        <animate attributeName="opacity" values="0.2;0.42;0.2" dur="7.4s" repeatCount="indefinite"/>',
+        '      </g>',
+        '    </g>',
+        # 10. Medieval 3-Arch Stone Bridge & Warm Street Lanterns
+        '    <g id="sleeping-bridge" shape-rendering="crispEdges">',
+        # Bridge masonry span across river (x=136..292)
+        '      <path d="M136 122h156v14h-18v-6h-4v-2h-22v2h-4v6h-12v-6h-4v-2h-26v2h-4v6h-12v-6h-4v-2h-22v2h-4v6h-20z" fill="#353A52"/>',
+        '      <path d="M136 122h156v3h-156z" fill="#626779"/>',
+        '      <path d="M136 122h156v1h-156z" fill="#B9A5CA" opacity="0.6"/>',
+        # Deep arch interior shadows
+        '      <path d="M156 136v-6h4v-2h22v2h4v6zM198 136v-6h4v-2h26v2h4v6zM244 136v-6h4v-2h22v2h4v6z" fill="#171B2A"/>',
+        # Stone masonry pier highlights
+        '      <rect x="148" y="126" width="6" height="10" fill="#4A4F68"/>',
+        '      <rect x="188" y="126" width="8" height="10" fill="#4A4F68"/>',
+        '      <rect x="234" y="126" width="8" height="10" fill="#4A4F68"/>',
+        '      <rect x="276" y="126" width="6" height="10" fill="#4A4F68"/>',
+        # Warm street & bridge lanterns
+        *lantern_lines,
+        '    </g>',
+        '  </g>',
+        # Subtle muted frame around the medieval scene + vertical separator
+        '  <rect x="18" y="44" width="382" height="112" rx="6" fill="none" stroke="#30363d" stroke-opacity="0.9"/>',
+        '  <path d="M412 44V156" stroke="#25283A"/>',
+    ]
+    return lines
+
+
+def _render_sleeping_right_footer(expiry_text: str, mode_badge: str) -> list[str]:
+    """Render right-panel footer for Sleeping with silver-lavender accents."""
+    if " · " in mode_badge:
+        prefix, suffix = mode_badge.split(" · ", 1)
+        badge_markup = (
+            f'  <text x="828" y="152" fill="#626779" font-size="10.5" text-anchor="end">'
+            f'{escape(prefix)} · <tspan fill="#B9A5CA" font-weight="700">{escape(suffix)}</tspan></text>'
+        )
+    else:
+        badge_markup = (
+            f'  <text x="828" y="152" fill="#B9A5CA" font-size="10.5" font-weight="700" text-anchor="end">'
+            f'{escape(mode_badge)}</text>'
+        )
+
+    return [
+        '  <path d="M428 139H828" stroke="#25283A"/>',
+        f'  <text x="428" y="152" fill="#B9A5CA" font-size="11">{escape(expiry_text)}</text>',
+        badge_markup,
+    ]
+
+
 def render_status_svg_markup(data: dict[str, Any]) -> str:
     """Render deterministic, valid XML SVG markup for a validated resolved status."""
     errors = validate_renderable_status(data)
@@ -1176,6 +1580,40 @@ def render_status_svg_markup(data: dict[str, Any]) -> str:
                 tag_text_color="#7ee787",
             ),
             *_render_available_jurassic_time_and_footer(expiry_text, mode_badge),
+            '</svg>',
+        ]
+    elif status_id == "sleeping":
+        lines = [
+            *_render_terminal_frame_open(
+                aria_label,
+                accent,
+                defs_and_styles=_render_sleeping_dragon_defs(),
+                show_left_bar=False,
+            ),
+            *_render_sleeping_dragon_scene(),
+            *_render_status_info_block(
+                title=title,
+                message=message,
+                project=project,
+                tags=tags,
+                accent=accent,
+                avail_color="#B9A5CA",
+                avail_label=avail_label,
+                text_x=428,
+                title_size=26,
+                title_y=74,
+                title_color="#E5DDDC",
+                pill_y=52,
+                msg_y=96,
+                msg_size=12.5,
+                tag_y=106,
+                max_msg_len=50,
+                max_proj_len=44,
+                tag_fill="#1D2033",
+                tag_stroke="#626779",
+                tag_text_color="#E5DDDC",
+            ),
+            *_render_sleeping_right_footer(expiry_text, mode_badge),
             '</svg>',
         ]
     else:

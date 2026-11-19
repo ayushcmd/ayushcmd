@@ -1,27 +1,27 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-19",
+  "generated": "2026-11-20",
   "totals": {
-    "stars": 599,
+    "stars": 606,
     "repositories": 42,
-    "starred_repositories": 40
+    "starred_repositories": 41
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 116
+    "stars": 119
   },
   "change": {
-    "since": "2026-11-18",
-    "stars": 36
+    "since": "2026-11-19",
+    "stars": 7
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 116
+      "stars": 119
     },
     {
       "name": "dollar-hegemony",
-      "stars": 96
+      "stars": 101
     },
     {
       "name": "open-workers",
@@ -33,7 +33,7 @@
     },
     {
       "name": "cloud_monitor",
-      "stars": 38
+      "stars": 37
     },
     {
       "name": "go-green",
@@ -41,7 +41,7 @@
     },
     {
       "name": "fitoglobe",
-      "stars": 27
+      "stars": 26
     },
     {
       "name": "rob-links",
@@ -168,16 +168,16 @@
       "stars": 1
     },
     {
+      "name": "iitp-cet-mock",
+      "stars": 1
+    },
+    {
       "name": "leet-practice",
       "stars": 1
     },
     {
       "name": "system-design-notes",
       "stars": 1
-    },
-    {
-      "name": "iitp-cet-mock",
-      "stars": 0
     },
     {
       "name": "mac-vault-web",
@@ -220,6 +220,10 @@
     {
       "date": "2026-11-19",
       "stars": 599
+    },
+    {
+      "date": "2026-11-20",
+      "stars": 606
     }
   ]
 }

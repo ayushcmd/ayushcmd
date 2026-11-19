@@ -57,5 +57,5 @@
   <rect x="788.8" y="372" width="34" height="56" rx="3" fill="#161b22"/><rect x="788.8" y="372.0" width="34" height="56.0" rx="3" fill="#3fb950"/><text x="805.8" y="367" class="mval" text-anchor="middle">175.5K</text><text x="805.8" y="444" class="month" text-anchor="middle">Nov</text>
   <line x1="20" y1="460" x2="840" y2="460" stroke="#21262d"/>
   <text x="20" y="484" class="foot"><tspan class="accent">42</tspan> repositories analyzed · forks, vendored and generated files excluded</text>
-  <text x="840" y="484" class="foot" text-anchor="end">updated 2026-11-18</text>
+  <text x="840" y="484" class="foot" text-anchor="end">updated 2026-11-19</text>
 </svg>

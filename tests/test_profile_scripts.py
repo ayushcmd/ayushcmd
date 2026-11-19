@@ -475,7 +475,7 @@ class TestCompactDashboard(unittest.TestCase):
         self.assertLess(readme.index("I'm **Ayush Raj**"), readme.index('<details>'))
         self.assertEqual(readme.count('<summary><b>'), 3)
         headings = re.findall(r'^### `ayushcmd@github ~ \$ (.*?)`', readme, re.M)
-        self.assertEqual(headings, ['./status --live', 'whoami', 'cat about-me.md', 'ls featured-projects/', './analytics --overview', './stars --all', './support.sh'])
+        self.assertEqual(headings, ['whoami', 'cat about-me.md', 'ls featured-projects/', './analytics --overview', './stars --all', './support.sh'])
 
     def test_missing_account_metrics_are_not_zero(self):
         import tempfile
@@ -571,8 +571,7 @@ class TestWhoamiRefinement(unittest.TestCase):
         self.assertEqual([m[1] for m in METRICS], ['commits_365d','public_repos','code_reviews','total_prs','total_issues','accepted_discussion_answers'])
         readme = (root / 'README.md').read_text(encoding='utf-8')
         self.assertNotIn('contrib-heatmap', readme)
-        self.assertTrue(readme.startswith('### `ayushcmd@github ~ $ ./status --live`'))
-        self.assertIn('### `ayushcmd@github ~ $ whoami`', readme)
+        self.assertTrue(readme.startswith('### `ayushcmd@github ~ $ whoami`'))
         badges = re.findall(r'alt="([^"]+)"', readme[readme.index('<p>'):readme.index('</p>')])
         self.assertEqual([html.unescape(b) for b in badges], ['Python','JavaScript','React','FastAPI','AWS','Docker','C++','MongoDB','Git & GitHub','PyTorch'])
         self.assertIn('<table><tr>', readme)

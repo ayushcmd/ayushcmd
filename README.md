@@ -1,7 +1,3 @@
-### `ayushcmd@github ~ $ ./status --live`
-
-<img src="./img/status/current.svg" width="860" alt="Ayush Live Status" />
-
 ### `ayushcmd@github ~ $ whoami`
 
 <table><tr>

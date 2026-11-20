@@ -2,30 +2,30 @@
   "owner": "ayushcmd",
   "generated": "2026-11-20",
   "totals": {
-    "stars": 606,
+    "stars": 623,
     "repositories": 42,
     "starred_repositories": 41
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 119
+    "stars": 122
   },
   "change": {
     "since": "2026-11-19",
-    "stars": 7
+    "stars": 24
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 119
+      "stars": 122
     },
     {
       "name": "dollar-hegemony",
-      "stars": 101
+      "stars": 105
     },
     {
       "name": "open-workers",
-      "stars": 46
+      "stars": 47
     },
     {
       "name": "cargo-vision-ai",
@@ -45,15 +45,15 @@
     },
     {
       "name": "rob-links",
-      "stars": 25
+      "stars": 26
     },
     {
       "name": "commoditychain",
-      "stars": 23
+      "stars": 24
     },
     {
       "name": "gh-insights",
-      "stars": 18
+      "stars": 19
     },
     {
       "name": "my-site-description",
@@ -76,15 +76,27 @@
       "stars": 11
     },
     {
+      "name": "ayushcmd",
+      "stars": 6
+    },
+    {
       "name": "api-repos-hub",
       "stars": 5
     },
     {
-      "name": "ayushcmd",
-      "stars": 5
+      "name": "ai-helper-prompt",
+      "stars": 4
+    },
+    {
+      "name": "bug-trace-agent",
+      "stars": 4
     },
     {
       "name": "developer-portfolios",
+      "stars": 4
+    },
+    {
+      "name": "dino-loader",
       "stars": 4
     },
     {
@@ -94,10 +106,6 @@
     {
       "name": "waytodoomsday",
       "stars": 4
-    },
-    {
-      "name": "ai-helper-prompt",
-      "stars": 3
     },
     {
       "name": "ajourneytotommorow",
@@ -120,10 +128,6 @@
       "stars": 3
     },
     {
-      "name": "bug-trace-agent",
-      "stars": 3
-    },
-    {
       "name": "campus-around",
       "stars": 3
     },
@@ -133,10 +137,6 @@
     },
     {
       "name": "deluxe-ghazal",
-      "stars": 3
-    },
-    {
-      "name": "dino-loader",
       "stars": 3
     },
     {
@@ -160,15 +160,15 @@
       "stars": 2
     },
     {
-      "name": "CS-Fundamentals",
-      "stars": 1
-    },
-    {
       "name": "fame-fighters",
-      "stars": 1
+      "stars": 2
     },
     {
       "name": "iitp-cet-mock",
+      "stars": 2
+    },
+    {
+      "name": "CS-Fundamentals",
       "stars": 1
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "date": "2026-11-20",
-      "stars": 606
+      "stars": 623
     }
   ]
 }

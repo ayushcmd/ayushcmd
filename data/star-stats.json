@@ -2,22 +2,22 @@
   "owner": "ayushcmd",
   "generated": "2026-11-20",
   "totals": {
-    "stars": 623,
+    "stars": 652,
     "repositories": 42,
-    "starred_repositories": 41
+    "starred_repositories": 42
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 122
+    "stars": 121
   },
   "change": {
     "since": "2026-11-19",
-    "stars": 24
+    "stars": 53
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 122
+      "stars": 121
     },
     {
       "name": "dollar-hegemony",
@@ -29,7 +29,7 @@
     },
     {
       "name": "cargo-vision-ai",
-      "stars": 40
+      "stars": 41
     },
     {
       "name": "cloud_monitor",
@@ -37,7 +37,7 @@
     },
     {
       "name": "go-green",
-      "stars": 28
+      "stars": 29
     },
     {
       "name": "fitoglobe",
@@ -57,30 +57,42 @@
     },
     {
       "name": "my-site-description",
-      "stars": 18
+      "stars": 19
     },
     {
       "name": "air-atlas",
-      "stars": 15
+      "stars": 16
     },
     {
       "name": "badge-quest",
-      "stars": 14
+      "stars": 15
     },
     {
       "name": "octoverse-2026",
-      "stars": 11
+      "stars": 12
     },
     {
       "name": "pdfkholo",
-      "stars": 11
+      "stars": 12
+    },
+    {
+      "name": "api-repos-hub",
+      "stars": 6
     },
     {
       "name": "ayushcmd",
       "stars": 6
     },
     {
-      "name": "api-repos-hub",
+      "name": "developer-portfolios",
+      "stars": 5
+    },
+    {
+      "name": "india-crime-analytics",
+      "stars": 5
+    },
+    {
+      "name": "waytodoomsday",
       "stars": 5
     },
     {
@@ -88,11 +100,43 @@
       "stars": 4
     },
     {
+      "name": "ajourneytotommorow",
+      "stars": 4
+    },
+    {
+      "name": "aqi-powerbi-dashboard",
+      "stars": 4
+    },
+    {
+      "name": "arcade-world",
+      "stars": 4
+    },
+    {
+      "name": "atmos-grid",
+      "stars": 4
+    },
+    {
+      "name": "banking-dashboard",
+      "stars": 4
+    },
+    {
       "name": "bug-trace-agent",
       "stars": 4
     },
     {
-      "name": "developer-portfolios",
+      "name": "campus-around",
+      "stars": 4
+    },
+    {
+      "name": "chess-khelo",
+      "stars": 4
+    },
+    {
+      "name": "Cloud-DevOps",
+      "stars": 4
+    },
+    {
+      "name": "deluxe-ghazal",
       "stars": 4
     },
     {
@@ -100,63 +144,23 @@
       "stars": 4
     },
     {
-      "name": "india-crime-analytics",
-      "stars": 4
-    },
-    {
-      "name": "waytodoomsday",
-      "stars": 4
-    },
-    {
-      "name": "ajourneytotommorow",
-      "stars": 3
-    },
-    {
-      "name": "aqi-powerbi-dashboard",
-      "stars": 3
-    },
-    {
-      "name": "arcade-world",
-      "stars": 3
-    },
-    {
-      "name": "atmos-grid",
-      "stars": 3
-    },
-    {
-      "name": "banking-dashboard",
-      "stars": 3
-    },
-    {
-      "name": "campus-around",
-      "stars": 3
-    },
-    {
-      "name": "chess-khelo",
-      "stars": 3
-    },
-    {
-      "name": "deluxe-ghazal",
-      "stars": 3
-    },
-    {
       "name": "mac-vault-app",
-      "stars": 3
+      "stars": 4
     },
     {
       "name": "nettracker",
-      "stars": 3
+      "stars": 4
     },
     {
       "name": "open-audex",
-      "stars": 3
+      "stars": 4
     },
     {
       "name": "rizz-dice",
-      "stars": 3
+      "stars": 4
     },
     {
-      "name": "Cloud-DevOps",
+      "name": "CS-Fundamentals",
       "stars": 2
     },
     {
@@ -168,20 +172,16 @@
       "stars": 2
     },
     {
-      "name": "CS-Fundamentals",
-      "stars": 1
-    },
-    {
       "name": "leet-practice",
-      "stars": 1
-    },
-    {
-      "name": "system-design-notes",
-      "stars": 1
+      "stars": 2
     },
     {
       "name": "mac-vault-web",
-      "stars": 0
+      "stars": 2
+    },
+    {
+      "name": "system-design-notes",
+      "stars": 2
     }
   ],
   "history": [
@@ -223,7 +223,7 @@
     },
     {
       "date": "2026-11-20",
-      "stars": 623
+      "stars": 652
     }
   ]
 }

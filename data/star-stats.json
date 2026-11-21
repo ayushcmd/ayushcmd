@@ -1,23 +1,23 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-20",
+  "generated": "2026-11-21",
   "totals": {
-    "stars": 652,
+    "stars": 650,
     "repositories": 42,
     "starred_repositories": 42
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 121
+    "stars": 122
   },
   "change": {
-    "since": "2026-11-19",
-    "stars": 53
+    "since": "2026-11-20",
+    "stars": -2
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 121
+      "stars": 122
     },
     {
       "name": "dollar-hegemony",
@@ -25,7 +25,7 @@
     },
     {
       "name": "open-workers",
-      "stars": 47
+      "stars": 46
     },
     {
       "name": "cargo-vision-ai",
@@ -33,19 +33,19 @@
     },
     {
       "name": "cloud_monitor",
-      "stars": 37
+      "stars": 36
     },
     {
       "name": "go-green",
       "stars": 29
     },
     {
-      "name": "fitoglobe",
+      "name": "rob-links",
       "stars": 26
     },
     {
-      "name": "rob-links",
-      "stars": 26
+      "name": "fitoglobe",
+      "stars": 25
     },
     {
       "name": "commoditychain",
@@ -224,6 +224,10 @@
     {
       "date": "2026-11-20",
       "stars": 652
+    },
+    {
+      "date": "2026-11-21",
+      "stars": 650
     }
   ]
 }

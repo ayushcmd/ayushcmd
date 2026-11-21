@@ -2,22 +2,22 @@
   "owner": "ayushcmd",
   "generated": "2026-11-21",
   "totals": {
-    "stars": 652,
+    "stars": 658,
     "repositories": 42,
     "starred_repositories": 42
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 124
+    "stars": 125
   },
   "change": {
     "since": "2026-11-20",
-    "stars": 0
+    "stars": 6
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 124
+      "stars": 125
     },
     {
       "name": "dollar-hegemony",
@@ -25,7 +25,7 @@
     },
     {
       "name": "open-workers",
-      "stars": 46
+      "stars": 47
     },
     {
       "name": "cargo-vision-ai",
@@ -160,23 +160,23 @@
       "stars": 4
     },
     {
-      "name": "CS-Fundamentals",
-      "stars": 2
-    },
-    {
       "name": "fame-fighters",
-      "stars": 2
+      "stars": 3
     },
     {
       "name": "iitp-cet-mock",
-      "stars": 2
+      "stars": 3
     },
     {
       "name": "leet-practice",
-      "stars": 2
+      "stars": 3
     },
     {
       "name": "mac-vault-web",
+      "stars": 3
+    },
+    {
+      "name": "CS-Fundamentals",
       "stars": 2
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "date": "2026-11-21",
-      "stars": 652
+      "stars": 658
     }
   ]
 }

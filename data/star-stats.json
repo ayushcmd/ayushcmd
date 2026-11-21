@@ -2,22 +2,22 @@
   "owner": "ayushcmd",
   "generated": "2026-11-21",
   "totals": {
-    "stars": 650,
+    "stars": 651,
     "repositories": 42,
     "starred_repositories": 42
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 122
+    "stars": 123
   },
   "change": {
     "since": "2026-11-20",
-    "stars": -2
+    "stars": -1
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 122
+      "stars": 123
     },
     {
       "name": "dollar-hegemony",
@@ -152,7 +152,7 @@
       "stars": 4
     },
     {
-      "name": "open-audex",
+      "name": "OpenNotetaker",
       "stars": 4
     },
     {
@@ -227,7 +227,7 @@
     },
     {
       "date": "2026-11-21",
-      "stars": 650
+      "stars": 651
     }
   ]
 }

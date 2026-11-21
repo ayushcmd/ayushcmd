@@ -1,27 +1,27 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-21",
+  "generated": "2026-11-22",
   "totals": {
-    "stars": 658,
+    "stars": 656,
     "repositories": 42,
     "starred_repositories": 42
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
-    "stars": 125
+    "stars": 124
   },
   "change": {
-    "since": "2026-11-20",
-    "stars": 6
+    "since": "2026-11-21",
+    "stars": -2
   },
   "repositories": [
     {
       "name": "PortfolioStore99-Promotional",
-      "stars": 125
+      "stars": 124
     },
     {
       "name": "dollar-hegemony",
-      "stars": 105
+      "stars": 104
     },
     {
       "name": "open-workers",
@@ -228,6 +228,10 @@
     {
       "date": "2026-11-21",
       "stars": 658
+    },
+    {
+      "date": "2026-11-22",
+      "stars": 656
     }
   ]
 }

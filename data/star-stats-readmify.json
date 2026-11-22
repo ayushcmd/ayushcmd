@@ -1,8 +1,8 @@
 {
   "owner": "Readmify",
-  "generated": "2026-11-22",
+  "generated": "2026-11-23",
   "totals": {
-    "stars": 92,
+    "stars": 91,
     "repositories": 12,
     "starred_repositories": 12
   },
@@ -11,8 +11,8 @@
     "stars": 15
   },
   "change": {
-    "since": "2026-11-21",
-    "stars": 23
+    "since": "2026-11-22",
+    "stars": -1
   },
   "repositories": [
     {
@@ -20,11 +20,11 @@
       "stars": 15
     },
     {
-      "name": "profile-readme-generator",
-      "stars": 14
+      "name": "contribution-painter",
+      "stars": 13
     },
     {
-      "name": "contribution-painter",
+      "name": "profile-readme-generator",
       "stars": 13
     },
     {
@@ -112,6 +112,10 @@
     {
       "date": "2026-11-22",
       "stars": 92
+    },
+    {
+      "date": "2026-11-23",
+      "stars": 91
     }
   ]
 }

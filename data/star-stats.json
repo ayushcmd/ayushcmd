@@ -1,8 +1,8 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-22",
+  "generated": "2026-11-23",
   "totals": {
-    "stars": 532,
+    "stars": 530,
     "repositories": 40,
     "starred_repositories": 40
   },
@@ -11,8 +11,8 @@
     "stars": 107
   },
   "change": {
-    "since": "2026-11-21",
-    "stars": -126
+    "since": "2026-11-22",
+    "stars": -2
   },
   "repositories": [
     {
@@ -21,15 +21,15 @@
     },
     {
       "name": "open-workers",
-      "stars": 47
+      "stars": 46
     },
     {
       "name": "cargo-vision-ai",
-      "stars": 41
+      "stars": 40
     },
     {
       "name": "cloud_monitor",
-      "stars": 37
+      "stars": 39
     },
     {
       "name": "go-green",
@@ -37,7 +37,7 @@
     },
     {
       "name": "rob-links",
-      "stars": 26
+      "stars": 25
     },
     {
       "name": "commoditychain",
@@ -57,7 +57,7 @@
     },
     {
       "name": "air-atlas",
-      "stars": 16
+      "stars": 15
     },
     {
       "name": "badge-quest",
@@ -224,6 +224,10 @@
     {
       "date": "2026-11-22",
       "stars": 532
+    },
+    {
+      "date": "2026-11-23",
+      "stars": 530
     }
   ]
 }

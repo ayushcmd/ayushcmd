@@ -2,9 +2,9 @@
   "owner": "ayushcmd",
   "generated": "2026-11-22",
   "totals": {
-    "stars": 656,
-    "repositories": 42,
-    "starred_repositories": 42
+    "stars": 653,
+    "repositories": 41,
+    "starred_repositories": 41
   },
   "top_repository": {
     "name": "PortfolioStore99-Promotional",
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-21",
-    "stars": -2
+    "stars": -5
   },
   "repositories": [
     {
@@ -168,10 +168,6 @@
       "stars": 3
     },
     {
-      "name": "leet-practice",
-      "stars": 3
-    },
-    {
       "name": "mac-vault-web",
       "stars": 3
     },
@@ -231,7 +227,7 @@
     },
     {
       "date": "2026-11-22",
-      "stars": 656
+      "stars": 653
     }
   ]
 }

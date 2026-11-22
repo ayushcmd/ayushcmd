@@ -1,17 +1,17 @@
 {
   "username": "ayushcmd",
-  "generated_at": "2026-11-21T23:31:14Z",
+  "generated_at": "2026-11-22T07:13:45Z",
   "range": {
-    "start": "2025-11-16",
-    "end": "2026-11-21"
+    "start": "2025-11-23",
+    "end": "2026-11-22"
   },
-  "total_contributions": 1436,
-  "active_days": 205,
-  "avg_per_active_day": 7.0,
+  "total_contributions": 1543,
+  "active_days": 202,
+  "avg_per_active_day": 7.6,
   "current_streak": {
-    "length": 33,
+    "length": 34,
     "start": "2026-10-20",
-    "end": "2026-11-21"
+    "end": "2026-11-22"
   },
   "longest_streak": {
     "length": 133,
@@ -19,15 +19,15 @@
     "end": "2026-07-23"
   },
   "best_day": {
-    "date": "2026-11-21",
-    "count": 97
+    "date": "2026-11-22",
+    "count": 116
   },
   "monthly": [
     {
       "key": "2025-11",
       "label": "Nov",
       "year": "2025",
-      "total": 15
+      "total": 6
     },
     {
       "key": "2025-12",
@@ -99,50 +99,22 @@
       "key": "2026-11",
       "label": "Nov",
       "year": "2026",
-      "total": 598
+      "total": 714
     }
   ],
   "github_stats": {
-    "public_repos": 42,
-    "total_stars": 656,
+    "public_repos": 41,
+    "total_stars": 653,
     "total_prs": 118,
     "merged_prs": 116,
-    "commits_365d": 936,
-    "code_reviews": 98,
-    "total_issues": 43,
+    "commits_365d": 935,
+    "code_reviews": 97,
+    "total_issues": 64,
     "scope": "public activity",
     "counting_method": "GitHub Search API (trailing 365 days for commits; public repos and PRs)",
     "accepted_discussion_answers": 8
   },
   "days": [
-    {
-      "date": "2025-11-16",
-      "count": 0
-    },
-    {
-      "date": "2025-11-17",
-      "count": 1
-    },
-    {
-      "date": "2025-11-18",
-      "count": 0
-    },
-    {
-      "date": "2025-11-19",
-      "count": 4
-    },
-    {
-      "date": "2025-11-20",
-      "count": 0
-    },
-    {
-      "date": "2025-11-21",
-      "count": 3
-    },
-    {
-      "date": "2025-11-22",
-      "count": 1
-    },
     {
       "date": "2025-11-23",
       "count": 3
@@ -1598,6 +1570,10 @@
     {
       "date": "2026-11-21",
       "count": 97
+    },
+    {
+      "date": "2026-11-22",
+      "count": 116
     }
   ]
 }

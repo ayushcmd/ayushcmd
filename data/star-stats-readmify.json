@@ -2,9 +2,9 @@
   "owner": "Readmify",
   "generated": "2026-11-22",
   "totals": {
-    "stars": 69,
-    "repositories": 7,
-    "starred_repositories": 7
+    "stars": 92,
+    "repositories": 12,
+    "starred_repositories": 12
   },
   "top_repository": {
     "name": "ascii-generator",
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-21",
-    "stars": 0
+    "stars": 23
   },
   "repositories": [
     {
@@ -32,6 +32,10 @@
       "stars": 13
     },
     {
+      "name": "render-awake",
+      "stars": 11
+    },
+    {
       "name": "visual-line",
       "stars": 7
     },
@@ -40,7 +44,23 @@
       "stars": 4
     },
     {
+      "name": "ai-agent-hub",
+      "stars": 3
+    },
+    {
+      "name": "automation-tools",
+      "stars": 3
+    },
+    {
       "name": "contribution-green-generator",
+      "stars": 3
+    },
+    {
+      "name": "mail-out",
+      "stars": 3
+    },
+    {
+      "name": "n8n-projects",
       "stars": 3
     }
   ],
@@ -91,7 +111,7 @@
     },
     {
       "date": "2026-11-22",
-      "stars": 69
+      "stars": 92
     }
   ]
 }

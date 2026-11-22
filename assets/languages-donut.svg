@@ -40,6 +40,6 @@
     <rect x="380" y="224" width="10" height="10" rx="2" fill="#6E7681"/><text x="400" y="233" class="lang">Other (19)</text><rect x="570" y="225" width="150" height="6" rx="3" fill="#161b22"/><rect x="570" y="225" width="18.4" height="6" rx="3" fill="#6E7681"/><text x="800" y="233" class="pct" text-anchor="end">6.6%</text>
   </g>
   <line x1="20" y1="250" x2="840" y2="250" stroke="#21262d"/>
-  <text x="20" y="274" class="foot"><tspan class="accent">37</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">13,941 KB</tspan> of code</text>
+  <text x="20" y="274" class="foot"><tspan class="accent">36</tspan> repositories · <tspan class="accent">26</tspan> languages · <tspan class="accent">13,941 KB</tspan> of code</text>
   <text x="840" y="274" class="foot" text-anchor="end">updated 2026-11-22</text>
 </svg>

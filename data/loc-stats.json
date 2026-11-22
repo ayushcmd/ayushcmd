@@ -1,11 +1,11 @@
 {
   "generated": "2026-11-22",
   "totals": {
-    "authored_lines": 368136,
+    "authored_lines": 364017,
     "live_lines": 334318,
     "authored_last_30_days": 225484,
-    "repositories": 44,
-    "public": 37,
+    "repositories": 43,
+    "public": 36,
     "private": 7
   },
   "top_repositories": [
@@ -83,11 +83,11 @@
     },
     {
       "month": "2026-02",
-      "lines": 1800
+      "lines": 900
     },
     {
       "month": "2026-03",
-      "lines": 16050
+      "lines": 12831
     },
     {
       "month": "2026-04",

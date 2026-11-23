@@ -1,31 +1,31 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-23",
+  "generated": "2026-11-24",
   "totals": {
-    "stars": 538,
-    "repositories": 40,
+    "stars": 564,
+    "repositories": 41,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 110
+    "stars": 118
   },
   "change": {
-    "since": "2026-11-22",
-    "stars": 6
+    "since": "2026-11-23",
+    "stars": 26
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 110
+      "stars": 118
+    },
+    {
+      "name": "cloud_monitor",
+      "stars": 63
     },
     {
       "name": "open-workers",
       "stars": 46
-    },
-    {
-      "name": "cloud_monitor",
-      "stars": 44
     },
     {
       "name": "cargo-vision-ai",
@@ -56,12 +56,12 @@
       "stars": 19
     },
     {
-      "name": "air-atlas",
+      "name": "badge-quest",
       "stars": 15
     },
     {
-      "name": "badge-quest",
-      "stars": 15
+      "name": "air-atlas",
+      "stars": 14
     },
     {
       "name": "octoverse-2026",
@@ -174,6 +174,10 @@
     {
       "name": "system-design-notes",
       "stars": 2
+    },
+    {
+      "name": "pare",
+      "stars": 0
     }
   ],
   "history": [
@@ -228,6 +232,10 @@
     {
       "date": "2026-11-23",
       "stars": 538
+    },
+    {
+      "date": "2026-11-24",
+      "stars": 564
     }
   ]
 }

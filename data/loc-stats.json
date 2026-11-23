@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-23",
   "totals": {
-    "authored_lines": 364017,
-    "live_lines": 334318,
-    "authored_last_30_days": 223618,
+    "authored_lines": 364476,
+    "live_lines": 334678,
+    "authored_last_30_days": 224077,
     "repositories": 43,
     "public": 36,
     "private": 7
@@ -30,8 +30,8 @@
     {
       "name": "private-project-1",
       "private": true,
-      "live_lines": 16510,
-      "authored_lines": 23290
+      "live_lines": 16870,
+      "authored_lines": 23749
     },
     {
       "name": "arcade-world",
@@ -53,7 +53,7 @@
     },
     {
       "name": "TypeScript",
-      "lines": 88178
+      "lines": 88297
     },
     {
       "name": "Python",
@@ -61,7 +61,7 @@
     },
     {
       "name": "CSS",
-      "lines": 28278
+      "lines": 28519
     },
     {
       "name": "Java",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 176639
+      "lines": 177098
     }
   ]
 }

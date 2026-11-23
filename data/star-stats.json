@@ -2,34 +2,34 @@
   "owner": "ayushcmd",
   "generated": "2026-11-23",
   "totals": {
-    "stars": 530,
+    "stars": 538,
     "repositories": 40,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 107
+    "stars": 110
   },
   "change": {
     "since": "2026-11-22",
-    "stars": -2
+    "stars": 6
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 107
+      "stars": 110
     },
     {
       "name": "open-workers",
       "stars": 46
     },
     {
-      "name": "cargo-vision-ai",
-      "stars": 40
+      "name": "cloud_monitor",
+      "stars": 44
     },
     {
-      "name": "cloud_monitor",
-      "stars": 39
+      "name": "cargo-vision-ai",
+      "stars": 40
     },
     {
       "name": "go-green",
@@ -227,7 +227,7 @@
     },
     {
       "date": "2026-11-23",
-      "stars": 530
+      "stars": 538
     }
   ]
 }

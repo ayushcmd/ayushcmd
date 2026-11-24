@@ -143,7 +143,7 @@ ML research system with a Dollar Stress Index and an XGBoost + LSTM + Transforme
 
 <img src="./assets/codebase-overview.svg" width="860" alt="Authored lines, live codebase and recent activity" />
 
-Language shares use GitHub language **bytes** in public non-fork repositories. Codebase metrics count filtered **lines**; authored lines are additions attributed to me, while live lines describe the current codebase, including accessible private repositories with masked names.
+Language shares use GitHub language **bytes** in public non-fork repositories. Codebase metrics count filtered **lines**; authored lines are additions attributed to me, while live lines describe [..]
 
 <details>
 <summary>View repository rankings, lines by language and monthly activity</summary>
@@ -164,8 +164,6 @@ Language shares use GitHub language **bytes** in public non-fork repositories. C
 <img src="./assets/star-stats-portfoliostore99.svg" width="860" alt="star-stats-portfoliostore99" />
 
 <img src="./assets/star-stats-readmify.svg" width="860" alt="star-stats-readmify" />
-
-<img src="./assets/star-stats-automate-workflow.svg" width="860" alt="star-stats-automate-workflow" />
 
 </details>
 

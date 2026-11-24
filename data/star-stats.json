@@ -2,26 +2,26 @@
   "owner": "ayushcmd",
   "generated": "2026-11-24",
   "totals": {
-    "stars": 564,
+    "stars": 584,
     "repositories": 41,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 118
+    "stars": 119
   },
   "change": {
     "since": "2026-11-23",
-    "stars": 26
+    "stars": 46
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 118
+      "stars": 119
     },
     {
       "name": "cloud_monitor",
-      "stars": 63
+      "stars": 69
     },
     {
       "name": "open-workers",
@@ -54,6 +54,10 @@
     {
       "name": "my-site-description",
       "stars": 19
+    },
+    {
+      "name": "atmos-grid",
+      "stars": 17
     },
     {
       "name": "badge-quest",
@@ -105,10 +109,6 @@
     },
     {
       "name": "arcade-world",
-      "stars": 4
-    },
-    {
-      "name": "atmos-grid",
       "stars": 4
     },
     {
@@ -235,7 +235,7 @@
     },
     {
       "date": "2026-11-24",
-      "stars": 564
+      "stars": 584
     }
   ]
 }

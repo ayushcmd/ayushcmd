@@ -1,23 +1,23 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-24",
+  "generated": "2026-11-25",
   "totals": {
-    "stars": 584,
+    "stars": 603,
     "repositories": 41,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 119
+    "stars": 121
   },
   "change": {
-    "since": "2026-11-23",
-    "stars": 46
+    "since": "2026-11-24",
+    "stars": 19
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 119
+      "stars": 121
     },
     {
       "name": "cloud_monitor",
@@ -30,6 +30,10 @@
     {
       "name": "cargo-vision-ai",
       "stars": 40
+    },
+    {
+      "name": "atmos-grid",
+      "stars": 34
     },
     {
       "name": "go-green",
@@ -54,10 +58,6 @@
     {
       "name": "my-site-description",
       "stars": 19
-    },
-    {
-      "name": "atmos-grid",
-      "stars": 17
     },
     {
       "name": "badge-quest",
@@ -236,6 +236,10 @@
     {
       "date": "2026-11-24",
       "stars": 584
+    },
+    {
+      "date": "2026-11-25",
+      "stars": 603
     }
   ]
 }

@@ -21,20 +21,20 @@
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">Stars · personal + organizations</text>
 
-<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">584</text>
-<rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">258</text>
+<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">603</text>
+<rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">259</text>
 <rect x="580" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="592" y="66" class="label">TRACKED ORGANIZATIONS</text><text x="592" y="94" class="value" fill="#f2cc60">3</text>
 <text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>
-<text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">119</text>
+<text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">121</text>
 <text x="20" y="183" class="name">02 cloud_monitor</text><text x="402" y="183" class="num" text-anchor="end">69</text>
 <text x="20" y="209" class="name">03 open-workers</text><text x="402" y="209" class="num" text-anchor="end">46</text>
 <text x="20" y="235" class="name">04 cargo-vision-ai</text><text x="402" y="235" class="num" text-anchor="end">40</text>
-<text x="20" y="261" class="name">05 go-green</text><text x="402" y="261" class="num" text-anchor="end">29</text>
-<text x="20" y="310" class="sub">Snapshot 2026-11-24</text>
+<text x="20" y="261" class="name">05 atmos-grid</text><text x="402" y="261" class="num" text-anchor="end">34</text>
+<text x="20" y="310" class="sub">Snapshot 2026-11-25</text>
 <text x="446" y="134" fill="#ff8c1a" font-size="13">PortfolioStore99</text>
-<text x="446" y="152" class="sub">141 stars · 2 repos · 2026-11-24</text><text x="446" y="169" class="sub">Top: PortfolioStore99-Promotional (140)</text>
+<text x="446" y="152" class="sub">142 stars · 2 repos · 2026-11-25</text><text x="446" y="169" class="sub">Top: PortfolioStore99-Promotional (141)</text>
 <text x="446" y="194" fill="#38bdf8" font-size="13">Readmify</text>
-<text x="446" y="212" class="sub">92 stars · 12 repos · 2026-11-24</text><text x="446" y="229" class="sub">Top: ascii-generator (16)</text>
+<text x="446" y="212" class="sub">92 stars · 12 repos · 2026-11-25</text><text x="446" y="229" class="sub">Top: ascii-generator (16)</text>
 <text x="446" y="254" fill="#f04848" font-size="13">Automate-Workflow</text>
 <text x="446" y="272" class="sub">25 stars · 6 repos · 2026-11-22</text><text x="446" y="289" class="sub">Top: render-awake (11)</text>
 </svg>

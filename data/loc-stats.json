@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-24",
+  "generated": "2026-11-25",
   "totals": {
-    "authored_lines": 367370,
-    "live_lines": 337557,
-    "authored_last_30_days": 226213,
+    "authored_lines": 376995,
+    "live_lines": 347029,
+    "authored_last_30_days": 235838,
     "repositories": 45,
     "public": 37,
     "private": 8
@@ -49,19 +49,19 @@
   "languages": [
     {
       "name": "JavaScript",
-      "lines": 110667
+      "lines": 110873
     },
     {
       "name": "TypeScript",
-      "lines": 89531
+      "lines": 97862
     },
     {
       "name": "Python",
-      "lines": 31116
+      "lines": 31771
     },
     {
       "name": "CSS",
-      "lines": 29023
+      "lines": 29138
     },
     {
       "name": "Java",
@@ -69,7 +69,7 @@
     },
     {
       "name": "HTML",
-      "lines": 15654
+      "lines": 15672
     }
   ],
   "monthly_authored": [
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 179992
+      "lines": 189617
     }
   ]
 }

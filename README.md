@@ -159,11 +159,7 @@ Language shares use GitHub language **bytes** in public non-fork repositories. C
 <details>
 <summary>View all personal and organization repository stars</summary>
 
-<img src="./assets/star-stats.svg" width="860" alt="star-stats" />
-
-<img src="./assets/star-stats-portfoliostore99.svg" width="860" alt="star-stats-portfoliostore99" />
-
-<img src="./assets/star-stats-readmify.svg" width="860" alt="star-stats-readmify" />
+<img src="./assets/star-stats-details.svg" width="860" alt="All personal, PortfolioStore99 and Readmify repository star rankings, with separate totals and snapshot dates" />
 
 </details>
 

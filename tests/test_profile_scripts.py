@@ -420,7 +420,7 @@ class TestStarStatsOrganizations(unittest.TestCase):
         self.assertEqual(raised.exception.code, 1)
         self.assertEqual(
             written,
-            ["star-stats-portfoliostore99.svg", "star-stats.svg", "stars-overview.svg"],
+            ["star-stats-details.svg", "star-stats-portfoliostore99.svg", "star-stats.svg", "stars-overview.svg"],
         )
 
 

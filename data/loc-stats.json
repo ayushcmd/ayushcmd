@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-25",
   "totals": {
-    "authored_lines": 391708,
-    "live_lines": 360413,
-    "authored_last_30_days": 250551,
+    "authored_lines": 391843,
+    "live_lines": 360547,
+    "authored_last_30_days": 250686,
     "repositories": 45,
     "public": 37,
     "private": 8
@@ -57,7 +57,7 @@
     },
     {
       "name": "Python",
-      "lines": 32863
+      "lines": 32997
     },
     {
       "name": "CSS",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 204330
+      "lines": 204465
     }
   ]
 }

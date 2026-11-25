@@ -25,9 +25,9 @@
 <rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">235</text>
 <rect x="580" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="592" y="66" class="label">TRACKED ORGANIZATIONS</text><text x="592" y="94" class="value" fill="#f2cc60">2</text>
 <text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>
-<text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">122</text>
+<text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">121</text>
 <text x="20" y="183" class="name">02 cloud_monitor</text><text x="402" y="183" class="num" text-anchor="end">72</text>
-<text x="20" y="209" class="name">03 atmos-grid</text><text x="402" y="209" class="num" text-anchor="end">49</text>
+<text x="20" y="209" class="name">03 atmos-grid</text><text x="402" y="209" class="num" text-anchor="end">50</text>
 <text x="20" y="235" class="name">04 open-workers</text><text x="402" y="235" class="num" text-anchor="end">46</text>
 <text x="20" y="261" class="name">05 cargo-vision-ai</text><text x="402" y="261" class="num" text-anchor="end">40</text>
 <text x="20" y="310" class="sub">Snapshot 2026-11-25</text>

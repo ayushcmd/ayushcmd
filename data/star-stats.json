@@ -8,7 +8,7 @@
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 122
+    "stars": 121
   },
   "change": {
     "since": "2026-11-24",
@@ -17,7 +17,7 @@
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 122
+      "stars": 121
     },
     {
       "name": "cloud_monitor",
@@ -25,7 +25,7 @@
     },
     {
       "name": "atmos-grid",
-      "stars": 49
+      "stars": 50
     },
     {
       "name": "open-workers",

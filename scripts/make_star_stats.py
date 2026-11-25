@@ -6,7 +6,6 @@ Cards (one per GitHub account, each with its own colour theme)
 - ayushcmd           gold    assets/star-stats.svg                       data/star-stats.json
 - PortfolioStore99   orange  assets/star-stats-portfoliostore99.svg      data/star-stats-portfoliostore99.json
 - Readmify           sky     assets/star-stats-readmify.svg              data/star-stats-readmify.json
-- Automate-Workflow  red     assets/star-stats-automate-workflow.svg     data/star-stats-automate-workflow.json
 
 What each card shows
 - Total stars across every public repository of the account.
@@ -15,7 +14,7 @@ What each card shows
 - Every public repository with its own live star count, ranked by stars.
 
 How it stays current
-- The GitHub Actions workflow runs this script once every 24 hours and commits
+- The GitHub Actions workflow runs this script on its configured schedule and commits
   the refreshed cards, so the numbers always come straight from the GitHub API.
 - Each data/*.json keeps a rolling daily history (last 30 days) which is used to
   compute the change since the previous refresh.
@@ -81,7 +80,6 @@ THEMES = {
 ORGANIZATIONS = [
     ("PortfolioStore99", "orange"),
     ("Readmify", "sky"),
-    ("Automate-Workflow", "red"),
 ]
 
 
@@ -361,7 +359,7 @@ def render_svg(report, profile=None):
   <line x1="448" y1="158" x2="840" y2="158" stroke="#21262d"/>
   {render_rows(report["repositories"], theme)}
   <line x1="20" y1="{height - 40}" x2="{WIDTH - 20}" y2="{height - 40}" stroke="#21262d"/>
-  <text x="20" y="{height - 16}" class="foot"><tspan class="accent">{fmt(totals["repositories"])}</tspan> public repositories · <tspan class="accent">{fmt(totals["starred_repositories"])}</tspan> starred · refreshed every 24 hours</text>
+  <text x="20" y="{height - 16}" class="foot"><tspan class="accent">{fmt(totals["repositories"])}</tspan> public repositories · <tspan class="accent">{fmt(totals["starred_repositories"])}</tspan> starred · scheduled refresh</text>
   <text x="{WIDTH - 20}" y="{height - 16}" class="foot" text-anchor="end">updated {esc(report["generated"])}</text>
 </svg>
 """

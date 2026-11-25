@@ -32,6 +32,6 @@
   <text x="20" y="182" class="rank">01</text><text x="48" y="182" class="name">PortfolioStore99-Prom…</text><rect x="236" y="174" width="120" height="6" rx="3" fill="#161b22"/><rect x="236" y="174" width="120.0" height="6" rx="3" fill="#ff8c1a"/><text x="412" y="182" class="num" text-anchor="end">141</text>
   <text x="448" y="182" class="rank">02</text><text x="476" y="182" class="name">.github</text><rect x="664" y="174" width="120" height="6" rx="3" fill="#161b22"/><rect x="664" y="174" width="3.0" height="6" rx="3" fill="#ff8c1a99"/><text x="840" y="182" class="num" text-anchor="end">1</text>
   <line x1="20" y1="210" x2="840" y2="210" stroke="#21262d"/>
-  <text x="20" y="234" class="foot"><tspan class="accent">2</tspan> public repositories · <tspan class="accent">2</tspan> starred · refreshed every 24 hours</text>
+  <text x="20" y="234" class="foot"><tspan class="accent">2</tspan> public repositories · <tspan class="accent">2</tspan> starred · scheduled refresh</text>
   <text x="840" y="234" class="foot" text-anchor="end">updated 2026-11-25</text>
 </svg>

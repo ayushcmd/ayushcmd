@@ -71,6 +71,6 @@
   <text x="448" y="614" class="rank">40</text><text x="476" y="614" class="name">system-design-notes</text><rect x="664" y="606" width="120" height="6" rx="3" fill="#161b22"/><rect x="664" y="606" width="3.0" height="6" rx="3" fill="#e3b34199"/><text x="840" y="614" class="num" text-anchor="end">2</text>
   <text x="448" y="638" class="rank">41</text><text x="476" y="638" class="name">pare</text><rect x="664" y="630" width="120" height="6" rx="3" fill="#161b22"/><text x="840" y="638" class="zero" text-anchor="end">0</text>
   <line x1="20" y1="690" x2="840" y2="690" stroke="#21262d"/>
-  <text x="20" y="714" class="foot"><tspan class="accent">41</tspan> public repositories · <tspan class="accent">40</tspan> starred · refreshed every 24 hours</text>
+  <text x="20" y="714" class="foot"><tspan class="accent">41</tspan> public repositories · <tspan class="accent">40</tspan> starred · scheduled refresh</text>
   <text x="840" y="714" class="foot" text-anchor="end">updated 2026-11-25</text>
 </svg>

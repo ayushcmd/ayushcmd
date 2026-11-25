@@ -1,6 +1,6 @@
 {
   "owner": "Readmify",
-  "generated": "2026-11-25",
+  "generated": "2026-11-26",
   "totals": {
     "stars": 93,
     "repositories": 12,
@@ -11,8 +11,8 @@
     "stars": 16
   },
   "change": {
-    "since": "2026-11-24",
-    "stars": 1
+    "since": "2026-11-25",
+    "stars": 0
   },
   "repositories": [
     {
@@ -123,6 +123,10 @@
     },
     {
       "date": "2026-11-25",
+      "stars": 93
+    },
+    {
+      "date": "2026-11-26",
       "stars": 93
     }
   ]

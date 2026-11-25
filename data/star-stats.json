@@ -1,31 +1,31 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-25",
+  "generated": "2026-11-26",
   "totals": {
-    "stars": 622,
+    "stars": 625,
     "repositories": 41,
     "starred_repositories": 40
   },
   "top_repository": {
     "name": "dollar-hegemony",
-    "stars": 121
+    "stars": 122
   },
   "change": {
-    "since": "2026-11-24",
-    "stars": 38
+    "since": "2026-11-25",
+    "stars": 3
   },
   "repositories": [
     {
       "name": "dollar-hegemony",
-      "stars": 121
+      "stars": 122
     },
     {
       "name": "cloud_monitor",
-      "stars": 72
+      "stars": 73
     },
     {
       "name": "atmos-grid",
-      "stars": 50
+      "stars": 51
     },
     {
       "name": "open-workers",
@@ -240,6 +240,10 @@
     {
       "date": "2026-11-25",
       "stars": 622
+    },
+    {
+      "date": "2026-11-26",
+      "stars": 625
     }
   ]
 }

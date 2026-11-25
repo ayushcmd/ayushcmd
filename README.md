@@ -165,8 +165,6 @@ Language shares use GitHub language **bytes** in public non-fork repositories. C
 
 <img src="./assets/star-stats-readmify.svg" width="860" alt="star-stats-readmify" />
 
-<img src="./assets/star-stats-automate-workflow.svg" width="860" alt="star-stats-automate-workflow" />
-
 </details>
 
 ### `ayushcmd@github ~ $ ./support.sh`

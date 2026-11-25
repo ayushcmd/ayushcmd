@@ -6,6 +6,7 @@ import urllib.error
 import urllib.request
 from datetime import date
 from pathlib import Path
+from html import escape
 
 USERNAME = os.environ.get("GH_USERNAME", "ayushcmd")
 TOKEN = os.environ.get("GITHUB_TOKEN", "")
@@ -70,11 +71,13 @@ def fetch_repos():
 def fetch_language_totals(repos):
     totals = {}
     for repo in repos:
-        try:
-            languages = api_get(repo["languages_url"])
-        except urllib.error.URLError as error:
-            print(f"skip {repo['name']}: {error}", file=sys.stderr)
-            continue
+        # A partial sample changes every percentage. Abort before writing so
+        # the last complete chart (and its original date) remains intact.
+        languages = api_get(repo["languages_url"])
+        if not isinstance(languages, dict) or any(
+            type(size) is not int or size < 0 for size in languages.values()
+        ):
+            raise ValueError("Invalid GitHub language-byte response")
         for language, size in languages.items():
             totals[language] = totals.get(language, 0) + size
     return totals
@@ -87,8 +90,11 @@ def color_for(language, index):
 
 
 def group_languages(totals):
-    ordered = sorted(totals.items(), key=lambda item: item[1], reverse=True)
+    ordered = sorted(((name, size) for name, size in totals.items() if size > 0),
+                     key=lambda item: (-item[1], item[0]))
     grand_total = sum(size for _, size in ordered)
+    if not grand_total:
+        return []
     head = ordered[:MAX_LEGEND_ROWS]
     tail = ordered[MAX_LEGEND_ROWS:]
     rows = []
@@ -125,7 +131,7 @@ def build_legend(rows, x, y, row_height):
         bar_width = max(percent / max_percent * 150, 3)
         lines.append(
             f'<rect x="{x}" y="{row_y - 9}" width="10" height="10" rx="2" fill="{color}"/>'
-            f'<text x="{x + 20}" y="{row_y}" class="lang">{language}</text>'
+            f'<text x="{x + 20}" y="{row_y}" class="lang">{escape(language)}</text>'
             f'<rect x="{x + 190}" y="{row_y - 8}" width="150" height="6" rx="3" fill="#161b22"/>'
             f'<rect x="{x + 190}" y="{row_y - 8}" width="{bar_width:.1f}" height="6" rx="3" fill="{color}"/>'
             f'<text x="{x + 420}" y="{row_y}" class="pct" text-anchor="end">{percent:.1f}%</text>'
@@ -135,6 +141,8 @@ def build_legend(rows, x, y, row_height):
 
 def build_svg(totals, repo_count):
     rows = group_languages(totals)
+    if not rows:
+        raise ValueError("No positive language-byte data; preserving previous chart")
     width = 860
     height = 290
     cx, cy = 200, 142
@@ -168,7 +176,7 @@ def build_svg(totals, repo_count):
     <circle cx="{cx}" cy="{cy}" r="{radius}" fill="none" stroke="#161b22" stroke-width="{stroke_width}"/>
     {arcs}
     <text x="{cx}" y="{cy + 2}" class="big" text-anchor="middle">{top_percent:.0f}%</text>
-    <text x="{cx}" y="{cy + 22}" class="small" text-anchor="middle">{top_language}</text>
+    <text x="{cx}" y="{cy + 22}" class="small" text-anchor="middle">{escape(top_language)}</text>
   </g>
   <g>
     {legend}

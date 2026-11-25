@@ -354,7 +354,7 @@ class TestStarStats(unittest.TestCase):
 
 
 class TestStarStatsOrganizations(unittest.TestCase):
-    def test_profiles_cover_personal_account_and_three_organizations(self):
+    def test_profiles_cover_personal_account_and_two_organizations(self):
         profiles = make_star_stats.all_profiles()
         self.assertEqual(
             [(profile["owner"], profile["theme"]) for profile in profiles],
@@ -362,10 +362,9 @@ class TestStarStatsOrganizations(unittest.TestCase):
                 (make_star_stats.USERNAME, "gold"),
                 ("PortfolioStore99", "orange"),
                 ("Readmify", "sky"),
-                ("Automate-Workflow", "red"),
             ],
         )
-        self.assertEqual(len({profile["slug"] for profile in profiles}), 4)
+        self.assertEqual(len({profile["slug"] for profile in profiles}), 3)
 
     def test_each_card_uses_its_own_theme_colour(self):
         report = make_star_stats.build_report(
@@ -379,7 +378,7 @@ class TestStarStatsOrganizations(unittest.TestCase):
             self.assertIn(profile["title"], svg)
             svgs[profile["owner"]] = svg
         gold = make_star_stats.THEMES["gold"]["accent"]
-        for owner in ("PortfolioStore99", "Readmify", "Automate-Workflow"):
+        for owner in ("PortfolioStore99", "Readmify"):
             self.assertNotIn(gold, svgs[owner])
 
     def test_placeholders_are_valid_for_every_profile(self):
@@ -421,7 +420,7 @@ class TestStarStatsOrganizations(unittest.TestCase):
         self.assertEqual(raised.exception.code, 1)
         self.assertEqual(
             written,
-            ["star-stats-automate-workflow.svg", "star-stats-portfoliostore99.svg", "star-stats.svg", "stars-overview.svg"],
+            ["star-stats-portfoliostore99.svg", "star-stats.svg", "stars-overview.svg"],
         )
 
 
@@ -444,7 +443,7 @@ class TestCompactDashboard(unittest.TestCase):
         for profile in make_star_stats.all_profiles():
             repos = [{"name": "small", "stars": 2}, {"name": "large", "stars": 8}] if profile["owner"] == make_star_stats.USERNAME else []
             reports[profile["owner"]] = make_star_stats.build_report(repos, previous={}, today="2026-11-11", owner=profile["owner"])
-        self.assertEqual(make_star_stats.overview_totals(reports), {"personal": 10, "organizations": 0, "tracked": 3})
+        self.assertEqual(make_star_stats.overview_totals(reports), {"personal": 10, "organizations": 0, "tracked": 2})
         svg = make_star_stats.render_overview(reports)
         ET.fromstring(svg)
         self.assertLess(svg.index("large"), svg.index("small"))

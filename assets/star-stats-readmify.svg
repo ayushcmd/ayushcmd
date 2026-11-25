@@ -42,6 +42,6 @@
   <text x="448" y="278" class="rank">11</text><text x="476" y="278" class="name">mail-out</text><rect x="664" y="270" width="120" height="6" rx="3" fill="#161b22"/><rect x="664" y="270" width="22.5" height="6" rx="3" fill="#38bdf899"/><text x="840" y="278" class="num" text-anchor="end">3</text>
   <text x="448" y="302" class="rank">12</text><text x="476" y="302" class="name">n8n-projects</text><rect x="664" y="294" width="120" height="6" rx="3" fill="#161b22"/><rect x="664" y="294" width="22.5" height="6" rx="3" fill="#38bdf899"/><text x="840" y="302" class="num" text-anchor="end">3</text>
   <line x1="20" y1="330" x2="840" y2="330" stroke="#21262d"/>
-  <text x="20" y="354" class="foot"><tspan class="accent">12</tspan> public repositories · <tspan class="accent">12</tspan> starred · refreshed every 24 hours</text>
+  <text x="20" y="354" class="foot"><tspan class="accent">12</tspan> public repositories · <tspan class="accent">12</tspan> starred · scheduled refresh</text>
   <text x="840" y="354" class="foot" text-anchor="end">updated 2026-11-25</text>
 </svg>

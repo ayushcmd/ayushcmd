@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-25",
   "totals": {
-    "authored_lines": 376995,
-    "live_lines": 347029,
-    "authored_last_30_days": 235838,
+    "authored_lines": 387814,
+    "live_lines": 356879,
+    "authored_last_30_days": 246657,
     "repositories": 45,
     "public": 37,
     "private": 8
@@ -30,6 +30,12 @@
     {
       "name": "private-project-1",
       "private": true,
+      "live_lines": 20207,
+      "authored_lines": 21329
+    },
+    {
+      "name": "private-project-2",
+      "private": true,
       "live_lines": 16870,
       "authored_lines": 23749
     },
@@ -38,12 +44,6 @@
       "private": false,
       "live_lines": 15177,
       "authored_lines": 14956
-    },
-    {
-      "name": "fame-fighters",
-      "private": false,
-      "live_lines": 14968,
-      "authored_lines": 16211
     }
   ],
   "languages": [
@@ -53,11 +53,11 @@
     },
     {
       "name": "TypeScript",
-      "lines": 97862
+      "lines": 106760
     },
     {
       "name": "Python",
-      "lines": 31771
+      "lines": 32654
     },
     {
       "name": "CSS",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 189617
+      "lines": 200436
     }
   ]
 }

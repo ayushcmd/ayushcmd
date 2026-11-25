@@ -452,12 +452,86 @@ def render_overview(reports):
     return "\n".join(parts)
 
 
+def render_details(reports):
+    """One complete ranking panel, retaining each account's snapshot date."""
+    profiles = all_profiles()
+    personal = reports.get(USERNAME)
+    personal_repos = personal["repositories"] if personal else []
+    org_reports = [reports.get(p["owner"]) for p in profiles[1:]]
+    personal_lines = max(math.ceil(len(personal_repos) / 2), 1)
+    org_y = 196 + personal_lines * ROW_STEP + 30
+    org_lines = max([len(r["repositories"]) if r else 1 for r in org_reports] + [1])
+    height = org_y + 70 + org_lines * ROW_STEP + 54
+    profile = dict(personal_profile(), title=f"{USERNAME}@github: ~/stars --all")
+    parts = [svg_open(profile, "All public repository stars: personal and organizations", height)]
+    totals = overview_totals(reports)
+    org_count = sum(r["totals"]["repositories"] for r in org_reports) if all(org_reports) else None
+    tiles = [
+        ("PERSONAL STARS", totals["personal"], "#e3b341"),
+        ("ORGANIZATION STARS", totals["organizations"], "#38bdf8"),
+        ("PERSONAL REPOSITORIES", personal["totals"]["repositories"] if personal else None, "#e3b341"),
+        ("ORG REPOSITORIES", org_count, "#38bdf8"),
+    ]
+    for i, (label, value, color) in enumerate(tiles):
+        x = 20 + i * 208
+        value = fmt(value) if value is not None else "N/A"
+        parts.append(f'<rect x="{x}" y="50" width="196" height="64" rx="6" fill="#161b22"/>'
+                     f'<text x="{x+12}" y="72" class="label">{label}</text>'
+                     f'<text x="{x+12}" y="100" class="value" fill="{color}">{value}</text>')
+
+    def section(x, y, owner, report, color, width):
+        parts.append(f'<text x="{x}" y="{y}" fill="{color}" font-size="13">{esc(owner)}</text>')
+        if report:
+            t = report["totals"]
+            summary = f'{fmt(t["stars"])} stars · {t["repositories"]} repos · {t["starred_repositories"]} starred'
+            snapshot = f'Snapshot {report["generated"]}'
+        else:
+            summary, snapshot = "Data unavailable", "Awaiting successful refresh"
+        parts.append(f'<text x="{x}" y="{y+20}" class="foot">{esc(summary)}</text>'
+                     f'<text x="{x}" y="{y+38}" class="foot">{esc(snapshot)}</text>'
+                     f'<line x1="{x}" y1="{y+48}" x2="{x+width}" y2="{y+48}" stroke="#21262d"/>')
+
+    def rows(repos, x, y, color, offset=0, peak=1):
+        for i, repo in enumerate(repos):
+            baseline = y + i * ROW_STEP
+            stars = repo["stars"]
+            bar = max(stars / peak * 100, 3) if stars else 0
+            parts.append(f'<g><title>{esc(repo["name"])}: {fmt(stars)} stars</title>'
+                         f'<text x="{x}" y="{baseline}" class="rank">{offset+i+1:02d}</text>'
+                         f'<text x="{x+28}" y="{baseline}" fill="#e6edf3" font-size="12">{esc(truncate(repo["name"], 26))}</text>'
+                         f'<rect x="{x+232}" y="{baseline-7}" width="100" height="5" rx="2.5" fill="#161b22"/>'
+                         f'<rect x="{x+232}" y="{baseline-7}" width="{bar:.1f}" height="5" rx="2.5" fill="{color}"/>'
+                         f'<text x="{x+392}" y="{baseline}" fill="{color}" font-size="12" text-anchor="end">{fmt(stars)}</text></g>')
+
+    section(20, 132, f"{USERNAME} / PERSONAL", personal, "#e3b341", 820)
+    peak = max([r["stars"] for r in personal_repos] + [1])
+    rows(personal_repos[:personal_lines], 20, 196, "#e3b341", peak=peak)
+    rows(personal_repos[personal_lines:], 448, 196, "#e3b341", offset=personal_lines, peak=peak)
+    if personal and not personal_repos:
+        parts.append('<text x="20" y="196" class="foot">No public repositories</text>')
+    for i, org_profile in enumerate(profiles[1:]):
+        x = 20 + i * 428
+        report = reports.get(org_profile["owner"])
+        color = THEMES[org_profile["theme"]]["accent"]
+        section(x, org_y, org_profile["owner"], report, color, 392)
+        if report:
+            repos = report["repositories"]
+            peak = max([r["stars"] for r in repos] + [1])
+            rows(repos, x, org_y + 70, color, peak=peak)
+            if not repos:
+                parts.append(f'<text x="{x}" y="{org_y+70}" class="foot">No public repositories</text>')
+    parts.append(f'<line x1="20" y1="{height-40}" x2="840" y2="{height-40}" stroke="#21262d"/>'
+                 f'<text x="20" y="{height-17}" class="foot">Public repositories · ranked within each account · scheduled refresh</text></svg>')
+    return "\n".join(parts)
+
+
 def write_overview():
     # Retain each last successful dated snapshot when an account fails refresh.
     reports = {p["owner"]: load_previous(data_path(p)) for p in all_profiles()}
     output = ROOT / "assets/stars-overview.svg"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(render_overview(reports), encoding="utf-8")
+    (ROOT / "assets/star-stats-details.svg").write_text(render_details(reports), encoding="utf-8")
 
 
 def main():

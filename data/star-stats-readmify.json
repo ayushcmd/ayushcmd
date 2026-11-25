@@ -2,7 +2,7 @@
   "owner": "Readmify",
   "generated": "2026-11-25",
   "totals": {
-    "stars": 92,
+    "stars": 93,
     "repositories": 12,
     "starred_repositories": 12
   },
@@ -12,7 +12,7 @@
   },
   "change": {
     "since": "2026-11-24",
-    "stars": 0
+    "stars": 1
   },
   "repositories": [
     {
@@ -20,15 +20,15 @@
       "stars": 16
     },
     {
+      "name": "readme-badges",
+      "stars": 14
+    },
+    {
       "name": "contribution-painter",
       "stars": 13
     },
     {
       "name": "profile-readme-generator",
-      "stars": 13
-    },
-    {
-      "name": "readme-badges",
       "stars": 13
     },
     {
@@ -123,7 +123,7 @@
     },
     {
       "date": "2026-11-25",
-      "stars": 92
+      "stars": 93
     }
   ]
 }

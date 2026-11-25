@@ -1,9 +1,9 @@
 {
   "generated": "2026-11-25",
   "totals": {
-    "authored_lines": 387814,
-    "live_lines": 356879,
-    "authored_last_30_days": 246657,
+    "authored_lines": 391708,
+    "live_lines": 360413,
+    "authored_last_30_days": 250551,
     "repositories": 45,
     "public": 37,
     "private": 8
@@ -30,8 +30,8 @@
     {
       "name": "private-project-1",
       "private": true,
-      "live_lines": 20207,
-      "authored_lines": 21329
+      "live_lines": 23675,
+      "authored_lines": 25139
     },
     {
       "name": "private-project-2",
@@ -49,15 +49,15 @@
   "languages": [
     {
       "name": "JavaScript",
-      "lines": 110873
+      "lines": 112459
     },
     {
       "name": "TypeScript",
-      "lines": 106760
+      "lines": 108365
     },
     {
       "name": "Python",
-      "lines": 32654
+      "lines": 32863
     },
     {
       "name": "CSS",
@@ -69,7 +69,7 @@
     },
     {
       "name": "HTML",
-      "lines": 15672
+      "lines": 15786
     }
   ],
   "monthly_authored": [
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 200436
+      "lines": 204330
     }
   ]
 }

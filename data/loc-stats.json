@@ -1,9 +1,9 @@
 {
-  "generated": "2026-11-26",
+  "generated": "2026-11-27",
   "totals": {
-    "authored_lines": 392553,
-    "live_lines": 361081,
-    "authored_last_30_days": 224864,
+    "authored_lines": 392662,
+    "live_lines": 361190,
+    "authored_last_30_days": 217701,
     "repositories": 45,
     "public": 37,
     "private": 8
@@ -49,7 +49,7 @@
   "languages": [
     {
       "name": "JavaScript",
-      "lines": 112933
+      "lines": 113039
     },
     {
       "name": "TypeScript",
@@ -119,7 +119,7 @@
     },
     {
       "month": "2026-11",
-      "lines": 205175
+      "lines": 205284
     }
   ]
 }

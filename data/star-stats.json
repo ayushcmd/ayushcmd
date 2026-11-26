@@ -1,8 +1,8 @@
 {
   "owner": "ayushcmd",
-  "generated": "2026-11-26",
+  "generated": "2026-11-27",
   "totals": {
-    "stars": 634,
+    "stars": 642,
     "repositories": 41,
     "starred_repositories": 40
   },
@@ -11,8 +11,8 @@
     "stars": 123
   },
   "change": {
-    "since": "2026-11-25",
-    "stars": 12
+    "since": "2026-11-26",
+    "stars": 8
   },
   "repositories": [
     {
@@ -21,11 +21,11 @@
     },
     {
       "name": "cloud_monitor",
-      "stars": 76
+      "stars": 79
     },
     {
       "name": "atmos-grid",
-      "stars": 56
+      "stars": 61
     },
     {
       "name": "open-workers",
@@ -244,6 +244,10 @@
     {
       "date": "2026-11-26",
       "stars": 634
+    },
+    {
+      "date": "2026-11-27",
+      "stars": 642
     }
   ]
 }

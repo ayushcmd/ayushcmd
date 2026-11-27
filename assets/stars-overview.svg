@@ -21,13 +21,13 @@
   <circle cx="56" cy="17" r="5" fill="#27c93f"/>
   <text x="430" y="21" class="title" text-anchor="middle">Stars · personal + organizations</text>
 
-<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">642</text>
+<rect x="20" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="32" y="66" class="label">PERSONAL STARS</text><text x="32" y="94" class="value" fill="#f2cc60">643</text>
 <rect x="300" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="312" y="66" class="label">ORGANIZATION STARS</text><text x="312" y="94" class="value" fill="#f2cc60">238</text>
 <rect x="580" y="46" width="260" height="62" rx="5" fill="#161b22"/><text x="592" y="66" class="label">TRACKED ORGANIZATIONS</text><text x="592" y="94" class="value" fill="#f2cc60">2</text>
 <text x="20" y="134" class="section">PERSONAL TOP REPOSITORIES</text>
 <text x="20" y="157" class="name">01 dollar-hegemony</text><text x="402" y="157" class="num" text-anchor="end">123</text>
 <text x="20" y="183" class="name">02 cloud_monitor</text><text x="402" y="183" class="num" text-anchor="end">79</text>
-<text x="20" y="209" class="name">03 atmos-grid</text><text x="402" y="209" class="num" text-anchor="end">61</text>
+<text x="20" y="209" class="name">03 atmos-grid</text><text x="402" y="209" class="num" text-anchor="end">62</text>
 <text x="20" y="235" class="name">04 open-workers</text><text x="402" y="235" class="num" text-anchor="end">46</text>
 <text x="20" y="261" class="name">05 cargo-vision-ai</text><text x="402" y="261" class="num" text-anchor="end">40</text>
 <text x="20" y="310" class="sub">Snapshot 2026-11-27</text>
